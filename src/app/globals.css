@@ -34,8 +34,8 @@
     justify-content: center;
     pointer-events: none;
     z-index: 1;
-    padding-left: 8px;
-    padding-right: 28px;
+    padding-left: 50px;
+    padding-right: 60px;
     gap: 8px;
   }
   .header-center svg {
