@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
             <div className="testimonials-img-wrapper">
               <Image src={t.img} alt={t.name} width={96} height={96} className="testimonials-img" />
             </div>
-            <div className="testimonials-quote">"{t.quote}"</div>
+            <div className="testimonials-quote">&ldquo;{t.quote}&rdquo;</div>
             <div className="testimonials-name">{t.name}</div>
           </div>
         ))}

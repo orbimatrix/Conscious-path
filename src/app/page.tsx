@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import CarouselSection from "./components/CarouselSection";
 import ConsciousLifeSection from "./components/ConsciousLifeSection";
 import PathAwakeningSection from "./components/PathAwakeningSection";
