@@ -9,6 +9,8 @@ import RegisterSection from "./components/RegisterSection";
 import VideosSection from "./components/VideosSection";
 import NewsletterSection from "./components/NewsletterSection";
 import ContactSection from "./components/ContactSection";
+import AboutSection from "./components/AboutSection";
+import FooterSection from "./components/FooterSection";
 
 export default function Page() {
   return (
@@ -23,8 +25,9 @@ export default function Page() {
       <VideosSection />
       <NewsletterSection />
       <ContactSection />
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      </div>
+      <AboutSection />
+      <FooterSection />
+    
     </div>
   );
 }
