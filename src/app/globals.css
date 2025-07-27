@@ -865,11 +865,18 @@ body {
   border-radius: 12px;
   padding: 32px 24px;
   text-align: left;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
 }
 
 .contact-field {
   margin-bottom: 20px;
+}
+
+.contact-field:last-of-type {
+  margin-bottom: 34px;
+  flex: 1;
 }
 
 .contact-label {
@@ -923,9 +930,8 @@ body {
   padding: 12px 32px;
   cursor: pointer;
   transition: background 0.2s;
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .contact-submit-btn:hover {
@@ -943,8 +949,12 @@ body {
   .contact-form {
     padding: 24px 16px;
     border-radius: 16px;
+    min-height: 350px;
   }
   .contact-field {
+    margin-bottom: 16px;
+  }
+  .contact-field:last-of-type {
     margin-bottom: 16px;
   }
   .contact-label {
@@ -963,7 +973,7 @@ body {
   .contact-submit-btn {
     font-size: 0.95rem;
     padding: 10px 24px;
-    bottom: 16px;
-    right: 16px;
+    align-self: flex-end;
+    margin-top: auto;
   }
 }
