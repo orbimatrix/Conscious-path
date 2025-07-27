@@ -234,15 +234,23 @@ body {
   margin-bottom: 28px;
 }
 
-.path-awakening-icon {
+.path-awakening-icon-bg {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: transparent;
+  background: #fff;
   flex-shrink: 0;
+}
+
+.path-awakening-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
 }
 
 .path-awakening-text {
@@ -279,9 +287,13 @@ body {
     gap: 8px;
     margin-bottom: 14px;
   }
+  .path-awakening-icon-bg {
+    width: 36px;
+    height: 36px;
+  }
   .path-awakening-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
   .path-awakening-text {
     font-size: 0.95rem;
