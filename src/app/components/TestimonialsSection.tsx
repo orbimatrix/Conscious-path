@@ -84,37 +84,6 @@ export default function TestimonialsSection() {
           />
         ))}
       </div>
-      <style>{`
-        @media (max-width: 900px) {
-          .testimonials-cards-row {
-            flex-direction: column;
-            align-items: center;
-          }
-          .testimonials-card {
-            max-width: 98vw;
-            margin-bottom: 18px;
-          }
-        }
-        @media (max-width: 600px) {
-          .testimonials-section {
-            padding-left: 4vw;
-            padding-right: 4vw;
-          }
-          .testimonials-cards-row {
-            flex-direction: row;
-            overflow-x: auto;
-            gap: 0;
-            justify-content: flex-start;
-            width: 100%;
-            margin-left: 0;
-          }
-          .testimonials-card {
-            min-width: 92vw;
-            max-width: 92vw;
-            margin: 0 4vw;
-          }
-        }
-      `}</style>
     </section>
   );
 } 
