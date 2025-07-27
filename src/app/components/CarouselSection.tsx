@@ -13,7 +13,7 @@ export default function CarouselSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section style={{ width: "100%", maxWidth: 700, margin: "32px auto 0 auto", background: "#fff", borderRadius: 8, boxShadow: "0 2px 8px rgba(0,0,0,0.10)" }}>
+    <section style={{ width: "100%", maxWidth: 900, margin: "32px auto 0 auto", background: "#fff", borderRadius: 8, boxShadow: "0 2px 8px rgba(0,0,0,0.10)" }}>
       <div style={{
         width: "100%",
         aspectRatio: "16/7",
