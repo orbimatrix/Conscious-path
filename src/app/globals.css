@@ -373,9 +373,11 @@ body {
 @media (max-width: 600px) {
   .exclusive-content-section {
     max-width: 100vw;
-    padding: 10px 1vw 10px 1vw;
+    padding: 16px 4vw 16px 4vw;
     font-size: 1.05rem;
     margin-top: 24px;
+    margin-left: 4vw;
+    margin-right: 4vw;
   }
   .exclusive-content-btn {
     width: 100%;
@@ -520,4 +522,78 @@ body {
     gap: 14px;
     margin-top: 18px;
   }
+}
+
+.register-section {
+  background: #fff;
+  max-width: 700px;
+  margin: 48px auto 0 auto;
+  padding: 16px 0 16px 0;
+  text-align: center;
+}
+
+.register-separator {
+  width: 100%;
+  height: 2px;
+  background: #b7a06a;
+  margin-bottom: 10px;
+}
+
+.register-btn {
+  display: block;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto 24px auto;
+  background: #6B8BBE;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 42px;
+  padding: 16px 0 12px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-btn:hover {
+  background: #5A7DBE;
+}
+
+.register-btn-main {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.register-btn-sub {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+
+
+@media (max-width: 600px) {
+  .register-section {
+    max-width: 100vw;
+    padding: 12px 0 12px 0;
+    margin-top: 24px;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+  .register-separator {
+    margin-bottom: 12px;
+  }
+  .register-btn {
+    width: 100%;
+    padding: 12px 0 8px 0;
+  }
+  .register-btn-main {
+    font-size: 1.4rem;
+  }
+  .register-btn-sub {
+    font-size: 1rem;
+  }
+  
 }
