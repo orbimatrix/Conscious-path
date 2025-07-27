@@ -299,3 +299,35 @@ body {
     font-size: 0.95rem;
   }
 }
+
+.portal-intro-section {
+  max-width: 1200px;
+  margin: 48px auto 0 auto;
+  padding: 32px 12px 32px 12px;
+  color: #34495e;
+  font-size: 1.35rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.portal-intro-section p {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.portal-intro-section p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .portal-intro-section {
+    max-width: 100vw;
+    padding: 10px 1vw 10px 1vw;
+    font-size: 1.08rem;
+    margin-top: 24px;
+  }
+  .portal-intro-section p {
+    margin-bottom: 18px;
+  }
+}
