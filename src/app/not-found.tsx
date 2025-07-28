@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Header from "./components/Header";
 import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 
@@ -12,7 +11,6 @@ export function navigateTo404() {
 export default function NotFound() {
   return (
     <div>
-      <Header />
       <div className="error404-container">
         <h1 className="error404-heading">
           El contenido buscado no se encuentra

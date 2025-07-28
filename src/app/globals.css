@@ -1595,3 +1595,66 @@ body {
     margin-top: 24px;
   }
 }
+
+/* Registration Page Styles */
+.registration-container {
+  max-width: 800px;
+  margin: 48px auto 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
+}
+
+.registration-heading {
+  color: #A3926B;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.registration-details {
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #E6A14A;
+  margin: 0 auto 32px auto;
+  max-width: 600px;
+}
+
+.registration-option {
+  margin-bottom: 12px;
+}
+
+.registration-assistance {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+@media (min-width: 960px) {
+  .registration-assistance {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .registration-container {
+    margin: 32px auto 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .registration-heading {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+  .registration-details {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+  .registration-assistance {
+    font-size: 1rem;
+    margin-top: 24px;
+  }
+}
