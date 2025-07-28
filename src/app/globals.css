@@ -164,6 +164,7 @@
   .header-root {
     padding: 0 0.5rem;
     height: 56px;
+    position: relative;
   }
   .header-center {
     position: absolute;
@@ -173,22 +174,21 @@
     bottom: 0;
     margin: auto;
     justify-content: center;
+    align-items: center;
     pointer-events: none;
     z-index: 1;
-    padding-left: 50px;
-    padding-right: 60px;
-    gap: 8px;
-  }
-  .header-center svg {
-    margin-left: 12px;
+    display: flex;
+    text-align: center;
   }
   .header-center span {
     font-size: 20px !important;
+    text-align: center;
   }
   .header-icon {
     min-width: 32px;
     z-index: 2;
     pointer-events: auto;
+    position: relative;
   }
 }
 
@@ -1391,5 +1391,81 @@ body {
   
   .footer-legal p {
     font-size: 0.7rem;
+  }
+}
+
+/* Payment Failure Page Styles */
+.payfail-container {
+  max-width: 800px;
+  margin: 48px auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.payfail-heading {
+  color: #A3926B;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.payfail-content {
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.payfail-paragraph {
+  margin-bottom: 16px;
+}
+
+.paragraph-email {
+  text-align: center;
+}
+
+.payfail-error-reason {
+  color: #E6A14A;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.payfail-telegram-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  /* background: #A3926B; */
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 50px;
+  margin: 0 auto 32px auto;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.payfail-telegram-button:hover {
+  background: #8B7A5A;
+}
+
+@media (max-width: 600px) {
+  .payfail-container {
+    margin: 32px auto;
+    padding: 0 16px;
+  }
+  
+  .payfail-heading {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+  
+  .payfail-content {
+    font-size: 1.1rem;
+  }
+  
+  .payfail-telegram-button {
+    padding: 10px 16px;
+    font-size: 0.95rem;
   }
 }
