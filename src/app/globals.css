@@ -1474,7 +1474,8 @@ body {
 .paysuccess-container {
   max-width: 800px;
   margin: 48px auto 0 auto;
-  padding: 0 24px;
+  padding-left: 40px;
+  padding-right: 40px;
   text-align: center;
 }
 
@@ -1514,7 +1515,8 @@ body {
 @media (max-width: 600px) {
   .paysuccess-container {
     margin: 32px auto 0 auto;
-    padding: 0 8px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .paysuccess-heading {
     font-size: 2rem;
