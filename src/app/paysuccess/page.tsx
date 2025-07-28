@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import ContactSection from "../components/ContactSection";
 import FooterSection from "../components/FooterSection";
 
@@ -13,10 +14,10 @@ export default function PaySuccessPage() {
             Recibirá en su email información sobre la operación realizada.
           </p>
           <p className="paysuccess-paragraph">
-            Si lo desea puede ir al <a href="/">INICIO</a> para explorar nuevos conocimientos y productos.
+            Si lo desea puede ir al <Link href="/">INICIO</Link> para explorar nuevos conocimientos y productos.
           </p>
           <p className="paysuccess-paragraph">
-            También puede <a href="/">VER TODO EL CONTENIDO</a> y descubrir un mundo de posibilidades.
+            También puede <Link href="/">VER TODO EL CONTENIDO</Link> y descubrir un mundo de posibilidades.
           </p>
           <p className="paysuccess-paragraph">
             Si tiene alguna duda, puedes escribirnos:

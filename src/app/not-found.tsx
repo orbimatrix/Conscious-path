@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import Header from "./components/Header";
 import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 
@@ -10,6 +12,7 @@ export function navigateTo404() {
 export default function NotFound() {
   return (
     <div>
+      <Header />
       <div className="error404-container">
         <h1 className="error404-heading">
           El contenido buscado no se encuentra
@@ -19,7 +22,7 @@ export default function NotFound() {
             Lo sentimos, el contenido que está buscando no se encuentra en esta dirección.
           </p>
           <p className="error404-paragraph">
-            Puede acceder a <a href="/">TODO EL CONTENIDO</a> y buscar el tema de su interés.
+            Puede acceder a <Link href="/">TODO EL CONTENIDO</Link> y buscar el tema de su interés.
           </p>
           <p className="error404-paragraph">
             También puede enviarnos un mensaje, y le ayudaremos a localizar la información que necesita.
