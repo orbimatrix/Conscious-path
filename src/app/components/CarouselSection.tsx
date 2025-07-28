@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const images = [
   "/fotos/tomb.jpg",
-  "/fotos/tomb.jpg",
-  "/fotos/tomb.jpg"
+  "/fotos/bridge.jpg",
+  "/fotos/pathway.jpg"
 
 ];
 
