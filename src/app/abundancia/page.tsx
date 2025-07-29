@@ -14,14 +14,15 @@ export default function AbundanciaPage() {
 
   return (
     <div className="abundancia-page">
+      {/* Hero Section - Outside main container for full width */}
+      <section className="abundancia-hero">
+        <div className="abundancia-hero-content">
+          <h1 className="abundancia-title">NIVEL</h1>
+          <h2 className="abundancia-subtitle">PROYECCIÓN DE LA ABUNDANCIA</h2>
+        </div>
+      </section>
+      
       <main className="abundancia-main">
-        {/* Hero Section */}
-        <section className="abundancia-hero">
-          <div className="abundancia-hero-content">
-            <h1 className="abundancia-title">NIVEL</h1>
-            <h2 className="abundancia-subtitle">PROYECCIÓN DE LA ABUNDANCIA</h2>
-          </div>
-        </section>
 
         {/* Benefits Section */}
         <section className="abundancia-benefits">

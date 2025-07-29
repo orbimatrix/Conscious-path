@@ -14,9 +14,10 @@
 /* Hero Section - Light Brown Background */
 .abundancia-hero {
   background: #D2B48C;
-  padding: 60px 20px;
+  padding: 80px 20px 60px;
   text-align: center;
   margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 .abundancia-hero-content {
@@ -385,6 +386,7 @@
 
 /* Large Screen Optimization */
 @media (min-width: 1920px) {
+  
   .abundancia-image-container {
     max-width: 1200px;
   }
