@@ -726,7 +726,7 @@
 
 @media (max-width: 1024px) {
   .carisma-video-section {
-    padding: 40px 20px;
+    padding: 25px 20px;
   }
   
   .carisma-video-container {
@@ -768,7 +768,7 @@
 
 @media (max-width: 768px) {
   .carisma-video-section {
-    padding: 30px 15px;
+    padding: 20px 15px;
   }
   
   .video-player {
@@ -806,7 +806,7 @@
 
 @media (max-width: 480px) {
   .carisma-video-section {
-    padding: 25px 15px;
+    padding: 15px 15px;
   }
   
   .video-player {
@@ -839,5 +839,43 @@
     padding: 13px 35px;
     font-size: 14px;
     min-width: 240px;
+  }
+} 
+
+@media (max-width: 360px) {
+  .carisma-video-section {
+    padding: 10px 15px;
+  }
+  
+  .video-player {
+    height: 160px;
+    margin-bottom: 15px;
+  }
+  
+  .play-button {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .play-icon {
+    border-left: 12px solid #FF0000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+  
+  .video-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .video-cta-button {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  
+  .carisma-action-button {
+    padding: 12px 30px;
+    font-size: 13px;
+    min-width: 220px;
   }
 } 
