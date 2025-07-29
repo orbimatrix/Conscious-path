@@ -26,6 +26,10 @@
   margin-bottom: 20px;
   color: #e0984a;
   text-align: center;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  font-weight: 100 !important;
+  letter-spacing: 0.5px;
+  font-style: normal;
 }
 
 .hero-subtitle {
