@@ -5,6 +5,8 @@ import "./conocimiento.css";
 
 export default function AudioVideoPage() {
   const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>({});
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const handleCheckboxClick = (index: number) => {
     setCheckedItems(prev => ({
@@ -12,6 +14,34 @@ export default function AudioVideoPage() {
       [index]: !prev[index]
     }));
   };
+
+  const handlePlusClick = (index: number) => {
+    setSelectedCard(index);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedCard(null);
+  };
+
+  const handleModalCheckboxClick = () => {
+    if (selectedCard !== null) {
+      setCheckedItems(prev => ({
+        ...prev,
+        [selectedCard]: !prev[selectedCard]
+      }));
+    }
+  };
+
+  const videoData = [
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." },
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." },
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." },
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." },
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." },
+    { title: "The tittle of the vídeo", level: "Carisma", description: "This is the extended audio/video description, with more details and keywords." }
+  ];
 
   return (
     <div>
@@ -49,7 +79,7 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[0] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(0)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(0)}>+</div>
               </div>
             </div>
           </div>
@@ -66,7 +96,7 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[1] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(1)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(1)}>+</div>
               </div>
             </div>
           </div>
@@ -83,7 +113,7 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[2] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(2)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(2)}>+</div>
               </div>
             </div>
           </div>
@@ -100,7 +130,7 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[3] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(3)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(3)}>+</div>
               </div>
             </div>
           </div>
@@ -117,7 +147,7 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[4] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(4)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(4)}>+</div>
               </div>
             </div>
           </div>
@@ -134,12 +164,31 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[5] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(5)}
                 ></div>
-                <div className="status-plus">+</div>
+                <div className="status-plus" onClick={() => handlePlusClick(5)}>+</div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Modal Overlay */}
+      {showModal && selectedCard !== null && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeModal}>×</button>
+            <div className="modal-title">{videoData[selectedCard].title}</div>
+            <div className="modal-level">Nivel: {videoData[selectedCard].level}</div>
+            <div className="modal-description">{videoData[selectedCard].description}</div>
+            <div className="modal-actions">
+              <div className="modal-checkbox-container">
+                <div className="modal-checkbox" onClick={handleModalCheckboxClick}></div>
+                <div className="modal-checkbox-text">Marcar como visto</div>
+              </div>
+              <div className="modal-minus"></div>
+            </div>
+          </div>
+        </div>
+      )}
       
       <FooterSection />
     </div>
