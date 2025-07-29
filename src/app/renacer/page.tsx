@@ -24,7 +24,7 @@ export default function RenacerPage() {
               </li>
               <li className="renacer-benefit-item">
                 <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Conservar su experiencia y frutos</span>
+                <span className="benefit-text">Conservar la experiencia y frutos conseguidos en esta vida</span>
               </li>
               <li className="renacer-benefit-item">
                 <span className="benefit-icon">✓</span>
@@ -40,8 +40,10 @@ export default function RenacerPage() {
               src="/fotos/renacer.jpg"
               alt="Renacer Consciente"
               className="renacer-image"
-              width={800}
+              width={1600}
               height={1200}
+              sizes="(max-width: 1920px) 100vw, 1200px"
+
             />
           </div>
         </section>
