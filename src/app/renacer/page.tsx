@@ -41,7 +41,7 @@ export default function RenacerPage() {
               alt="Renacer Consciente"
               className="renacer-image"
               width={800}
-              height={600}
+              height={1200}
             />
           </div>
         </section>
