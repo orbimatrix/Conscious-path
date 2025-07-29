@@ -1,0 +1,156 @@
+/* Benec Page Styles */
+.benec-page {
+  min-height: 100vh;
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+.benec-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Dark Banner Section */
+.benec-banner {
+  background: #1a1a1a;
+  padding: 80px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.benec-banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.benec-banner-subtitle {
+  font-size: 18px;
+  color: #f8f8f8;
+  margin-bottom: 15px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.benec-banner-title {
+  font-size: 32px;
+  color: #EFA540;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.benec-banner-main-title {
+  font-size: 36px;
+  color: #EFA540;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Main Content */
+.benec-content {
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .benec-banner {
+    padding: 60px 15px;
+  }
+  
+  .benec-banner-subtitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .benec-banner-title {
+    font-size: 26px;
+    margin-bottom: 15px;
+  }
+  
+  .benec-banner-main-title {
+    font-size: 28px;
+  }
+  
+  .benec-main {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .benec-banner {
+    padding: 50px 10px;
+  }
+  
+  .benec-banner-subtitle {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .benec-banner-title {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  
+  .benec-banner-main-title {
+    font-size: 24px;
+  }
+  
+  .benec-main {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .benec-banner {
+    padding: 40px 8px;
+  }
+  
+  .benec-banner-subtitle {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .benec-banner-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .benec-banner-main-title {
+    font-size: 20px;
+  }
+  
+  .benec-main {
+    padding: 0 8px;
+  }
+}
+
+/* Large Screen Optimization */
+@media (min-width: 1920px) {
+  .benec-banner {
+    padding: 100px 20px;
+  }
+  
+  .benec-banner-subtitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .benec-banner-title {
+    font-size: 40px;
+    margin-bottom: 25px;
+  }
+  
+  .benec-banner-main-title {
+    font-size: 44px;
+  }
+  
+  .benec-banner-content {
+    max-width: 1000px;
+  }
+} 
