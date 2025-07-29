@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./karma.css";
 
@@ -35,10 +36,12 @@ export default function KarmaPage() {
 
         <section className="carisma-image-section">
           <div className="carisma-image-container">
-            <img 
+            <Image 
               src="/fotos/karma.png" 
               alt="Carisma" 
               className="carisma-image"
+              width={800}
+              height={600}
             />
           </div>
         </section>

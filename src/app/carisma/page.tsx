@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./carisma.css";
 
@@ -35,10 +36,12 @@ export default function CarismaPage() {
 
         <section className="carisma-image-section">
           <div className="carisma-image-container">
-            <img 
-              src="/fotos/carisma.jpg" 
-              alt="Carisma" 
+                        <Image
+              src="/fotos/carisma.jpg"
+              alt="Carisma"
               className="carisma-image"
+              width={800}
+              height={600}
             />
           </div>
         </section>

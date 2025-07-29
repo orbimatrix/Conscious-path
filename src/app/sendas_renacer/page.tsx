@@ -137,7 +137,7 @@ export default function SendasRenacerPage() {
               <div className="modal-price">180,000$</div>
               <p className="modal-instruction">Envíe un mensaje si desea:</p>
               <ul className="modal-options">
-                <li><strong>A)</strong> Iniciar el proceso "Renacer Consciente".</li>
+                <li><strong>A)</strong> Iniciar el proceso &quot;Renacer Consciente&quot;.</li>
                 <li><strong>B)</strong> Consultar si cumple con los requisitos.</li>
                 <li><strong>C)</strong> Conocer las formas de pago.</li>
                 <li><strong>D)</strong> Preguntar sobre la disponibilidad de plazas</li>
@@ -166,7 +166,7 @@ export default function SendasRenacerPage() {
               <p className="modal-note">Seré necesario realizar un depósito no reembolsable para iniciar el proceso.</p>
               <p className="modal-instruction">Envíe un mensaje si desea:</p>
               <ul className="modal-options">
-                <li><strong>A)</strong> Iniciar el proceso "Renacer Consciente".</li>
+                <li><strong>A)</strong> Iniciar el proceso &quot;Renacer Consciente&quot;.</li>
                 <li><strong>B)</strong> Consultar si cumple con los requisitos.</li>
                 <li><strong>C)</strong> Conocer las formas de pago.</li>
                 <li><strong>D)</strong> Preguntar sobre la disponibilidad de plazas</li>

@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from "react";
+import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./conocimiento.css";
 
@@ -46,10 +47,12 @@ export default function AudioVideoPage() {
   return (
     <div>
       <section className="audio-video-hero">
-        <img 
+        <Image 
           src="/girl.png" 
           alt="Girl" 
           className="hero-image"
+          width={800}
+          height={600}
         />
       </section>
       

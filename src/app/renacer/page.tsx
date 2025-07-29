@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./renacer.css";
 
@@ -35,10 +36,12 @@ export default function RenacerPage() {
 
         <section className="renacer-image-section">
           <div className="renacer-image-container">
-            <img
+            <Image
               src="/fotos/renacer.jpg"
               alt="Renacer Consciente"
               className="renacer-image"
+              width={800}
+              height={600}
             />
           </div>
         </section>
