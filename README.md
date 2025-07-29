@@ -1,193 +1,208 @@
-# Senda Consciente
+# Conscious Path - Web Application
 
-A modern, responsive landing page built with Next.js for Senda Consciente, featuring a comprehensive spiritual and wellness platform.
+A comprehensive web application for spiritual development and conscious evolution, featuring multiple levels of knowledge and interactive content.
 
-## 🌟 Features
+## 🌟 Overview
 
-### Design & User Experience
-- **Fully Responsive Design** - Optimized for all devices (desktop, tablet, mobile)
-- **Modern UI/UX** - Clean, elegant design with warm color palette
-- **Smooth Animations** - Interactive elements with hover effects
-- **Accessibility** - Proper semantic HTML and ARIA labels
+This Next.js application provides a platform for users to explore different levels of consciousness and spiritual development. The application features multiple pages with interactive elements, responsive design, and a modern user interface.
 
-### Sections & Components
-- **Header** - Navigation with golden dollar sign logo and mobile menu
-- **Hero Carousel** - Image carousel with navigation dots
-- **Conscious Life Section** - Call-to-action for spiritual awakening
-- **Path Awakening Section** - Service categories with icons
-- **Portal Introduction** - Educational content about the platform
-- **Exclusive Content** - Premium services showcase
-- **Testimonials** - Customer reviews in card format
-- **Registration** - User signup call-to-action
-- **Videos & Audio** - Media content grid
-- **Newsletter** - Email subscription with contact options
-- **Contact Form** - User inquiry form
-- **About Section** - Team member profile
-- **Footer** - Comprehensive site navigation and legal information
+## 📱 Pages & Features
 
-### Technical Features
-- **Next.js 14** - Latest React framework with App Router
-- **TypeScript** - Type-safe development
-- **CSS Modules** - Organized styling with global CSS
-- **Image Optimization** - Next.js Image component for performance
-- **Mobile-First** - Responsive design approach
+### 🧠 Conocimiento (Knowledge)
+- **Interactive Video Grid**: Browse and filter content by categories
+- **Smart Filtering**: Filter by Todo, Público, Inmortal, Carisma, Abundancia, Karma
+- **Video Cards**: Click to view detailed information and mark as watched
+- **Modal System**: Detailed video information with mobile optimization
+- **Responsive Design**: 2x3 grid on desktop, single column on mobile
+
+### 🎯 Acceder (Access)
+- **Plan Selection**: Choose between NIVEL CARISMA ($15/mo) and NIVEL KARMA ($150/mo)
+- **Feature Comparison**: Detailed feature lists with visual indicators
+- **Payment Modal**: Comprehensive payment options (monthly/annual)
+- **Contact Integration**: Multiple contact methods including crypto payments
+- **Dynamic Pricing**: Real-time price updates based on selection
+
+### ✨ Carisma (Charisma Level)
+- **Hero Section**: Introduction to the Charisma level
+- **Benefits Display**: Key benefits and features
+- **Content Sections**: Audio/video information and live sessions
+- **Video Presentation**: Interactive video section with CTA buttons
+- **Responsive Layout**: Optimized for all screen sizes
+
+### 🕉️ Karma (Karma Level)
+- **Advanced Content**: Information about influences and possessions
+- **Reincarnation Details**: Karma and reincarnation information
+- **Conscious Rebirth Access**: Details about advanced level access
+- **Merged Layout**: Combined content sections for better flow
+
+### 🌅 Renacer (Conscious Rebirth)
+- **Memory Preservation**: Information about preserving memories across lives
+- **Annual Limits**: Details about procedure availability (max 3 per year)
+- **Access Options**: Two paths - Karma level assistants or Express access
+- **Enhanced Images**: Large, responsive images optimized for all screens
+- **Video Section**: Presentation with call-to-action buttons
+
+### 🛤️ Sendas Renacer (Rebirth Paths)
+- **Requirements Comparison**: Side-by-side comparison of access methods
+- **Interactive Modals**: Two different modals for different access paths
+- **Free Access Information**: Details about free access opportunities
+- **Contact Integration**: Seamless contact form integration
+- **Clean Design**: Minimalist layout with two-tone sections
+
+## 🛠️ Technical Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: CSS Modules with responsive design
+- **State Management**: React Hooks (useState)
+- **Components**: Reusable React components
+- **Responsive Design**: Mobile-first approach
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary Blue**: `#6284AB` - Used for buttons and interactive elements
+- **Orange Accent**: `#EFA540` - Used for prices and highlights
+- **Text Colors**: `#333` (dark), `#666` (medium), `#999` (light)
+- **Backgrounds**: White, light gray (`#f8f8f8`), brownish (`#f5f2ed`)
+
+### Typography
+- **Font Family**: Arial, sans-serif
+- **Heading Hierarchy**: Clear font size progression
+- **Mobile Optimization**: Responsive font sizing
+
+### Layout Principles
+- **Mobile-First**: Responsive design starting from mobile
+- **Grid Systems**: Flexible grid layouts
+- **Consistent Spacing**: Uniform padding and margins
+- **Touch-Friendly**: Proper button sizes for mobile interaction
+
+## 📱 Responsive Breakpoints
+
+- **Desktop**: 1200px+ (full layout)
+- **Large Tablet**: 960px-1199px (adjusted grid)
+- **Tablet**: 768px-959px (single column)
+- **Mobile**: 480px-767px (compact layout)
+- **Small Mobile**: 320px-479px (minimal spacing)
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
-- npm or yarn package manager
+- npm or yarn
 
 ### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd conscious
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-### Build for Production
-
 ```bash
-npm run build
-npm start
+# Clone the repository
+git clone [repository-url]
+
+# Navigate to project directory
+cd conscious
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-## 🛠️ Technology Stack
+### Build for Production
+```bash
+# Build the application
+npm run build
 
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: CSS with responsive design
-- **Icons**: Custom PNG icons and SVG graphics
-- **Images**: Optimized with Next.js Image component
-- **Deployment**: Vercel-ready
+# Start production server
+npm start
+```
 
 ## 📁 Project Structure
 
 ```
-conscious/
-├── public/                 # Static assets
-│   ├── img/               # PNG icons and images
-│   ├── fotos/             # Photo assets
-│   ├── *.png              # Social media icons
-│   └── *.svg              # SVG graphics
-├── src/
-│   └── app/
-│       ├── components/    # React components
-│       │   ├── Header.tsx
-│       │   ├── CarouselSection.tsx
-│       │   ├── ConsciousLifeSection.tsx
-│       │   ├── PathAwakeningSection.tsx
-│       │   ├── PortalIntroSection.tsx
-│       │   ├── ExclusiveContentSection.tsx
-│       │   ├── TestimonialsSection.tsx
-│       │   ├── RegisterSection.tsx
-│       │   ├── VideosSection.tsx
-│       │   ├── NewsletterSection.tsx
-│       │   ├── ContactSection.tsx
-│       │   ├── AboutSection.tsx
-│       │   └── FooterSection.tsx
-│       ├── globals.css    # Global styles
-│       ├── layout.tsx     # Root layout
-│       └── page.tsx       # Main page component
-├── package.json
-├── next.config.ts
-├── tsconfig.json
-└── README.md
+src/
+├── app/
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   ├── FooterSection.tsx
+│   │   └── ContactSection.tsx
+│   ├── conocimiento/
+│   │   ├── page.tsx
+│   │   └── conocimiento.css
+│   ├── acceder/
+│   │   ├── page.tsx
+│   │   └── acceder.css
+│   ├── carisma/
+│   │   ├── page.tsx
+│   │   └── carisma.css
+│   ├── karma/
+│   │   ├── page.tsx
+│   │   └── karma.css
+│   ├── renacer/
+│   │   ├── page.tsx
+│   │   └── renacer.css
+│   └── sendas_renacer/
+│       ├── page.tsx
+│       └── sendas_renacer.css
 ```
 
-## 🎨 Design System
+## 🔧 Key Features
 
-### Color Palette
-- **Primary Gold**: #E6A14A (Golden accents)
-- **Dark Gold**: #B8860B (Logo elements)
-- **Warm Beige**: #F8F5ED (Footer background)
-- **Muted Brown**: #9C8C70 (Text and borders)
-- **Blue Accent**: #5A7DBE (Interactive elements)
-- **Tan Background**: #D2B48C (Section backgrounds)
+### Interactive Elements
+- **Modal Systems**: Reusable modal components with different content
+- **State Management**: Proper React state management for interactive features
+- **Form Integration**: Contact forms with validation
+- **Payment Options**: Multiple payment methods including cryptocurrency
 
-### Typography
-- **Font Family**: Geist Sans (Google Fonts)
-- **Headings**: Light to medium weight
-- **Body Text**: Regular weight
-- **Responsive**: Scales appropriately on mobile
+### Performance Optimizations
+- **Image Optimization**: Responsive images with proper sizing
+- **CSS Efficiency**: Minimal and focused stylesheets
+- **Component Reusability**: Shared components reduce code duplication
+- **Lazy Loading**: Efficient loading of content
 
-### Spacing
-- **Mobile**: 16px-24px margins
-- **Desktop**: 24px-48px margins
-- **Consistent**: 8px grid system
+### Accessibility
+- **Semantic HTML**: Proper heading hierarchy and structure
+- **Keyboard Navigation**: Accessible button and link interactions
+- **Screen Reader Support**: Proper alt text and ARIA labels
+- **Focus Management**: Clear focus indicators
 
-## 📱 Responsive Breakpoints
+## 🎯 Browser Support
 
-- **Mobile**: < 600px
-- **Tablet**: 600px - 900px  
-- **Desktop**: > 900px
+- **Chrome**: 90+
+- **Firefox**: 88+
+- **Safari**: 14+
+- **Edge**: 90+
 
-## 🔧 Customization
+## 📝 Development Guidelines
 
-### Adding New Sections
-1. Create a new component in `src/app/components/`
-2. Add styles to `src/app/globals.css`
-3. Import and add to `src/app/page.tsx`
+### Code Style
+- **TypeScript**: Strict type checking enabled
+- **Component Structure**: Functional components with hooks
+- **CSS Organization**: Modular CSS files per page
+- **Naming Conventions**: Consistent naming for classes and components
 
-### Updating Content
-- **Text**: Edit component files directly
-- **Images**: Replace files in `public/` directory
-- **Styling**: Modify `globals.css` classes
+### State Management
+- **useState Hooks**: For local component state
+- **Event Handlers**: Proper event handling and propagation
+- **Modal States**: Separate state for different modals
+- **Form States**: Controlled form inputs
 
-### Social Media Links
-Update the footer component with actual URLs:
-```tsx
-<a href="https://facebook.com/yourpage" className="social-icon">
-  <Image src="/facebook.png" alt="Facebook" width={20} height={20} />
-</a>
-```
+### Responsive Design
+- **Mobile-First**: Start with mobile design
+- **Breakpoint Consistency**: Use defined breakpoints
+- **Touch Optimization**: Proper touch targets
+- **Typography Scaling**: Responsive font sizes
 
-## 🚀 Deployment
+## 🔄 Version History
 
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Deploy automatically on push to main branch
-3. Custom domain configuration available
-
-### Other Platforms
-- **Netlify**: Compatible with Next.js
-- **AWS Amplify**: Full-stack deployment
-- **Docker**: Containerized deployment
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history and feature updates.
 
 ## 📄 License
 
-This project is proprietary software for Senda Consciente.
+This project is proprietary and confidential.
 
-## 👥 Contributing
+## 🤝 Contributing
 
-For internal development:
-1. Create feature branch
-2. Make changes
-3. Test responsiveness
-4. Submit pull request
-
-## 📞 Support
-
-For technical support or questions about the platform, contact the development team.
+This is a private project. For questions or support, please contact the development team.
 
 ---
 
-**Built with ❤️ for Senda Consciente**
+**Built with ❤️ for conscious evolution and spiritual development**
