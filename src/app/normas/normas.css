@@ -1,0 +1,155 @@
+/* Normas Page Styles */
+
+.normas-main {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Top Brown Banner */
+.normas-banner {
+  background-color: #B19B6D;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.normas-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.normas-banner-subtitle {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.normas-banner-title {
+  font-size: 60px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Main Content Section */
+.normas-content-section {
+  padding: 60px 20px;
+  background-color: #ffffff;
+}
+
+.normas-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.normas-content-title {
+  font-size: 28px;
+  color:#B19B6D;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.normas-content-subtitle {
+  font-size: 28px;
+  color: #B19B6D;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  line-height: 1.2;
+}
+
+.normas-paragraph {
+  font-size: 16px;
+  color: #4A4A4A;
+  line-height: 1.6;
+  text-align: left;
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Bottom Brown Banner */
+.normas-bottom-banner {
+  background-color: var(--olive, #B19B6D);
+  width: 1183px;
+  height: 190px;
+  top: 1007px;
+  left: 373px;
+  opacity: 1;
+  gap: 10px;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  margin: 0 auto;
+}
+
+.normas-bottom-banner-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.normas-bottom-title {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 400;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.normas-bottom-text {
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .normas-banner {
+    padding: 30px 15px;
+  }
+  
+  .normas-banner-title {
+    font-size: 24px;
+  }
+  
+  .normas-content-section {
+    padding: 40px 15px;
+  }
+  
+  .normas-content-title,
+  .normas-content-subtitle {
+    font-size: 24px;
+  }
+  
+  .normas-paragraph {
+    font-size: 15px;
+  }
+  
+  .normas-bottom-banner {
+    padding: 30px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .normas-banner-title {
+    font-size: 20px;
+  }
+  
+  .normas-content-title,
+  .normas-content-subtitle {
+    font-size: 20px;
+  }
+  
+  .normas-paragraph {
+    font-size: 14px;
+  }
+} 
