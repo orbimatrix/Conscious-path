@@ -364,6 +364,14 @@
   text-align: center;
 }
 
+.modal-note {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
 .modal-options {
   list-style: none;
   padding: 0;
@@ -425,6 +433,7 @@
   }
   
   .modal-instruction,
+  .modal-note,
   .contact-instruction {
     font-size: 14px;
   }
@@ -467,6 +476,7 @@
   }
   
   .modal-instruction,
+  .modal-note,
   .contact-instruction {
     font-size: 13px;
   }

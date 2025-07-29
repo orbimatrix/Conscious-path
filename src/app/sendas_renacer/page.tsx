@@ -6,13 +6,22 @@ import "./sendas_renacer.css";
 
 export default function SendasRenacerPage() {
   const [showModal, setShowModal] = useState(false);
+  const [showDirectModal, setShowDirectModal] = useState(false);
 
   const openModal = () => {
     setShowModal(true);
   };
 
+  const openDirectModal = () => {
+    setShowDirectModal(true);
+  };
+
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const closeDirectModal = () => {
+    setShowDirectModal(false);
   };
 
   return (
@@ -80,7 +89,7 @@ export default function SendasRenacerPage() {
             <button className="cta-button karma-button" onClick={openModal}>
               Acceder por NIVEL KARMA
             </button>
-            <button className="cta-button direct-button">
+            <button className="cta-button direct-button" onClick={openDirectModal}>
               Acceder de forma DIRECTA
             </button>
           </div>
@@ -132,6 +141,37 @@ export default function SendasRenacerPage() {
                 <li><strong>B)</strong> Consultar si cumple con los requisitos.</li>
                 <li><strong>C)</strong> Conocer las formas de pago.</li>
                 <li><strong>D)</strong> Preguntar sobre la disponibilidad de plazas</li>
+              </ul>
+              <div className="modal-separator"></div>
+              <p className="contact-instruction">Escriba su email y mensaje:</p>
+            </div>
+
+            {/* Bottom Section - Brownish Background */}
+            <div className="modal-bottom-section">
+              <ContactSection />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Direct Access Modal */}
+      {showDirectModal && (
+        <div className="renacer-modal-overlay" onClick={closeDirectModal}>
+          <div className="renacer-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeDirectModal}>×</button>
+            
+            {/* Top Section - Light Gray */}
+            <div className="modal-top-section">
+              <h2 className="modal-title">La tarifa para el nivel RENACER CONSCIENTE es calculado para cada aspirante de forma independiente.</h2>
+              <p className="modal-note">Seré necesario realizar un depósito no reembolsable para iniciar el proceso.</p>
+              <p className="modal-instruction">Envíe un mensaje si desea:</p>
+              <ul className="modal-options">
+                <li><strong>A)</strong> Iniciar el proceso "Renacer Consciente".</li>
+                <li><strong>B)</strong> Consultar si cumple con los requisitos.</li>
+                <li><strong>C)</strong> Conocer las formas de pago.</li>
+                <li><strong>D)</strong> Preguntar sobre la disponibilidad de plazas</li>
+                <li><strong>E)</strong> Realizar el depósito para iniciar el paso.</li>
+                <li><strong>F)</strong> Realizar otras consultas.</li>
               </ul>
               <div className="modal-separator"></div>
               <p className="contact-instruction">Escriba su email y mensaje:</p>
