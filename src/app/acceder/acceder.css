@@ -328,6 +328,20 @@
   flex: 1;
 }
 
+/* Contact Instruction */
+.contact-instruction {
+  padding: 20px;
+  text-align: center;
+  background: white;
+}
+
+.contact-instruction p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
   .hero-title {

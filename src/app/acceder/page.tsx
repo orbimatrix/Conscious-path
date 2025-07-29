@@ -6,6 +6,8 @@ import "./acceder.css";
 
 export default function AccederPage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
 
   const plans = [
     {
@@ -56,11 +58,22 @@ export default function AccederPage() {
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
+    if (planId === "carisma") {
+      setShowPaymentModal(true);
+    }
+  };
+
+  const handlePaymentSelect = (paymentType: string) => {
+    setSelectedPayment(paymentType);
+  };
+
+  const closePaymentModal = () => {
+    setShowPaymentModal(false);
+    setSelectedPayment(null);
   };
 
   return (
     <div className="acceder-page">
-      
       <main className="acceder-main">
         <section className="hero-section">
           <div className="hero-content">
@@ -140,7 +153,92 @@ export default function AccederPage() {
           </div>
         </section>
 
+        <div className="contact-instruction">
+          <p>Escriba su email y mensaje:</p>
+        </div>
+
         <ContactSection />
+
+        {/* Payment Selection Modal */}
+        {showPaymentModal && (
+          <div className="payment-modal-overlay" onClick={closePaymentModal}>
+            <div className="payment-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="payment-modal-close" onClick={closePaymentModal}>×</button>
+              
+              <div className="payment-sections">
+                {/* Monthly Plan Section */}
+                <div className="payment-section">
+                  <h3 className="payment-section-title">Seleccione su preferencia:</h3>
+                  <div className="monthly-plan">
+                    <div className="monthly-price">
+                      <span className="price-large">15$</span>
+                      <span className="price-period">/mes</span>
+                    </div>
+                    <button 
+                      className={`payment-option ${selectedPayment === 'monthly-single' ? 'selected' : ''}`}
+                      onClick={() => handlePaymentSelect('monthly-single')}
+                    >
+                      <div>Pago único</div>
+                      <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="payment-divider"></div>
+
+                {/* Annual Plan Section */}
+                <div className="payment-section">
+                  <div className="annual-plan">
+                    <div className="annual-price">
+                      <span className="price-large">150$</span>
+                      <span className="price-period">/año</span>
+                    </div>
+                    <div className="discount-badge">20% de descuento</div>
+                    
+                    <div className="annual-payment-options">
+                      <button 
+                        className={`payment-option ${selectedPayment === 'annual-single' ? 'selected' : ''}`}
+                        onClick={() => handlePaymentSelect('annual-single')}
+                      >
+                        <div>Pago único</div>
+                        <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
+                      </button>
+                      
+                      <button 
+                        className={`payment-option ${selectedPayment === 'annual-3months' ? 'selected' : ''}`}
+                        onClick={() => handlePaymentSelect('annual-3months')}
+                      >
+                        <div>Pago en 3 meses con Paypal</div>
+                      </button>
+                      
+                      <button 
+                        className={`payment-option ${selectedPayment === 'annual-telegram' ? 'selected' : ''}`}
+                        onClick={() => handlePaymentSelect('annual-telegram')}
+                      >
+                        <div>Pago con Telegram</div>
+                        <div className="points-badge">100% Más de PUNTOS</div>
+                      </button>
+                      
+                      <button 
+                        className={`payment-option ${selectedPayment === 'annual-crypto' ? 'selected' : ''}`}
+                        onClick={() => handlePaymentSelect('annual-crypto')}
+                      >
+                        <div>Pago con Criptomoneda</div>
+                        <div className="points-badge">200% Más de PUNTOS</div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {selectedPayment && (
+                <button className="proceed-payment-btn">
+                  Continuar con el Pago
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </main>
 
       <FooterSection />
