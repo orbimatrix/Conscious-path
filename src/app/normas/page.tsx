@@ -114,7 +114,7 @@ export default function NormasPage() {
 
                     <div className="normas-rule-item">
                         <div className="normas-rule-content">
-                            9: BENEC es nuestro egrégor del beneficio económico, de uso opcional. Cuidaremos de la idea, las palabras y los símbolos usados. Solo usaremos el material en contextos de abundancia, siempre positivos. Está muy desaconsejado "aprovecharse" del Egrégor BENEC sin cumplir el trato convenido, pues puede causar pérdidas importantes de todo tipo.
+                            9: BENEC es nuestro egrégor del beneficio económico, de uso opcional. Cuidaremos de la idea, las palabras y los símbolos usados. Solo usaremos el material en contextos de abundancia, siempre positivos. Está muy desaconsejado &ldquo;aprovecharse&rdquo; del Egrégor BENEC sin cumplir el trato convenido, pues puede causar pérdidas importantes de todo tipo.
                         </div>
                     </div>
 
