@@ -47,10 +47,23 @@
   text-align: center;
 }
 
+/* Large screens - center align */
+@media (min-width: 1200px) {
+  .normas-content-container {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .normas-content-title,
+  .normas-content-subtitle {
+    text-align: center;
+  }
+}
+
 .normas-content-title {
   font-size: 28px;
   color:#B19B6D;
-  font-weight: 400;
+  font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 10px;
   line-height: 1.2;
@@ -59,7 +72,7 @@
 .normas-content-subtitle {
   font-size: 28px;
   color: #B19B6D;
-  font-weight: 400;
+  font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 40px;
   line-height: 1.2;
@@ -69,10 +82,9 @@
   font-size: 16px;
   color: #2F435A;
   line-height: 1.6;
-  text-align: left;
-  margin: 0;
-  max-width: 600px;
+  text-align: center;
   margin: 0 auto;
+  max-width: 600px;
 }
 
 /* Rules List Styles */
@@ -99,7 +111,7 @@
   color: #2F435A;
   line-height: 1.6;
   text-align: left;
-  margin: 30px auto 0;
+  margin: 30px 0 0 0;
   max-width: 600px;
   font-style: italic;
 }
@@ -152,6 +164,15 @@
   align-items: center;
 }
 
+/* Legal Image Section - Mobile */
+.normas-legal-image-section-mobile {
+  display: none;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
 .normas-legal-image {
   width: 100%;
   height: 100%;
@@ -159,6 +180,16 @@
 }
 
 /* Responsive Design */
+@media (max-width: 960px) {
+  .normas-legal-image-section {
+    display: none;
+  }
+  
+  .normas-legal-image-section-mobile {
+    display: block;
+  }
+}
+
 @media (max-width: 1200px) {
   .normas-bottom-banner {
     width: 90%;
