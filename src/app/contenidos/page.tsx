@@ -201,6 +201,29 @@ export default function ContenidosPage() {
         </div>
       </section>
 
+      {/* Email Subscription Section */}
+      <section className="contenidos-subscription-section">
+        <div className="contenidos-subscription-container">
+          <div className="contenidos-subscription-form">
+            <p className="contenidos-subscription-text">
+              Reciba en su email todas las novedades.
+            </p>
+            
+            <form className="contenidos-email-form">
+              <input 
+                type="email" 
+                placeholder="Su Email" 
+                className="contenidos-email-input"
+                required
+              />
+              <button type="submit" className="contenidos-submit-button">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <FooterSection />
     </div>
   );

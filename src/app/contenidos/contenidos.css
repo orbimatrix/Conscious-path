@@ -339,6 +339,8 @@
   
   .contenidos-service-level {
     font-size: 18px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-service-description {
@@ -367,6 +369,8 @@
   
   .contenidos-service-level {
     font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-service-description {
@@ -439,6 +443,8 @@
   
   .contenidos-personal-service {
     font-size: 18px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-personal-description {
@@ -462,6 +468,8 @@
   
   .contenidos-personal-service {
     font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-personal-description {
@@ -534,6 +542,8 @@
   
   .contenidos-content-heading {
     font-size: 18px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-content-description {
@@ -557,6 +567,8 @@
   
   .contenidos-content-heading {
     font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   
   .contenidos-content-description {
@@ -627,6 +639,8 @@
   
   .contenidos-about-link {
     font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
@@ -646,5 +660,159 @@
   
   .contenidos-about-link {
     font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+/* Email Subscription Section */
+.contenidos-subscription-section {
+  padding: 60px 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenidos-subscription-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contenidos-subscription-form {
+  background: #6284AB;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(98, 132, 171, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contenidos-subscription-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.contenidos-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contenidos-email-input {
+  padding: 12px 16px;
+  border: 1px solid #D2B48C;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  background: white;
+  color: #333;
+}
+
+.contenidos-email-input::placeholder {
+  color: #999;
+}
+
+.contenidos-email-input:focus {
+  outline: none;
+  border-color: #4A6B8A;
+  box-shadow: 0 0 0 2px rgba(74, 107, 138, 0.2);
+}
+
+.contenidos-submit-button {
+  background: #EFA540;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.contenidos-submit-button:hover {
+  background: #E55A2B;
+  transform: translateY(-1px);
+}
+
+/* Mobile Responsive for Subscription Section */
+@media (max-width: 768px) {
+  .contenidos-subscription-section {
+    padding: 40px 0;
+  }
+  
+  .contenidos-subscription-form {
+    padding: 25px;
+    gap: 15px;
+  }
+  
+  .contenidos-subscription-text {
+    font-size: 16px;
+  }
+  
+  .contenidos-email-input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .contenidos-submit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenidos-subscription-section {
+    padding: 30px 0;
+  }
+  
+  .contenidos-subscription-form {
+    padding: 20px;
+    gap: 12px;
+  }
+  
+  .contenidos-subscription-text {
+    font-size: 14px;
+  }
+  
+  .contenidos-email-input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .contenidos-submit-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile Responsive (360px and below) */
+@media (max-width: 360px) {
+  .contenidos-service-level {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .contenidos-personal-service {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .contenidos-content-heading {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .contenidos-about-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 } 
