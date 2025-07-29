@@ -92,10 +92,6 @@ export default function AccederPage() {
                 className={`plan-card ${plan.popular ? 'popular' : ''} ${selectedPlan === plan.id ? 'selected' : ''}`}
                 onClick={() => handlePlanSelect(plan.id)}
               >
-                {plan.popular && (
-                  <div className="popular-badge">Recomendado</div>
-                )}
-                
                 <div className="plan-header">
                   <h3 className="plan-name">{plan.name}</h3>
                   <div className="plan-price">
