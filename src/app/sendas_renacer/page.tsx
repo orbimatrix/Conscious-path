@@ -1,9 +1,20 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import FooterSection from "../components/FooterSection";
+import ContactSection from "../components/ContactSection";
 import "./sendas_renacer.css";
 
 export default function SendasRenacerPage() {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="sendas-renacer-page">
       <main className="sendas-renacer-main">
@@ -66,7 +77,7 @@ export default function SendasRenacerPage() {
         {/* Call-to-Action Buttons */}
         <section className="sendas-cta-buttons">
           <div className="cta-buttons-container">
-            <button className="cta-button karma-button">
+            <button className="cta-button karma-button" onClick={openModal}>
               Acceder por NIVEL KARMA
             </button>
             <button className="cta-button direct-button">
@@ -104,6 +115,35 @@ export default function SendasRenacerPage() {
           </div>
         </section>
       </main>
+
+      {/* Renacer Consciente Modal */}
+      {showModal && (
+        <div className="renacer-modal-overlay" onClick={closeModal}>
+          <div className="renacer-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>×</button>
+            
+            {/* Top Section - Light Gray */}
+            <div className="modal-top-section">
+              <h2 className="modal-title">La tarifa de referencia para el año 2025 es:</h2>
+              <div className="modal-price">180,000$</div>
+              <p className="modal-instruction">Envíe un mensaje si desea:</p>
+              <ul className="modal-options">
+                <li><strong>A)</strong> Iniciar el proceso "Renacer Consciente".</li>
+                <li><strong>B)</strong> Consultar si cumple con los requisitos.</li>
+                <li><strong>C)</strong> Conocer las formas de pago.</li>
+                <li><strong>D)</strong> Preguntar sobre la disponibilidad de plazas</li>
+              </ul>
+              <div className="modal-separator"></div>
+              <p className="contact-instruction">Escriba su email y mensaje:</p>
+            </div>
+
+            {/* Bottom Section - Brownish Background */}
+            <div className="modal-bottom-section">
+              <ContactSection />
+            </div>
+          </div>
+        </div>
+      )}
 
       <FooterSection />
     </div>
