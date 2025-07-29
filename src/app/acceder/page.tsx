@@ -58,7 +58,7 @@ export default function AccederPage() {
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
-    if (planId === "carisma") {
+    if (planId === "carisma" || planId === "karma") {
       setShowPaymentModal(true);
     }
   };
@@ -171,7 +171,9 @@ export default function AccederPage() {
                   <h3 className="payment-section-title">Seleccione su preferencia:</h3>
                   <div className="monthly-plan">
                     <div className="monthly-price">
-                      <span className="price-large">15$</span>
+                      <span className="price-large">
+                        {selectedPlan === "carisma" ? "15$" : "150$"}
+                      </span>
                       <span className="price-period">/mes</span>
                     </div>
                     <button 
@@ -190,7 +192,9 @@ export default function AccederPage() {
                 <div className="payment-section">
                   <div className="annual-plan">
                     <div className="annual-price">
-                      <span className="price-large">150$</span>
+                      <span className="price-large">
+                        {selectedPlan === "carisma" ? "150$" : "1,500$"}
+                      </span>
                       <span className="price-period">/año</span>
                     </div>
                     <div className="discount-badge">20% de descuento</div>

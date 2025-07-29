@@ -379,12 +379,11 @@
 }
 
 .payment-modal::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 1px;
+  background: transparent;
 }
 
 .payment-modal::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: transparent;
 }
 
 .payment-modal-close {
@@ -586,20 +585,27 @@
   }
   
   .payment-modal {
-    padding: 30px 20px;
+    padding: 20px 15px;
     max-width: 95%;
+    max-height: 90vh;
   }
   
   .payment-section-title {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 12px;
   }
   
   .price-large {
-    font-size: 28px;
+    font-size: 24px;
+  }
+  
+  .price-period {
+    font-size: 14px;
   }
   
   .payment-option {
-    padding: 15px;
+    padding: 12px;
+    margin-bottom: 8px;
   }
   
   .payment-option div:first-child {
@@ -611,7 +617,30 @@
   }
   
   .points-badge {
-    font-size: 11px;
+    font-size: 10px;
+  }
+  
+  .discount-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  
+  .proceed-payment-btn {
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  
+  .payment-sections {
+    gap: 15px;
+  }
+  
+  .payment-divider {
+    margin: 10px 0;
+  }
+  
+  .annual-payment-options {
+    gap: 8px;
   }
 }
 
