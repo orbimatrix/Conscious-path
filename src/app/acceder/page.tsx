@@ -21,14 +21,7 @@ export default function AccederPage() {
         "Tecnología y ciencia",
         "Abundancia",
         "Bienestar",
-        "Acceso nivel BENEC",
-        "X",
-        "X",
-        "X",
-        "X",
-        "X",
-        "X",
-        "X"
+        "Acceso nivel BENEC"
       ],
       popular: true
     },
