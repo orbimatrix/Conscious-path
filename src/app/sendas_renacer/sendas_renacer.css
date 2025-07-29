@@ -1,0 +1,279 @@
+/* Sendas Renacer Page Styles */
+.sendas-renacer-page {
+  min-height: 100vh;
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+.sendas-renacer-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Navigation */
+.sendas-header {
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sendas-nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #333;
+}
+
+/* Hero Section */
+.sendas-hero {
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.sendas-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sendas-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+.sendas-description {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.sendas-requirements-intro {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+/* Requirements Section */
+.sendas-requirements {
+  padding: 40px 0;
+}
+
+.requirements-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.requirement-column {
+  text-align: center;
+}
+
+.requirement-title {
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.requirement-box {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: left;
+}
+
+.requirement-subtitle {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.requirement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.requirement-list li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.requirement-list li:last-child {
+  border-bottom: none;
+}
+
+.requirement-x {
+  color: #6284AB !important;
+  font-weight: bold;
+}
+
+/* CTA Buttons */
+.sendas-cta-buttons {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.cta-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  background: #6284AB;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 200px;
+}
+
+.cta-button:hover {
+  background: #5a6b82;
+}
+
+/* Free Access Section */
+.sendas-free-access {
+  padding: 60px 0;
+  background: #f9f9f9;
+}
+
+.free-access-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.free-access-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.free-access-content {
+  text-align: left;
+}
+
+.free-access-paragraph {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Bottom CTA */
+.sendas-bottom-cta {
+  padding: 40px 0 60px;
+  text-align: center;
+}
+
+.bottom-cta-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.bottom-cta-button {
+  background: #6284AB;
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.bottom-cta-button:hover {
+  background: #5a6b82;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sendas-title {
+    font-size: 24px;
+  }
+  
+  .requirements-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .requirement-title {
+    font-size: 20px;
+  }
+  
+  .cta-buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .sendas-nav {
+    gap: 20px;
+  }
+  
+  .nav-link {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sendas-renacer-main {
+    padding: 0 15px;
+  }
+  
+  .sendas-title {
+    font-size: 20px;
+  }
+  
+  .sendas-description {
+    font-size: 14px;
+  }
+  
+  .requirement-box {
+    padding: 20px;
+  }
+  
+  .free-access-title {
+    font-size: 20px;
+  }
+  
+  .free-access-paragraph {
+    font-size: 14px;
+  }
+} 
