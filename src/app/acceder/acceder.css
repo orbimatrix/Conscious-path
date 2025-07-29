@@ -99,11 +99,27 @@
   margin-bottom: 30px;
 }
 
+.plan-name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.plan-level-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 .plan-name {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 300;
   color: #333;
   margin-bottom: 15px;
+  letter-spacing: 2px;
 }
 
 .plan-price {
@@ -760,5 +776,9 @@
   
   .benefit-item p {
     font-size: 13px;
+  }
+  
+  .karma-part {
+    color: #EFA540;
   }
 } 

@@ -90,20 +90,31 @@ export default function AccederPage() {
                 onClick={() => handlePlanSelect(plan.id)}
               >
                 <div className="plan-header">
-                  <h3 className="plan-name">{plan.name}</h3>
-                  
+                  <div className="plan-name-container">
+                    <span className="plan-level-label">NIVEL</span>
+                    <h3 className="plan-name" data-plan={plan.id}>
+                      {plan.id === 'karma' ? (
+                        <>
+                          <span className="karma-part">KARM</span>
+                          <span>A</span>
+                        </>
+                      ) : (
+                        plan.name.split(' ')[1]
+                      )}
+                    </h3>
+                  </div>
                 </div>
 
-                <ul className="plan-features">
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className="plan-feature">
-                      <span className={`feature-icon ${plan.id === 'carisma' && index >= 6 ? 'feature-cross' : ''}`}>
-                        {plan.id === 'carisma' && index >= 6 ? 'X' : ''}
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                                  <ul className="plan-features">
+                    {plan.features.map((feature, index) => (
+                      <li key={index} className="plan-feature">
+                        <span className={`feature-icon ${plan.id === 'carisma' && index >= 6 ? 'feature-cross' : ''}`}>
+                          {plan.id === 'carisma' && index >= 6 ? '✗' : ''}
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
 
                 <button 
                   className={`plan-button ${selectedPlan === plan.id ? 'selected' : ''}`}
