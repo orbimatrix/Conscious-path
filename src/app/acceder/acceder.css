@@ -590,9 +590,18 @@
     max-height: 90vh;
   }
   
+  .payment-modal-close {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+  
   .payment-section-title {
     font-size: 16px;
     margin-bottom: 12px;
+    padding-right: 40px;
   }
   
   .price-large {
