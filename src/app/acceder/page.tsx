@@ -11,7 +11,7 @@ export default function AccederPage() {
     {
       id: "carisma",
       name: "NIVEL CARISMA",
-      price: "$79",
+      price: "$15",
       period: "por mes",
       features: [
         "10 Directos al año",
@@ -33,7 +33,7 @@ export default function AccederPage() {
     {
       id: "karma",
       name: "NIVEL KARMA",
-      price: "$149",
+      price: "$150",
       period: "por mes",
       features: [
         "20 Directos al año",
