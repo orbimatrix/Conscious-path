@@ -92,19 +92,19 @@ This Next.js application provides a platform for users to explore different leve
 - npm or yarn
 
 ### Installation
-```bash
+   ```bash
 # Clone the repository
 git clone [repository-url]
 
 # Navigate to project directory
-cd conscious
+   cd conscious
 
 # Install dependencies
-npm install
+   npm install
 
 # Start development server
-npm run dev
-```
+   npm run dev
+   ```
 
 ### Build for Production
 ```bash

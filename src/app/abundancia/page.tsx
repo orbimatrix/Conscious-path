@@ -71,6 +71,37 @@ export default function AbundanciaPage() {
             </div>
           </div>
         </section>
+
+        {/* Benefits Block Section */}
+        <section className="abundancia-benefits-block">
+          <div className="benefits-block-container">
+            <div className="benefits-block-content">
+              <p className="benefit-item">Dispondrá de nuevas oportunidades y retos.</p>
+              <p className="benefit-item">Las &quot;casualidades&quot; positivas serán habituales.</p>
+              <p className="benefit-item">La economía siempre tenderá a mejorar.</p>
+              <p className="benefit-item">Dispondrá de la evaluación personalizada para identificar y eliminar bloqueos mentales, familiares y transgeneracionales.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Presentation Section */}
+        <section className="abundancia-video-section">
+          <div className="video-section-container">
+            <div className="video-player">
+              <div className="play-button">
+                <div className="play-icon"></div>
+              </div>
+            </div>
+            <h3 className="video-title">Presentación del Grupo de Proyección</h3>
+            <button className="video-cta-button">
+              ENTRAR / REGISTRARSE
+            </button>
+            <div className="secondary-buttons">
+              <button className="secondary-button">Volver a Carisma</button>
+              <button className="secondary-button">Volver a Karma</button>
+            </div>
+          </div>
+        </section>
       </main>
 
       <FooterSection />
