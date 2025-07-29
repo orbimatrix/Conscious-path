@@ -67,12 +67,41 @@
 
 .normas-paragraph {
   font-size: 16px;
-  color: #4A4A4A;
+  color: #2F435A;
   line-height: 1.6;
   text-align: left;
   margin: 0;
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Rules List Styles */
+.normas-rules-list {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.normas-rule-item {
+  margin-bottom: 15px;
+}
+
+.normas-rule-content {
+  font-size: 16px;
+  color: #2F435A;
+  line-height: 1.6;
+}
+
+.normas-conclusion {
+  font-size: 16px;
+  color: #2F435A;
+  line-height: 1.6;
+  text-align: left;
+  margin: 30px auto 0;
+  max-width: 600px;
+  font-style: italic;
 }
 
 /* Bottom Brown Banner */
@@ -111,7 +140,43 @@
   margin: 0;
 }
 
+/* Legal Image Section */
+.normas-legal-image-section {
+  width: 1510px;
+  height: 684px;
+  opacity: 1;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.normas-legal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .normas-bottom-banner {
+    width: 90%;
+    left: 5%;
+    top: auto;
+  }
+  
+  .normas-legal-image-section {
+    width: 90%;
+    padding-top: 30px;
+  }
+  
+  .normas-legal-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .normas-banner {
     padding: 30px 15px;
@@ -134,8 +199,36 @@
     font-size: 15px;
   }
   
+  .normas-rules-list {
+    max-width: 95%;
+    /* margin: 30px auto; */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .normas-rule-item {
+    margin-bottom: 12px;
+  }
+  
+  .normas-rule-content {
+    font-size: 15px;
+  }
+  
+  .normas-conclusion {
+    font-size: 15px;
+  }
+  
   .normas-bottom-banner {
-    padding: 30px 15px;
+    width: 95%;
+    left: 2.5%;
+    padding: 20px 15px;
+    height: auto;
+    min-height: 120px;
+  }
+  
+  .normas-legal-image-section {
+    width: 95%;
+    padding-top: 20px;
   }
 }
 
@@ -151,5 +244,89 @@
   
   .normas-paragraph {
     font-size: 14px;
+  }
+  
+  .normas-rules-list {
+    max-width: 98%;
+    /* margin: 25px auto; */
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .normas-rule-item {
+    margin-bottom: 10px;
+  }
+  
+  .normas-rule-content {
+    font-size: 14px;
+  }
+  
+  .normas-conclusion {
+    font-size: 14px;
+  }
+  
+  .normas-bottom-banner {
+    width: 98%;
+    left: 1%;
+    padding: 15px 10px;
+  }
+  
+  .normas-bottom-title {
+    font-size: 14px;
+  }
+  
+  .normas-bottom-text {
+    font-size: 14px;
+  }
+  
+  .normas-legal-image-section {
+    width: 98%;
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .normas-banner-title {
+    font-size: 18px;
+  }
+  
+  .normas-content-title,
+  .normas-content-subtitle {
+    font-size: 18px;
+  }
+  
+  .normas-paragraph {
+    font-size: 13px;
+  }
+  
+  .normas-rules-list {
+    max-width: 98%;
+    /* margin: 20px auto; */
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .normas-rule-item {
+    margin-bottom: 8px;
+  }
+  
+  .normas-rule-content {
+    font-size: 13px;
+  }
+  
+  .normas-conclusion {
+    font-size: 13px;
+  }
+  
+  .normas-bottom-banner {
+    padding: 10px 8px;
+  }
+  
+  .normas-bottom-title {
+    font-size: 13px;
+  }
+  
+  .normas-bottom-text {
+    font-size: 13px;
   }
 } 
