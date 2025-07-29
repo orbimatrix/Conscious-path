@@ -151,6 +151,10 @@
   font-size: 18px;
 }
 
+.feature-cross {
+  color: #f44336;
+}
+
 .plan-button {
   width: 100%;
   padding: 16px 24px;

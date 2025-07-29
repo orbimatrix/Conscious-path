@@ -21,7 +21,14 @@ export default function AccederPage() {
         "Tecnología y ciencia",
         "Abundancia",
         "Bienestar",
-        "Acceso nivel BENEC"
+        "Acceso nivel BENEC",
+        "Posesión y demonios",
+        "Bienestar avanzado",
+        "Karma",
+        "Reencarnación",
+        "Acceso a Renacer Consciente",
+        "Posibilidad de ser seleccionado para Renacer Consciente de forma gratuita",
+        "Atención preferente"
       ],
       popular: true
     },
@@ -96,7 +103,9 @@ export default function AccederPage() {
                 <ul className="plan-features">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="plan-feature">
-                      <span className="feature-icon">✓</span>
+                      <span className={`feature-icon ${plan.id === 'carisma' && index >= 6 ? 'feature-cross' : ''}`}>
+                        {plan.id === 'carisma' && index >= 6 ? '✗' : '✓'}
+                      </span>
                       {feature}
                     </li>
                   ))}
