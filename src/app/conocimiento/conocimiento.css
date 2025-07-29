@@ -1,0 +1,48 @@
+.audio-video-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  padding-top: 20px;
+  max-width: 90%;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.button-section {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.filter-button {
+  padding: 15px 20px;
+  border: 2px solid #2F435A;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  border-color: #EFA540;
+}
+
+.filter-button.active {
+  border-color: #EFA540;
+} 
