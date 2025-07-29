@@ -72,23 +72,20 @@ export default function CarismaPage() {
 
             <div className="carisma-content-list">
               <div className="carisma-content-item">
-                <h3 className="content-number">1: ACTUALIDAD</h3>
                 <p className="content-description">
-                  geopolítica, ciencia oficial y oculta, noticias, bulos y manipulaciones, estudios varios.
+                1: ACTUALIDAD geopolítica, ciencia oficial y oculta, noticias, bulos y manipulaciones, estudios varios.
                 </p>
               </div>
 
               <div className="carisma-content-item">
-                <h3 className="content-number">2: ABUNDANCIA</h3>
                 <p className="content-description">
-                  formas de lograrla y conservarla, metafísica aplicada, mentalidad abundante, tendencias y previsiones, ejemplos.
+                2: ABUNDANCIA formas de lograrla y conservarla, metafísica aplicada, mentalidad abundante, tendencias y previsiones, ejemplos.
                 </p>
               </div>
 
               <div className="carisma-content-item">
-                <h3 className="content-number">3: BIENESTAR</h3>
                 <p className="content-description">
-                  físico y emocional, señales de la vida, conflictos y malestares, recurrencia, problemas heredados, conocimientos antiguos y alternativos.
+                3: BIENESTAR físico y emocional, señales de la vida, conflictos y malestares, recurrencia, problemas heredados, conocimientos antiguos y alternativos.
                 </p>
               </div>
             </div>
