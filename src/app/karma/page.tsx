@@ -75,16 +75,14 @@ export default function KarmaPage() {
             
             <div className="carisma-content-list">
               <div className="carisma-content-item">
-                <h3 className="content-number">4: INFLUENCIAS Y POSESIONES</h3>
                 <p className="content-description">
-                  habituales, manipulaciones químicas y energéticas, afecciones extrañas del bienestar, campos psíquicos, distorsiones de la realidad individual y colectiva.
+                4: INFLUENCIAS Y POSESIONES habituales, manipulaciones químicas y energéticas, afecciones extrañas del bienestar, campos psíquicos, distorsiones de la realidad individual y colectiva.
                 </p>
               </div>
               
               <div className="carisma-content-item">
-                <h3 className="content-number">5: REENCARNACIÓN Y KARMA</h3>
                 <p className="content-description">
-                  memoria más allá de la muerte, avance rápido en el camino de la ascensión, trascendencia, disolución del alma, gestión del Karma, fortaleza mental, valores espirituales y materiales.
+                5: REENCARNACIÓN Y KARMA memoria más allá de la muerte, avance rápido en el camino de la ascensión, trascendencia, disolución del alma, gestión del Karma, fortaleza mental, valores espirituales y materiales.
                 </p>
               </div>
             </div>
