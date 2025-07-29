@@ -15,6 +15,17 @@ export default function AportesPage() {
     }
   };
 
+  // Auto-hide success message after 12 seconds
+  React.useEffect(() => {
+    if (messageSent) {
+      const timer = setTimeout(() => {
+        setMessageSent(false);
+      }, 12000); // 12 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [messageSent]);
+
   return (
     <div className="aportes-page">
       {/* Brown Banner Section */}
@@ -32,7 +43,7 @@ export default function AportesPage() {
             <h2 className="payment-info-title">
               FORMAS DE PAGO Y RECOMPENSAS
             </h2>
-            
+
             {/* Credit Card Image */}
             <div className="credit-card-section">
               <div className="credit-card-container">
@@ -54,12 +65,12 @@ export default function AportesPage() {
             <h3 className="payment-methods-title">
               Formas de pago y premios
             </h3>
-            
+
             <div className="payment-methods-content">
               <p className="payment-paragraph">
                 "Senda Consciente" agradece la colaboración y constancia. Premiamos cada aporte y pago con <strong>PUNTOS</strong>. Estos puntos serán considerados para diversas promociones, prioridades y accesos preferentes.
               </p>
-              
+
               <div className="points-list-section">
                 <h4 className="points-list-title">Puntos extra por método de pago:</h4>
                 <ul className="points-list">
@@ -86,15 +97,15 @@ export default function AportesPage() {
                   </li>
                 </ul>
               </div>
-              
+
               <p className="payment-paragraph">
                 El proyecto también aceptará donaciones y transferencias de bienes, previa consulta.
               </p>
-              
+
               <p className="payment-paragraph">
                 Trabajamos con personas, siempre es posible considerar descuentos, planes de pago, modificaciones y excepciones para ayudar en casos particulares. Contáctanos para comentar tu situación específica.
               </p>
-              
+
               <div className="important-note">
                 <p className="important-note-text">
                   <strong>Importante:</strong> Antes de usar criptomonedas o realizar transferencias bancarias, es necesario confirmar los datos para evitar errores o pérdidas.
@@ -123,7 +134,7 @@ export default function AportesPage() {
           <button className="payment-button paypal-button">
             REALIZAR APORTE CON PAYPAL
           </button>
-          
+
           <p className="inquiry-text">
             Envíe su consulta sobre la forma de pago preferida, o sobre condiciones particulares.
           </p>
@@ -134,38 +145,32 @@ export default function AportesPage() {
       <div className="bottom-brown-banner">
         <div className="bottom-brown-banner-content">
           <div className="contact-form-container">
-            {!messageSent ? (
-              <>
-                <textarea 
-                  className="contact-textarea" 
-                  placeholder="Texto..."
-                  rows={4}
-                  value={messageText}
-                  onChange={(e) => setMessageText(e.target.value)}
-                ></textarea>
-                <button 
-                  className="send-message-button"
-                  onClick={handleSendMessage}
-                >
-                  ENVIAR MENSAJE
-                </button>
-              </>
-            ) : (
-              <div className="success-message">
-                <p className="success-text">
-                  SU CONSULTA HA SIDO ENVIADA. RECIBIRÁ RESPUESTA POR EMAIL.
-                </p>
-                <button 
-                  className="send-another-button"
-                  onClick={() => setMessageSent(false)}
-                >
-                  ENVIAR OTRO MENSAJE
-                </button>
-              </div>
-            )}
+            <textarea
+              className="contact-textarea"
+              placeholder="Texto..."
+              rows={4}
+              value={messageText}
+              onChange={(e) => setMessageText(e.target.value)}
+            ></textarea>
+            <button
+              className="send-message-button"
+              onClick={handleSendMessage}
+            >
+              ENVIAR MENSAJE
+            </button>
+
+
           </div>
         </div>
       </div>
+      {messageSent && (
+        <div className="success-message">
+          <p className="success-text">
+            SU CONSULTA HA SIDO ENVIADA. RECIBIRÁ RESPUESTA POR EMAIL.
+          </p>
+
+        </div>
+      )}
 
       <FooterSection />
     </div>
