@@ -46,7 +46,7 @@ export default function AvisoLegalPage() {
 
                 <h4 className="  mt-6">1. Datos identificativos</h4>
                 <p>
-                  La web www.SENDACONSCIENTE.com (en adelante denominada "SENDACONSCIENTE") es un servicio online de orientación espiritual, gestionado por la compañía de responsabilidad limitada DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) con domicilio en Sepapaja tn 6, Lasnamäe linnaosa, Tallinn 15551, y con correo electrónico de contacto general "info[arroba]SENDACONSCIENTE.com".
+                  La web www.SENDACONSCIENTE.com (en adelante denominada &quot;SENDACONSCIENTE&quot;) es un servicio online de orientación espiritual, gestionado por la compañía de responsabilidad limitada DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) con domicilio en Sepapaja tn 6, Lasnamäe linnaosa, Tallinn 15551, y con correo electrónico de contacto general &quot;info[arroba]SENDACONSCIENTE.com&quot;.
                 </p>
 
                 <h4 className=" mt-6">2. USUARIOS y responsabilidades</h4>
@@ -164,7 +164,7 @@ export default function AvisoLegalPage() {
                   El USUARIO podrá visualizar los elementos de SENDACONSCIENTE según su nivel de acceso, pero no podrá imprimirlos, ni realizar capturas de pantalla, ni descargar ningún elemento del servicio. El USUARIO no podrá hacer copias de la información que se pueda presentar a través de la web, ni tratar los datos obtenidos de ninguna forma. El USUARIO deberá abstenerse de suprimir, alterar, eludir o manipular cualquier dispositivo de protección o sistema de seguridad que estuviera instalado en las páginas y aplicaciones de DigitalMaps OÜ
                 </p>
                 <p>
-                  Para realizar cualquier tipo de consulta respecto a posibles incumplimientos de los derechos de propiedad intelectual o industrial, así como sobre cualquiera de los contenidos de SENDACONSCIENTE, puede hacerlo a través de la dirección de correo electrónico "info[arroba]SENDACONSCIENTE.com".
+                  Para realizar cualquier tipo de consulta respecto a posibles incumplimientos de los derechos de propiedad intelectual o industrial, así como sobre cualquiera de los contenidos de SENDACONSCIENTE, puede hacerlo a través de la dirección de correo electrónico &quot;info[arroba]SENDACONSCIENTE.com&quot;.
                 </p>
 
                 <h5 className=" mt-4">5.1 Elementos para publicidad y difusión</h5>
@@ -217,7 +217,7 @@ export default function AvisoLegalPage() {
                 </p>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
                   <li>No será necesaria autorización previa si el enlace permite únicamente el acceso a la página de inicio. Cualquier otra forma de enlace requerirá la autorización expresa e inequívoca por escrito de DigitalMaps OÜ.</li>
-                  <li>No se crearán "marcos" ("frames") con las páginas Web, ni sobre las páginas Web propiedad de DigitalMaps OÜ.</li>
+                  <li>No se crearán &quot;marcos&quot; (&quot;frames&quot;) con las páginas Web, ni sobre las páginas Web propiedad de DigitalMaps OÜ.</li>
                   <li>No se realizarán manifestaciones o indicaciones falsas, inexactas, u ofensivas sobre DigitalMaps OÜ sus socios, sus empleados o colaboradores, sus productos, o de las personas que se relacionen en la web o la aplicación por cualquier motivo, o de los USUARIOS de SENDACONSCIENTE, o de los contenidos suministrados.</li>
                   <li>No se declarará ni se dará a entender que DigitalMaps OÜ ha autorizado el enlace o que ha supervisado o asumido de cualquier forma los contenidos ofrecidos o puestos a disposición de la página web en la que aparece el enlace.</li>
                   <li>La página Web en la que aparezca el enlace solo podrá contener lo estrictamente necesario para identificar el destino del enlace.</li>

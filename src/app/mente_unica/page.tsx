@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import FooterSection from '../components/FooterSection';
 
 export default function MenteUnicaPage() {
@@ -30,9 +31,11 @@ export default function MenteUnicaPage() {
 
       {/* Full Width Image Section */}
       <section className="w-full">
-        <img 
+        <Image 
           src="/fotos/woman.jpg" 
           alt="Woman" 
+          width={1920}
+          height={1080}
           className="w-full h-auto object-cover"
         />
       </section>
@@ -113,7 +116,7 @@ export default function MenteUnicaPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-              <p className="text-justify">15. Eres el creador y destructor de todo en la ilusión. Sin embargo no debe asociarse a la idea de "Dios", pues no tiene el control sobre sí mismo. La idea de que es la única creación real de la Mente Única es más acertada.</p>
+              <p className="text-justify">15. Eres el creador y destructor de todo en la ilusión. Sin embargo no debe asociarse a la idea de &quot;Dios&quot;, pues no tiene el control sobre sí mismo. La idea de que es la única creación real de la Mente Única es más acertada.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
