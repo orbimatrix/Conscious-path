@@ -13,8 +13,7 @@ export default function AccederPage() {
     {
       id: "carisma",
       name: "NIVEL CARISMA",
-      price: "$15",
-      period: "por mes",
+     
       features: [
         "10 Directos al año",
         "Actualidad real",
@@ -35,8 +34,6 @@ export default function AccederPage() {
     {
       id: "karma",
       name: "NIVEL KARMA",
-      price: "$150",
-      period: "por mes",
       features: [
         "20 Directos al año",
         "Actualidad real",
@@ -94,17 +91,14 @@ export default function AccederPage() {
               >
                 <div className="plan-header">
                   <h3 className="plan-name">{plan.name}</h3>
-                  <div className="plan-price">
-                    <span className="price-amount">{plan.price}</span>
-                    <span className="price-period">{plan.period}</span>
-                  </div>
+                  
                 </div>
 
                 <ul className="plan-features">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="plan-feature">
                       <span className={`feature-icon ${plan.id === 'carisma' && index >= 6 ? 'feature-cross' : ''}`}>
-                        {plan.id === 'carisma' && index >= 6 ? '✗' : '✓'}
+                        {plan.id === 'carisma' && index >= 6 ? 'X' : ''}
                       </span>
                       {feature}
                     </li>
@@ -118,7 +112,7 @@ export default function AccederPage() {
                     handlePlanSelect(plan.id);
                   }}
                 >
-                  {selectedPlan === plan.id ? 'Seleccionado' : `Entrar en el nivel ${plan.name.split(' ')[1]}`}
+                  {selectedPlan === plan.id ? 'Entrar en el nivel KARMA' : `Entrar en el nivel ${plan.name.split(' ')[1]}`}
                 </button>
               </div>
             ))}
@@ -130,21 +124,18 @@ export default function AccederPage() {
             <h2 className="contact-options-title">Envíe un mensaje si desea:</h2>
             <div className="contact-options-list">
               <div className="contact-option">
-                <span className="option-label">A.</span>
                 <span className="option-text">
-                  Pagar con criptomonedas. Son recomendables USDT, USDC y BTC. Consultar para otras. Recibirá la dirección del monedero adecuado.
+                 A) Pagar con criptomonedas. Son recomendables USDT, USDC y BTC. Consultar para otras. Recibirá la dirección del monedero adecuado.
                 </span>
               </div>
               <div className="contact-option">
-                <span className="option-label">B.</span>
                 <span className="option-text">
-                  Usar otras formas de pago.
+                  B) Usar otras formas de pago.
                 </span>
               </div>
               <div className="contact-option">
-                <span className="option-label">C.</span>
                 <span className="option-text">
-                  Solicitudes especiales para su caso.
+                 C) Solicitudes especiales para su caso.
                 </span>
               </div>
             </div>

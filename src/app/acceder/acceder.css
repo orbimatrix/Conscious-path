@@ -23,10 +23,8 @@
 
 .hero-title {
   font-size: 48px;
-  font-weight: 300;
   margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #94520C;
+  color: #e0984a;
   text-align: center;
 }
 
@@ -63,7 +61,6 @@
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
-  border: 3px solid transparent;
 }
 
 .plan-card:hover {
@@ -72,12 +69,11 @@
 }
 
 .plan-card.selected {
-  border-color: #E6A14A;
   background: linear-gradient(135deg, #fff 0%, #fef9e7 100%);
 }
 
 .plan-card.popular {
-  border-color: #F9D264;
+  /* Removed border styling */
 }
 
 .popular-badge {
@@ -139,6 +135,8 @@
   font-size: 16px;
   color: #555;
   border-bottom: 1px solid #f0f0f0;
+  list-style: disc;
+  list-style-position: inside;
 }
 
 .plan-feature:last-child {
@@ -146,19 +144,31 @@
 }
 
 .feature-icon {
-  color: #4CAF50;
+  color: #4a5568;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4a5568;
+  display: inline-block;
+  margin-right: 8px;
 }
 
 .feature-cross {
-  color: #f44336;
+  color: #B19B6D;
+  background-color: transparent;
+  font-size: 16px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  margin-right: 8px;
 }
 
 .plan-button {
   width: 100%;
   padding: 16px 24px;
-  background: #E6A14A;
+  background: #6284AB;
   color: white;
   border: none;
   border-radius: 12px;
@@ -169,12 +179,12 @@
 }
 
 .plan-button:hover {
-  background: #D68910;
+  background: #5a7a9e;
   transform: translateY(-2px);
 }
 
 .plan-button.selected {
-  background: #4CAF50;
+  background: #6284AB;
 }
 
 /* Selected Plan Section */
@@ -213,7 +223,7 @@
 }
 
 .proceed-button {
-  background: #4CAF50;
+  background:#6284AB;
   color: white;
   border: none;
   padding: 16px 32px;
@@ -225,7 +235,7 @@
 }
 
 .proceed-button:hover {
-  background: #45a049;
+  background: #6284AB;
   transform: translateY(-2px);
 }
 
@@ -299,7 +309,6 @@
 
 .contact-options-title {
   font-size: 24px;
-  font-weight: 600;
   color: #333;
   margin-bottom: 30px;
 }
@@ -439,8 +448,7 @@
 
 .price-large {
   font-size: 32px;
-  font-weight: 800;
-  color: #E6A14A;
+  color: #E95B0E;
 }
 
 .price-period {
@@ -515,7 +523,7 @@
 
 .proceed-payment-btn {
   width: 100%;
-  background: #4CAF50;
+  background:#6284AB;
   color: white;
   border: none;
   padding: 14px 20px;
