@@ -95,7 +95,7 @@ export default function CarismaPage() {
             </p>
           </div>
         </section>
-        
+
         <section className="carisma-button-section">
           <div className="carisma-button-container">
             <button className="carisma-action-button">
@@ -103,6 +103,22 @@ export default function CarismaPage() {
             </button>
           </div>
         </section>
+        
+        <section className="carisma-video-section">
+          <div className="carisma-video-container">
+            <div className="video-player">
+              <div className="play-button">
+                <div className="play-icon"></div>
+              </div>
+            </div>
+            <h3 className="video-title">Presentación del Nivel Carisma</h3>
+            <button className="video-cta-button">
+              VER EL NIVEL SUPERIOR KARMA
+            </button>
+          </div>
+        </section>
+        
+       
       </main>
 
       <FooterSection />
