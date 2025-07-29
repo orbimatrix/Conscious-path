@@ -68,7 +68,7 @@ export default function AportesPage() {
 
             <div className="payment-methods-content">
               <p className="payment-paragraph">
-                "Senda Consciente" agradece la colaboración y constancia. Premiamos cada aporte y pago con <strong>PUNTOS</strong>. Estos puntos serán considerados para diversas promociones, prioridades y accesos preferentes.
+                &ldquo;Senda Consciente&rdquo; agradece la colaboración y constancia. Premiamos cada aporte y pago con <strong>PUNTOS</strong>. Estos puntos serán considerados para diversas promociones, prioridades y accesos preferentes.
               </p>
 
               <div className="points-list-section">

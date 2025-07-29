@@ -48,7 +48,7 @@ export default function BenecPage() {
             
             <div className="benec-info-content">
               <p className="benec-paragraph">
-                Toda idea compartida y sostenida crea una energía condensada que toma conciencia propia, a la que se llama "egrégor". El egrégor es un ente neutro que simplemente busca sobrevivir. Para ello favorece a quienes lo apoyan, y evita o combate a quienes lo atacan.
+                Toda idea compartida y sostenida crea una energía condensada que toma conciencia propia, a la que se llama &ldquo;egrégor&rdquo;. El egrégor es un ente neutro que simplemente busca sobrevivir. Para ello favorece a quienes lo apoyan, y evita o combate a quienes lo atacan.
               </p>
               
               <p className="benec-paragraph">
@@ -56,11 +56,11 @@ export default function BenecPage() {
               </p>
               
               <p className="benec-paragraph">
-                "BENEC" es el nombre del egrégor de la abundancia. A diferencia de otros grupos, nosotros no rendimos culto a un egrégor, si no que tenemos conciencia de que es una herramienta, y la usamos en consecuencia.
+                &ldquo;BENEC&rdquo; es el nombre del egrégor de la abundancia. A diferencia de otros grupos, nosotros no rendimos culto a un egrégor, si no que tenemos conciencia de que es una herramienta, y la usamos en consecuencia.
               </p>
               
               <p className="benec-paragraph">
-                Nuestro egrégor "BENEC" dispone de diversos símbolos, con los que le aportamos atención positiva. La experiencia demuestra que devuelve este regalo con resultados de abundancia.
+                Nuestro egrégor &ldquo;BENEC&rdquo; dispone de diversos símbolos, con los que le aportamos atención positiva. La experiencia demuestra que devuelve este regalo con resultados de abundancia.
               </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function BenecPage() {
             
             <div className="contributions-content">
               <p className="contribution-paragraph">
-                Los participantes practican el principio de "dar es igual a recibir". Se invita a los participantes a compartir <strong>VOLUNTARIAMENTE</strong> una parte del <strong>INCREMENTO</strong> de sus ganancias recibidas. Un egrégor puede favorecer la fortuna de quienes "lo alimentan con su atención", obteniendo resultados "mejores y más rápidos". No corresponder a la ayuda del egrégor "suele traer resultados negativos", ya que el egrégor ha "confiado e invertido su energía, confiando en tu respuesta como ser abundante".
+                Los participantes practican el principio de &ldquo;dar es igual a recibir&rdquo;. Se invita a los participantes a compartir <strong>VOLUNTARIAMENTE</strong> una parte del <strong>INCREMENTO</strong> de sus ganancias recibidas. Un egrégor puede favorecer la fortuna de quienes &ldquo;lo alimentan con su atención&rdquo;, obteniendo resultados &ldquo;mejores y más rápidos&rdquo;. No corresponder a la ayuda del egrégor &ldquo;suele traer resultados negativos&rdquo;, ya que el egrégor ha &ldquo;confiado e invertido su energía, confiando en tu respuesta como ser abundante&rdquo;.
               </p>
               
               <p className="contribution-paragraph">
@@ -102,7 +102,7 @@ export default function BenecPage() {
               </p>
               
               <p className="contribution-paragraph">
-                Puede resultar difícil recordar la "verdadera situación" cuando se ingresó al grupo, especialmente después de que ya se han manifestado los resultados. Puede ser complicado saber realmente "cuánto hemos mejorado realmente". Para esto se recomienda "realizar una declaración económica inicial para tomar conciencia de la mejora real lograda".
+                Puede resultar difícil recordar la &ldquo;verdadera situación&rdquo; cuando se ingresó al grupo, especialmente después de que ya se han manifestado los resultados. Puede ser complicado saber realmente &ldquo;cuánto hemos mejorado realmente&rdquo;. Para esto se recomienda &ldquo;realizar una declaración económica inicial para tomar conciencia de la mejora real lograda&rdquo;.
               </p>
             </div>
           </div>
