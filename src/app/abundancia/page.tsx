@@ -1,10 +1,17 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./abundancia.css";
 
 export default function AbundanciaPage() {
+  // Simulate user login status - in real app this would come from auth context
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const toggleLoginStatus = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
   return (
     <div className="abundancia-page">
       <main className="abundancia-main">
@@ -93,13 +100,46 @@ export default function AbundanciaPage() {
               </div>
             </div>
             <h3 className="video-title">Presentación del Grupo de Proyección</h3>
-            <button className="video-cta-button">
-              ENTRAR / REGISTRARSE
-            </button>
+            
+            {/* Conditional content based on login status */}
+            {isLoggedIn ? (
+              <div className="logged-in-content">
+                <div className="logged-in-message">
+                  YA PARTICIPAS EN EL GRUPO DE<br />
+                  PROYECCIÓN DE LA ABUNDANCIA<br />
+                  &quot;BENEC&quot;
+                </div>
+                <button className="video-cta-button logged-in">
+                  ENTRAR EN BENEC
+                </button>
+              </div>
+            ) : (
+              <button className="video-cta-button">
+                ENTRAR / REGISTRARSE
+              </button>
+            )}
+            
             <div className="secondary-buttons">
               <button className="secondary-button">Volver a Carisma</button>
               <button className="secondary-button">Volver a Karma</button>
             </div>
+            
+            {/* Debug toggle button - remove in production */}
+            <button 
+              className="debug-toggle" 
+              onClick={toggleLoginStatus}
+              style={{ 
+                marginTop: '20px', 
+                padding: '8px 16px', 
+                background: '#666', 
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '4px',
+                fontSize: '12px'
+              }}
+            >
+              {isLoggedIn ? 'Logout' : 'Login'} (Debug)
+            </button>
           </div>
         </section>
       </main>

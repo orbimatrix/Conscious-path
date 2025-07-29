@@ -179,6 +179,15 @@
     padding: 15px 30px;
   }
   
+  .logged-in-message {
+    font-size: 16px;
+  }
+  
+  .video-cta-button.logged-in {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+  
   .secondary-buttons {
     flex-direction: column;
     align-items: center;
@@ -258,6 +267,15 @@
     padding: 12px 25px;
   }
   
+  .logged-in-message {
+    font-size: 14px;
+  }
+  
+  .video-cta-button.logged-in {
+    font-size: 14px;
+    padding: 12px 25px;
+  }
+  
   .secondary-button {
     font-size: 13px;
     padding: 10px 20px;
@@ -325,6 +343,15 @@
   }
   
   .video-cta-button {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+  
+  .logged-in-message {
+    font-size: 13px;
+  }
+  
+  .video-cta-button.logged-in {
     font-size: 13px;
     padding: 10px 20px;
   }
@@ -512,4 +539,37 @@
   background: #f0e8d8;
   border-color: #C4A484;
   box-shadow: 2px 2px 6px rgba(210, 180, 140, 0.4);
+}
+
+/* Logged In Content Styles */
+.logged-in-content {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logged-in-message {
+  font-size: 18px;
+  color: #2DDD79;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.video-cta-button.logged-in {
+  background: #6284AB;
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.video-cta-button.logged-in:hover {
+  background: #5a6b82;
 } 
