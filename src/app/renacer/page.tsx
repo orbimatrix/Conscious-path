@@ -56,6 +56,62 @@ export default function RenacerPage() {
             </div>
           </div>
         </section>
+
+        <section className="renacer-banner-section">
+          <div className="renacer-banner-container">
+            <h2 className="renacer-banner-title">
+              Se realizan un máximo de<br />
+              3 procedimientos al año
+            </h2>
+          </div>
+        </section>
+
+        <section className="renacer-options-section">
+          <div className="renacer-options-container">
+            <p className="renacer-options-intro">
+              El paso RENACER CONSCIENTE ofrece 2 opciones:
+            </p>
+            
+            <div className="renacer-option-card">
+              <h3 className="option-title">Asistentes al Nivel KARMA:</h3>
+              <ul className="option-features">
+                <li>Preparación completa para el proceso y los siguientes pasos despúes de la reencarnación.</li>
+                <li>Evaluación y mejora de las fortalezas y de los conocimientos necesarios, durante el tiempo que sea necesario.</li>
+                <li>Precio de referencia revisado cada año.</li>
+                <li>Posibilidad de acceso gratuito.</li>
+              </ul>
+            </div>
+            
+            <div className="renacer-divider"></div>
+            
+            <div className="renacer-option-card">
+              <h3 className="option-title">Acceso EXPRESS:</h3>
+              <ul className="option-features">
+                <li>Realización urgente del proceso, sin necesidad de preparación previa obligatoria.</li>
+                <li>Mínimos requisitos necesarios.</li>
+                <li>Precio personalizado.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="renacer-video-section">
+          <div className="renacer-video-container">
+            <div className="video-player">
+              <div className="play-button">
+                <div className="play-icon"></div>
+              </div>
+            </div>
+            <h3 className="video-title">Presentación del Nivel Renacer Consciente</h3>
+            <button className="video-cta-button">
+              ACCEDER
+            </button>
+            <div className="secondary-buttons">
+              <button className="secondary-button">Nivel Carisma</button>
+              <button className="secondary-button">Nivel Karma</button>
+            </div>
+          </div>
+        </section>
       </main>
       <FooterSection />
     </div>

@@ -146,6 +146,187 @@
   margin-bottom: 0;
 }
 
+/* Banner Section */
+.renacer-banner-section {
+  background: #B19B6D;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.renacer-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.renacer-banner-title {
+  color: #fcfcfc;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Options Section */
+.renacer-options-section {
+  padding: 60px 20px;
+  background: white;
+}
+
+.renacer-options-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.renacer-options-intro {
+  color: #4A4A4A;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 40px 0;
+  text-align: left;
+}
+
+.renacer-option-card {
+  margin-bottom: 30px;
+}
+
+.option-title {
+  color: #E67E22;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.option-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.option-features li {
+  color: #4A4A4A;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  text-align: left;
+  padding-left: 20px;
+  position: relative;
+}
+
+.option-features li:before {
+  content: "•";
+  color: #E67E22;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.renacer-divider {
+  height: 1px;
+  background: #D3D3D3;
+  margin: 40px 0;
+}
+
+/* Video Section */
+.renacer-video-section {
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.renacer-video-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-player {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  background: #FFE4E1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  position: relative;
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  background: white;
+}
+
+.play-icon {
+  width: 0;
+  height: 0;
+  border-left: 20px solid #FF0000;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 4px;
+}
+
+.video-title {
+  color: #4A4A4A;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 25px 0;
+}
+
+.video-cta-button {
+  background: #6284AB;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.video-cta-button:hover {
+  background: #4A6B8A;
+  transform: translateY(-2px);
+}
+
+.secondary-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.secondary-button {
+  background: white;
+  color: #4A4A4A;
+  border: 2px solid #B19B6D;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  background: #B19B6D;
+  color: white;
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 1024px) {
   .renacer-hero {
@@ -182,6 +363,51 @@
   }
   
   .renacer-info-paragraph {
+    font-size: 15px;
+  }
+
+  .renacer-banner-title {
+    font-size: 26px;
+  }
+  
+  .renacer-options-intro {
+    font-size: 17px;
+  }
+  
+  .option-title {
+    font-size: 22px;
+  }
+  
+  .option-features li {
+    font-size: 15px;
+  }
+  
+  .video-player {
+    height: 250px;
+  }
+  
+  .play-button {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .play-icon {
+    border-left: 18px solid #FF0000;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+  
+  .video-title {
+    font-size: 18px;
+  }
+  
+  .video-cta-button {
+    padding: 14px 35px;
+    font-size: 17px;
+  }
+  
+  .secondary-button {
+    padding: 11px 22px;
     font-size: 15px;
   }
 }
@@ -230,6 +456,76 @@
     font-size: 15px;
     margin-bottom: 20px;
   }
+
+  .renacer-banner-section {
+    padding: 35px 15px;
+  }
+  
+  .renacer-banner-title {
+    font-size: 24px;
+  }
+  
+  .renacer-options-section {
+    padding: 50px 15px;
+  }
+  
+  .renacer-options-intro {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .option-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .option-features li {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .renacer-divider {
+    margin: 30px 0;
+  }
+  
+  .renacer-video-section {
+    padding: 50px 15px;
+  }
+  
+  .video-player {
+    height: 200px;
+  }
+  
+  .play-button {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .play-icon {
+    border-left: 15px solid #FF0000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+  
+  .video-title {
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
+  
+  .video-cta-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .secondary-buttons {
+    gap: 15px;
+  }
+  
+  .secondary-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -276,6 +572,58 @@
     font-size: 14px;
     margin-bottom: 18px;
   }
+
+  .renacer-banner-title {
+    font-size: 22px;
+  }
+  
+  .renacer-options-intro {
+    font-size: 15px;
+  }
+  
+  .option-title {
+    font-size: 18px;
+  }
+  
+  .option-features li {
+    font-size: 13px;
+  }
+  
+  .video-player {
+    height: 180px;
+  }
+  
+  .play-button {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .play-icon {
+    border-left: 12px solid #FF0000;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+  }
+  
+  .video-title {
+    font-size: 16px;
+  }
+  
+  .video-cta-button {
+    padding: 11px 25px;
+    font-size: 15px;
+  }
+  
+  .secondary-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .secondary-button {
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -321,5 +669,50 @@
   .renacer-info-paragraph {
     font-size: 13px;
     margin-bottom: 15px;
+  }
+
+  .renacer-banner-title {
+    font-size: 20px;
+  }
+  
+  .renacer-options-intro {
+    font-size: 14px;
+  }
+  
+  .option-title {
+    font-size: 17px;
+  }
+  
+  .option-features li {
+    font-size: 12px;
+  }
+  
+  .video-player {
+    height: 160px;
+  }
+  
+  .play-button {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .play-icon {
+    border-left: 10px solid #FF0000;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  
+  .video-title {
+    font-size: 15px;
+  }
+  
+  .video-cta-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .secondary-button {
+    width: 180px;
+    font-size: 12px;
   }
 } 
