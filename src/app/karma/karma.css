@@ -42,16 +42,19 @@
   /* Benefits Section */
   .carisma-benefits {
     background: white;
-    padding: 60px 20px;
-    min-height: 55vh;
+    padding: 30px 20px;
+    min-height: 25vh;
     display: flex;
     align-items: center;
   }
   
   .carisma-benefits-container {
-    max-width: 800px;
+    max-width: 500px;
     margin: 0 auto;
     width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
   }
   
   .carisma-benefits-list {
@@ -59,16 +62,23 @@
   padding: 0;
   margin: 0;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto;
 }
   
   .carisma-benefit-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 10px 0;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 6px 0;
   font-size: 18px;
   color: #666;
+  width: 100%;
 }
   
   .benefit-icon {
@@ -365,8 +375,8 @@
     }
     
     .carisma-benefits {
-      padding: 50px 20px;
-      min-height: 60vh;
+      padding: 25px 20px;
+      min-height: 30vh;
     }
     
     .carisma-image-section {
@@ -455,15 +465,16 @@
     }
     
     .carisma-benefits {
-      padding: 40px 15px;
-      min-height: 65vh;
+      padding: 20px 15px;
+      min-height: 35vh;
     }
     
     .carisma-benefit-item {
       font-size: 16px;
-      padding: 15px 0;
-      flex-direction: column;
-      gap: 8px;
+      padding: 8px 0;
+      flex-direction: row;
+      gap: 12px;
+      width: 100%;
     }
     
     .benefit-icon {
@@ -471,7 +482,7 @@
     }
     
     .benefit-text {
-      text-align: center;
+      text-align: left;
     }
     
     .carisma-image-section {
@@ -564,13 +575,14 @@
     }
     
     .carisma-benefits {
-      padding: 30px 15px;
-      min-height: 70vh;
+      padding: 15px 15px;
+      min-height: 40vh;
     }
     
     .carisma-benefit-item {
       font-size: 14px;
-      padding: 12px 0;
+      padding: 6px 0;
+      width: 100%;
     }
     
     .benefit-icon {
@@ -667,13 +679,14 @@
     }
     
     .carisma-benefits {
-      padding: 25px 10px;
-      min-height: 75vh;
+      padding: 12px 10px;
+      min-height: 45vh;
     }
     
     .carisma-benefit-item {
       font-size: 13px;
-      padding: 10px 0;
+      padding: 5px 0;
+      width: 100%;
     }
     
     .benefit-icon {
@@ -696,12 +709,13 @@
     }
     
     .carisma-benefits {
-      padding: 20px 8px;
+      padding: 10px 8px;
     }
     
     .carisma-benefit-item {
       font-size: 12px;
-      padding: 8px 0;
+      padding: 4px 0;
+      width: 100%;
     }
     
     .benefit-icon {
@@ -717,8 +731,8 @@
     }
     
     .carisma-benefits {
-      min-height: 50vh;
-      padding: 30px 20px;
+      min-height: 25vh;
+      padding: 15px 20px;
     }
     
     .carisma-title {
