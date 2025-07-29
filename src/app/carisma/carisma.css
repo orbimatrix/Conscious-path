@@ -42,8 +42,8 @@
 /* Benefits Section */
 .carisma-benefits {
   background: white;
-  padding: 60px 20px;
-  min-height: 55vh;
+  padding: 30px 20px;
+  min-height: 30vh;
   display: flex;
   align-items: center;
 }
@@ -69,11 +69,6 @@
   padding: 20px 0;
   font-size: 18px;
   color: #666;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.carisma-benefit-item:last-child {
-  border-bottom: none;
 }
 
 .benefit-icon {
@@ -81,6 +76,10 @@
   font-weight: bold;
   font-size: 20px;
   min-width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .benefit-text {
@@ -90,14 +89,20 @@
 
 /* Image Section */
 .carisma-image-section {
-  padding: 40px 20px;
+  padding: 20px 20px;
   background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carisma-image-container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carisma-image {
@@ -105,6 +110,8 @@
   height: auto;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  display: block;
 }
 
 /* Information Section */
@@ -290,8 +297,8 @@
 
 .video-cta-button {
   background: white;
-  color: #EFA540;
-  border: 2px solid #EFA540;
+  color: #B19B6D;
+  border: 2px solid #B19B6D;
   padding: 15px 30px;
   border-radius: 8px;
   font-size: 16px;
@@ -304,7 +311,7 @@
 }
 
 .video-cta-button:hover {
-  background: #EFA540;
+  background: #B19B6D;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
