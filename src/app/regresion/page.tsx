@@ -105,19 +105,24 @@ export default function RegresionPage() {
           </div>
         </div>
       </div>
-
-      {/* Video Presentation Section */}
+      
+      {/* Video Section */}
       <div className={styles.videoSection}>
         <div className={styles.videoContainer}>
-          <div className={styles.videoPlayer}>
+          {/* Video Player Placeholder */}
+          <div className={styles.videoPlaceholder}>
             <div className={styles.playButton}>
-              <div className={styles.playIcon}>▶</div>
+              <div className={styles.playIcon}></div>
             </div>
           </div>
+          
+          {/* Title */}
           <h2 className={styles.videoTitle}>
             Presentación de Regresión Origen
           </h2>
-          <button className={styles.reserveButton}>
+          
+          {/* Booking Button */}
+          <button className={styles.bookingButton}>
             Reservar Regresión Origen
           </button>
         </div>
