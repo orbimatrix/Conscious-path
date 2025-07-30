@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Custom hook to detect media query
 function useMediaQuery(query: string): boolean {
@@ -82,7 +83,7 @@ export default function Header() {
               </div>
 
               <div className="mobile-dropdown-section">
-                <a href="/blogs" className="mobile-dropdown-menu-item">Blog</a>
+                <Link href="/blogs" className="mobile-dropdown-menu-item">Blog</Link>
               </div>
 
               <div className="mobile-dropdown-section">
@@ -116,7 +117,7 @@ export default function Header() {
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Niveles</a>
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Servicios</a>
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Todos contenidos</a>
-        <a href="/blogs" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Blog</a>
+        <Link href="/blogs" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Blog</Link>
       </nav>
     </header>
   );

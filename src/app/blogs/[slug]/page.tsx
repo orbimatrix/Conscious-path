@@ -29,10 +29,16 @@ async function getPostSlugs() {
   return await client.fetch(query)
 }
 
+interface PostSlug {
+  slug: {
+    current: string
+  }
+}
+
 export async function generateStaticParams() {
   const posts = await getPostSlugs()
   
-  return posts.map((post: any) => ({
+  return posts.map((post: PostSlug) => ({
     slug: post.slug.current,
   }))
 }
@@ -69,15 +75,15 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         
         <h1 className="blog-post-title">{post.title}</h1>
         
-        {post.categories && post.categories.length > 0 && (
-          <div className="post-categories">
-            {post.categories.map((category: any) => (
-              <span key={category.title} className="post-category">
-                {category.title}
-              </span>
-            ))}
-          </div>
-        )}
+                 {post.categories && post.categories.length > 0 && (
+           <div className="post-categories">
+             {post.categories.map((category: { title: string }) => (
+               <span key={category.title} className="post-category">
+                 {category.title}
+               </span>
+             ))}
+           </div>
+         )}
       </div>
       
       {post.mainImage && (

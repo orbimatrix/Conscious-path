@@ -3,6 +3,24 @@ import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import './blogs.css'
 
+interface BlogPost {
+  _id: string
+  title: string
+  slug: {
+    current: string
+  }
+  mainImage?: {
+    alt?: string
+  }
+  publishedAt?: string
+  author?: {
+    name: string
+  }
+  categories?: Array<{
+    title: string
+  }>
+}
+
 async function getPosts() {
   const query = `*[_type == "post"] | order(publishedAt desc) {
     _id,
@@ -28,15 +46,15 @@ export default async function BlogsPage() {
       </div>
       
       <div className="blogs-grid">
-        {posts.map((post: any) => (
+        {posts.map((post: BlogPost) => (
           <Link href={`/blogs/${post.slug.current}`} key={post._id} className="blog-card">
             <div className="blog-card-image">
               {post.mainImage && (
-                                 <img
-                   src={urlFor(post.mainImage).width(400).height(250).url()}
-                   alt={post.mainImage.alt || post.title}
-                   className="blog-image"
-                 />
+                <img
+                  src={urlFor(post.mainImage).width(400).height(250).url()}
+                  alt={post.mainImage.alt || post.title}
+                  className="blog-image"
+                />
               )}
             </div>
             <div className="blog-card-content">
@@ -57,7 +75,7 @@ export default async function BlogsPage() {
               </div>
               {post.categories && post.categories.length > 0 && (
                 <div className="blog-categories">
-                  {post.categories.map((category: any) => (
+                  {post.categories.map((category) => (
                     <span key={category.title} className="blog-category">
                       {category.title}
                     </span>
