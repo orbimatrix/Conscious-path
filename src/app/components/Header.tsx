@@ -82,7 +82,7 @@ export default function Header() {
               </div>
 
               <div className="mobile-dropdown-section">
-                <a href="#" className="mobile-dropdown-menu-item">Blog</a>
+                <a href="/blogs" className="mobile-dropdown-menu-item">Blog</a>
               </div>
 
               <div className="mobile-dropdown-section">
@@ -116,7 +116,7 @@ export default function Header() {
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Niveles</a>
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Servicios</a>
         <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Todos contenidos</a>
-        <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Blog</a>
+        <a href="/blogs" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Blog</a>
       </nav>
     </header>
   );
