@@ -17,6 +17,7 @@ export default function LimpiarKarmaPage() {
 
         <section className="limpiar-karma-benefits">
           <div className="limpiar-karma-benefits-container">
+            <h2 className="limpiar-karma-benefits-title">LIBERE LAS CARGAS DE SU ALMA</h2>
             <ul className="limpiar-karma-benefits-list">
               <li className="limpiar-karma-benefit-item">
                 <span className="benefit-icon">✓</span>

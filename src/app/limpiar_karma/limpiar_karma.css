@@ -57,7 +57,21 @@
   border-radius: 8px;
   background: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.limpiar-karma-benefits-title {
+  font-size: 32px;
+  color: #B19B6D;
+  text-align: center;
+  margin-bottom: 25px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .limpiar-karma-benefits-list {
@@ -391,6 +405,12 @@
     min-height: 25vh;
   }
   
+  .limpiar-karma-benefits-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    white-space: nowrap;
+  }
+  
   .limpiar-karma-image-section {
     padding: 25px 20px;
   }
@@ -488,6 +508,12 @@
   .limpiar-karma-benefits {
     padding: 15px 15px;
     min-height: 25vh;
+  }
+  
+  .limpiar-karma-benefits-title {
+    font-size: 24px;
+    margin-bottom: 18px;
+    white-space: nowrap;
   }
   
   .limpiar-karma-benefit-item {
@@ -609,6 +635,12 @@
     min-height: 30vh;
   }
   
+  .limpiar-karma-benefits-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+  }
+  
   .limpiar-karma-benefit-item {
     font-size: 14px;
     padding: 5px 0;
@@ -722,6 +754,12 @@
     min-height: 35vh;
   }
   
+  .limpiar-karma-benefits-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+  
   .limpiar-karma-benefit-item {
     font-size: 13px;
     padding: 4px 0;
@@ -763,6 +801,12 @@
   
   .limpiar-karma-benefits {
     padding: 10px 8px;
+  }
+  
+  .limpiar-karma-benefits-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    white-space: nowrap;
   }
   
   .limpiar-karma-benefit-item {
