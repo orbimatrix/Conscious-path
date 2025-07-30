@@ -17,6 +17,7 @@ export default function EstructuralPage() {
 
         <section className="estructural-benefits">
           <div className="estructural-benefits-container">
+            <h2 className="estructural-benefits-title">DESCUBRA SUS CAPACIDADES REALES</h2>
             <ul className="estructural-benefits-list">
               <li className="estructural-benefit-item">
                 <span className="benefit-icon">✓</span>
