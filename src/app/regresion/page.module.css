@@ -1,0 +1,657 @@
+.container {
+  min-height: 100vh;
+  background-color: white;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.bannerSection {
+  width: 100%;
+  min-height: 300px;
+  padding: 10px 20px;
+  gap: 10px;
+  opacity: 1;
+  background-color: #B19B6D;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.bannerContent {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.infoText {
+  color: #ffffff;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.bannerTitle {
+  color: #ffffff;
+  font-size: 3.75rem;
+  line-height: 1.1;
+}
+
+/* New Checkmark Section Styles */
+.checkmarkSection {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkmarkContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.checkmarkTitle {
+  color: #B19B6D;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkmarkList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.checkmarkItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.checkmarkIcon {
+  color: #22c55e;
+  font-size: 1.25rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.checkmarkText {
+  color: #374151;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  text-align: left;
+  flex: 1;
+}
+
+/* New Checkmark Section Styles */
+.checkmarkSection {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkmarkContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.checkmarkTitle {
+  color: #B19B6D;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkmarkList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.checkmarkItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.checkmarkIcon {
+  color: #22c55e;
+  font-size: 1.25rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.checkmarkText {
+  color: #374151;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  text-align: left;
+  flex: 1;
+}
+
+.contentSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+
+/* Image Section Styles */
+.imageSection {
+  width: 100%;
+  padding: 3rem 1rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.reflectionImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.reflectionImage:hover {
+  transform: scale(1.02);
+}
+
+.contentContainer {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.prose {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.paragraph {
+  color: #374151;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.subsectionTitle {
+  font-size: 1.25rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  color: #374151;
+  margin-bottom: 1.5rem;
+}
+
+.listItem {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 1200px) {
+  .contentSection {
+    padding: 2.5rem 1rem;
+  }
+  
+  .bannerTitle {
+    font-size: 3.5rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bannerTitle {
+    font-size: 3rem;
+  }
+  
+  .contentSection {
+    padding: 2rem 1rem;
+  }
+  
+  .prose {
+    font-size: 1rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 2rem;
+  }
+  
+  .checkmarkText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerTitle {
+    font-size: 2.5rem;
+  }
+  
+  .bannerSection {
+    padding: 10px 15px;
+    min-height: 250px;
+  }
+  
+  .infoText {
+    font-size: 1rem;
+  }
+  
+  .contentSection {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.375rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .paragraph {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+  
+  .list {
+    padding-left: 1.25rem;
+  }
+  
+  .checkmarkSection {
+    padding: 3rem 1rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .checkmarkList {
+    gap: 1.25rem;
+  }
+  
+  .checkmarkItem {
+    gap: 0.75rem;
+  }
+  
+  .checkmarkIcon {
+    font-size: 1.125rem;
+    width: 1.25rem;
+  }
+  
+  .checkmarkText {
+    font-size: 0.95rem;
+  }
+  
+  .imageSection {
+    padding: 2rem 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .bannerTitle {
+    font-size: 2.25rem;
+  }
+  
+  .infoText {
+    font-size: 0.95rem;
+  }
+  
+  .bannerSection {
+    min-height: 220px;
+    padding: 8px 12px;
+  }
+  
+  .contentSection {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 1rem;
+  }
+  
+  .paragraph {
+    font-size: 0.9rem;
+  }
+  
+  .checkmarkSection {
+    padding: 2.5rem 0.75rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .checkmarkList {
+    gap: 1rem;
+  }
+  
+  .checkmarkItem {
+    gap: 0.5rem;
+  }
+  
+  .checkmarkIcon {
+    font-size: 1rem;
+    width: 1rem;
+  }
+  
+  .checkmarkText {
+    font-size: 0.9rem;
+  }
+  
+  .imageSection {
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bannerTitle {
+    font-size: 2rem;
+  }
+  
+  .bannerSection {
+    padding: 6px 10px;
+    min-height: 200px;
+  }
+  
+  .infoText {
+    font-size: 0.875rem;
+  }
+  
+  .contentSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.95rem;
+  }
+  
+  .paragraph {
+    font-size: 0.85rem;
+  }
+  
+  .list {
+    padding-left: 1rem;
+  }
+  
+  .listItem {
+    font-size: 0.85rem;
+  }
+  
+  .checkmarkSection {
+    padding: 2rem 0.5rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .checkmarkList {
+    gap: 0.75rem;
+  }
+  
+  .checkmarkItem {
+    gap: 0.5rem;
+  }
+  
+  .checkmarkIcon {
+    font-size: 0.875rem;
+    width: 0.875rem;
+  }
+  
+  .checkmarkText {
+    font-size: 0.85rem;
+  }
+  
+  .imageSection {
+    padding: 1.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .bannerTitle {
+    font-size: 1.75rem;
+  }
+  
+  .infoText {
+    font-size: 0.8rem;
+  }
+  
+  .bannerSection {
+    min-height: 180px;
+    padding: 5px 8px;
+  }
+  
+  .contentSection {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.9rem;
+  }
+  
+  .paragraph {
+    font-size: 0.8rem;
+  }
+  
+  .listItem {
+    font-size: 0.8rem;
+  }
+  
+  .checkmarkSection {
+    padding: 1.5rem 0.25rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  
+  .checkmarkList {
+    gap: 0.5rem;
+  }
+  
+  .checkmarkItem {
+    gap: 0.375rem;
+  }
+  
+  .checkmarkIcon {
+    font-size: 0.75rem;
+    width: 0.75rem;
+  }
+  
+  .checkmarkText {
+    font-size: 0.8rem;
+  }
+  
+  .imageSection {
+    padding: 1rem 0.25rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .bannerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .infoText {
+    font-size: 0.75rem;
+  }
+  
+  .bannerSection {
+    min-height: 160px;
+    padding: 4px 6px;
+  }
+  
+  .contentSection {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.95rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.85rem;
+  }
+  
+  .paragraph {
+    font-size: 0.75rem;
+  }
+  
+  .listItem {
+    font-size: 0.75rem;
+  }
+  
+  .checkmarkSection {
+    padding: 1rem 0.25rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .checkmarkList {
+    gap: 0.375rem;
+  }
+  
+  .checkmarkItem {
+    gap: 0.25rem;
+  }
+  
+  .checkmarkIcon {
+    font-size: 0.625rem;
+    width: 0.625rem;
+  }
+  
+  .checkmarkText {
+    font-size: 0.75rem;
+  }
+  
+  .imageSection {
+    padding: 0.75rem 0.25rem;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .bannerSection {
+    min-height: 150px;
+    padding: 5px 15px;
+  }
+  
+  .bannerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .infoText {
+    font-size: 0.8rem;
+  }
+  
+  .contentSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .checkmarkSection {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .checkmarkTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .bannerTitle {
+    font-weight: 700;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .bannerSection {
+    transition: none;
+  }
+} 
