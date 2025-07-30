@@ -31,10 +31,10 @@ export default function PrivacidadPage() {
 
             <h3 className={styles.subsectionTitle}>1 Información general</h3>
             <p className={styles.paragraph}>
-              A través de la presente política de protección de datos, DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) responsable de la web www.SENDACONSCIENTE.com, en adelante denominada "SENDACONSCIENTE", informa a los USUARIOS que utilicen dicha web acerca de su política de protección de datos personales, con la finalidad de que decidan libre y voluntariamente si desean facilitar a DigitalMaps OÜ los datos personales que les puedan ser solicitados.
+              A través de la presente política de protección de datos, DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) responsable de la web www.SENDACONSCIENTE.com, en adelante denominada &ldquo;SENDACONSCIENTE&rdquo;, informa a los USUARIOS que utilicen dicha web acerca de su política de protección de datos personales, con la finalidad de que decidan libre y voluntariamente si desean facilitar a DigitalMaps OÜ los datos personales que les puedan ser solicitados.
             </p>
             <p className={styles.paragraph}>
-              En cumplimiento de las leyes de protección de datos y sus reglamentos, le informamos que los datos personales que nos aporte serán objeto de tratamiento en un fichero denominado "USUARIOS SENDACONSCIENTE", responsabilidad de DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) con domicilio en Sepapaja tn 6, Lasnamäe linnaosa, Tallinn 15551, y con correo electrónico de contacto general "info[arroba]SENDACONSCIENTE.com".
+              En cumplimiento de las leyes de protección de datos y sus reglamentos, le informamos que los datos personales que nos aporte serán objeto de tratamiento en un fichero denominado &ldquo;USUARIOS SENDACONSCIENTE&rdquo;, responsabilidad de DigitalMaps OÜ con nº de registro 16551653 (en adelante DigitalMaps OÜ) con domicilio en Sepapaja tn 6, Lasnamäe linnaosa, Tallinn 15551, y con correo electrónico de contacto general &ldquo;info[arroba]SENDACONSCIENTE.com&rdquo;.
             </p>
             <p className={styles.paragraph}>
               Al registrarse en SENDACONSCIENTE, el cliente reconoce haber leídos las presentes condiciones de privacidad de DigitalMaps OÜ (SENDACONSCIENTE) y acepta de forma expresa que las presentes condiciones son parte de la relación contractual.
@@ -107,7 +107,7 @@ export default function PrivacidadPage() {
 
             <h4 className={styles.subsectionTitle}>4.4 Política anti-spam</h4>
             <p className={styles.paragraph}>
-              DigitalMaps OÜ se declara completamente en contra del envío de comunicaciones comerciales no solicitadas de cualquier tipo de conducta o manifestación conocida como "spam", asimismo se declara comprometido con la lucha contra este tipo de prácticas abusivas. Por tanto, DigitalMaps OÜ garantiza al USUARIO a que bajo ningún concepto los datos personales recogidos en UNAFRUTA serán cedidos, compartidos, transferidos, ni vendidos a ningún tercero, al tiempo que se hará un uso respetuoso y moderado de los mismos.
+              DigitalMaps OÜ se declara completamente en contra del envío de comunicaciones comerciales no solicitadas de cualquier tipo de conducta o manifestación conocida como &ldquo;spam&rdquo;, asimismo se declara comprometido con la lucha contra este tipo de prácticas abusivas. Por tanto, DigitalMaps OÜ garantiza al USUARIO a que bajo ningún concepto los datos personales recogidos en UNAFRUTA serán cedidos, compartidos, transferidos, ni vendidos a ningún tercero, al tiempo que se hará un uso respetuoso y moderado de los mismos.
             </p>
             <p className={styles.paragraph}>
               En el caso de que un USUARIO reciba comunicaciones SENDACONSCIENTE sin haberse registrado, o sin haber dado su consentimiento expreso a dicho registro, puede cancelar dicha suscripción desde los enlaces que se proporcionan en nuestras comunicaciones, en el email info@SENDACONSCIENTE.com.
@@ -121,7 +121,7 @@ export default function PrivacidadPage() {
               Ambas acciones quedarán registradas en soportes informáticos. Con este doble proceso Usted nos da su consentimiento expreso, de forma clara e inequívoca, para el tratamiento de sus datos, tal y como se recoge en la política de privacidad de SENDACONSCIENTE.
             </p>
             <p className={styles.paragraph}>
-              Si no recibimos contestación por su parte al email enviado en el momento del registro, ejerciendo su derecho de acceso, rectificación, cancelación y oposición, entenderemos que está de acuerdo con el uso y finalidad de la aplicación "SENDACONSCIENTE" y nos da su consentimiento expreso de forma clara e inequívoca y acepta el tratamiento de los datos que nos ha proporcionado.
+              Si no recibimos contestación por su parte al email enviado en el momento del registro, ejerciendo su derecho de acceso, rectificación, cancelación y oposición, entenderemos que está de acuerdo con el uso y finalidad de la aplicación &ldquo;SENDACONSCIENTE&rdquo; y nos da su consentimiento expreso de forma clara e inequívoca y acepta el tratamiento de los datos que nos ha proporcionado.
             </p>
             <p className={styles.paragraph}>
               También es posible que a iniciativa de SENDACONSCIENTE se inicien procesos de verificación de edad.

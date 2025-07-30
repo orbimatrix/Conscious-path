@@ -33,7 +33,7 @@ export default function RegresionPage() {
             </div>
             <div className={styles.checkmarkItem}>
               <span className={styles.checkmarkIcon}>✓</span>
-              <span className={styles.checkmarkText}>Comprensión de patrones repetitivos y de relaciones</span>
+              <span className={`${styles.checkmarkText} ${styles.longText}`}>Comprensión de patrones repetitivos y de relaciones</span>
             </div>
             <div className={styles.checkmarkItem}>
               <span className={styles.checkmarkIcon}>✓</span>
