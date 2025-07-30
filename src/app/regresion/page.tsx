@@ -43,6 +43,8 @@ export default function RegresionPage() {
         </div>
       </div>
 
+     
+
       {/* Image Section */}
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
@@ -54,6 +56,70 @@ export default function RegresionPage() {
             className={styles.reflectionImage}
             priority
           />
+        </div>
+      </div>
+
+       {/* Content Section */}
+       <div className={styles.contentSection}>
+        <div className={styles.contentContainer}>
+          <div className={styles.prose}>
+            <h2 className={styles.sectionTitle}>
+              La regresión a vidas pasadas se usa para conocer las ataduras que trae nuestra alma, y así conocernos y liberarnos.
+            </h2>
+            
+            <h3 className={styles.subsectionTitle}>
+              Se usa principalmente en 3 casos:
+            </h3>
+            
+            <ol className={styles.numberedList}>
+              <li className={styles.listItem}>
+                Exploratorio, para ganar saber más sobre la propia naturaleza, los orígenes, historias del pasado, etc.
+              </li>
+              <li className={styles.listItem}>
+                Medio para el bienestar, identificando bloqueos que no responden a eventos de esta vida, y que nos causan molestias.
+              </li>
+              <li className={styles.listItem}>
+                Preparación para la siguiente reencarnación. Si bien no es obligado, sí ayuda en muchos casos a liberar ataduras tóxicas, y también a preparar la mente para ese paso con mayor consciencia.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      {/* Service Information Section */}
+      <div className={styles.serviceSection}>
+        <div className={styles.serviceContainer}>
+          <div className={styles.serviceContent}>
+            <p className={styles.serviceParagraph}>
+              Aseguramos un servicio de máxima eficacia, dentro de la atención integral.
+            </p>
+            <p className={styles.serviceParagraph}>
+              Esta sesión no necesita preparación previa cuando es exploratoria y de conocimiento.
+            </p>
+            <p className={styles.serviceParagraph}>
+              Si quiere encontrar el origen de un problema concreto, le solicitaremos información previa, para conseguir el mejor resultado.
+            </p>
+            <p className={styles.serviceParagraph}>
+              Se le guiará paso a paso en todo el proceso.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Video Presentation Section */}
+      <div className={styles.videoSection}>
+        <div className={styles.videoContainer}>
+          <div className={styles.videoPlayer}>
+            <div className={styles.playButton}>
+              <div className={styles.playIcon}>▶</div>
+            </div>
+          </div>
+          <h2 className={styles.videoTitle}>
+            Presentación de Regresión Origen
+          </h2>
+          <button className={styles.reserveButton}>
+            Reservar Regresión Origen
+          </button>
         </div>
       </div>
 

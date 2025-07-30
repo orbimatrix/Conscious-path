@@ -107,8 +107,8 @@
   flex: 1;
 }
 
-/* New Checkmark Section Styles */
-.checkmarkSection {
+/* Content Section Styles */
+.contentSection {
   width: 100%;
   padding: 4rem 1rem;
   background-color: white;
@@ -117,63 +117,96 @@
   justify-content: center;
 }
 
-.checkmarkContainer {
+.contentContainer {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
   width: 100%;
 }
 
-.checkmarkTitle {
-  color: #B19B6D;
-  font-size: 2.5rem;
-  font-weight: 300;
-  line-height: 1.2;
-  margin-bottom: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.checkmarkList {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 600px;
+.prose {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.checkmarkItem {
+.sectionTitle {
+  font-size: 1.75rem;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+.subsectionTitle {
+  font-size: 1.25rem;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  
+}
+
+.numberedList {
+  list-style-type: none;
+  padding-left: 0;
+  color: #374151;
+  margin-bottom: 1.5rem;
+  counter-reset: item;
+}
+
+.numberedList li {
+  counter-increment: item;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1.125rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.numberedList li::before {
+  content: counter(item) ") ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+}
+
+.listItem {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1.125rem;
+}
+
+/* Service Section Styles */
+.serviceSection {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: #B19B6D;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 500px;
 }
 
-.checkmarkIcon {
-  color: #22c55e;
-  font-size: 1.25rem;
-  font-weight: bold;
-  flex-shrink: 0;
-  width: 1.5rem;
-  text-align: center;
-}
-
-.checkmarkText {
-  color: #374151;
-  font-size: 1.125rem;
-  line-height: 1.4;
-  text-align: left;
-  flex: 1;
-}
-
-.contentSection {
+.serviceContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
   width: 100%;
+}
+
+.serviceContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.serviceParagraph {
+  color: #ffffff;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.serviceParagraph:last-child {
+  margin-bottom: 0;
 }
 
 /* Image Section Styles */
@@ -207,6 +240,90 @@
   transform: scale(1.02);
 }
 
+/* Video Presentation Section Styles */
+.videoSection {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.videoPlayer {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  background-color: #FCE8E8;
+  border-radius: 8px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.videoPlayer:hover {
+  transform: scale(1.02);
+}
+
+.playButton {
+  width: 80px;
+  height: 80px;
+  background-color: #D1D5DB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.playIcon {
+  color: #FF0000;
+  font-size: 2rem;
+  margin-left: 4px;
+}
+
+.videoTitle {
+  font-size: 1.75rem;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.reserveButton {
+  background-color: #7792B0;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.reserveButton:hover {
+  background-color: #6B7FA0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.reserveButton:active {
+  transform: translateY(0);
+}
+
 .contentContainer {
   max-width: 64rem;
   margin: 0 auto;
@@ -218,7 +335,7 @@
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: #1f2937;
   margin-bottom: 1.5rem;
   line-height: 1.3;
@@ -256,12 +373,36 @@
     padding: 2.5rem 1rem;
   }
   
+  .serviceSection {
+    padding: 2.5rem 1rem;
+  }
+  
+  .videoSection {
+    padding: 2.5rem 1rem;
+  }
+  
   .bannerTitle {
     font-size: 3.5rem;
   }
   
   .checkmarkTitle {
     font-size: 2.25rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 1rem;
+  }
+  
+  .videoTitle {
+    font-size: 1.5rem;
+  }
+  
+  .videoPlayer {
+    height: 250px;
   }
 }
 
@@ -271,6 +412,14 @@
   }
   
   .contentSection {
+    padding: 2rem 1rem;
+  }
+  
+  .serviceSection {
+    padding: 2rem 1rem;
+  }
+  
+  .videoSection {
     padding: 2rem 1rem;
   }
   
@@ -284,6 +433,44 @@
   
   .checkmarkText {
     font-size: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.375rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .listItem {
+    font-size: 1rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.95rem;
+  }
+  
+  .videoTitle {
+    font-size: 1.375rem;
+  }
+  
+  .videoPlayer {
+    height: 220px;
+  }
+  
+  .playButton {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .playIcon {
+    font-size: 1.75rem;
+  }
+  
+  .reserveButton {
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
   }
 }
 
@@ -302,6 +489,14 @@
   }
   
   .contentSection {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .serviceSection {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .videoSection {
     padding: 1.5rem 0.75rem;
   }
   
@@ -351,6 +546,44 @@
   .imageSection {
     padding: 2rem 0.75rem;
   }
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 1rem;
+  }
+  
+  .listItem {
+    font-size: 0.95rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.9rem;
+  }
+  
+  .videoTitle {
+    font-size: 1.25rem;
+  }
+  
+  .videoPlayer {
+    height: 200px;
+  }
+  
+  .playButton {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .playIcon {
+    font-size: 1.5rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -368,6 +601,14 @@
   }
   
   .contentSection {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .serviceSection {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .videoSection {
     padding: 1.25rem 0.5rem;
   }
   
@@ -412,6 +653,44 @@
   .imageSection {
     padding: 1.5rem 0.5rem;
   }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.95rem;
+  }
+  
+  .listItem {
+    font-size: 0.9rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.85rem;
+  }
+  
+  .videoTitle {
+    font-size: 1.125rem;
+  }
+  
+  .videoPlayer {
+    height: 180px;
+  }
+  
+  .playButton {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .playIcon {
+    font-size: 1.25rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.9rem;
+    padding: 0.625rem 1.25rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -429,6 +708,14 @@
   }
   
   .contentSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .serviceSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .videoSection {
     padding: 1rem 0.5rem;
   }
   
@@ -481,6 +768,44 @@
   .imageSection {
     padding: 1.25rem 0.5rem;
   }
+  
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.9rem;
+  }
+  
+  .listItem {
+    font-size: 0.8rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.8rem;
+  }
+  
+  .videoTitle {
+    font-size: 1rem;
+  }
+  
+  .videoPlayer {
+    height: 160px;
+  }
+  
+  .playButton {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .playIcon {
+    font-size: 1.125rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 @media (max-width: 375px) {
@@ -498,6 +823,14 @@
   }
   
   .contentSection {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .serviceSection {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .videoSection {
     padding: 0.75rem 0.25rem;
   }
   
@@ -546,6 +879,44 @@
   .imageSection {
     padding: 1rem 0.25rem;
   }
+  
+  .sectionTitle {
+    font-size: 0.95rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.85rem;
+  }
+  
+  .listItem {
+    font-size: 0.75rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.75rem;
+  }
+  
+  .videoTitle {
+    font-size: 0.95rem;
+  }
+  
+  .videoPlayer {
+    height: 140px;
+  }
+  
+  .playButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .playIcon {
+    font-size: 1rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.875rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -563,6 +934,14 @@
   }
   
   .contentSection {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .serviceSection {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .videoSection {
     padding: 0.5rem 0.25rem;
   }
   
@@ -611,6 +990,44 @@
   .imageSection {
     padding: 0.75rem 0.25rem;
   }
+  
+  .sectionTitle {
+    font-size: 0.9rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 0.8rem;
+  }
+  
+  .listItem {
+    font-size: 0.7rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.7rem;
+  }
+  
+  .videoTitle {
+    font-size: 0.9rem;
+  }
+  
+  .videoPlayer {
+    height: 120px;
+  }
+  
+  .playButton {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .playIcon {
+    font-size: 0.875rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
 }
 
 /* Landscape orientation for mobile devices */
@@ -632,6 +1049,14 @@
     padding: 1rem 0.5rem;
   }
   
+  .serviceSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .videoSection {
+    padding: 1rem 0.5rem;
+  }
+  
   .checkmarkSection {
     padding: 1.5rem 0.5rem;
   }
@@ -639,6 +1064,44 @@
   .checkmarkTitle {
     font-size: 1.25rem;
     margin-bottom: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .subsectionTitle {
+    font-size: 1rem;
+  }
+  
+  .listItem {
+    font-size: 0.9rem;
+  }
+  
+  .serviceParagraph {
+    font-size: 0.85rem;
+  }
+  
+  .videoTitle {
+    font-size: 1.125rem;
+  }
+  
+  .videoPlayer {
+    height: 120px;
+  }
+  
+  .playButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .playIcon {
+    font-size: 1rem;
+  }
+  
+  .reserveButton {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
   }
 }
 
