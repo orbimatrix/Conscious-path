@@ -20,15 +20,15 @@ export default function LimpiarKarmaPage() {
             <ul className="limpiar-karma-benefits-list">
               <li className="limpiar-karma-benefit-item">
                 <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Liberación de cargas kármicas</span>
+                <span className="benefit-text">Corte los lazos de la culpabilidad</span>
               </li>
               <li className="limpiar-karma-benefit-item">
                 <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Sanación espiritual profunda</span>
+                <span className="benefit-text">Tenga una vida más consciente y plena</span>
               </li>
               <li className="limpiar-karma-benefit-item">
                 <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Renovación de energía vital</span>
+                <span className="benefit-text">Asegure una buena reencarnación</span>
               </li>
             </ul>
           </div>

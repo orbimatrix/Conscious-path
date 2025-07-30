@@ -374,8 +374,8 @@
 /* Mobile Responsive Design */
 @media (max-width: 1024px) {
   .limpiar-karma-hero {
-    padding: 70px 20px;
-    min-height: 40vh;
+    padding: 60px 20px;
+    min-height: 35vh;
   }
   
   .limpiar-karma-title {
@@ -387,12 +387,12 @@
   }
   
   .limpiar-karma-benefits {
-    padding: 25px 20px;
-    min-height: 30vh;
+    padding: 20px 20px;
+    min-height: 25vh;
   }
   
   .limpiar-karma-image-section {
-    padding: 30px 20px;
+    padding: 25px 20px;
   }
   
   .limpiar-karma-info-section {
@@ -473,8 +473,8 @@
 
 @media (max-width: 768px) {
   .limpiar-karma-hero {
-    padding: 60px 15px;
-    min-height: 35vh;
+    padding: 50px 15px;
+    min-height: 30vh;
   }
   
   .limpiar-karma-title {
@@ -486,13 +486,13 @@
   }
   
   .limpiar-karma-benefits {
-    padding: 20px 15px;
-    min-height: 35vh;
+    padding: 15px 15px;
+    min-height: 25vh;
   }
   
   .limpiar-karma-benefit-item {
     font-size: 16px;
-    padding: 8px 0;
+    padding: 6px 0;
     flex-direction: row;
     gap: 12px;
     width: 100%;
@@ -507,7 +507,7 @@
   }
   
   .limpiar-karma-image-section {
-    padding: 25px 15px;
+    padding: 20px 15px;
   }
   
   .limpiar-karma-image {
@@ -592,8 +592,8 @@
 
 @media (max-width: 480px) {
   .limpiar-karma-hero {
-    padding: 50px 15px;
-    min-height: 30vh;
+    padding: 40px 15px;
+    min-height: 25vh;
   }
   
   .limpiar-karma-title {
@@ -605,13 +605,13 @@
   }
   
   .limpiar-karma-benefits {
-    padding: 15px 15px;
-    min-height: 40vh;
+    padding: 12px 15px;
+    min-height: 30vh;
   }
   
   .limpiar-karma-benefit-item {
     font-size: 14px;
-    padding: 6px 0;
+    padding: 5px 0;
     width: 100%;
   }
   
@@ -620,7 +620,7 @@
   }
   
   .limpiar-karma-image-section {
-    padding: 20px 15px;
+    padding: 15px 15px;
   }
   
   .limpiar-karma-image {
@@ -705,8 +705,8 @@
 
 @media (max-width: 360px) {
   .limpiar-karma-hero {
-    padding: 40px 10px;
-    min-height: 25vh;
+    padding: 35px 10px;
+    min-height: 20vh;
   }
   
   .limpiar-karma-title {
@@ -718,13 +718,13 @@
   }
   
   .limpiar-karma-benefits {
-    padding: 12px 10px;
-    min-height: 45vh;
+    padding: 10px 10px;
+    min-height: 35vh;
   }
   
   .limpiar-karma-benefit-item {
     font-size: 13px;
-    padding: 5px 0;
+    padding: 4px 0;
     width: 100%;
   }
   
