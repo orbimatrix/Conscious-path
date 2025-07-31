@@ -5,15 +5,14 @@ import FooterSection from "../components/FooterSection";
 import "./conocimiento.css";
 
 export default function AudioVideoPage() {
-  const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>({});
+  const [checkedItems, setCheckedItems] = useState<boolean[]>([false, false, false, false, false, false]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const handleCheckboxClick = (index: number) => {
-    setCheckedItems(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    const newCheckedItems = [...checkedItems];
+    newCheckedItems[index] = !newCheckedItems[index];
+    setCheckedItems(newCheckedItems);
   };
 
   const handlePlusClick = (index: number) => {
@@ -27,12 +26,7 @@ export default function AudioVideoPage() {
   };
 
   const handleModalCheckboxClick = () => {
-    if (selectedCard !== null) {
-      setCheckedItems(prev => ({
-        ...prev,
-        [selectedCard]: !prev[selectedCard]
-      }));
-    }
+    // Handle modal checkbox logic here
   };
 
   const videoData = [
@@ -48,11 +42,11 @@ export default function AudioVideoPage() {
     <div>
       <section className="audio-video-hero">
         <Image 
-          src="/girl.png" 
-          alt="Girl" 
-          className="hero-image"
+          src="/fotos/reflection.jpg" 
+          alt="Hero Image" 
           width={800}
-          height={600}
+          height={400}
+          className="hero-image"
         />
       </section>
       
@@ -68,7 +62,7 @@ export default function AudioVideoPage() {
       </section>
       
       <section className="videos-section">
-        <h2 className="videos-title">Vídeos y Audios Públicos</h2>
+        <h2 className="videos-title">Videos</h2>
         <div className="videos-grid">
           {/* Video Card 1 */}
           <div className="video-card">
@@ -82,7 +76,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[0] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(0)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(0)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(0)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -99,7 +95,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[1] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(1)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(1)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(1)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -116,7 +114,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[2] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(2)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(2)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(2)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -133,7 +133,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[3] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(3)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(3)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(3)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -150,7 +152,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[4] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(4)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(4)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(4)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -167,7 +171,9 @@ export default function AudioVideoPage() {
                   className={`status-checkbox ${checkedItems[5] ? 'checked' : ''}`}
                   onClick={() => handleCheckboxClick(5)}
                 ></div>
-                <div className="status-plus" onClick={() => handlePlusClick(5)}>+</div>
+                <div className="status-plus-circle" onClick={() => handlePlusClick(5)}>
+                  <span className="plus-icon">+</span>
+                </div>
               </div>
             </div>
           </div>
@@ -179,13 +185,19 @@ export default function AudioVideoPage() {
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal" onClick={closeModal}>×</button>
-            <div className="modal-title">{videoData[selectedCard].title}</div>
-            <div className="modal-level">Nivel: {videoData[selectedCard].level}</div>
-            <div className="modal-description">{videoData[selectedCard].description}</div>
+            <h3 className="modal-title">Abundancia y enfermedades</h3>
+            <p className="modal-level">Nivel: Público</p>
+            <p className="modal-description">
+              Este video explora la relación entre la abundancia y las enfermedades, 
+              proporcionando insights valiosos sobre cómo mantener la salud física y mental.
+            </p>
             <div className="modal-actions">
               <div className="modal-checkbox-container">
-                <div className="modal-checkbox" onClick={handleModalCheckboxClick}></div>
-                <div className="modal-checkbox-text">Marcar como visto</div>
+                <div 
+                  className="modal-checkbox"
+                  onClick={handleModalCheckboxClick}
+                ></div>
+                <span className="modal-checkbox-text">Marcar como completado</span>
               </div>
               <div className="modal-minus"></div>
             </div>
