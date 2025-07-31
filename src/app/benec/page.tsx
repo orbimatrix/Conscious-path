@@ -94,7 +94,7 @@ export default function BenecPage() {
             
             <div className="contributions-content">
               <p className="contribution-paragraph">
-                Los participantes practican el principio de &ldquo;dar es igual a recibir&rdquo;. Se invita a los participantes a compartir <strong>VOLUNTARIAMENTE</strong> una parte del <strong>INCREMENTO</strong> de sus ganancias recibidas. Un egrégor puede favorecer la fortuna de quienes &ldquo;lo alimentan con su atención&rdquo;, obteniendo resultados &ldquo;mejores y más rápidos&rdquo;. No corresponder a la ayuda del egrégor &ldquo;suele traer resultados negativos&rdquo;, ya que el egrégor ha &ldquo;confiado e invertido su energía, confiando en tu respuesta como ser abundante&rdquo;.
+                Los participantes practican el principio de &ldquo;dar es igual a recibir&rdquo;. Se invita a los participantes a compartir VOLUNTARIAMENTE una parte del INCREMENTO de sus ganancias recibidas. Un egrégor puede favorecer la fortuna de quienes &ldquo;lo alimentan con su atención&rdquo;, obteniendo resultados &ldquo;mejores y más rápidos&rdquo;. No corresponder a la ayuda del egrégor &ldquo;suele traer resultados negativos&rdquo;, ya que el egrégor ha &ldquo;confiado e invertido su energía, confiando en tu respuesta como ser abundante&rdquo;.
               </p>
               
               <p className="contribution-paragraph">

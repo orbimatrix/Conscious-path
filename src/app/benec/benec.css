@@ -14,7 +14,7 @@
 /* Dark Banner Section */
 .benec-banner {
   background: #1a1a1a;
-  padding: 80px 20px;
+  padding: 40px 20px;
   text-align: center;
   width: 100%;
 }
@@ -27,23 +27,23 @@
 .benec-banner-subtitle {
   font-size: 18px;
   color: #f8f8f8;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .benec-banner-title {
-  font-size: 32px;
+  font-size: 42px;
   color: #EFA540;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.2;
 }
 
 .benec-banner-main-title {
-  font-size: 36px;
+  font-size: 46px;
   color: #EFA540;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -53,13 +53,13 @@
 
 /* Main Content */
 .benec-content {
-  padding: 40px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
 /* Abundance Group Section */
 .abundance-group-section {
-  padding: 60px 0;
+  padding: 30px 0;
   text-align: center;
 }
 
@@ -71,7 +71,7 @@
 .abundance-group-title {
   font-size: 28px;
   color: #94520C;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1.3;
@@ -79,15 +79,15 @@
 
 /* Graphic Container */
 .graphic-container {
-  margin: 40px 0;
+  margin: 25px 0;
 }
 
 .graphic-background {
   background: #000;
-  padding: 40px;
+  padding: 30px;
   border-radius: 8px;
   position: relative;
-  min-height: 300px;
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,7 +103,7 @@
 
 /* BENEC Information Section */
 .benec-info-section {
-  padding: 60px 0;
+  padding: 30px 0;
   background: white;
 }
 
@@ -115,10 +115,9 @@
 
 .benec-info-title {
   font-size: 24px;
-  color: #D2B48C;
-  margin-bottom: 30px;
-  font-weight: bold;
-  text-align: center;
+  color: #000000;
+  margin-bottom: 20px;
+  text-align: left;
   line-height: 1.3;
 }
 
@@ -130,7 +129,7 @@
   font-size: 16px;
   color: #333;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: justify;
 }
 
@@ -140,7 +139,7 @@
 
 /* Contributions Section */
 .contributions-section {
-  padding: 60px 0;
+  padding: 30px 0;
   background: white;
 }
 
@@ -152,10 +151,9 @@
 
 .contributions-title {
   font-size: 24px;
-  color: #94520C;
-  margin-bottom: 30px;
-  font-weight: bold;
-  text-align: center;
+  color: #000000;
+  margin-bottom: 20px;
+  text-align: left;
   line-height: 1.3;
 }
 
@@ -167,7 +165,7 @@
   font-size: 16px;
   color: #333;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: justify;
 }
 
@@ -182,7 +180,7 @@
 
 /* BENEC Image Section */
 .benec-image-section {
-  padding: 60px 0;
+  padding: 30px 0;
   text-align: center;
 }
 
@@ -204,15 +202,15 @@
 
 /* Audio Meditation Section */
 .audio-meditation-section {
-  padding: 40px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
 /* Brown Banner */
 .audio-banner {
   background: #8B5A2B;
-  padding: 30px 20px;
-  margin-bottom: 40px;
+  padding: 20px;
+  margin-bottom: 25px;
   width: 100%;
 }
 
@@ -231,7 +229,7 @@
 
 /* Video Player Section */
 .video-player-section {
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .video-player-container {
@@ -246,7 +244,7 @@
   height: 300px;
   background: #F8E6E6;
   border-radius: 8px;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,8 +280,7 @@
 
 .video-title {
   font-size: 20px;
-  color: #333;
-  font-weight: bold;
+  color: #000000;
   text-align: center;
   margin: 0;
   line-height: 1.3;
@@ -291,7 +288,7 @@
 
 /* Contribution Button */
 .contribution-button-section {
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -333,17 +330,17 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .benec-banner {
-    padding: 60px 15px;
+    padding: 30px 15px;
   }
   
   .benec-banner-subtitle {
     font-size: 16px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   
   .benec-banner-title {
     font-size: 26px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   .benec-banner-main-title {
@@ -356,12 +353,12 @@
   
   .abundance-group-title {
     font-size: 22px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   
   .graphic-background {
-    padding: 30px 20px;
-    min-height: 250px;
+    padding: 20px 15px;
+    min-height: 200px;
   }
   
   .graphic-image {
@@ -369,35 +366,35 @@
   }
   
   .benec-info-section {
-    padding: 40px 0;
+    padding: 25px 0;
   }
   
   .benec-info-title {
     font-size: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   
   .benec-paragraph {
     font-size: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
   
   .contributions-section {
-    padding: 40px 0;
+    padding: 25px 0;
   }
   
   .contributions-title {
     font-size: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   
   .contribution-paragraph {
     font-size: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
   
   .benec-image-section {
-    padding: 40px 0;
+    padding: 25px 0;
   }
   
   .benec-image {
@@ -405,8 +402,8 @@
   }
   
   .audio-banner {
-    padding: 25px 15px;
-    margin-bottom: 30px;
+    padding: 15px;
+    margin-bottom: 20px;
   }
   
   .audio-banner-text {
@@ -449,17 +446,17 @@
 
 @media (max-width: 480px) {
   .benec-banner {
-    padding: 50px 10px;
+    padding: 25px 10px;
   }
   
   .benec-banner-subtitle {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   
   .benec-banner-title {
     font-size: 22px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   
   .benec-banner-main-title {
@@ -472,12 +469,12 @@
   
   .abundance-group-title {
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   
   .graphic-background {
-    padding: 25px 15px;
-    min-height: 200px;
+    padding: 15px 10px;
+    min-height: 150px;
   }
   
   .graphic-image {
@@ -485,35 +482,35 @@
   }
   
   .benec-info-section {
-    padding: 30px 0;
+    padding: 20px 0;
   }
   
   .benec-info-title {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   
   .benec-paragraph {
     font-size: 13px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   .contributions-section {
-    padding: 30px 0;
+    padding: 20px 0;
   }
   
   .contributions-title {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   
   .contribution-paragraph {
     font-size: 13px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   .benec-image-section {
-    padding: 30px 0;
+    padding: 20px 0;
   }
   
   .benec-image {
@@ -521,8 +518,8 @@
   }
   
   .audio-banner {
-    padding: 20px 10px;
-    margin-bottom: 25px;
+    padding: 12px;
+    margin-bottom: 15px;
   }
   
   .audio-banner-text {
@@ -565,17 +562,17 @@
 
 @media (max-width: 360px) {
   .benec-banner {
-    padding: 40px 8px;
+    padding: 20px 8px;
   }
   
   .benec-banner-subtitle {
     font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
   }
   
   .benec-banner-title {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   
   .benec-banner-main-title {
@@ -588,12 +585,12 @@
   
   .abundance-group-title {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   
   .graphic-background {
-    padding: 20px 10px;
-    min-height: 180px;
+    padding: 12px 8px;
+    min-height: 120px;
   }
   
   .graphic-image {
@@ -601,35 +598,35 @@
   }
   
   .benec-info-section {
-    padding: 25px 0;
+    padding: 15px 0;
   }
   
   .benec-info-title {
     font-size: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
   }
   
   .benec-paragraph {
     font-size: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   
   .contributions-section {
-    padding: 25px 0;
+    padding: 15px 0;
   }
   
   .contributions-title {
     font-size: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
   }
   
   .contribution-paragraph {
     font-size: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   
   .benec-image-section {
-    padding: 25px 0;
+    padding: 15px 0;
   }
   
   .benec-image {
@@ -637,8 +634,8 @@
   }
   
   .audio-banner {
-    padding: 15px 8px;
-    margin-bottom: 20px;
+    padding: 10px 8px;
+    margin-bottom: 12px;
   }
   
   .audio-banner-text {
