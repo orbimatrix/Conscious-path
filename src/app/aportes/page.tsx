@@ -72,7 +72,7 @@ export default function AportesPage() {
               </p>
 
               <div className="points-list-section">
-                <h4 className="points-list-title">Puntos extra por método de pago:</h4>
+                <h4 className="points-list-title">Además, algunos medios de pago tendrán un premio extra en forma de puntos:</h4>
                 <ul className="points-list">
                   <li className="points-item">
                     <span className="payment-method">Tarjeta:</span> 1 punto por $
@@ -99,18 +99,17 @@ export default function AportesPage() {
               </div>
 
               <p className="payment-paragraph">
-                El proyecto también aceptará donaciones y transferencias de bienes, previa consulta.
+              Nuestro proyecto a largo plazo también aceptará donaciones y traspasos de propiedades, previa consulta.
               </p>
 
               <p className="payment-paragraph">
-                Trabajamos con personas, siempre es posible considerar descuentos, planes de pago, modificaciones y excepciones para ayudar en casos particulares. Contáctanos para comentar tu situación específica.
+              Sabiendo que trabajamos con personas, siempre es posible considerar rebajas, plazos, modificaciones y excepciones, para ayudar en casos particulares. Póngase en contacto con nosotros y comente su caso.
+              </p>
+              <p className="payment-paragraph">
+              Antes de usar criptomonedas o realizar transferencias, es necesario confirmar los datos, para evitar errores o pérdidas.
               </p>
 
-              <div className="important-note">
-                <p className="important-note-text">
-                  <strong>Importante:</strong> Antes de usar criptomonedas o realizar transferencias bancarias, es necesario confirmar los datos para evitar errores o pérdidas.
-                </p>
-              </div>
+             
             </div>
           </div>
         </section>
