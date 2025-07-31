@@ -34,7 +34,7 @@
   
   .carisma-subtitle {
     font-size: 64px;
-    font-weight: 300;
+    
     color: #f5f5f5;
     letter-spacing: 3px;
   }
@@ -142,7 +142,7 @@
   
   .carisma-info-title {
     font-size: 32px;
-    font-weight: 600;
+    
     color: #B19B6D;
     text-align: center;
     margin-bottom: 40px;
@@ -301,7 +301,7 @@
   
   .video-title {
     font-size: 24px;
-    font-weight: 600;
+    
     color: #333;
     margin-bottom: 25px;
     line-height: 1.3;
