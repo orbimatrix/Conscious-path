@@ -32,7 +32,6 @@
   text-transform: uppercase;
   line-height: 1.2;
   margin: 0;
-  font-weight: 300;
 }
 
 /* Main Content Section */
@@ -125,22 +124,23 @@
 /* Bottom Brown Banner */
 .normas-bottom-banner {
   background-color: var(--olive, #B19B6D);
-  width: 1183px;
-  height: 190px;
-  top: 1007px;
-  left: 373px;
+  max-width: 800px;
+  width: 70%;
+  height: auto;
+  min-height: 150px;
   opacity: 1;
   gap: 10px;
-  padding-top: 20px;
-  padding-right: 50px;
-  padding-bottom: 20px;
-  padding-left: 50px;
+  padding: 30px 40px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .normas-bottom-banner-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .normas-bottom-title {
@@ -192,7 +192,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 960px) {
+@media (max-width: 960px) and (min-width: 360px) {
   .normas-legal-image-section {
     display: none;
   }
@@ -202,11 +202,31 @@
   }
 }
 
+@media (max-width: 359px) {
+  .normas-legal-image-section {
+    display: none;
+  }
+  
+  .normas-legal-image-section-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 961px) {
+  .normas-legal-image-section {
+    display: block;
+  }
+  
+  .normas-legal-image-section-mobile {
+    display: none;
+  }
+}
+
 @media (max-width: 1200px) {
   .normas-bottom-banner {
-    width: 90%;
-    left: 5%;
-    top: auto;
+    width: 75%;
+    max-width: 700px;
+    padding: 25px 35px;
   }
   
   .normas-legal-image-section {
@@ -217,6 +237,13 @@
   .normas-legal-image {
     width: 100%;
     height: auto;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 360px) {
+  .normas-content-title,
+  .normas-content-subtitle {
+    font-weight: normal;
   }
 }
 
@@ -262,10 +289,8 @@
   }
   
   .normas-bottom-banner {
-    width: 95%;
-    left: 2.5%;
-    padding: 20px 15px;
-    height: auto;
+    width: 85%;
+    padding: 20px 25px;
     min-height: 120px;
   }
   
@@ -309,9 +334,8 @@
   }
   
   .normas-bottom-banner {
-    width: 98%;
-    left: 1%;
-    padding: 15px 10px;
+    width: 90%;
+    padding: 15px 20px;
   }
   
   .normas-bottom-title {
@@ -362,7 +386,8 @@
   }
   
   .normas-bottom-banner {
-    padding: 10px 8px;
+    width: 95%;
+    padding: 12px 15px;
   }
   
   .normas-bottom-title {

@@ -8,10 +8,10 @@ export default function MenteUnicaPage() {
       {/* Top Section - LA MENTE ÚNICA */}
       <section className="bg-[#A8926E] flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
         <div className="text-center space-y-3 sm:space-y-4">
-          <h2 className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-wide text-gray-100">
+          <h2 className="text-sm sm:text-base md:text-lg uppercase tracking-wide text-gray-100">
             INFORMACIÓN
           </h2>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-wider text-gray-100 leading-tight font-thin">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-wider text-gray-100 leading-tight">
             LA MENTE ÚNICA
           </h1>
         </div>
@@ -20,10 +20,10 @@ export default function MenteUnicaPage() {
       {/* Bottom Section - CONOCIMIENTOS IMPRESCINDIBLES */}
       <section className="bg-white flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
         <div className="text-center space-y-3 sm:space-y-4">
-          <h2 className="text-[#A8926E] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold uppercase tracking-wide leading-tight">
+          <h2 className="text-[#A8926E] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase tracking-wide leading-tight">
             CONOCIMIENTOS IMPRESCINDIBLES
           </h2>
-          <h3 className="text-[#A8926E] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold uppercase tracking-wide leading-tight">
+          <h3 className="text-[#A8926E] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase tracking-wide leading-tight">
             PARA DESPERTAR
           </h3>
         </div>
