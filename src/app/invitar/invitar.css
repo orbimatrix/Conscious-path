@@ -49,7 +49,7 @@
 }
 
 .invitar-text-title {
-  font-size: 24px;
+  font-size: 34px;
   color: #B19B6D;
   margin-bottom: 10px;
   font-weight: bold;
@@ -58,7 +58,7 @@
 }
 
 .invitar-text-subtitle {
-  font-size: 24px;
+  font-size: 34px;
   color:#B19B6D;
   font-weight: bold;
   text-transform: uppercase;
@@ -188,6 +188,13 @@
 }
 
 /* Mobile Responsive */
+@media (max-width: 768px) and (min-width: 360px) {
+  .invitar-text-title,
+  .invitar-text-subtitle {
+    font-weight: normal;
+  }
+}
+
 @media (max-width: 768px) {
   .invitar-banner {
     padding: 40px 15px;
