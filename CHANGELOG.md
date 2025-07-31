@@ -2,7 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - 2024-12-19
+## [1.1.0] - 2025-07-31
+
+### Added
+- **Blog System**: Complete blog functionality with Sanity CMS integration
+  - `blogs/page.tsx` - Blog listing page with grid layout and filtering
+  - `blogs/[slug]/page.tsx` - Individual blog post pages with dynamic routing
+  - `blogs/[slug]/not-found.tsx` - Custom 404 page for blog posts
+  - `blogs.css` - Comprehensive styling for blog listing page
+  - `blog-post.css` - Detailed styling for individual blog posts
+  - `not-found.css` - Styling for blog 404 pages
+
+### Blog Features
+- **Blog Listing Page**: Grid layout displaying all blog posts with featured images
+- **Dynamic Routing**: Individual blog post pages with slug-based URLs
+- **Sanity CMS Integration**: Content management system for blog posts
+- **Responsive Design**: Mobile-optimized blog layouts
+- **Meta Information**: Author, publication date, and categories display
+- **Image Optimization**: Responsive images with proper alt text
+- **SEO Friendly**: Proper heading hierarchy and semantic structure
+
+### New Pages
+- **Contenidos Page**: Content management and display page
+- **Benec Page**: Benefits and features information page
+- **Abundancia Page**: Abundance and prosperity content page
+- **Bienestar Page**: Wellness and well-being information page
+- **Aportes Page**: Contributions and support page
+- **Invitar Page**: Invitation and referral system page
+- **Limpiar Karma Page**: Karma cleansing information page
+- **Estructural Page**: Structural and foundational content page
+- **Mente Unica Page**: Unique mind and consciousness page
+- **Normas Page**: Rules and guidelines page
+- **Privado Page**: Private content access page
+- **Registration Page**: User registration system
+- **Regresion Page**: Regression and past life content page
+- **Aviso Legal Page**: Legal notice and terms page
+- **Privacidad Page**: Privacy policy page
+- **Pay Success/Fail Pages**: Payment result pages
+
+### Technical Improvements
+- **Enhanced Routing**: Dynamic routes for blog posts and content pages
+- **Content Management**: Sanity CMS integration for blog content
+- **Image Handling**: Optimized image loading and display
+- **Error Handling**: Custom 404 pages for better user experience
+- **Component Architecture**: Reusable components across multiple pages
+
+### Styling Enhancements
+- **Blog Styling**: Comprehensive CSS for blog functionality
+- **Responsive Grids**: Adaptive layouts for different content types
+- **Typography**: Improved text hierarchy and readability
+- **Interactive Elements**: Enhanced hover effects and transitions
+
+## [1.0.0] - 2025-07-29
 
 ### Added
 - **New Pages**: Created 5 new pages for the conscious path web application
