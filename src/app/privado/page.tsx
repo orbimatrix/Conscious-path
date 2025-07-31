@@ -125,7 +125,7 @@ export default function PrivadoPage() {
                      </button>
                  </div>
              </section>
-
+           
             {/* Booking Form Section */}
             {showBookingForm && (
                 <section className="booking-form-section">
@@ -239,7 +239,7 @@ export default function PrivadoPage() {
                     </div>
                 </section>
             )}
-           
+
             <FooterSection />
         </div>
     );

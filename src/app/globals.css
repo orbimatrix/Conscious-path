@@ -335,7 +335,7 @@ body {
   margin: 48px auto 0 auto;
   padding: 32px 40px 32px 40px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  text-align: left;
+  text-align: center;
 }
 
 .path-awakening-heading {
@@ -362,10 +362,21 @@ body {
   border-radius: 2px;
 }
 
+.path-awakening-list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .path-awakening-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 600px;
 }
 
 .path-awakening-item {
@@ -373,6 +384,9 @@ body {
   align-items: center;
   gap: 20px;
   margin-bottom: 28px;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
 }
 
 .path-awakening-icon-bg {
@@ -384,6 +398,7 @@ body {
   border-radius: 50%;
   background: #fff;
   flex-shrink: 0;
+  line-height: 1;
 }
 
 .path-awakening-icon {
@@ -398,6 +413,9 @@ body {
   color: #fff;
   font-size: 1.4rem;
   font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 900px) {

@@ -15,14 +15,16 @@ export default function PathAwakeningSection() {
       <h2 className="path-awakening-heading">SIGA LA SENDA</h2>
       <div className="path-awakening-subheading">del despertar consciente</div>
       <div className="path-awakening-underline" />
-      <ul className="path-awakening-list">
-        {items.map((item, idx) => (
-          <li className="path-awakening-item" key={idx}>
-            <span className="path-awakening-icon-bg"><span className="path-awakening-icon">{item.icon}</span></span>
-            <span className="path-awakening-text">{item.text}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="path-awakening-list-container">
+        <ul className="path-awakening-list">
+          {items.map((item, idx) => (
+            <li className="path-awakening-item" key={idx}>
+              <span className="path-awakening-icon-bg"><span className="path-awakening-icon">{item.icon}</span></span>
+              <span className="path-awakening-text">{item.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 } 
