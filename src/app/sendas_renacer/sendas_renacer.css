@@ -222,6 +222,7 @@
 @media (max-width: 768px) {
   .sendas-title {
     font-size: 24px;
+    font-weight: normal;
   }
   
   .requirements-container {
@@ -259,6 +260,7 @@
   
   .sendas-title {
     font-size: 20px;
+    font-weight: normal;
   }
   
   .sendas-description {
