@@ -42,7 +42,7 @@ export default function AudioVideoPage() {
     <div>
       <section className="audio-video-hero">
         <Image 
-          src="/fotos/reflection.jpg" 
+          src="/fotos/girl.png" 
           alt="Hero Image" 
           width={800}
           height={400}
@@ -62,7 +62,7 @@ export default function AudioVideoPage() {
       </section>
       
       <section className="videos-section">
-        <h2 className="videos-title">Videos</h2>
+        <h2 className="videos-title">Vídeos y Audios Públicos</h2>
         <div className="videos-grid">
           {/* Video Card 1 */}
           <div className="video-card">
