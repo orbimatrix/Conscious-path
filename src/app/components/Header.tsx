@@ -48,7 +48,12 @@ export default function Header() {
     // Mobile header (current)
     return (
       <>
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+        <div style={{ 
+          paddingTop: 'env(safe-area-inset-top)', 
+          marginTop: 'env(safe-area-inset-top)',
+          position: 'relative',
+          top: 'env(safe-area-inset-top)'
+        }}>
           <header className="header-root">
             <div className="header-icon" onClick={toggleDropdown}>
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
