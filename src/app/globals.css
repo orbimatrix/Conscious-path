@@ -1237,26 +1237,6 @@ body {
   position: relative;
 }
 
-.footer-section::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: #E0E0E0;
-}
-
-.footer-section::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: #E0E0E0;
-}
-
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -1264,56 +1244,62 @@ body {
   position: relative;
 }
 
+/* Top Section */
+.footer-top {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
 .footer-title {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 300;
-  text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   color: #9C8C70;
   letter-spacing: 1px;
 }
 
 .footer-social-icons {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 48px;
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .social-icon {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #9C8C70;
-  border-radius: 50%;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #9C8C70;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .social-icon:hover {
-  background: #9C8C70;
-  color: #F8F5ED;
+  opacity: 0.7;
 }
 
-.footer-sections {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
-  margin-bottom: 48px;
+/* Main Footer Content */
+.footer-main {
+  position: relative;
+  margin-bottom: 40px;
 }
 
-.footer-section-item {
+/* Navigation */
+.footer-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+}
+
+.footer-nav-section {
   text-align: left;
 }
 
 .footer-section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 1.1rem;
+  
+  margin-bottom: 8px;
   color: #9C8C70;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1322,8 +1308,8 @@ body {
 .footer-divider {
   height: 1px;
   background: #9C8C70;
-  margin-bottom: 16px;
-  width: 80%;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
 .footer-links-list {
@@ -1333,13 +1319,13 @@ body {
 }
 
 .footer-links-list li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .footer-link {
   color: #9C8C70;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 400;
   transition: color 0.2s;
 }
@@ -1348,23 +1334,47 @@ body {
   color: #7A6B5A;
 }
 
+.footer-section-title-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.footer-section-title-link:hover .footer-section-title {
+  color: #7A6B5A;
+}
+
+/* Bottom Right - Legal Information */
 .footer-legal {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   text-align: right;
-  border-top: 1px solid #E0E0E0;
-  padding-top: 24px;
+  min-width: 200px;
 }
 
 .footer-legal p {
   margin: 0 0 4px 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #9C8C70;
   font-weight: 300;
 }
 
 @media (max-width: 900px) {
-  .footer-sections {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 24px;
+  .footer-main {
+    margin-bottom: 60px;
+  }
+  
+  .footer-navigation {
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .footer-legal {
+    position: static;
+    text-align: center;
+    min-width: auto;
+    margin-top: 20px;
   }
 }
 
@@ -1378,39 +1388,38 @@ body {
     padding: 0 16px;
   }
   
+  .footer-top {
+    margin-bottom: 32px;
+  }
+  
   .footer-title {
-    font-size: 1.4rem;
-    margin-bottom: 24px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
   
   .footer-social-icons {
     gap: 16px;
-    margin-bottom: 32px;
   }
   
   .social-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    width: 56px;
+    height: 56px;
   }
   
-  .footer-sections {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-bottom: 32px;
+  .footer-main {
+    gap: 24px;
+  }
+  
+  .footer-navigation {
+    gap: 16px;
   }
   
   .footer-section-title {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   
   .footer-link {
     font-size: 0.8rem;
-  }
-  
-  .footer-legal {
-    text-align: center;
-    padding-top: 20px;
   }
   
   .footer-legal p {
