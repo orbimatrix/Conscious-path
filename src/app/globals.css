@@ -591,6 +591,63 @@
   }
 }
 
+/* Specific device adjustments - move content to left */
+/* Samsung Galaxy S23, A35, S24, A25 (360 x 760) */
+@media screen and (width: 360px) and (height: 760px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Samsung Galaxy S9, S9+ (360 x 740) */
+@media screen and (width: 360px) and (height: 740px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* iPhone 13, 14, 15 (375 x 812) */
+@media screen and (width: 375px) and (height: 812px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Alternative approach for devices that might not match exact dimensions */
+@media screen and (min-width: 360px) and (max-width: 375px) and (min-height: 740px) and (max-height: 812px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
 /* Force safe area on all iOS devices */
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
   .header-root {
