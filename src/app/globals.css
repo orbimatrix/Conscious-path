@@ -593,7 +593,7 @@
 
 /* Specific device adjustments - move content to left */
 /* Samsung Galaxy S23, A35, S24, A25 (360 x 760) */
-@media screen and (width: 360px) and (height: 760px) {
+@media screen and (max-width: 360px) and (min-height: 740px) and (max-height: 760px) {
   .header-root {
     justify-content: flex-start !important;
     padding-left: 1rem !important;
@@ -607,7 +607,7 @@
 }
 
 /* Samsung Galaxy S9, S9+ (360 x 740) */
-@media screen and (width: 360px) and (height: 740px) {
+@media screen and (max-width: 360px) and (min-height: 730px) and (max-height: 750px) {
   .header-root {
     justify-content: flex-start !important;
     padding-left: 1rem !important;
@@ -621,7 +621,7 @@
 }
 
 /* iPhone 13, 14, 15 (375 x 812) */
-@media screen and (width: 375px) and (height: 812px) {
+@media screen and (min-width: 370px) and (max-width: 380px) and (min-height: 800px) and (max-height: 820px) {
   .header-root {
     justify-content: flex-start !important;
     padding-left: 1rem !important;
@@ -634,8 +634,36 @@
   }
 }
 
-/* Alternative approach for devices that might not match exact dimensions */
-@media screen and (min-width: 360px) and (max-width: 375px) and (min-height: 740px) and (max-height: 812px) {
+/* iPhone 13, 14, 15 Pro Max (414 x 896) */
+@media screen and (min-width: 410px) and (max-width: 420px) and (min-height: 880px) and (max-height: 900px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Samsung Galaxy S10+, A41+, A22+, A33+ (412 x 869) */
+@media screen and (min-width: 410px) and (max-width: 415px) and (min-height: 860px) and (max-height: 875px) {
+  .header-root {
+    justify-content: flex-start !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .header-logo-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Broader range for all the specified devices */
+@media screen and (max-width: 420px) and (min-height: 730px) and (max-height: 900px) {
   .header-root {
     justify-content: flex-start !important;
     padding-left: 1rem !important;
