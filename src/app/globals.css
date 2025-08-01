@@ -331,6 +331,7 @@
   height: 72px;
   position: relative;
   z-index: 10;
+  padding-top: max(8px, env(safe-area-inset-top));
 }
 
 .header-center {
@@ -407,6 +408,29 @@
   .header-icon {
     min-width: 32px;
     padding: 4px;
+  }
+}
+
+/* iPhone Pro Max specific fixes */
+@media screen and (max-width: 414px) and (max-height: 896px) {
+  .header-root {
+    padding-top: max(12px, env(safe-area-inset-top));
+    height: calc(72px + env(safe-area-inset-top));
+  }
+}
+
+@media screen and (max-width: 375px) and (max-height: 812px) {
+  .header-root {
+    padding-top: max(12px, env(safe-area-inset-top));
+    height: calc(72px + env(safe-area-inset-top));
+  }
+}
+
+/* General iPhone safe area support */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .header-root {
+    padding-top: max(8px, env(safe-area-inset-top));
+    height: calc(72px + env(safe-area-inset-top));
   }
 }
 
