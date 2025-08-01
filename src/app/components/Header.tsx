@@ -30,7 +30,7 @@ export default function Header() {
       setTimeout(() => {
         setIsDropdownOpen(false);
         setIsClosing(false);
-      }, 400); // Match the animation duration
+      }, 450); // Match the animation duration (400ms + 50ms buffer)
     } else {
       setIsDropdownOpen(true);
     }
@@ -42,7 +42,7 @@ export default function Header() {
     setTimeout(() => {
       setIsDropdownOpen(false);
       setIsClosing(false);
-    }, 400); // Match the animation duration
+    }, 450); // Match the animation duration (400ms + 50ms buffer)
   };
 
   const handleDropdownMouseEnter = (dropdownName: string) => {
@@ -67,13 +67,15 @@ export default function Header() {
             <div className="header-icon" onClick={toggleDropdown}>
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
             </div>
-            <div className="header-center">
-              <Image src="/dollar.png" alt="Logo" width={22} height={22} />
-              <span style={{ fontWeight: 400, fontSize: 28, letterSpacing: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                <span style={{ color: "#E6A14A", fontWeight: 300 }}>SENDA</span>
-                <span style={{ color: "#5A5353", fontWeight: 300 }}> CONSCIENTE</span>
-              </span>
-            </div>
+                         <div className="header-center">
+               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                 <Image src="/dollar.png" alt="Logo" width={22} height={22} />
+                 <span style={{ fontWeight: 400, fontSize: 28, letterSpacing: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                   <span style={{ color: "#E6A14A", fontWeight: 300 }}>SENDA</span>
+                   <span style={{ color: "#5A5353", fontWeight: 300 }}> CONSCIENTE</span>
+                 </span>
+               </div>
+             </div>
             <div className="header-icon">
               <Image src="/profile.svg" alt="User" width={32} height={32} />
             </div>
