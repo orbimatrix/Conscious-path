@@ -23,9 +23,10 @@ export default function PaySuccessPage() {
             Si tiene alguna duda, puedes escribirnos:
           </p>
         </div>
-        <div className="paysuccess-email-center">
-          Escriba su email y mensaje:
-        </div>
+
+      </div>
+      <div className="paysuccess-email-center">
+        Escriba su email y mensaje:
       </div>
       <ContactSection />
       <FooterSection />
