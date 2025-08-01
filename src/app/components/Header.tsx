@@ -30,7 +30,7 @@ export default function Header() {
       setTimeout(() => {
         setIsDropdownOpen(false);
         setIsClosing(false);
-      }, 450); // Match the animation duration (400ms + 50ms buffer)
+      }, 500); // Match the animation duration (400ms + 100ms buffer)
     } else {
       setIsDropdownOpen(true);
     }
@@ -42,7 +42,7 @@ export default function Header() {
     setTimeout(() => {
       setIsDropdownOpen(false);
       setIsClosing(false);
-    }, 450); // Match the animation duration (400ms + 50ms buffer)
+    }, 500); // Match the animation duration (400ms + 100ms buffer)
   };
 
   const handleDropdownMouseEnter = (dropdownName: string) => {
