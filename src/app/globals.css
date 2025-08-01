@@ -125,26 +125,39 @@
 
 /* Custom scrollbar styling for mobile dropdown */
 .mobile-dropdown::-webkit-scrollbar {
-  width: 0px;
+  width: 0px !important;
+  display: none !important;
 }
 
 .mobile-dropdown::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 .mobile-dropdown::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 0px;
+  background: transparent !important;
+  border-radius: 0px !important;
 }
 
 .mobile-dropdown::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background: transparent !important;
 }
 
 /* Firefox scrollbar styling */
 .mobile-dropdown {
-  scrollbar-width: none;
-  scrollbar-color: transparent transparent;
+  scrollbar-width: none !important;
+  scrollbar-color: transparent transparent !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Hide mobile dropdown on larger screens */
+@media (min-width: 769px) {
+  .mobile-dropdown-overlay {
+    display: none !important;
+  }
+  
+  .mobile-dropdown {
+    display: none !important;
+  }
 }
 
 .mobile-dropdown-close-btn {
@@ -375,6 +388,7 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 0;
 }
 
 .carousel-image-container {
@@ -410,11 +424,69 @@
   transition: background 0.2s, outline 0.2s;
 }
 
+@media (max-width: 853px) {
+  .carousel-section {
+    max-width: calc(100% - 80px) !important;
+    margin-left: 40px !important;
+    margin-right: 40px !important;
+    border-radius: 8px !important;
+    width: calc(100% - 80px) !important;
+    box-sizing: border-box !important;
+  }
+  .carousel-image-container {
+    aspect-ratio: 16/9 !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+  }
+  .carousel-dots {
+    bottom: 12px !important;
+    gap: 16px !important;
+  }
+  .carousel-dot {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* Additional specific breakpoint for 853px */
+@media (min-width: 768px) and (max-width: 853px) {
+  .carousel-section {
+    max-width: calc(100% - 80px) !important;
+    margin-left: 40px !important;
+    margin-right: 40px !important;
+    width: calc(100% - 80px) !important;
+  }
+  .carousel-image-container {
+    padding: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-section {
+    max-width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    border-radius: 8px !important;
+  }
+  .carousel-image-container {
+    aspect-ratio: 16/9 !important;
+    border-radius: 16px !important;
+  }
+  .carousel-dots {
+    bottom: 12px !important;
+    gap: 16px !important;
+  }
+  .carousel-dot {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .carousel-section {
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    max-width: calc(100% - 24px) !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
     border-radius: 0 !important;
     padding-left: 12px !important;
     padding-right: 12px !important;

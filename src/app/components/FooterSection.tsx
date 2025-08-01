@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function FooterSection() {
   return (
@@ -68,10 +69,10 @@ export default function FooterSection() {
             </div>
 
             <div className="footer-nav-section">
-              <a href="/blogs" className="footer-section-title-link">
+              <Link href="/blogs" className="footer-section-title-link">
                 <h3 className="footer-section-title">Blog</h3>
                 <div className="footer-divider"></div>
-              </a>
+              </Link>
             </div>
 
             <div className="footer-nav-section">
