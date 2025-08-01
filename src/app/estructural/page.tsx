@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import AnimatedButton from "../components/AnimatedButton";
 import "./es_karma.css";
 
 export default function EstructuralPage() {
@@ -148,12 +149,12 @@ export default function EstructuralPage() {
             <h3 className="video-title">Presentación del Análisis Estructural</h3>
             <section className="estructural-button-section">
               <div className="estructural-button-container">
-                <button 
+                <AnimatedButton
                   className="estructural-action-button"
                   onClick={toggleBookingForm}
                 >
-                RESERVAR
-                </button>
+                  RESERVAR
+                </AnimatedButton>
               </div>
             </section>
           </div>
