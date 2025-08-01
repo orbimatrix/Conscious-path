@@ -19,7 +19,7 @@ export default function CarouselSection() {
           src={images[active]}
           alt={`Carousel image ${active + 1}`}
           fill
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", objectPosition: "center" }}
           sizes="(max-width: 900px) 100vw, 900px"
         />
         {/* Dots inside image container, absolutely positioned */}
