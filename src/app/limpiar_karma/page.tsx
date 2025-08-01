@@ -53,6 +53,7 @@ export default function LimpiarKarmaPage() {
       <main className="limpiar-karma-main">
         <section className="limpiar-karma-hero">
           <div className="limpiar-karma-hero-content">
+            <h3 className="limpiar-karma-category">ASISTENCIA PERSONAL</h3>
             <h1 className="limpiar-karma-title">SESIÓN</h1>
             <h2 className="limpiar-karma-subtitle">LIMPIAR KARMA</h2>
           </div>
