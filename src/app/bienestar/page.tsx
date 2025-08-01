@@ -68,20 +68,22 @@ export default function BienestarPage() {
             {/* Benefits List */}
             <section className="bienestar-benefits">
               <div className="bienestar-benefits-container">
-                <ul className="bienestar-benefits-list">
-                  <li className="bienestar-benefit-item">
-                    <span className="benefit-icon">✓</span>
-                    <span className="benefit-text">Eficaz solución a problemas repetitivos</span>
-                  </li>
-                  <li className="bienestar-benefit-item">
-                    <span className="benefit-icon">✓</span>
-                    <span className="benefit-text">Experiencia y métodos probados</span>
-                  </li>
-                  <li className="bienestar-benefit-item">
-                    <span className="benefit-icon">✓</span>
-                    <span className="benefit-text">Mucho más que una charla</span>
-                  </li>
-                </ul>
+                <div className="bienestar-benefits-wrapper">
+                  <ul className="bienestar-benefits-list">
+                    <li className="bienestar-benefit-item">
+                      <span className="benefit-icon">✓</span>
+                      <span className="benefit-text">Eficaz solución a problemas repetitivos</span>
+                    </li>
+                    <li className="bienestar-benefit-item">
+                      <span className="benefit-icon">✓</span>
+                      <span className="benefit-text">Experiencia y métodos probados</span>
+                    </li>
+                    <li className="bienestar-benefit-item">
+                      <span className="benefit-icon">✓</span>
+                      <span className="benefit-text">Mucho más que una charla</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </section>
 

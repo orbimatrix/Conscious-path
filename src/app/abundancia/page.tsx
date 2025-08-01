@@ -27,20 +27,22 @@ export default function AbundanciaPage() {
         {/* Benefits Section */}
         <section className="abundancia-benefits">
           <div className="abundancia-benefits-container">
-            <ul className="abundancia-benefits-list">
-              <li className="abundancia-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Cambiar la suerte en positivo</span>
-              </li>
-              <li className="abundancia-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Llegada de dinero y regalos</span>
-              </li>
-              <li className="abundancia-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Adiós a la escased</span>
-              </li>
-            </ul>
+            <div className="abundancia-benefits-wrapper">
+              <ul className="abundancia-benefits-list">
+                <li className="abundancia-benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span className="benefit-text">Cambiar la suerte en positivo</span>
+                </li>
+                <li className="abundancia-benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span className="benefit-text">Llegada de dinero y regalos</span>
+                </li>
+                <li className="abundancia-benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span className="benefit-text">Adiós a la escased</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 

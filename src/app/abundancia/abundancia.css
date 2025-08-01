@@ -52,6 +52,12 @@
   margin: 0 auto;
 }
 
+.abundancia-benefits-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .abundancia-benefits-list {
   list-style: none;
   padding: 0;
@@ -60,11 +66,15 @@
 
 .abundancia-benefit-item {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin-bottom: 20px;
   font-size: 18px;
   color: #333;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .benefit-icon {
@@ -72,6 +82,13 @@
   font-size: 20px;
   margin-right: 15px;
   font-weight: bold;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .benefit-text {
@@ -209,13 +226,17 @@
   
   .abundancia-benefit-item {
     font-size: 16px;
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   
   .benefit-icon {
-    margin-right: 0;
-    margin-bottom: 8px;
+    margin-right: 12px;
+    margin-bottom: 0;
+    width: 16px;
+    font-size: 16px;
   }
   
   .abundancia-content-title {
@@ -296,6 +317,10 @@
   
   .abundancia-benefit-item {
     font-size: 14px;
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   
   .abundancia-content-title {
@@ -369,6 +394,10 @@
   
   .abundancia-benefit-item {
     font-size: 13px;
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   
   .abundancia-content-title {
