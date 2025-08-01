@@ -21,13 +21,27 @@ function useMediaQuery(query: string): boolean {
 export default function Header() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (isDropdownOpen) {
+      setIsClosing(true);
+      setTimeout(() => {
+        setIsDropdownOpen(false);
+        setIsClosing(false);
+      }, 400); // Match the animation duration
+    } else {
+      setIsDropdownOpen(true);
+    }
   };
 
   const closeDropdown = () => {
-    setIsDropdownOpen(false);
+    console.log('Close button clicked'); // Debug log
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsDropdownOpen(false);
+      setIsClosing(false);
+    }, 400); // Match the animation duration
   };
 
   if (isMobile) {
@@ -51,35 +65,37 @@ export default function Header() {
         </header>
 
         {isDropdownOpen && (
-          <div className="mobile-dropdown-overlay" onClick={closeDropdown}>
-            <div className="mobile-dropdown" onClick={(e) => e.stopPropagation()}>
+          <div className={`mobile-dropdown-overlay ${isClosing ? 'mobile-dropdown-overlay-closing' : ''}`} onClick={closeDropdown}>
+            <div className={`mobile-dropdown ${isClosing ? 'mobile-dropdown-closing' : ''}`} onClick={(e) => e.stopPropagation()}>
               <button className="mobile-dropdown-close-btn" onClick={closeDropdown}>
                 ✕
               </button>
               
               <div className="mobile-dropdown-section">
-                <div className="mobile-dropdown-section-title">AUDIOS y VIDEOS</div>
+                <Link href="/conocimiento" className="mobile-dropdown-section-title" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  AUDIOS y VIDEOS
+                </Link>
               </div>
 
               <div className="mobile-dropdown-section">
                 <div className="mobile-dropdown-section-title">NIVELES</div>
-                <a href="#" className="mobile-dropdown-menu-item">Carisma</a>
-                <a href="#" className="mobile-dropdown-menu-item">Karma</a>
-                <a href="#" className="mobile-dropdown-menu-item">Renacer Consciente</a>
-                <a href="#" className="mobile-dropdown-menu-item">Abundancia</a>
+                <a href="/carisma" className="mobile-dropdown-menu-item">Carisma</a>
+                <a href="/karma" className="mobile-dropdown-menu-item">Karma</a>
+                <a href="/renacer" className="mobile-dropdown-menu-item">Renacer Consciente</a>
+                <a href="/abundancia" className="mobile-dropdown-menu-item">Abundancia</a>
               </div>
 
               <div className="mobile-dropdown-section">
                 <div className="mobile-dropdown-section-title">SERVICIOS</div>
-                <a href="#" className="mobile-dropdown-menu-item">Bienestar Integral</a>
-                <a href="#" className="mobile-dropdown-menu-item">Encuentro Privado</a>
-                <a href="#" className="mobile-dropdown-menu-item">Sesión Limpiar Karma</a>
-                <a href="#" className="mobile-dropdown-menu-item">Análisis Estructural</a>
-                <a href="#" className="mobile-dropdown-menu-item">Regresión Origen</a>
+                <a href="/bienestar" className="mobile-dropdown-menu-item">Bienestar Integral</a>
+                <a href="/privado" className="mobile-dropdown-menu-item">Encuentro Privado</a>
+                <a href="/limpiar_karma" className="mobile-dropdown-menu-item">Sesión Limpiar Karma</a>
+                <a href="/estructural" className="mobile-dropdown-menu-item">Análisis Estructural</a>
+                <a href="/regresion" className="mobile-dropdown-menu-item">Regresión Origen</a>
               </div>
 
               <div className="mobile-dropdown-section">
-                <a href="#" className="mobile-dropdown-menu-item">Todos los contenidos</a>
+                <a href="/contenidos" className="mobile-dropdown-menu-item">Todos los contenidos</a>
               </div>
 
               <div className="mobile-dropdown-section">
