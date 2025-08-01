@@ -62,6 +62,9 @@ export default function SendasRenacerPage() {
                   <li>Precio de referencia</li>
                 </ul>
               </div>
+              <button className="cta-button karma-button" onClick={openModal}>
+                Acceder por NIVEL KARMA
+              </button>
             </div>
 
             {/* Right Column - Direct Access */}
@@ -79,19 +82,10 @@ export default function SendasRenacerPage() {
                   <li>Precio personalizado</li>
                 </ul>
               </div>
+              <button className="cta-button direct-button" onClick={openDirectModal}>
+                Acceder de forma DIRECTA
+              </button>
             </div>
-          </div>
-        </section>
-
-        {/* Call-to-Action Buttons */}
-        <section className="sendas-cta-buttons">
-          <div className="cta-buttons-container">
-            <button className="cta-button karma-button" onClick={openModal}>
-              Acceder por NIVEL KARMA
-            </button>
-            <button className="cta-button direct-button" onClick={openDirectModal}>
-              Acceder de forma DIRECTA
-            </button>
           </div>
         </section>
 

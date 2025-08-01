@@ -84,6 +84,8 @@
 
 .requirement-column {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .requirement-title {
@@ -98,6 +100,7 @@
   border-radius: 8px;
   padding: 30px;
   text-align: left;
+  margin-bottom: 20px;
 }
 
 .requirement-subtitle {
@@ -158,6 +161,12 @@
 
 .cta-button:hover {
   background: #5a6b82;
+}
+
+/* Individual column buttons */
+.requirement-column .cta-button {
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Free Access Section */
@@ -232,6 +241,16 @@
   
   .requirement-title {
     font-size: 20px;
+  }
+  
+  .requirement-column {
+    margin-bottom: 30px;
+  }
+  
+  .requirement-column .cta-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
   
   .cta-buttons-container {
