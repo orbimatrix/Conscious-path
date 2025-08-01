@@ -539,6 +539,130 @@ body {
   }
 }
 
+/* Desktop Header Styles */
+.desktop-header {
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.10);
+  position: relative;
+  z-index: 10;
+}
+
+.desktop-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 90px;
+}
+
+.desktop-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.desktop-header-logo {
+  margin-right: 24px;
+}
+
+.desktop-header-text {
+  font-weight: 300;
+  font-size: 48px;
+  letter-spacing: 1px;
+  font-family: inherit;
+}
+
+.desktop-header-text-senda {
+  color: #E6A14A;
+  margin-left: 8px;
+}
+
+.desktop-header-text-consciente {
+  color: #5A5353;
+}
+
+.desktop-header-button {
+  background: #F9D264;
+  color: #fff;
+  font-weight: 400;
+  font-size: 22px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  cursor: pointer;
+  margin-left: 24px;
+}
+
+.desktop-header-divider {
+  border-bottom: 1px solid #d9d9d9;
+  margin: 0;
+}
+
+.desktop-nav {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  padding: 18px 0;
+  background: #fff;
+  position: relative;
+}
+
+.desktop-nav-link {
+  color: #8B4C00;
+  font-weight: 500;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.desktop-dropdown-container {
+  position: relative;
+}
+
+.desktop-dropdown-button {
+  color: #8B4C00;
+  font-weight: 500;
+  font-size: 22px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.desktop-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px 0;
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.desktop-dropdown-menu-niveles {
+  min-width: 200px;
+}
+
+.desktop-dropdown-menu-servicios {
+  min-width: 250px;
+}
+
+.desktop-dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  color: #8B4C00;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.desktop-dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
 .carousel-section {
   width: 100%;
   max-width: 900px;

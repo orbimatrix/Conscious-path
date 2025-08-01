@@ -22,6 +22,7 @@ export default function Header() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleDropdown = () => {
     if (isDropdownOpen) {
@@ -42,6 +43,14 @@ export default function Header() {
       setIsDropdownOpen(false);
       setIsClosing(false);
     }, 400); // Match the animation duration
+  };
+
+  const handleDropdownMouseEnter = (dropdownName: string) => {
+    setActiveDropdown(dropdownName);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setActiveDropdown(null);
   };
 
   if (isMobile) {
@@ -123,24 +132,62 @@ export default function Header() {
     );
   }
 
-  // Desktop header
+    // Desktop header
   return (
-    <header style={{ background: '#fff', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.10)', position: 'relative', zIndex: 10 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2rem', height: 90 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <Image src="/dollar.png" alt="Logo" width={40} height={40} style={{ marginRight: 16 }} />
-          <span style={{ fontWeight: 300, fontSize: 48, letterSpacing: 1, color: '#E6A14A', fontFamily: 'inherit' }}>SENDA</span>
-          <span style={{ fontWeight: 300, fontSize: 48, letterSpacing: 1, color: '#5A5353', fontFamily: 'inherit' }}> CONSCIENTE</span>
+    <header className="desktop-header">
+      <div className="desktop-header-top">
+        <div className="desktop-header-brand">
+          <Image src="/dollar.png" alt="Logo" width={40} height={40} className="desktop-header-logo" />
+          <span className="desktop-header-text desktop-header-text-senda">SENDA</span>
+          <span className="desktop-header-text desktop-header-text-consciente"> CONSCIENTE</span>
         </div>
-        <button style={{ background: '#F9D264', color: '#fff', fontWeight: 400, fontSize: 22, border: 'none', borderRadius: 8, padding: '12px 36px', cursor: 'pointer', marginLeft: 24 }}>Entrar</button>
+        <button className="desktop-header-button">Entrar</button>
       </div>
-      <div style={{ borderBottom: '1px solid #d9d9d9', margin: '0 0 0 0' }} />
-      <nav style={{ display: 'flex', justifyContent: 'center', gap: 64, padding: '18px 0', background: '#fff' }}>
-        <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Audios y Videos</a>
-        <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Niveles</a>
-        <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Servicios</a>
-        <a href="#" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Todos contenidos</a>
-        <Link href="/blogs" style={{ color: '#8B4C00', fontWeight: 500, fontSize: 22, textDecoration: 'none' }}>Blog</Link>
+      <div className="desktop-header-divider" />
+      <nav className="desktop-nav">
+        <a href="#" className="desktop-nav-link">Audios y Videos</a>
+        
+        <div 
+          className="desktop-dropdown-container" 
+          data-dropdown
+          onMouseEnter={() => handleDropdownMouseEnter('niveles')}
+          onMouseLeave={handleDropdownMouseLeave}
+        >
+          <button className="desktop-dropdown-button">
+            Niveles
+          </button>
+          {activeDropdown === 'niveles' && (
+            <div className="desktop-dropdown-menu desktop-dropdown-menu-niveles">
+              <a href="/carisma" className="desktop-dropdown-item">Carisma</a>
+              <a href="/karma" className="desktop-dropdown-item">Karma</a>
+              <a href="/renacer" className="desktop-dropdown-item">Renacer Consciente</a>
+              <a href="/abundancia" className="desktop-dropdown-item">Abundancia</a>
+            </div>
+          )}
+        </div>
+        
+        <div 
+          className="desktop-dropdown-container" 
+          data-dropdown
+          onMouseEnter={() => handleDropdownMouseEnter('servicios')}
+          onMouseLeave={handleDropdownMouseLeave}
+        >
+          <button className="desktop-dropdown-button">
+            Servicios
+          </button>
+          {activeDropdown === 'servicios' && (
+            <div className="desktop-dropdown-menu desktop-dropdown-menu-servicios">
+              <a href="/bienestar" className="desktop-dropdown-item">Bienestar Integral</a>
+              <a href="/privado" className="desktop-dropdown-item">Encuentro Privado</a>
+              <a href="/limpiar_karma" className="desktop-dropdown-item">Sesión Limpiar Karma</a>
+              <a href="/estructural" className="desktop-dropdown-item">Análisis Estructural</a>
+              <a href="/regresion" className="desktop-dropdown-item">Regresión Origen</a>
+            </div>
+          )}
+        </div>
+        
+        <a href="#" className="desktop-nav-link">Todos contenidos</a>
+        <Link href="/blogs" className="desktop-nav-link">Blog</Link>
       </nav>
     </header>
   );
