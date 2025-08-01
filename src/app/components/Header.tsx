@@ -145,7 +145,7 @@ export default function Header() {
       </div>
       <div className="desktop-header-divider" />
       <nav className="desktop-nav">
-        <a href="#" className="desktop-nav-link">Audios y Videos</a>
+        <a href="/conocimiento" className="desktop-nav-link">Audios y Videos</a>
         
         <div 
           className="desktop-dropdown-container" 
@@ -186,7 +186,7 @@ export default function Header() {
           )}
         </div>
         
-        <a href="#" className="desktop-nav-link">Todos contenidos</a>
+        <a href="/contenidos" className="desktop-nav-link">Todos contenidos</a>
         <Link href="/blogs" className="desktop-nav-link">Blog</Link>
       </nav>
     </header>
