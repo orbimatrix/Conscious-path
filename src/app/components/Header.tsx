@@ -63,7 +63,7 @@ export default function Header() {
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
             </div>
               <div className="header-logo-container">
-                <Image src="/dollar.png" alt="Logo" width={22} height={22} />
+                <Image src="/dollar.png" alt="Logo" width={32} height={32} />
                 <span className="header-brand-text">
                   <span className="header-brand-senda">SENDA</span>
                   <span className="header-brand-consciente"> CONSCIENTE</span>
