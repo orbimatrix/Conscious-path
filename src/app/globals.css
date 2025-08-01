@@ -423,6 +423,7 @@
   gap: 8px;
 }
 
+
 .header-brand-text {
   font-weight: 400;
   font-size: 28px;
@@ -453,22 +454,15 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.10);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 2rem 0 2rem;
+  justify-content: space-around;
+  /* padding: 8px 2rem 0 2rem; */
   height: 72px;
   position: relative;
   z-index: 10;
   padding-top: max(8px, env(safe-area-inset-top));
 }
 
-.header-center {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  justify-content: center;
-  min-width: 0;
-}
+
 
 .header-icon {
   display: flex;
@@ -483,24 +477,8 @@
     height: 62px;
     position: relative;
   }
-  .header-center {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    z-index: 1;
-    display: flex;
-    text-align: center;
-  }
-  .header-center span {
-    font-size: 18px !important;
-    text-align: center;
-  }
+  
+ 
   .header-icon {
     min-width: 40px;
     z-index: 2;
@@ -515,9 +493,7 @@
     padding: 4px 0.75rem 0 0.75rem;
     height: 60px;
   }
-  .header-center span {
-    font-size: 16px !important;
-  }
+ 
   .header-icon {
     min-width: 36px;
     padding: 6px;
@@ -529,9 +505,7 @@
     padding: 4px 0.5rem 0 0.5rem;
     height: 58px;
   }
-  .header-center span {
-    font-size: 14px !important;
-  }
+  
   .header-icon {
     min-width: 32px;
     padding: 4px;
@@ -550,12 +524,7 @@
     align-items: center !important;
     justify-content: space-between !important;
   }
-  
-  .header-center {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
+
   
   .header-icon {
     display: flex !important;
@@ -563,11 +532,7 @@
     justify-content: center !important;
   }
   
-  .header-center span {
-    line-height: 1.2 !important;
-    display: flex !important;
-    align-items: center !important;
-  }
+  
 }
 
 @media screen and (max-width: 375px) and (max-height: 812px) {
@@ -582,11 +547,7 @@
     justify-content: space-between !important;
   }
   
-  .header-center {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
+ 
   
   .header-icon {
     display: flex !important;
@@ -594,11 +555,7 @@
     justify-content: center !important;
   }
   
-  .header-center span {
-    line-height: 1.2 !important;
-    display: flex !important;
-    align-items: center !important;
-  }
+  
 }
 
 /* General iPhone safe area support */
@@ -624,11 +581,7 @@
     justify-content: space-between !important;
   }
   
-  .header-center {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
+ 
   
   .header-icon {
     display: flex !important;

@@ -62,15 +62,13 @@ export default function Header() {
             <div className="header-icon" onClick={toggleDropdown}>
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
             </div>
-                <div className="header-center">
-               <div className="header-logo-container">
-                 <Image src="/dollar.png" alt="Logo" width={22} height={22} />
-                 <span className="header-brand-text">
-                   <span className="header-brand-senda">SENDA</span>
-                   <span className="header-brand-consciente"> CONSCIENTE</span>
-                 </span>
-               </div>
-             </div>
+              <div className="header-logo-container">
+                <Image src="/dollar.png" alt="Logo" width={22} height={22} />
+                <span className="header-brand-text">
+                  <span className="header-brand-senda">SENDA</span>
+                  <span className="header-brand-consciente"> CONSCIENTE</span>
+                </span>
+            </div>
             <div className="header-icon">
               <Image src="/profile.svg" alt="User" width={32} height={32} />
             </div>
@@ -83,7 +81,7 @@ export default function Header() {
               <button className="mobile-dropdown-close-btn" onClick={closeDropdown}>
                 ✕
               </button>
-              
+
               <div className="mobile-dropdown-section">
                 <Link href="/conocimiento" className="mobile-dropdown-section-title mobile-dropdown-link">
                   AUDIOS y VIDEOS
@@ -129,7 +127,7 @@ export default function Header() {
     );
   }
 
-    // Desktop header
+  // Desktop header
   return (
     <header className="desktop-header">
       <div className="desktop-header-top">
@@ -143,9 +141,9 @@ export default function Header() {
       <div className="desktop-header-divider" />
       <nav className="desktop-nav">
         <a href="/conocimiento" className="desktop-nav-link">Audios y Videos</a>
-        
-        <div 
-          className="desktop-dropdown-container" 
+
+        <div
+          className="desktop-dropdown-container"
           data-dropdown
           onMouseEnter={() => handleDropdownMouseEnter('niveles')}
           onMouseLeave={handleDropdownMouseLeave}
@@ -162,9 +160,9 @@ export default function Header() {
             </div>
           )}
         </div>
-        
-        <div 
-          className="desktop-dropdown-container" 
+
+        <div
+          className="desktop-dropdown-container"
           data-dropdown
           onMouseEnter={() => handleDropdownMouseEnter('servicios')}
           onMouseLeave={handleDropdownMouseLeave}
@@ -182,7 +180,7 @@ export default function Header() {
             </div>
           )}
         </div>
-        
+
         <a href="/contenidos" className="desktop-nav-link">Todos contenidos</a>
         <Link href="/blogs" className="desktop-nav-link">Blog</Link>
       </nav>
