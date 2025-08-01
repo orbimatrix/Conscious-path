@@ -57,22 +57,17 @@ export default function Header() {
     // Mobile header (current)
     return (
       <>
-        <div style={{ 
-          paddingTop: 'env(safe-area-inset-top)', 
-          marginTop: 'env(safe-area-inset-top)',
-          position: 'relative',
-          top: 'env(safe-area-inset-top)'
-        }}>
+        <div className="header-safe-area">
           <header className="header-root">
             <div className="header-icon" onClick={toggleDropdown}>
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
             </div>
-                         <div className="header-center">
-               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="header-center">
+               <div className="header-logo-container">
                  <Image src="/dollar.png" alt="Logo" width={22} height={22} />
-                 <span style={{ fontWeight: 400, fontSize: 28, letterSpacing: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                   <span style={{ color: "#E6A14A", fontWeight: 300 }}>SENDA</span>
-                   <span style={{ color: "#5A5353", fontWeight: 300 }}> CONSCIENTE</span>
+                 <span className="header-brand-text">
+                   <span className="header-brand-senda">SENDA</span>
+                   <span className="header-brand-consciente"> CONSCIENTE</span>
                  </span>
                </div>
              </div>
@@ -90,7 +85,7 @@ export default function Header() {
               </button>
               
               <div className="mobile-dropdown-section">
-                <Link href="/conocimiento" className="mobile-dropdown-section-title" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link href="/conocimiento" className="mobile-dropdown-section-title mobile-dropdown-link">
                   AUDIOS y VIDEOS
                 </Link>
               </div>

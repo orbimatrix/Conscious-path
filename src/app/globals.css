@@ -409,6 +409,44 @@
   background-color: #3C3C3C;
 }
 
+/* Header inline styles moved to CSS */
+.header-safe-area {
+  padding-top: env(safe-area-inset-top);
+  margin-top: env(safe-area-inset-top);
+  position: relative;
+  top: env(safe-area-inset-top);
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-brand-text {
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-brand-senda {
+  color: #E6A14A;
+  font-weight: 300;
+}
+
+.header-brand-consciente {
+  color: #5A5353;
+  font-weight: 300;
+}
+
+.mobile-dropdown-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Header styles */
 .header-root {
   background: #fff;
