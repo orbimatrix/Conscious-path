@@ -57,75 +57,84 @@ export default function PrivadoPage() {
                 </div>
             </section>
 
-                         {/* Main Content Section */}
-             <section className="privado-content">
-                 <div className="privado-content-wrapper">
-                     <h2 className="privado-content-title">
-                         ENTREVISTA PERSONAL CON TODO DETALLE
-                     </h2>
- 
-                     <div className="privado-description">
-                         <p>Reserve un encuentro personal privado para resolver todo tipo de dudas. Tendremos una conversación profunda enfocada en sus inquietudes, para aportar claridad.</p>
-                         <p>Descubra las soluciones a sus bloqueos actuales, cualquiera que sea la naturaleza. Y examinaremos los posibles caminos para avanzar en las mejoras que desea obtener.</p>
-                     </div>
- 
-                     <div className="privado-features">
-                         <div className="privado-feature-item">
-                             <div className="privado-check-icon">✓</div>
-                             <span className="privado-feature-text">Atención exclusiva</span>
-                         </div>
- 
-                         <div className="privado-feature-item">
-                             <div className="privado-check-icon">✓</div>
-                             <span className="privado-feature-text">Máxima privacidad</span>
-                         </div>
- 
-                         <div className="privado-feature-item">
-                             <div className="privado-check-icon">✓</div>
-                             <span className="privado-feature-text">Identificar problemas y soluciones</span>
-                         </div>
-                     </div>
-                 </div>
-             </section>
+            {/* Main Content Section */}
+            <section className="privado-content">
+                <div className="privado-content-wrapper">
+                    <h2 className="privado-content-title">
+                        ENTREVISTA PERSONAL CON TODO DETALLE
+                    </h2>
 
-             <div className="privado-image-container">
-                                 <Image
-                     src="/fotos/armchair.jpg"
-                     alt="Armchair - Encuentro Privado"
-                     width={600}
-                     height={450}
-                     className="privado-image"
-                     priority
-                 />
+                    <div className="privado-features-container">
+                        <div className="privado-features">
+                            <div className="privado-feature-item">
+                                <div className="privado-check-icon">✓</div>
+                                <span className="privado-feature-text">Atención exclusiva</span>
+                            </div>
+
+                            <div className="privado-feature-item">
+                                <div className="privado-check-icon">✓</div>
+                                <span className="privado-feature-text">Máxima privacidad</span>
+                            </div>
+
+                            <div className="privado-feature-item">
+                                <div className="privado-check-icon">✓</div>
+                                <span className="privado-feature-text">Identificar problemas y soluciones</span>
+                            </div>
+                        </div>
+                    </div>
+
+                  
+
+                    
+                </div>
+            </section>
+
+            <div className="privado-image-container">
+                <Image
+                    src="/fotos/armchair.jpg"
+                    alt="Armchair - Encuentro Privado"
+                    width={800}
+                    height={450}
+                    className="privado-image"
+                    priority
+                />
             </div>
- 
-             {/* Middle Highlight Section */}
-             <section className="privado-highlight">
-                 <div className="privado-highlight-content">
-                     <p>Entorno de máxima discreción, en función de sus necesidades.</p>
-                     <p>Trato personal, con calma y atención.</p>
-                     <p>Orientación en todo tipo de temáticas.</p>
-                 </div>
-             </section>
- 
-             {/* Video and CTA Section */}
-             <section className="privado-video-section">
-                 <div className="privado-video-container">
-                     <div className="privado-video-player">
-                         <div className="privado-play-button">
-                             <div className="privado-play-icon">▶</div>
-                         </div>
-                     </div>
-                     <h3 className="privado-video-title">Presentación del Encuentro privado</h3>
-                     <button 
-                         className="privado-cta-button"
-                         onClick={toggleBookingForm}
-                     >
-                         Reservar el Encuentro
-                     </button>
-                 </div>
-             </section>
-           
+
+            {/* Additional Content Section */}
+            <section className="privado-additional-content">
+                <div className="privado-additional-wrapper">
+                    <p>Reserve un encuentro personal privado para resolver todo tipo de dudas. Tendremos una conversación profunda enfocada en sus inquietudes, para aportar claridad.</p>
+                    <p>Descubra las soluciones a sus bloqueos actuales, cualquiera que sea la naturaleza. Y examinaremos los posibles caminos para avanzar en las mejoras que desea obtener.</p>
+                </div>
+            </section>
+
+            {/* Middle Highlight Section */}
+            <section className="privado-highlight">
+                <div className="privado-highlight-content">
+                    <p>Entorno de máxima discreción, en función de sus necesidades.</p>
+                    <p>Trato personal, con calma y atención.</p>
+                    <p>Orientación en todo tipo de temáticas.</p>
+                </div>
+            </section>
+
+            {/* Video and CTA Section */}
+            <section className="privado-video-section">
+                <div className="privado-video-container">
+                    <div className="privado-video-player">
+                        <div className="privado-play-button">
+                            <div className="privado-play-icon">▶</div>
+                        </div>
+                    </div>
+                    <h3 className="privado-video-title">Presentación del Encuentro privado</h3>
+                    <button
+                        className="privado-cta-button"
+                        onClick={toggleBookingForm}
+                    >
+                        Reservar el Encuentro
+                    </button>
+                </div>
+            </section>
+
             {/* Booking Form Section */}
             {showBookingForm && (
                 <section className="booking-form-section">
