@@ -48,21 +48,23 @@ export default function Header() {
     // Mobile header (current)
     return (
       <>
-        <header className="header-root">
-          <div className="header-icon" onClick={toggleDropdown}>
-            <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
-          </div>
-          <div className="header-center">
-            <Image src="/dollar.png" alt="Logo" width={22} height={22} />
-            <span style={{ fontWeight: 400, fontSize: 28, letterSpacing: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              <span style={{ color: "#E6A14A", fontWeight: 300 }}>SENDA</span>
-              <span style={{ color: "#5A5353", fontWeight: 300 }}> CONSCIENTE</span>
-            </span>
-          </div>
-          <div className="header-icon">
-            <Image src="/profile.svg" alt="User" width={32} height={32} />
-          </div>
-        </header>
+        <div style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+          <header className="header-root">
+            <div className="header-icon" onClick={toggleDropdown}>
+              <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
+            </div>
+            <div className="header-center">
+              <Image src="/dollar.png" alt="Logo" width={22} height={22} />
+              <span style={{ fontWeight: 400, fontSize: 28, letterSpacing: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <span style={{ color: "#E6A14A", fontWeight: 300 }}>SENDA</span>
+                <span style={{ color: "#5A5353", fontWeight: 300 }}> CONSCIENTE</span>
+              </span>
+            </div>
+            <div className="header-icon">
+              <Image src="/profile.svg" alt="User" width={32} height={32} />
+            </div>
+          </header>
+        </div>
 
         {isDropdownOpen && (
           <div className={`mobile-dropdown-overlay ${isClosing ? 'mobile-dropdown-overlay-closing' : ''}`} onClick={closeDropdown}>

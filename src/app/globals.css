@@ -414,23 +414,34 @@
 /* iPhone Pro Max specific fixes */
 @media screen and (max-width: 414px) and (max-height: 896px) {
   .header-root {
-    padding-top: max(12px, env(safe-area-inset-top));
-    height: calc(72px + env(safe-area-inset-top));
+    padding-top: max(20px, env(safe-area-inset-top));
+    height: calc(92px + env(safe-area-inset-top));
+    margin-top: env(safe-area-inset-top);
   }
 }
 
 @media screen and (max-width: 375px) and (max-height: 812px) {
   .header-root {
-    padding-top: max(12px, env(safe-area-inset-top));
-    height: calc(72px + env(safe-area-inset-top));
+    padding-top: max(20px, env(safe-area-inset-top));
+    height: calc(92px + env(safe-area-inset-top));
+    margin-top: env(safe-area-inset-top);
   }
 }
 
 /* General iPhone safe area support */
 @supports (padding-top: env(safe-area-inset-top)) {
   .header-root {
-    padding-top: max(8px, env(safe-area-inset-top));
-    height: calc(72px + env(safe-area-inset-top));
+    padding-top: max(16px, env(safe-area-inset-top));
+    height: calc(88px + env(safe-area-inset-top));
+    margin-top: env(safe-area-inset-top);
+  }
+}
+
+/* Additional safe area support for all mobile devices */
+@media screen and (max-width: 768px) {
+  .header-root {
+    padding-top: max(12px, env(safe-area-inset-top));
+    margin-top: env(safe-area-inset-top);
   }
 }
 
