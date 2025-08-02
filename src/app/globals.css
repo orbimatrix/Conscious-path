@@ -411,10 +411,10 @@
 
 /* Header inline styles moved to CSS */
 .header-safe-area {
-  padding-top: env(safe-area-inset-top);
-  margin-top: env(safe-area-inset-top);
+  padding-top: 12px;
+  margin-top: 0;
   position: relative;
-  top: env(safe-area-inset-top);
+  top: 2;
 }
 
 .header-logo-container {
@@ -460,7 +460,7 @@
   height: 72px;
   position: relative;
   z-index: 10;
-  padding-top: max(8px, env(safe-area-inset-top));
+  padding-top: 4px;
 }
 
 
@@ -474,7 +474,7 @@
 
 @media (max-width: 600px) {
   .header-root {
-    padding: 6px 1rem 0 1rem;
+    padding: 2px 1rem 0 1rem;
     height: 62px;
     position: relative;
   }
@@ -491,7 +491,7 @@
 
 @media (max-width: 480px) {
   .header-root {
-    padding: 4px 0.75rem 0 0.75rem;
+    padding: 1px 0.75rem 0 0.75rem;
     height: 60px;
   }
  
@@ -503,7 +503,7 @@
 
 @media (max-width: 360px) {
   .header-root {
-    padding: 4px 0.5rem 0 0.5rem;
+    padding: 0px 0.5rem 0 0.5rem;
     height: 58px;
   }
   
@@ -516,11 +516,11 @@
 /* iPhone Pro Max specific fixes */
 @media screen and (max-width: 414px) and (max-height: 896px) {
   .header-root {
-    padding-top: max(35px, env(safe-area-inset-top)) !important;
-    height: calc(107px + env(safe-area-inset-top)) !important;
-    margin-top: env(safe-area-inset-top) !important;
+    padding-top: 0 !important;
+    height: 72px !important;
+    margin-top: 0 !important;
     position: relative !important;
-    top: env(safe-area-inset-top) !important;
+    top: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -538,11 +538,11 @@
 
 @media screen and (max-width: 375px) and (max-height: 812px) {
   .header-root {
-    padding-top: max(35px, env(safe-area-inset-top)) !important;
-    height: calc(107px + env(safe-area-inset-top)) !important;
-    margin-top: env(safe-area-inset-top) !important;
+    padding-top: 0 !important;
+    height: 72px !important;
+    margin-top: 0 !important;
     position: relative !important;
-    top: env(safe-area-inset-top) !important;
+    top: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -562,21 +562,21 @@
 /* General iPhone safe area support */
 @supports (padding-top: env(safe-area-inset-top)) {
   .header-root {
-    padding-top: max(25px, env(safe-area-inset-top)) !important;
-    height: calc(97px + env(safe-area-inset-top)) !important;
-    margin-top: env(safe-area-inset-top) !important;
+    padding-top: 0 !important;
+    height: 72px !important;
+    margin-top: 0 !important;
     position: relative !important;
-    top: env(safe-area-inset-top) !important;
+    top: 0 !important;
   }
 }
 
 /* Additional safe area support for all mobile devices */
 @media screen and (max-width: 768px) {
   .header-root {
-    padding-top: max(20px, env(safe-area-inset-top)) !important;
-    margin-top: env(safe-area-inset-top) !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
     position: relative !important;
-    top: env(safe-area-inset-top) !important;
+    top: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -679,23 +679,23 @@
 /* Force safe area on all iOS devices */
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
   .header-root {
-    padding-top: max(30px, env(safe-area-inset-top)) !important;
-    margin-top: env(safe-area-inset-top) !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
     position: relative !important;
-    top: env(safe-area-inset-top) !important;
+    top: 0 !important;
   }
 }
 
 /* Body level safe area support */
 body {
-  padding-top: env(safe-area-inset-top) !important;
-  margin-top: env(safe-area-inset-top) !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Additional iPhone specific fixes */
 @media screen and (max-width: 414px) {
   body {
-    padding-top: max(env(safe-area-inset-top), 20px) !important;
+    padding-top: 0 !important;
   }
 }
 
