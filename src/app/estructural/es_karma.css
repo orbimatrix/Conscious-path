@@ -5,8 +5,9 @@
   }
   
   .estructural-main {
-    flex: 1;
-  }
+  flex: 1;
+  padding: 0;
+}
   
   /* Hero Section */
   .estructural-hero {
@@ -94,14 +95,11 @@
   }
   
   .benefit-icon {
-    color: #4CAF50;
-    font-weight: bold;
-    font-size: 20px;
-    min-width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
+    margin-right: 15px;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
   }
   
   .benefit-text {
@@ -129,14 +127,14 @@
   }
   
   .estructural-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    display: block;
-    object-fit: contain;
-  }
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  display: block;
+  object-fit: contain;
+}
   
   /* Information Section */
   .estructural-info-section {
@@ -574,7 +572,8 @@
     }
     
     .benefit-icon {
-      font-size: 18px;
+      width: 20px;
+      height: 20px;
     }
     
     .benefit-text {
@@ -696,7 +695,8 @@
     }
     
     .benefit-icon {
-      font-size: 16px;
+      width: 18px;
+      height: 18px;
     }
     
     .estructural-image-section {
@@ -814,7 +814,8 @@
     }
     
     .benefit-icon {
-      font-size: 15px;
+      width: 18px;
+      height: 18px;
     }
     
     .estructural-following-section {
@@ -862,7 +863,8 @@
     }
     
     .benefit-icon {
-      font-size: 14px;
+      width: 16px;
+      height: 16px;
     }
     
     .estructural-following-section {
@@ -1416,4 +1418,37 @@
     .booking-form-section-group {
       gap: 10px;
     }
-  } 
+  }
+
+  /* Full width image for devices 960px to 340px */
+  @media (max-width: 960px) and (min-width: 340px) {
+    .estructural-image-section {
+      padding: 0;
+    }
+    
+    .estructural-image-container {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .estructural-image {
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
+  }
+
+  /* Increase image size for screens wider than 960px */
+  @media (min-width: 960px) {
+    .estructural-image-container {
+      max-width: 1200px;
+    }
+    
+    .estructural-image {
+      max-width: 1000px;
+      width: 100%;
+      height: auto;
+    }
+  }

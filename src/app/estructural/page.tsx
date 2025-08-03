@@ -64,35 +64,39 @@ export default function EstructuralPage() {
             <h2 className="estructural-benefits-title">DESCUBRA SUS CAPACIDADES REALES</h2>
             <ul className="estructural-benefits-list">
               <li className="estructural-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">Aproveche bien su energía y tiempo
                 </span>
               </li>
               <li className="estructural-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">Evite frustaciones vitales y profesionales
                 </span>
               </li>
               <li className="estructural-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">Tenga amistades adecuadas</span>
               </li>
             </ul>
           </div>
         </section>
 
-        <section className="estructural-image-section">
-          <div className="estructural-image-container">
-            <Image 
-              src="/fotos/white.jpg" 
-              alt="Limpiar Karma" 
-              className="estructural-image"
-              width={1000}
-              height={600}
-            />
-          </div>
-        </section>
+      </main>
 
+      {/* Image Section - Outside main container for full width */}
+      <section className="estructural-image-section">
+        <div className="estructural-image-container">
+          <Image 
+            src="/fotos/white.jpg" 
+            alt="Limpiar Karma" 
+            className="estructural-image"
+            width={1000}
+            height={600}
+          />
+        </div>
+      </section>
+
+      <main className="estructural-main">
         <section className="estructural-info-section">
           <div className="estructural-info-container">
             
