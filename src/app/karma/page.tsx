@@ -19,33 +19,37 @@ export default function KarmaPage() {
           <div className="carisma-benefits-container">
             <ul className="carisma-benefits-list">
               <li className="carisma-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">El conocimiento más censurado</span>
               </li>
               <li className="carisma-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">Evite ser esclavo del mal</span>
               </li>
               <li className="carisma-benefit-item">
-                <span className="benefit-icon">✓</span>
+                <img src="/img/check.png" alt="Check" className="benefit-icon" />
                 <span className="benefit-text">Libere su siguiente vida</span>
               </li>
             </ul>
           </div>
         </section>
 
-        <section className="carisma-image-section">
-          <div className="carisma-image-container">
-            <Image 
-              src="/fotos/karma.png" 
-              alt="Carisma" 
-              className="carisma-image"
-              width={800}
-              height={600}
-            />
-          </div>
-        </section>
+      </main>
 
+      {/* Image Section - Outside main container for full width */}
+      <section className="carisma-image-section">
+        <div className="carisma-image-container">
+          <Image 
+            src="/fotos/karma.png" 
+            alt="Carisma" 
+            className="carisma-image"
+            width={1000}
+            height={600}
+          />
+        </div>
+      </section>
+
+      <main className="carisma-main">
         <section className="carisma-info-section">
           <div className="carisma-info-container">
             <h2 className="carisma-info-title">ADIÓS A LOS DEMONIOS, TRANCENDE LA MUERTE
