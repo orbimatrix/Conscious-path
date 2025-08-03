@@ -27,6 +27,7 @@
   
   .carisma-title {
     font-size: 32px;
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
     color: #f5f5f5;
     margin-bottom: 10px;
@@ -35,7 +36,8 @@
   
   .carisma-subtitle {
     font-size: 64px;
-    
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     color: #f5f5f5;
     letter-spacing: 3px;
   }
@@ -141,6 +143,8 @@
   
   .carisma-info-title {
     font-size: 32px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     
     color: #B19B6D;
     text-align: center;
@@ -157,11 +161,14 @@
     font-size: 18px;
     margin-bottom: 25px;
     text-align: justify;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+
   }
   
   .carisma-info-paragraph:last-child {
     margin-bottom: 0;
-    font-weight: 600;
+    font-weight: 300;
   }
   
   /* Action Section */
@@ -346,6 +353,8 @@
     color: white;
     border: none;
     padding: 18px 60px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     border-radius: 12px;
     font-size: 18px;
     font-weight: 600;

@@ -52,7 +52,7 @@ export default function KarmaPage() {
       <main className="carisma-main">
         <section className="carisma-info-section">
           <div className="carisma-info-container">
-            <h2 className="carisma-info-title">ADIÓS A LOS DEMONIOS, TRANCENDE LA MUERTE
+            <h2 className="carisma-info-title">ADIÓS A LOS DEMONIOS, <br /> TRANCENDE LA MUERTE
 
 
             </h2>
