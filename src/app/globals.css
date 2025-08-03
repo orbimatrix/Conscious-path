@@ -831,21 +831,20 @@ body {
 
 .carousel-section {
   width: 100%;
-  max-width: 900px;
-  margin: 32px auto 0 auto;
+  margin: 0;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border-radius: 0;
+  box-shadow: none;
   padding: 0;
 }
 
 .carousel-image-container {
   width: 100%;
   aspect-ratio: 16/7;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 2px 8px rgb(253, 253, 253);
+  box-shadow: none;
   background: #eee;
 }
 
@@ -874,17 +873,15 @@ body {
 
 @media (max-width: 853px) {
   .carousel-section {
-    max-width: calc(100% - 80px) !important;
-    margin-left: 40px !important;
-    margin-right: 40px !important;
-    border-radius: 8px !important;
-    width: calc(100% - 80px) !important;
-    box-sizing: border-box !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
   .carousel-image-container {
     aspect-ratio: 16/9 !important;
-    border-radius: 16px !important;
-    padding: 20px !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
   }
   .carousel-dots {
     bottom: 12px !important;
@@ -899,25 +896,25 @@ body {
 /* Additional specific breakpoint for 853px */
 @media (min-width: 768px) and (max-width: 853px) {
   .carousel-section {
-    max-width: calc(100% - 80px) !important;
-    margin-left: 40px !important;
-    margin-right: 40px !important;
-    width: calc(100% - 80px) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
   .carousel-image-container {
-    padding: 20px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
   }
 }
 
 @media (max-width: 768px) {
   .carousel-section {
-    max-width: calc(100% - 32px) !important;
-    margin: 32px auto 0 auto !important;
-    border-radius: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
   .carousel-image-container {
     aspect-ratio: 16/9 !important;
-    border-radius: 16px !important;
+    border-radius: 0 !important;
   }
   .carousel-dots {
     bottom: 12px !important;
@@ -931,13 +928,13 @@ body {
 
 @media (max-width: 600px) {
   .carousel-section {
-    max-width: calc(100% - 24px) !important;
-    margin: 32px auto 0 auto !important;
+    width: 100% !important;
+    margin: 0 !important;
     border-radius: 0 !important;
   }
   .carousel-image-container {
     aspect-ratio: 16/9 !important;
-    border-radius: 16px !important;
+    border-radius: 0 !important;
   }
   .carousel-dots {
     bottom: 12px !important;
@@ -962,9 +959,9 @@ body {
 }
 
 .conscious-life-heading {
-  color: #9C6B2F;
+  color: #94520C;
   font-size: 2.5rem;
-  font-family: inherit;
+  font-family: 'Lato', sans-serif;
   font-weight: 300;
   letter-spacing: 1px;
   margin-bottom: 40px;
@@ -987,13 +984,15 @@ body {
 }
 
 .conscious-life-btn-main {
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
   line-height: 1.2;
 }
 
 .conscious-life-btn-sub {
   font-size: 1.2rem;
+  font-family: 'Lato', sans-serif;
   font-weight: 300;
   line-height: 1.2;
 }
@@ -1034,14 +1033,16 @@ body {
   color: #fff;
   font-size: 2.2rem;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   text-align: center;
   margin-bottom: 0.2em;
 }
 
 .path-awakening-subheading {
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 2.3rem;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   text-align: center;
   margin-bottom: 0.5em;
 }
@@ -1103,8 +1104,9 @@ body {
 
 .path-awakening-text {
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1157,8 +1159,8 @@ body {
   padding: 32px 12px 32px 12px;
   color: #34495e;
   font-size: 1.35rem;
-  font-weight: 400;
-  text-align: center;
+  font-weight: 300;
+  text-align: left;
   line-height: 1.5;
 }
 
@@ -1188,12 +1190,12 @@ body {
   border-radius: 14px;
   max-width: 1000px;
   margin: 48px auto 0 auto;
-  padding: 32px 12px 32px 12px;
+  padding: 32px 12px 32px 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   color: #fff;
   font-size: 1.25rem;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
 }
 
 .exclusive-content-section p {
@@ -1205,7 +1207,7 @@ body {
   width: 90%;
   max-width: 400px;
   margin: 32px auto 0 auto;
-  background: #ffe000;
+  background: #EFA540;
   color: #fff;
   font-size: 1.3rem;
   font-weight: 400;
@@ -1218,7 +1220,7 @@ body {
 }
 
 .exclusive-content-btn:hover {
-  background: #ffd600;
+  background: #EFA540;
 }
 
 @media (max-width: 600px) {
@@ -1259,6 +1261,7 @@ body {
   color: #fff;
   font-size: 2.2rem;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   margin-bottom: 24px;
 }
 
@@ -1419,13 +1422,15 @@ body {
 
 .register-btn-main {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
   line-height: 1.2;
 }
 
 .register-btn-sub {
   font-size: 1.1rem;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   line-height: 1.2;
 }
 
@@ -1465,8 +1470,9 @@ body {
 
 .videos-heading {
   color: #E6A14A;
-  font-size: 2.2rem;
+  font-size: 50px;
   font-weight: 300;
+  font-family: 'Lato', sans-serif;
   margin-bottom: 32px;
 }
 
@@ -1515,6 +1521,7 @@ body {
   cursor: pointer;
   transition: background 0.2s;
   text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
 }
 
 .videos-btn:hover {
