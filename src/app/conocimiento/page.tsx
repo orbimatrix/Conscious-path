@@ -87,6 +87,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(0)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(0)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
@@ -106,6 +107,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(1)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(1)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
@@ -125,6 +127,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(2)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(2)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
@@ -144,6 +147,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(3)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(3)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
@@ -163,6 +167,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(4)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(4)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
@@ -182,6 +187,7 @@ export default function AudioVideoPage() {
                   onClick={() => handleCheckboxClick(5)}
                 ></div>
                 <div className="status-plus-circle" onClick={() => handlePlusClick(5)}>
+                  <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
                   <span className="plus-icon">+</span>
                 </div>
               </div>
