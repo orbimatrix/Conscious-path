@@ -8,7 +8,7 @@
 .bienestar-main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 /* Hero Section - Light Brown/Gold Background */
@@ -42,7 +42,7 @@
 
 /* Main Content Section */
 .bienestar-content {
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 .bienestar-content-container {
@@ -61,7 +61,7 @@
 
 /* Benefits Section */
 .bienestar-benefits {
-  padding: 30px 0;
+  padding: 30px 20px;
   text-align:left;
 }
 
@@ -96,17 +96,11 @@
 }
 
 .benefit-icon {
-  color: #4CAF50;
-  font-size: 18px;
   margin-right: 15px;
-  font-weight: bold;
   flex-shrink: 0;
-  width: 18px;
-  text-align: center;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .benefit-text {
@@ -131,7 +125,7 @@
   width: 100%;
   max-width: 800px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 0 auto;
@@ -139,7 +133,7 @@
 
 /* Introduction Section */
 .bienestar-intro {
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 .bienestar-intro-container {
@@ -157,7 +151,7 @@
 
 /* Process Section */
 .bienestar-process {
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 .bienestar-process-container {
@@ -222,7 +216,8 @@
   
   .benefit-icon {
     margin-right: 12px;
-    width: 16px;
+    width: 20px;
+    height: 20px;
   }
   
   .bienestar-intro-text {
@@ -544,6 +539,39 @@
   .booking-button {
     font-size: 18px;
     padding: 18px 35px;
+  }
+}
+
+/* Full width image for devices 960px to 360px */
+@media (max-width: 960px) and (min-width: 360px) {
+  .bienestar-image-section {
+    padding: 0;
+  }
+  
+  .bienestar-image-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .bienestar-image {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+/* Increase image size for screens wider than 960px */
+@media (min-width: 960px) {
+  .bienestar-image-container {
+    max-width: 1200px;
+  }
+  
+  .bienestar-image {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
   }
 }
 
