@@ -164,15 +164,11 @@
 }
 
 .feature-icon {
-  color: #4a5568;
-  font-weight: bold;
-  font-size: 8px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #4a5568;
-  display: inline-block;
   margin-right: 8px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .feature-cross {
@@ -587,6 +583,11 @@
     font-size: 14px;
   }
   
+  .feature-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
   .benefits-grid {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -764,6 +765,11 @@
   
   .plan-feature {
     font-size: 13px;
+  }
+  
+  .feature-icon {
+    width: 12px;
+    height: 12px;
   }
   
   .benefits-title {

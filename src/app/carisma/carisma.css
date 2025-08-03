@@ -6,6 +6,7 @@
 
 .carisma-main {
   flex: 1;
+  padding: 0;
 }
 
 /* Hero Section */
@@ -75,14 +76,11 @@
   }
 
 .benefit-icon {
-  color: #4CAF50;
-  font-weight: bold;
-  font-size: 20px;
-  min-width: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  margin-right: 15px;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .benefit-text {
@@ -111,7 +109,7 @@
 .carisma-image {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   display: block;
@@ -152,7 +150,7 @@
 
 .carisma-info-paragraph:last-child {
   margin-bottom: 0;
-  font-weight: 600;
+  
 }
 
 /* Action Section */
@@ -473,7 +471,9 @@
   }
   
   .benefit-icon {
-    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
   }
   
   .benefit-text {
@@ -580,7 +580,9 @@
   }
   
   .benefit-icon {
-    font-size: 16px;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
   
   .carisma-image-section {
@@ -683,7 +685,9 @@
   }
   
   .benefit-icon {
-    font-size: 15px;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
 }
 
@@ -711,7 +715,9 @@
   }
   
   .benefit-icon {
-    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
   }
 }
 
@@ -890,4 +896,38 @@
     font-size: 13px;
     min-width: 220px;
   }
-} 
+}
+
+/* Full width image for devices 960px to 360px */
+@media (max-width: 960px) and (min-width: 360px) {
+  .carisma-image-section {
+    padding: 0 !important;
+  }
+  
+  .carisma-image-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .carisma-image {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Increase image size for screens wider than 960px */
+@media (min-width: 960px) {
+  .carisma-image-container {
+    max-width: 1800px !important;
+  }
+  
+  .carisma-image {
+    max-width: 1600px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+}

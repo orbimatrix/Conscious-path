@@ -108,9 +108,11 @@ export default function AccederPage() {
                                   <ul className="plan-features">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="plan-feature">
-                        <span className={`feature-icon ${plan.id === 'carisma' && index >= 6 ? 'feature-cross' : ''}`}>
-                          {plan.id === 'carisma' && index >= 6 ? '✗' : ''}
-                        </span>
+                        {plan.id === 'carisma' && index >= 6 ? (
+                          <span className="feature-cross">X</span>
+                        ) : (
+                          <img src="/img/check.png" alt="Check" className="feature-icon" />
+                        )}
                         {feature}
                       </li>
                     ))}

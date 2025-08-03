@@ -970,11 +970,11 @@
 /* Increase image size for screens wider than 960px */
 @media (min-width: 960px) {
   .carisma-image-container {
-    max-width: 2400px !important;
+    max-width: 1200px !important;
   }
   
   .carisma-image {
-    max-width: 2200px !important;
+    max-width: 1000px !important;
     width: 100% !important;
     height: auto !important;
   }

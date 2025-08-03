@@ -41,13 +41,23 @@ export default function AudioVideoPage() {
   return (
     <div>
       <section className="audio-video-hero">
-        <Image 
-          src="/fotos/girl.png" 
-          alt="Hero Image" 
-          width={800}
-          height={400}
-          className="hero-image"
-        />
+        {/* Responsive images for different screen sizes */}
+        <picture>
+          {/* For screens 960px and above */}
+          <source media="(min-width: 960px)" srcSet="/fotos/g_960.png" />
+          {/* For screens 768px to 959px */}
+          <source media="(min-width: 768px)" srcSet="/fotos/g_768.png" />
+          {/* For screens 480px to 767px */}
+          <source media="(min-width: 480px)" srcSet="/fotos/g_480.png" />
+          {/* For screens 360px to 479px */}
+          <source media="(min-width: 360px)" srcSet="/fotos/g_360.png" />
+          {/* Fallback for screens below 360px */}
+          <img 
+            src="/fotos/girl.png" 
+            alt="Hero Image" 
+            className="hero-image"
+          />
+        </picture>
       </section>
       
       <section className="button-section">
