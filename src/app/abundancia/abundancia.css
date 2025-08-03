@@ -8,12 +8,12 @@
 .abundancia-main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 /* Hero Section - Light Brown Background */
 .abundancia-hero {
-  background: #D2B48C;
+  background: #B19B6D;
   padding: 80px 20px 60px;
   text-align: center;
   margin-bottom: 40px;
@@ -43,7 +43,7 @@
 
 /* Benefits Section */
 .abundancia-benefits {
-  padding: 40px 0;
+  padding: 40px 20px;
   text-align: center;
 }
 
@@ -78,17 +78,11 @@
 }
 
 .benefit-icon {
-  color: #4CAF50;
-  font-size: 20px;
   margin-right: 15px;
-  font-weight: bold;
   flex-shrink: 0;
   width: 20px;
-  text-align: center;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 20px;
+  object-fit: contain;
 }
 
 .benefit-text {
@@ -112,15 +106,35 @@
   width: 100%;
   max-width: 800px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 0 auto;
 }
 
+/* Full width image for devices 960px to 360px */
+@media (max-width: 960px) and (min-width: 360px) {
+  .abundancia-image-section {
+    padding: 0;
+  }
+  
+  .abundancia-image-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .abundancia-image {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
 /* Content Section */
 .abundancia-content {
-  padding: 60px 0;
+  padding: 60px 20px;
   background: white;
 }
 
@@ -441,9 +455,22 @@
   }
 }
 
+/* Increase image size for screens wider than 960px */
+@media (min-width: 960px) {
+  .abundancia-image-container {
+    max-width: 1200px;
+  }
+  
+  .abundancia-image {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+  }
+}
+
 /* Benefits Block Section */
 .abundancia-benefits-block {
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 .benefits-block-container {
@@ -472,7 +499,7 @@
 
 /* Video Presentation Section */
 .abundancia-video-section {
-  padding: 60px 0;
+  padding: 60px 20px;
   /* background: #f5e6d3; */
 }
 
