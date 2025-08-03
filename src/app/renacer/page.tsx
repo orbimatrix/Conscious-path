@@ -17,37 +17,40 @@ export default function RenacerPage() {
 
         <section className="renacer-benefits">
           <div className="renacer-benefits-container">
-            <ul className="renacer-benefits-list">
-              <li className="renacer-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Evitar ser ignorante otra vez</span>
-              </li>
-              <li className="renacer-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Conservar la experiencia y frutos conseguidos en esta vida</span>
-              </li>
-              <li className="renacer-benefit-item">
-                <span className="benefit-icon">✓</span>
-                <span className="benefit-text">Vivir sin miedo a morir</span>
-              </li>
-            </ul>
+              <ul className="renacer-benefits-list">
+                <li className="renacer-benefit-item">
+                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <span className="benefit-text">Evitar ser ignorante otra vez</span>
+                </li>
+                <li className="renacer-benefit-item">
+                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <span className="benefit-text">Conservar la experiencia y frutos conseguidos en esta vida</span>
+                </li>
+                <li className="renacer-benefit-item">
+                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <span className="benefit-text">Vivir sin miedo a morir</span>
+                </li>
+              </ul>
           </div>
         </section>
 
-        <section className="renacer-image-section">
-          <div className="renacer-image-container">
-            <Image
-              src="/fotos/renacer.jpg"
-              alt="Renacer Consciente"
-              className="renacer-image"
-              width={1600}
-              height={1200}
-              sizes="(max-width: 1920px) 100vw, 1200px"
+      </main>
 
-            />
-          </div>
-        </section>
+      {/* Image Section - Outside main container for full width */}
+      <section className="renacer-image-section">
+        <div className="renacer-image-container">
+          <Image
+            src="/fotos/renacer.jpg"
+            alt="Renacer Consciente"
+            className="renacer-image"
+            width={1600}
+            height={1200}
+            sizes="(max-width: 1920px) 100vw, 1200px"
+          />
+        </div>
+      </section>
 
+      <main className="renacer-main">
         <section className="renacer-info-section">
           <div className="renacer-info-container">
             <h2 className="renacer-info-title">CONSERVAR LA MEMORIA PARA LA SIGUIENTE VIDA</h2>

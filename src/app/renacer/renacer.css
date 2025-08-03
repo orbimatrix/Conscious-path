@@ -6,6 +6,7 @@
 
 .renacer-main {
   width: 100%;
+  padding: 0;
 }
 
 /* Hero Section */
@@ -39,24 +40,33 @@
 
 /* Benefits Section */
 .renacer-benefits {
-  padding: 60px 20px;
   background: white;
-  text-align: center;
+  padding: 30px 20px;
+  min-height: 25vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  justify-content: center;
 }
 
 .renacer-benefits-container {
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+
+.renacer-benefits-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   width: 100%;
-  text-align: center;
+  flex-direction: column;
 }
 
 .renacer-benefits-list {
@@ -66,10 +76,23 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: auto;
-  max-width: 600px;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Large screen optimization */
+@media (min-width: 1200px) {
+  .renacer-benefits-list {
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .renacer-benefits-list {
+    max-width: 800px;
+  }
 }
 
 /* Center benefits for larger screens */
@@ -102,21 +125,22 @@
 
 .renacer-benefit-item {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
   gap: 12px;
+  padding: 6px 0;
   font-size: 18px;
-  color: #4A4A4A;
+  color: #666;
   width: 100%;
 }
 
 .benefit-icon {
-  color: #4CAF50;
-  font-size: 18px;
-  font-weight: bold;
+  margin-right: 2px;
   flex-shrink: 0;
-  min-width: 20px;
-  margin-top: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  min-width: 22px;
 }
 
 .benefit-text {
@@ -148,7 +172,7 @@
   width: 100%;
   max-width: 70%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 0 auto;
@@ -492,8 +516,9 @@
   }
   
   .benefit-icon {
-    font-size: 18px;
-    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
   }
   
   .renacer-image-section {
@@ -608,8 +633,9 @@
   }
   
   .benefit-icon {
-    font-size: 16px;
-    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
   
   .renacer-image-section {
@@ -706,8 +732,9 @@
   }
   
   .benefit-icon {
-    font-size: 15px;
-    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
   
   .renacer-image-section {
@@ -772,4 +799,51 @@
     width: 180px;
     font-size: 12px;
   }
-} 
+}
+
+/* Full width image for devices 960px to 360px */
+@media (max-width: 960px) and (min-width: 360px) {
+  .renacer-image-section {
+    padding: 0 !important;
+  }
+  
+  .renacer-image-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .renacer-image {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Increase image size for screens wider than 960px */
+@media (min-width: 960px) {
+  .renacer-image-container {
+    max-width: 2000px;
+  }
+  
+  .renacer-image {
+    max-width: 1800px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1920px) {
+  .renacer-image-container {
+    max-width: 2000px;
+  }
+  
+  .renacer-image {
+    max-width: 1800px;
+    width: 100%;
+    height: auto;
+  }
+}
