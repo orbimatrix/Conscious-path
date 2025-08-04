@@ -411,10 +411,9 @@
 
 /* Header inline styles moved to CSS */
 .header-safe-area {
-  padding-top: 12px;
   margin-top: 0;
   position: relative;
-  top: 2;
+  top: 0;
 }
 
 .header-logo-container {
@@ -457,10 +456,10 @@
   align-items: center;
   justify-content: space-evenly;
   /* padding: 8px 2rem 0 2rem; */
-  height: 72px;
+  height: 60px;
   position: relative;
   z-index: 10;
-  padding-top: 4px;
+  padding-top: 0;
 }
 
 
@@ -474,9 +473,10 @@
 
 @media (max-width: 600px) {
   .header-root {
-    padding: 2px 1rem 0 1rem;
+    padding: 0 1rem 0 1rem;
     height: 62px;
     position: relative;
+    margin-top: 0;
   }
   
  
