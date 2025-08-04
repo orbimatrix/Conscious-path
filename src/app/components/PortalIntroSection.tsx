@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PortalIntroSection() {
   return (
-    <section className="portal-intro-section text-left">
+    <section className="portal-intro-section">
       <p>
         Esta web es un portal a una nueva vida. Es la senda que sigue los pasos para el renacer.
       </p>
