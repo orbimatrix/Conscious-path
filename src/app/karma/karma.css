@@ -228,8 +228,10 @@
   }
   
   .content-description {
-    font-size: 18px;
+    font-size: 20px;
     color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     line-height: 1.5;
     opacity: 0.95;
     margin: 0;
@@ -238,6 +240,8 @@
   .carisma-live-info {
     font-size: 20px;
     color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 350;
     margin: 0;
     text-align: left;
     padding-top: 20px;
@@ -923,7 +927,9 @@
   
   .karma-renacer-text {
   color: white;
-  font-size: 18px;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 350;
   line-height: 1.5;
   margin: 20px 0 0 0;
   text-align: left;
