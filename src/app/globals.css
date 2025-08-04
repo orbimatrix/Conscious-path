@@ -539,7 +539,7 @@
 @media screen and (max-width: 375px) and (max-height: 812px) {
   .header-root {
     padding-top: 0 !important;
-    height: 72px !important;
+    height: 70px !important;
     margin-top: 0 !important;
     position: relative !important;
     top: 0 !important;
@@ -588,6 +588,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 12px !important;
   }
 }
 
@@ -701,7 +702,7 @@ body {
 
 @media screen and (max-width: 375px) {
   body {
-    padding-top: max(env(safe-area-inset-top), 10px) !important;
+    padding-top: max(env(safe-area-inset-top), 6px) !important;
   }
 }
 
