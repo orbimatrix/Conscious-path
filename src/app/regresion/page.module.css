@@ -35,13 +35,16 @@
 .infoText {
   color: #ffffff;
   font-size: 1.125rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   margin-bottom: 0.5rem;
-  font-weight: 500;
 }
 
 .bannerTitle {
   color: #ffffff;
   font-size: 3.75rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   line-height: 1.1;
 }
 
@@ -65,6 +68,7 @@
 .checkmarkTitle {
   color: #B19B6D;
   font-size: 2.5rem;
+  font-family: 'Lato', sans-serif;
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: 3rem;
@@ -91,11 +95,11 @@
 }
 
 .checkmarkIcon {
-  color: #22c55e;
-  font-size: 1.25rem;
-  font-weight: bold;
+  margin-right: 15px;
   flex-shrink: 0;
-  width: 1.5rem;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
   text-align: center;
 }
 
@@ -212,7 +216,7 @@
 /* Image Section Styles */
 .imageSection {
   width: 100%;
-  padding: 3rem 1rem;
+  padding: 0;
   background-color: white;
   display: flex;
   align-items: center;
@@ -220,8 +224,8 @@
 }
 
 .imageContainer {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   text-align: center;
   width: 100%;
 }
@@ -408,6 +412,13 @@
   }
 }
 
+@media (max-width: 960px) and (min-width: 360px) {
+  .reflectionImage {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 1024px) {
   .bannerTitle {
     font-size: 3rem;
@@ -539,8 +550,8 @@
   }
   
   .checkmarkIcon {
-    font-size: 1.125rem;
-    width: 1.25rem;
+    width: 20px;
+    height: 20px;
   }
   
   .checkmarkText {
@@ -648,8 +659,8 @@
   }
   
   .checkmarkIcon {
-    font-size: 1rem;
-    width: 1rem;
+    width: 18px;
+    height: 18px;
   }
   
   .checkmarkText {
@@ -814,9 +825,8 @@
   }
   
   .checkmarkIcon {
-    font-size: 0.9rem;
-    width: 0.9rem;
-    margin-top: 2px;
+    width: 16px;
+    height: 16px;
   }
   
   .checkmarkText {
@@ -953,8 +963,8 @@
   }
   
   .checkmarkIcon {
-    font-size: 0.75rem;
-    width: 0.75rem;
+    width: 14px;
+    height: 14px;
   }
   
   .checkmarkText {
@@ -1066,8 +1076,8 @@
   }
   
   .checkmarkIcon {
-    font-size: 0.625rem;
-    width: 0.625rem;
+    width: 12px;
+    height: 12px;
   }
   
   .checkmarkText {
@@ -1199,7 +1209,7 @@
 /* High DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .bannerTitle {
-    font-weight: 700;
+    font-weight: 300;
   }
 }
 

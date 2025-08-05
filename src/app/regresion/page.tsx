@@ -72,22 +72,20 @@ export default function RegresionPage() {
           </h2>
           <div className={styles.checkmarkList}>
             <div className={styles.checkmarkItem}>
-              <span className={styles.checkmarkIcon}>✓</span>
+              <img src="/img/check.png" alt="Check" className={styles.checkmarkIcon} />
               <span className={styles.checkmarkText}>Sanación emocional</span>
             </div>
             <div className={styles.checkmarkItem}>
-              <span className={styles.checkmarkIcon}>✓</span>
+              <img src="/img/check.png" alt="Check" className={styles.checkmarkIcon} />
               <span className={`${styles.checkmarkText} ${styles.longText}`}>Comprensión de patrones repetitivos y de relaciones</span>
             </div>
             <div className={styles.checkmarkItem}>
-              <span className={styles.checkmarkIcon}>✓</span>
+              <img src="/img/check.png" alt="Check" className={styles.checkmarkIcon} />
               <span className={styles.checkmarkText}>Reducir miedo a la muerte</span>
             </div>
           </div>
         </div>
       </div>
-
-     
 
       {/* Image Section */}
       <div className={styles.imageSection}>
@@ -103,8 +101,8 @@ export default function RegresionPage() {
         </div>
       </div>
 
-       {/* Content Section */}
-       <div className={styles.contentSection}>
+      {/* Content Section */}
+      <div className={styles.contentSection}>
         <div className={styles.contentContainer}>
           <div className={styles.prose}>
             <h2 className={styles.sectionTitle}>
