@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Senda Consciente",
-  description: "Un camino lujoso hacia la reencarnación y la abundancia. Descubre la ciencia real de la espiritualidad.",
+  description: "Descubre un enfoque lujoso y exclusivo hacia la reencarnación, la abundancia y la salud holística. En Senda Consciente, unimos la ciencia real con la espiritualidad para transformar tu vida.",
   robots: {
     index: true,
     follow: true,
