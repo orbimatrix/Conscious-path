@@ -67,20 +67,22 @@
   color: #ffffff;
   font-size: 1.125rem;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
 }
 
 .privacyTitle {
   color: #ffffff;
   font-size: 3.75rem;
-  
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   line-height: 1.1;
 }
 
 .contentSection {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 3rem 3rem;
   width: 100%;
 }
 
@@ -180,7 +182,7 @@
   }
   
   .contentSection {
-    padding: 1.5rem 0.75rem;
+    padding: 1.5rem 2rem;
   }
   
   .sectionTitle {
@@ -216,7 +218,7 @@
   }
   
   .contentSection {
-    padding: 1.25rem 0.5rem;
+    padding: 1.25rem 1.5rem;
   }
   
   .sectionTitle {
@@ -259,7 +261,7 @@
   }
   
   .contentSection {
-    padding: 1rem 0.5rem;
+    padding: 1rem 1.5rem;
   }
   
   .sectionTitle {
@@ -298,7 +300,7 @@
   }
   
   .contentSection {
-    padding: 0.75rem 0.25rem;
+    padding: 0.75rem 1rem;
   }
   
   .sectionTitle {
@@ -337,7 +339,7 @@
   }
   
   .contentSection {
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem 0.75rem;
   }
   
   .sectionTitle {
@@ -388,7 +390,7 @@
   }
   
   .privacyTitle {
-    font-weight: 700;
+    font-weight: 300;
   }
 }
 
