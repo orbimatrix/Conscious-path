@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Senda Consciente | Reencarnación, Abundancia y Vida Espiritual",
-  description: "Descubre un enfoque lujoso y exclusivo hacia la reencarnación, la abundancia y la salud holística. En Senda Consciente, unimos la ciencia real con la espiritualidad para transformar tu vida.",
+  title: "Senda Consciente",
+  description: "Un camino lujoso hacia la reencarnación y la abundancia. Descubre la ciencia real de la espiritualidad.",
   robots: {
     index: true,
     follow: true,
@@ -24,17 +24,26 @@ export const metadata: Metadata = {
     title: "Senda Consciente",
     description: "Un camino lujoso hacia la reencarnación y la abundancia. Descubre la ciencia real de la espiritualidad.",
     type: "website",
+    url: "https://conscious-path.vercel.app/",
     images: [
       {
-        url: "/icon1.jpg",
+        url: "https://opengraph.b-cdn.net/production/images/225abe7f-b14d-4bd8-a85c-c9514ea2dd1b.png?token=8rWMTH5--eURY-yJK0jzlRxo4oMUKBbzX0tq8Phkp0Q&height=188&width=86&expires=33290408049",
         width: 1200,
         height: 630,
         alt: "Senda Consciente",
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Senda Consciente",
+    description: "Un camino lujoso hacia la reencarnación y la abundancia. Descubre la ciencia real de la espiritualidad.",
+    images: [
+      "https://opengraph.b-cdn.net/production/images/225abe7f-b14d-4bd8-a85c-c9514ea2dd1b.png?token=8rWMTH5--eURY-yJK0jzlRxo4oMUKBbzX0tq8Phkp0Q&height=188&width=86&expires=33290408049",
+    ],
+  },
   alternates: {
-    canonical: "https://www.sendaconsciente.com",
+    canonical: "https://conscious-path.vercel.app/",
   },
   viewport: {
     width: 'device-width',
