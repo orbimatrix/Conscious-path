@@ -1,0 +1,516 @@
+/* Usuario Page Styles */
+
+.usuario-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.usuario-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Profile Section - Two Column Layout */
+.usuario-profile-section {
+  display: flex;
+  padding: 30px;
+  gap: 40px;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+/* Left Column - Personal Information */
+.usuario-info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Right Column - Profile Picture and Points */
+.usuario-profile-picture {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  height: 100%;
+}
+
+.usuario-info,
+.usuario-time,
+.usuario-contact,
+.usuario-credentials,
+.usuario-level {
+  text-align: left;
+}
+
+.usuario-info-item {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.usuario-info-label {
+  font-weight: 600;
+  color: #333;
+  min-width: 140px;
+  margin-right: 10px;
+}
+
+.usuario-info-value {
+  color: #666;
+  flex: 1;
+}
+
+/* Time Display */
+.usuario-time {
+  margin: 20px 0;
+}
+
+.usuario-time-label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.usuario-time-display {
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Password Toggle */
+.usuario-password-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.usuario-password-toggle:hover {
+  background-color: #f0f0f0;
+}
+
+.usuario-password-toggle svg {
+  color: #666;
+}
+
+/* User Level */
+.usuario-level {
+  margin-top: 20px;
+}
+
+.usuario-level-list {
+  color: #666;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+
+.usuario-profile-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.usuario-edit-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.usuario-edit-button:hover {
+  background: #0056b3;
+}
+
+.usuario-points {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.usuario-claim-button {
+  background: #EFA540;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.usuario-claim-button:hover {
+  background: #e55a2b;
+}
+
+/* Notifications Section */
+.usuario-notifications-section {
+  background: #B19B6D;
+  padding: 15px 30px;
+}
+
+.usuario-notifications-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.usuario-notifications-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.usuario-notifications-label {
+  color:#FFD700;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.usuario-notifications-text {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+/* Quote Section */
+.usuario-quote-section {
+  padding: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.usuario-quote-container {
+  text-align: center;
+}
+
+.usuario-quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.usuario-quote-line {
+  height: 2px;
+  background: #ddd;
+  flex: 1;
+  max-width: 100px;
+}
+
+.usuario-quote-title {
+  margin: 0 20px;
+  font-size: 40px;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+  color: #B19B6D;
+}
+
+.usuario-quote-text {
+  font-size: 40px;
+  color: #B19B6D;
+  margin-bottom: 15px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+.usuario-quote-separator {
+  height: 1px;
+  background: #ddd;
+  margin: 20px 0;
+}
+
+/* Messages Section */
+.usuario-messages-section {
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.usuario-messages-display {
+  background: transparent;
+  color: #1976d2;
+  padding: 20px;
+  border: 2px solid #1976d2;
+  border-radius: 8px;
+  font-weight: 600;
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  width: 574px;
+  height: 157px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.usuario-notification-badge {
+  position: static;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+/* Unified Info Section */
+.usuario-unified-section {
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  margin: 20px 30px;
+}
+
+.usuario-unified-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.usuario-unified-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.usuario-unified-row:last-child {
+  border-bottom: none;
+}
+
+.usuario-unified-text {
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+}
+
+.usuario-unified-button {
+  background:#EFA540;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: 20px;
+}
+
+.usuario-unified-button:hover {
+  background: #e55a2b;
+}
+
+.usuario-unified-count {
+  font-weight: 600;
+  color: #B19B6D;
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+/* Action Buttons */
+.usuario-actions-section {
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+.usuario-action-button {
+  background: #B19B6D;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  width: 575px;
+  height: 38px;
+  transform: rotate(0deg);
+}
+ 
+
+.usuario-action-button:hover {
+  background: #9a8a5a;
+}
+
+/* Contact Form Section */
+.usuario-contact-form-section {
+  padding: 30px;
+}
+
+.usuario-contact-form-title {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.usuario-delete-account-button {
+  background: white;
+  color: #B19B6D;
+  border: 1px solid #B19B6D;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+  width: 575px;
+  height: 38px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  .usuario-profile-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .usuario-profile-picture {
+    order: -1;
+  }
+  
+  .usuario-actions-section {
+    flex-direction: column;
+  }
+  
+  .usuario-alliance-content,
+  .usuario-referral-content,
+  .usuario-story-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .usuario-alliance-button,
+  .usuario-story-button {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1920px) {
+  .usuario-profile-section {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  /* Left Column - Personal Information */
+  .usuario-info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Right Column - Profile Picture and Points */
+  .usuario-profile-picture {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .usuario-info,
+  .usuario-time,
+  .usuario-contact,
+  .usuario-credentials,
+  .usuario-level {
+    text-align: left;
+  }
+  
+  .usuario-points {
+    margin-top: 10px;
+  }
+  
+  .usuario-claim-button {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1921px) {
+  .usuario-main {
+    max-width: 1400px;
+  }
+  
+  .usuario-profile-section {
+    gap: 60px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .usuario-messages-button {
+    width: 574px;
+    height: 157px;
+  }
+  
+  .usuario-unified-section {
+    width: 376px;
+    height: 126px;
+    margin: 20px auto;
+  }
+  
+  .usuario-actions-section {
+    width: 376px;
+    height: 126px;
+    margin: 20px auto;
+  }
+} 
