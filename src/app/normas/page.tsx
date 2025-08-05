@@ -24,18 +24,23 @@ export default function NormasPage() {
                         <h3 className="normas-content-subtitle">
                             PARA PARTICIPAR
                         </h3>
+                    </div>
+                </section>
 
-                        {/* Legal Image Section - Mobile */}
-                        <section className="normas-legal-image-section-mobile">
-                            <Image
-                                src="/legal.png"
-                                alt="Legal information"
-                                className="normas-legal-image"
-                                width={1900}
-                                height={684}
-                            />
-                        </section>
+                {/* Legal Image Section - Mobile */}
+                <section className="normas-legal-image-section-mobile">
+                    <Image
+                        src="/legal.png"
+                        alt="Legal information"
+                        className="normas-legal-image"
+                        width={1900}
+                        height={684}
+                    />
+                </section>
 
+                {/* Main Content Section - Continued */}
+                <section className="normas-content-section">
+                    <div className="normas-content-container">
                         <p className="normas-paragraph">
                             Para que pueda funcionar cualquier grupo es preciso que todos sus miembros cuiden su comportamiento. Nuestro grupo tiene objetivos de abundancia y bienestar, y nuestras acciones deben ir encaminadas a estos objetivos. Además, al manejar energías muy potentes, es imprescindible un correcto uso de ciertos elementos, pues el no hacerlo ocasiona perjuicios a quienes no actúan con cuidado.
                         </p>
