@@ -50,8 +50,8 @@ export default function UsuarioPage() {
                             </div>
                         </div>
 
-                        <div className="usuario-time">
-                            <span className="usuario-time-label">Time zone / Real time:</span>
+                        <div className="usuario-info-item">
+                            <span className="usuario-info-label">Time zone / Real time:</span>
                             <div className="usuario-time-display">{currentTime}</div>
                         </div>
 
@@ -103,9 +103,9 @@ export default function UsuarioPage() {
                             </div>
                         </div>
 
-                        <div className="usuario-level">
+                        <div className="usuario-info-item">
                             <span className="usuario-info-label">Tu nivel:</span>
-                            <div className="usuario-level-list">Inmortal, Carisma, Benec, Karma, Renacer</div>
+                            <span className="usuario-info-value">Inmortal, Carisma, Benec, Karma, Renacer</span>
                         </div>
                     </div>
 

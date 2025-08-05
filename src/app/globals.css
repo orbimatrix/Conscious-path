@@ -327,7 +327,7 @@
 }
 
 .usuario-level {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   padding: 1rem;
 }
 
@@ -555,7 +555,7 @@
   color: white;
   border: none;
   padding: 1rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -859,7 +859,7 @@
 .usuario-contact-form-container {
   background-color: #a08b6b;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 2px;
   margin-bottom: 1rem;
 }
 
@@ -2630,7 +2630,7 @@ body {
 
 .contact-form {
   background: #b7a06a;
-  border-radius: 12px;
+  border-radius: 2px;
   padding: 32px 24px;
   text-align: left;
   display: flex;
@@ -2711,13 +2711,14 @@ body {
     max-width: 100vw;
     padding: 18px 0 18px 0;
     margin-top: 2px;
-    margin-left: 8vw;
-    margin-right: 8vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
   }
   .contact-form {
     padding: 24px 16px;
-    border-radius: 16px;
+    border-radius: 2px;
     min-height: 350px;
+    width: 100%;
   }
   .contact-field {
     margin-bottom: 16px;
