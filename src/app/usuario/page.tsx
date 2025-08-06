@@ -144,7 +144,7 @@ export default function UsuarioPage() {
                             <h2 className="usuario-quote-title">FRASE DEL DÍA</h2>
                             <div className="usuario-quote-line"></div>
                         </div>
-                        <div className="usuario-quote-text">"RECUERDA, TÚ NO ERES TU CUERPO"</div>
+                        <div className="usuario-quote-text">&ldquo;RECUERDA, TÚ NO ERES TU CUERPO&rdquo;</div>
                         <div className="usuario-quote-separator"></div>
 
                     </div>
