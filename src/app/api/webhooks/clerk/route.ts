@@ -58,7 +58,6 @@ export async function POST(req: Request) {
           clerkId: userData.id,
           fullName: `${userData.first_name || ''} ${userData.last_name || ''}`.trim(),
           email: userData.email_addresses?.[0]?.email_address || '',
-          imageUrl: userData.image_url,
         });
         console.log('User created in database:', userData.id);
       } catch (error) {
@@ -74,8 +73,6 @@ export async function POST(req: Request) {
           .set({
             fullName: `${userData.first_name || ''} ${userData.last_name || ''}`.trim(),
             email: userData.email_addresses?.[0]?.email_address || '',
-            imageUrl: userData.image_url,
-            updatedAt: new Date(),
           })
           .where(eq(users.clerkId, userData.id));
         console.log('User updated in database:', userData.id);

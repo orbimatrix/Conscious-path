@@ -1,14 +1,12 @@
-import { pgTable, serial, text, varchar, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, timestamp } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   clerkId: varchar('clerk_id', { length: 255 }).notNull().unique(),
   fullName: text('full_name'),
   email: varchar('email', { length: 255 }),
-  phone: varchar('phone', { length: 256 }),
-  imageUrl: text('image_url'),
+  username: varchar('username', { length: 256 }),
   createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
 });
 
 export const userSubscriptions = pgTable('user_subscriptions', {
