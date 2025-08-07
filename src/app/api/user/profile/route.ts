@@ -75,7 +75,15 @@ export async function PUT(request: NextRequest) {
         }
 
         // Build update object with only provided fields
-        const updateData: any = {};
+        const updateData: Partial<{
+            birthDate: string;
+            city: string;
+            telegram: string;
+            signal: string;
+            username: string;
+            points: number;
+            lastDailyClaim: Date;
+        }> = {};
         
         if (birthDate !== undefined) updateData.birthDate = birthDate;
         if (city !== undefined) updateData.city = city;
