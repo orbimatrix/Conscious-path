@@ -1,8 +1,15 @@
-import { pgTable, serial, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, timestamp, boolean, integer } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   clerkId: varchar('clerk_id', { length: 255 }).notNull().unique(),
+  birthDate: text('birth_date'),
+  city: varchar('city', { length: 100 }),
+  telegram: varchar('telegram', { length: 100 }),
+  signal: varchar('signal', { length: 100 }),
+  isActive: boolean('is_active').default(true),
+  points: integer('points').default(0),
+  level: varchar('level', { length: 50 }).default('inmortal'), // inmortal, carisma, benec, karma, renacer
   fullName: text('full_name'),
   email: varchar('email', { length: 255 }),
   username: varchar('username', { length: 256 }),

@@ -58,6 +58,7 @@
   width: 100%;
   justify-content: center;
   order: -1;
+  gap: 15px;
 }
 
 @media (min-width: 768px) {
@@ -65,6 +66,7 @@
     flex: 1;
     height: 100%;
     order: 0;
+    gap: 20px;
   }
 }
 
@@ -184,19 +186,19 @@
 
 .usuario-edit-button {
   position: absolute;
-  top: 0;
-  right: 0;
-  background: #007bff;
-  border: none;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  border: none;
+  background-color: #68A9FF80;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .usuario-edit-button:hover {
@@ -627,4 +629,59 @@
     height: 126px;
     margin: 20px auto;
   }
+} 
+
+.usuario-info-input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 200px;
+    background: white;
+}
+
+.usuario-edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .usuario-edit-actions {
+    margin-top: 15px;
+  }
+}
+
+.usuario-edit-profile-button,
+.usuario-save-button,
+.usuario-cancel-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.usuario-edit-profile-button {
+    background-color: #6284AB;
+    color: white;
+}
+
+.usuario-save-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.usuario-cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.usuario-edit-profile-button:hover,
+.usuario-save-button:hover,
+.usuario-cancel-button:hover {
+    opacity: 0.8;
 } 
