@@ -1,0 +1,583 @@
+/* Daily Points Modal Styles */
+
+.daily-points-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.daily-points-modal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.daily-points-modal-content {
+  padding: 30px;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.daily-points-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.daily-points-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.daily-points-modal-header {
+  margin-bottom: 30px;
+}
+
+.daily-points-modal-header h2 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.daily-points-modal-header p {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.daily-points-modal-body {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Wheel Styles */
+.daily-points-wheel {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff6b6b 0deg 72deg,
+    #4ecdc4 72deg 144deg,
+    #45b7d1 144deg 216deg,
+    #96ceb4 216deg 288deg,
+    #feca57 288deg 360deg
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.daily-points-wheel.spinning {
+  animation: spin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1440deg); }
+}
+
+.daily-points-wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.daily-points-wheel-pointer {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #333;
+  transform: translateY(-2px);
+}
+
+.daily-points-wheel-segments {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wheel-segment {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-origin: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.wheel-segment:nth-child(1) { transform: rotate(0deg); }
+.wheel-segment:nth-child(2) { transform: rotate(72deg); }
+.wheel-segment:nth-child(3) { transform: rotate(144deg); }
+.wheel-segment:nth-child(4) { transform: rotate(216deg); }
+.wheel-segment:nth-child(5) { transform: rotate(288deg); }
+
+/* Spin Button */
+.daily-points-spin-button {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  border: none;
+  color: white;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.daily-points-spin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 107, 107, 0.6);
+}
+
+.daily-points-spin-button:active {
+  transform: translateY(0);
+}
+
+/* Spinning State */
+.daily-points-spinning p {
+  font-size: 18px;
+  margin-top: 20px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Result Animation */
+.daily-points-result {
+  text-align: center;
+}
+
+.daily-points-result-animation {
+  margin-bottom: 30px;
+}
+
+.points-particle-container {
+  position: relative;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.points-particle {
+  position: absolute;
+  font-size: 24px;
+  animation: particleFloat 2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50px) scale(1);
+  }
+}
+
+.points-particle:nth-child(1) { left: 20%; animation-delay: 0s; }
+.points-particle:nth-child(2) { left: 35%; animation-delay: 0.2s; }
+.points-particle:nth-child(3) { left: 50%; animation-delay: 0.4s; }
+.points-particle:nth-child(4) { left: 65%; animation-delay: 0.6s; }
+.points-particle:nth-child(5) { left: 80%; animation-delay: 0.8s; }
+
+.earned-points-display {
+  margin-top: 20px;
+}
+
+.earned-points-number {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: numberPop 0.5s ease-out;
+}
+
+@keyframes numberPop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.earned-points-label {
+  font-size: 18px;
+  margin-left: 10px;
+  opacity: 0.9;
+}
+
+/* Integration Animation */
+.points-integration-animation {
+  margin-top: 30px;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.integration-arrow {
+  font-size: 24px;
+  margin-bottom: 10px;
+  animation: arrowBounce 1s infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.integration-text {
+  font-size: 16px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.final-points-display {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4ecdc4;
+}
+
+/* Cooldown State */
+.daily-points-cooldown {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cooldown-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+.daily-points-cooldown h3 {
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  color: #ffd700;
+}
+
+.daily-points-cooldown p {
+  font-size: 16px;
+  margin: 0 0 30px 0;
+  opacity: 0.9;
+}
+
+.cooldown-timer {
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.cooldown-timer span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.timer-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.timer-hours,
+.timer-minutes {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.daily-points-close-button {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.daily-points-close-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Footer */
+.daily-points-modal-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.daily-points-probabilities h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.probability-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.probability-list span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .daily-points-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .daily-points-modal-content {
+    padding: 20px;
+  }
+  
+  .daily-points-modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .daily-points-modal-header p {
+    font-size: 14px;
+  }
+  
+  .daily-points-wheel {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .wheel-segment {
+    font-size: 14px;
+  }
+  
+  .daily-points-spin-button {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+  
+  .earned-points-number {
+    font-size: 36px;
+  }
+  
+  .probability-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .probability-list span {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  
+  /* Cooldown responsive */
+  .cooldown-icon {
+    font-size: 48px;
+  }
+  
+  .daily-points-cooldown h3 {
+    font-size: 20px;
+  }
+  
+  .daily-points-cooldown p {
+    font-size: 14px;
+  }
+  
+  .timer-display {
+    font-size: 20px;
+    gap: 15px;
+  }
+  
+  .timer-hours,
+  .timer-minutes {
+    padding: 8px 12px;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-points-modal-overlay {
+    padding: 10px;
+  }
+  
+  .daily-points-modal-content {
+    padding: 15px;
+  }
+  
+  .daily-points-wheel {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .wheel-segment {
+    font-size: 12px;
+  }
+  
+  .daily-points-spin-button {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+  
+  .earned-points-number {
+    font-size: 28px;
+  }
+  
+  .earned-points-label {
+    font-size: 14px;
+  }
+  
+  /* Cooldown mobile */
+  .cooldown-icon {
+    font-size: 40px;
+  }
+  
+  .daily-points-cooldown h3 {
+    font-size: 18px;
+  }
+  
+  .daily-points-cooldown p {
+    font-size: 13px;
+  }
+  
+  .timer-display {
+    font-size: 18px;
+    gap: 10px;
+  }
+  
+  .timer-hours,
+  .timer-minutes {
+    padding: 6px 10px;
+    min-width: 45px;
+  }
+  
+  .daily-points-close-button {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .daily-points-modal {
+    max-width: 80vw;
+  }
+  
+  .daily-points-wheel {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .wheel-segment {
+    font-size: 16px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .daily-points-modal {
+    max-width: 500px;
+  }
+  
+  .daily-points-wheel {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .wheel-segment {
+    font-size: 20px;
+  }
+}

@@ -13,6 +13,7 @@ export const users = pgTable('users', {
   fullName: text('full_name'),
   email: varchar('email', { length: 255 }),
   username: varchar('username', { length: 256 }),
+  lastDailyClaim: timestamp('last_daily_claim'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 

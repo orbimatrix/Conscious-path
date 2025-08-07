@@ -244,6 +244,24 @@
   background: #e55a2b;
 }
 
+.usuario-claim-button.can-claim {
+  background: #4ecdc4;
+}
+
+.usuario-claim-button.can-claim:hover {
+  background: #44a08d;
+}
+
+.usuario-claim-button.cooldown {
+  background: #95a5a6;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.usuario-claim-button.cooldown:hover {
+  background: #95a5a6;
+}
+
 /* Notifications Section */
 .usuario-notifications-section {
   background: #B19B6D;

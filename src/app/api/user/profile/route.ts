@@ -58,22 +58,47 @@ export async function PUT(request: NextRequest) {
         }
 
         const body = await request.json();
-        const { clerkId, birthDate, city, telegram, signal, username } = body;
+        console.log('Received update data:', body);
+        const { 
+            clerkId, 
+            birthDate, 
+            city, 
+            telegram, 
+            signal, 
+            username, 
+            points, 
+            lastDailyClaim 
+        } = body;
 
         if (!clerkId) {
             return NextResponse.json({ error: 'Clerk ID required' }, { status: 400 });
         }
 
+        // Build update object with only provided fields
+        const updateData: any = {};
+        
+        if (birthDate !== undefined) updateData.birthDate = birthDate;
+        if (city !== undefined) updateData.city = city;
+        if (telegram !== undefined) updateData.telegram = telegram;
+        if (signal !== undefined) updateData.signal = signal;
+        if (username !== undefined) updateData.username = username;
+        if (points !== undefined) updateData.points = points;
+        if (lastDailyClaim !== undefined) {
+            // Ensure lastDailyClaim is properly formatted for the database
+            updateData.lastDailyClaim = new Date(lastDailyClaim);
+        }
+
+        // Check if we have any data to update
+        if (Object.keys(updateData).length === 0) {
+            return NextResponse.json({ error: 'No values to set' }, { status: 400 });
+        }
+
+        console.log('Updating with data:', updateData);
+
         // Update user data
         const updatedUser = await db
             .update(users)
-            .set({
-                birthDate,
-                city,
-                telegram,
-                signal,
-                username,
-            })
+            .set(updateData)
             .where(eq(users.clerkId, clerkId))
             .returning();
 

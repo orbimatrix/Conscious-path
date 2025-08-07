@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import ContactSection from '../components/ContactSection';
 import FooterSection from '../components/FooterSection';
+import DailyPointsModal from '../components/DailyPointsModal';
 import './usuario.css';
 
 interface UserData {
@@ -14,6 +15,7 @@ interface UserData {
   username?: string;
   points?: number;
   level?: string;
+  lastDailyClaim?: string;
 }
 
 export default function UsuarioPage() {
@@ -22,6 +24,7 @@ export default function UsuarioPage() {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTime, setCurrentTime] = useState('18:38:17');
     const [loading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Update time every second
     React.useEffect(() => {
@@ -86,6 +89,43 @@ export default function UsuarioPage() {
             }
         } catch (error) {
             console.error('Error updating profile:', error);
+        }
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handlePointsEarned = async (points: number) => {
+        try {
+            const now = new Date().toISOString();
+            // Update points and lastDailyClaim in the database
+            const response = await fetch('/api/user/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    clerkId: user?.id,
+                    points: (userData?.points || 0) + points,
+                    lastDailyClaim: now
+                }),
+            });
+
+            if (response.ok) {
+                // Update local state
+                setUserData(prev => prev ? { 
+                    ...prev, 
+                    points: (prev.points || 0) + points,
+                    lastDailyClaim: now
+                } : null);
+            }
+        } catch (error) {
+            console.error('Error updating points:', error);
         }
     };
 
@@ -211,7 +251,34 @@ export default function UsuarioPage() {
                             <img src="/img/editor.png" alt="Editar" width="40" height="40" />
                         </button>
                         <div className="usuario-points">{userData?.points || 0} Puntos</div>
-                        <button className="usuario-claim-button">Reclamar puntos de hoy</button>
+                        <button 
+                            className={`usuario-claim-button ${(() => {
+                                if (!userData?.lastDailyClaim) return 'can-claim';
+                                const lastClaim = new Date(userData.lastDailyClaim);
+                                const now = new Date();
+                                const timeDiff = now.getTime() - lastClaim.getTime();
+                                const hoursDiff = timeDiff / (1000 * 60 * 60);
+                                return hoursDiff >= 24 ? 'can-claim' : 'cooldown';
+                            })()}`}
+                            onClick={handleOpenModal}
+                        >
+                            {(() => {
+                                if (!userData?.lastDailyClaim) return 'Reclamar puntos de hoy';
+                                const lastClaim = new Date(userData.lastDailyClaim);
+                                const now = new Date();
+                                const timeDiff = now.getTime() - lastClaim.getTime();
+                                const hoursDiff = timeDiff / (1000 * 60 * 60);
+                                if (hoursDiff >= 24) {
+                                    return 'Reclamar puntos de hoy';
+                                } else {
+                                    const nextClaim = new Date(lastClaim.getTime() + 24 * 60 * 60 * 1000);
+                                    const remainingTime = nextClaim.getTime() - now.getTime();
+                                    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                                    return `Próximo claim en ${hours}h ${minutes}m`;
+                                }
+                            })()}
+                        </button>
                         
                         {/* Save/Cancel buttons only show when editing */}
                         {isEditing && (
@@ -316,6 +383,15 @@ export default function UsuarioPage() {
             </main>
 
             <FooterSection />
+
+            {/* Daily Points Modal */}
+            <DailyPointsModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onPointsEarned={handlePointsEarned}
+                currentPoints={userData?.points || 0}
+                lastDailyClaim={userData?.lastDailyClaim}
+            />
         </div>
     );
 }
