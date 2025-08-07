@@ -84,20 +84,7 @@ export async function POST(req: Request) {
       }
       break;
 
-    case 'user.deleted':
-      try {
-        const userData = evt.data;
-        if (!userData.id) {
-          console.error('No user ID provided for deletion');
-          return new Response('No user ID provided', { status: 400 });
-        }
-        await db.delete(users).where(eq(users.clerkId, userData.id));
-        console.log('User deleted from database:', userData.id);
-      } catch (error) {
-        console.error('Error deleting user:', error);
-        return new Response('Error deleting user', { status: 500 });
-      }
-      break;
+   
 
     default:
       console.log(`Unhandled event type: ${eventType}`);
