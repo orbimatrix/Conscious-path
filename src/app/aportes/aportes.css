@@ -13,10 +13,33 @@
 
 /* Brown Banner Section */
 .aportes-banner {
-  background: #D2B48C;
+  background: #B19B6D;
   padding: 60px 20px;
   text-align: center;
   width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive banner height */
+@media (max-width: 768px) {
+  .aportes-banner {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aportes-banner {
+    height: 200px;
+  }
+}
+
+@media (max-width: 360px) {
+  .aportes-banner {
+    height: 200px;
+  }
 }
 
 .aportes-banner-content {
@@ -25,17 +48,20 @@
 }
 
 .aportes-banner-subtitle {
-  font-size: 18px;
+  font-size: 30px;
   color: #f8f8f8;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .aportes-banner-title {
-  font-size: 38px;
+  font-size: 50px;
   color: #f8f8f8;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   
   text-transform: uppercase;
   line-height: 1.2;
@@ -54,10 +80,11 @@
 }
 
 .payment-info-title {
-  font-size: 24px;
+  font-size: 44px;
   color: #D2B48C;
   margin-bottom: 40px;
-  font-weight: bold;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   text-transform: uppercase;
   line-height: 1.3;
 }
@@ -82,6 +109,26 @@
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Credit Card Full Width Section - New separate section */
+.credit-card-full-section {
+  width: 100%;
+  padding: 0;
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  /* Responsive height using aspect ratio */
+  height: 0;
+  padding-bottom: 42.19%; /* 810/1920 = 0.4219 = 42.19% */
+}
+
+.credit-card-full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
 }
 
 /* Payment Methods and Rewards Section */

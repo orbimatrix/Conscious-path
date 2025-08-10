@@ -12,9 +12,9 @@ export default function AportesPage() {
   const [messageText, setMessageText] = useState("");
 
   const handleSendMessage = () => {
-    if (!requireAuth()) {
-      return; // Show signup modal instead
-    }
+    // if (!requireAuth()) {
+    //   return; // Show signup modal instead
+    // }
     if (messageText.trim()) {
       setMessageSent(true);
       setMessageText("");
@@ -49,20 +49,18 @@ export default function AportesPage() {
             <h2 className="payment-info-title">
               FORMAS DE PAGO Y RECOMPENSAS
             </h2>
-
-            {/* Credit Card Image */}
-            <div className="credit-card-section">
-              <div className="credit-card-container">
-                <Image
-                  src="/fotos/credit_card.png"
-                  alt="Credit cards and wallet for payment methods"
-                  className="credit-card-image"
-                  width={800}
-                  height={600}
-                />
-              </div>
-            </div>
           </div>
+        </section>
+
+        {/* Credit Card Image Section - New separate section */}
+        <section className="credit-card-full-section">
+          <Image
+            src="/fotos/credit_card.png"
+            alt="Credit cards and wallet for payment methods"
+            className="credit-card-full-image"
+            fill
+            sizes="100vw"
+          />
         </section>
 
         {/* Payment Methods and Rewards Section */}

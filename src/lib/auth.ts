@@ -9,12 +9,12 @@ export function useAuth() {
   const router = useRouter();
   const [showSignupModal, setShowSignupModal] = useState(false);
 
-  // Redirect to registration if profile is not loaded
-  useEffect(() => {
-    if (isLoaded && !user) {
-      router.push('/registration');
-    }
-  }, [isLoaded, user, router]);
+  // Remove automatic redirect - only redirect when explicitly requested
+  // useEffect(() => {
+  //   if (isLoaded && !user) {
+  //     router.push('/registration');
+  //   }
+  // }, [isLoaded, user, router]);
 
   const requireAuth = () => {
     if (!user) {
