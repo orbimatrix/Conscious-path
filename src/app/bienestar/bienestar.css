@@ -28,13 +28,16 @@
   font-size: 20px;
   color: #f8f8f8;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   text-transform: uppercase;
 }
 
 .bienestar-subtitle {
-  font-size: 28px;
+  font-size: 50px;
   color: #ffffff;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   
   text-transform: uppercase;
   line-height: 1.2;

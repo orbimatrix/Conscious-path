@@ -7,7 +7,7 @@ import { useAuth } from "../../lib/auth";
 import "./aportes.css";
 
 export default function AportesPage() {
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { showSignupModal, closeSignupModal } = useAuth();
   const [messageSent, setMessageSent] = useState(false);
   const [messageText, setMessageText] = useState("");
 

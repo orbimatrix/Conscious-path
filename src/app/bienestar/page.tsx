@@ -7,7 +7,7 @@ import { useAuth } from "../../lib/auth";
 import "./bienestar.css";
 
 export default function BienestarPage() {
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",

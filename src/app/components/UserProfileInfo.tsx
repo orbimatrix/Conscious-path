@@ -4,7 +4,13 @@ import React from 'react';
 import { UserData } from '../types/user';
 
 interface UserProfileInfoProps {
-    user: any;
+    user: {
+        id?: string;
+        fullName?: string | null;
+        primaryEmailAddress?: {
+            emailAddress?: string;
+        } | null;
+    };
     userData: UserData | null;
     isEditing: boolean;
     currentTime: string;

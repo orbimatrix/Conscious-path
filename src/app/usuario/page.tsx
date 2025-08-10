@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -50,13 +50,7 @@ export default function UsuarioPage() {
     }, []);
 
     // Fetch user data from your database
-    useEffect(() => {
-        if (isLoaded && user) {
-            fetchUserData();
-        }
-    }, [isLoaded, user]);
-
-    const fetchUserData = async () => {
+    const fetchUserData = useCallback(async () => {
         try {
             console.log('Fetching user data for clerkId:', user?.id);
             const response = await fetch(`/api/user/profile?clerkId=${user?.id}`);
@@ -75,7 +69,13 @@ export default function UsuarioPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [user]);
+
+    useEffect(() => {
+        if (isLoaded && user) {
+            fetchUserData();
+        }
+    }, [isLoaded, user, fetchUserData]);
 
     const handleSaveProfile = async (updatedData: Partial<UserData>) => {
         try {

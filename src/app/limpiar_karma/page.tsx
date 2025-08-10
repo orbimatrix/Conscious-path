@@ -7,7 +7,7 @@ import { useAuth } from "../../lib/auth";
 import "./limpiar_karma.css";
 
 export default function LimpiarKarmaPage() {
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",

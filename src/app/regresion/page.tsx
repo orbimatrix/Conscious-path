@@ -7,7 +7,7 @@ import SignupModal from '../components/SignupModal';
 import { useAuth } from '../../lib/auth';
 
 export default function RegresionPage() {
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",

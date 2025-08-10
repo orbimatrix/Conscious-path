@@ -7,7 +7,7 @@ import { useAuth } from "../../lib/auth";
 import "./acceder.css";
 
 export default function AccederPage() {
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
