@@ -7,7 +7,6 @@ import { eq } from 'drizzle-orm';
 export async function GET(request: NextRequest) {
     try {
         const { userId } = await auth();
-        console.log('userId', userId);  
         
         if (!userId) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -28,7 +27,6 @@ export async function GET(request: NextRequest) {
 
         // If user doesn't exist, create a new record
         if (userData.length === 0) {
-            console.log('Creating new user record for clerkId:', clerkId);
             const newUser = await db
                 .insert(users)
                 .values({
@@ -58,7 +56,6 @@ export async function PUT(request: NextRequest) {
         }
 
         const body = await request.json();
-        console.log('Received update data:', body);
         const { 
             clerkId, 
             birthDate, 
@@ -101,7 +98,6 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({ error: 'No values to set' }, { status: 400 });
         }
 
-        console.log('Updating with data:', updateData);
 
         // Update user data
         const updatedUser = await db

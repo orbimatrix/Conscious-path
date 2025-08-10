@@ -2,13 +2,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "../../lib/auth";
 import "./aportes.css";
 
 export default function AportesPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [messageSent, setMessageSent] = useState(false);
   const [messageText, setMessageText] = useState("");
 
   const handleSendMessage = () => {
+    if (!requireAuth()) {
+      return; // Show signup modal instead
+    }
     if (messageText.trim()) {
       setMessageSent(true);
       setMessageText("");
@@ -172,6 +178,14 @@ export default function AportesPage() {
       )}
 
       <FooterSection />
+      
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para hacer aportes"
+        message="Necesitas iniciar sesión para realizar donaciones y aportes."
+      />
     </div>
   );
 }

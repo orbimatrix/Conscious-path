@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "../../lib/auth";
 import "./limpiar_karma.css";
 
 export default function LimpiarKarmaPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -35,6 +38,9 @@ export default function LimpiarKarmaPage() {
   };
 
   const toggleBookingForm = () => {
+    if (!requireAuth()) {
+      return; // Show signup modal instead
+    }
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -47,6 +53,8 @@ export default function LimpiarKarmaPage() {
       });
     }
   };
+
+
 
   return (
     <div className="limpiar-karma-page">
@@ -266,6 +274,14 @@ export default function LimpiarKarmaPage() {
       </main>
 
       <FooterSection />
+      
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para reservar"
+        message="Necesitas iniciar sesión para reservar una sesión de limpiar karma."
+      />
     </div>
   );
 }

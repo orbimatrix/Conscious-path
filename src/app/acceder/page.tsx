@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import FooterSection from "../components/FooterSection";
 import ContactSection from "../components/ContactSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "../../lib/auth";
 import "./acceder.css";
 
 export default function AccederPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
@@ -54,6 +57,9 @@ export default function AccederPage() {
   ];
 
   const handlePlanSelect = (planId: string) => {
+    if (!requireAuth()) {
+      return; // Show signup modal instead
+    }
     setSelectedPlan(planId);
     if (planId === "carisma" || planId === "karma") {
       setShowPaymentModal(true);
@@ -68,6 +74,8 @@ export default function AccederPage() {
     setShowPaymentModal(false);
     setSelectedPayment(null);
   };
+
+
 
   return (
     <div className="acceder-page">
@@ -248,6 +256,14 @@ export default function AccederPage() {
       </main>
 
       <FooterSection />
+      
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para acceder a los planes"
+        message="Necesitas iniciar sesión para seleccionar y pagar por un plan."
+      />
     </div>
   );
 }

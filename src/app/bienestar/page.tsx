@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "../../lib/auth";
 import "./bienestar.css";
 
 export default function BienestarPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -34,6 +37,9 @@ export default function BienestarPage() {
   };
 
   const toggleBookingForm = () => {
+    if (!requireAuth()) {
+      return; // Show signup modal instead
+    }
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -46,6 +52,8 @@ export default function BienestarPage() {
       });
     }
   };
+
+
 
   return (
     <div className="bienestar-page">
@@ -284,6 +292,14 @@ export default function BienestarPage() {
       )}
 
       <FooterSection />
+      
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para reservar"
+        message="Necesitas iniciar sesión para reservar una sesión de bienestar integral."
+      />
     </div>
   );
 }

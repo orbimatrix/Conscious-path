@@ -16,7 +16,7 @@
 }
 
 .daily-points-modal {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   max-width: 90vw;
@@ -24,6 +24,7 @@
   overflow: hidden;
   position: relative;
   animation: modalSlideIn 0.3s ease-out;
+  border: 2px solid #e9ecef;
 }
 
 @keyframes modalSlideIn {
@@ -39,7 +40,7 @@
 
 .daily-points-modal-content {
   padding: 30px;
-  color: white;
+  color: #333;
   text-align: center;
   position: relative;
 }
@@ -48,9 +49,9 @@
   position: absolute;
   top: 15px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #6c757d;
   font-size: 24px;
   width: 40px;
   height: 40px;
@@ -63,24 +64,30 @@
 }
 
 .daily-points-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #e9ecef;
+  color: #495057;
   transform: scale(1.1);
 }
 
 .daily-points-modal-header {
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
 .daily-points-modal-header h2 {
   font-size: 24px;
   margin: 0 0 10px 0;
   font-weight: 700;
+  color: #333;
 }
 
 .daily-points-modal-header p {
   font-size: 16px;
   margin: 0;
-  opacity: 0.9;
+  color: #6c757d;
 }
 
 .daily-points-modal-body {
@@ -98,24 +105,17 @@
   position: relative;
   margin: 0 auto 30px;
   border-radius: 50%;
-  background: conic-gradient(
-    #ff6b6b 0deg 72deg,
-    #4ecdc4 72deg 144deg,
-    #45b7d1 144deg 216deg,
-    #96ceb4 216deg 288deg,
-    #feca57 288deg 360deg
-  );
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 8px solid #dee2e6;
 }
 
 .daily-points-wheel.spinning {
-  animation: spin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: spin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(1440deg); }
+  to { transform: rotate(1440deg); }
 }
 
 .daily-points-wheel-center {
@@ -125,12 +125,12 @@
   transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
-  background: white;
+  background: #6c757d;
   border-radius: 50%;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .daily-points-wheel-pointer {
@@ -138,8 +138,11 @@
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 12px solid #333;
-  transform: translateY(-2px);
+  border-top: 12px solid #495057;
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .daily-points-wheel-segments {
@@ -162,58 +165,73 @@
   font-weight: bold;
   font-size: 18px;
   color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.wheel-segment:nth-child(1) { transform: rotate(0deg); }
-.wheel-segment:nth-child(2) { transform: rotate(72deg); }
-.wheel-segment:nth-child(3) { transform: rotate(144deg); }
-.wheel-segment:nth-child(4) { transform: rotate(216deg); }
-.wheel-segment:nth-child(5) { transform: rotate(288deg); }
+.wheel-segment:nth-child(1) { 
+  transform: rotate(0deg); 
+  background: #007bff;
+}
+.wheel-segment:nth-child(2) { 
+  transform: rotate(72deg); 
+  background: #28a745;
+}
+.wheel-segment:nth-child(3) { 
+  transform: rotate(144deg); 
+  background: #ffc107;
+}
+.wheel-segment:nth-child(4) { 
+  transform: rotate(216deg); 
+  background: #dc3545;
+}
+.wheel-segment:nth-child(5) { 
+  transform: rotate(288deg); 
+  background: #6f42c1;
+}
 
-/* Spin Button */
 .daily-points-spin-button {
-  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-  border: none;
+  background: #007bff;
   color: white;
-  padding: 15px 40px;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 700;
   font-size: 18px;
-  font-weight: bold;
-  border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .daily-points-spin-button:hover {
+  background: #0056b3;
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(255, 107, 107, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }
 
 .daily-points-spin-button:active {
   transform: translateY(0);
 }
 
-/* Spinning State */
 .daily-points-spinning p {
+  color: #333;
   font-size: 18px;
-  margin-top: 20px;
-  animation: pulse 1s infinite;
+  font-weight: 600;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.7; }
 }
 
-/* Result Animation */
 .daily-points-result {
   text-align: center;
 }
 
 .daily-points-result-animation {
+  position: relative;
   margin-bottom: 30px;
 }
 
@@ -237,11 +255,11 @@
   }
   50% {
     opacity: 1;
-    transform: translateY(-30px) scale(1.2);
+    transform: translateY(-50px) scale(1.2);
   }
   100% {
-    opacity: 1;
-    transform: translateY(-50px) scale(1);
+    opacity: 0;
+    transform: translateY(-100px) scale(0.8);
   }
 }
 
@@ -252,33 +270,35 @@
 .points-particle:nth-child(5) { left: 80%; animation-delay: 0.8s; }
 
 .earned-points-display {
+  text-align: center;
   margin-top: 20px;
 }
 
 .earned-points-number {
   font-size: 48px;
-  font-weight: bold;
-  color: #ffd700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 900;
+  color: #28a745;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   animation: numberPop 0.5s ease-out;
+  display: block;
 }
 
 @keyframes numberPop {
-  0% { transform: scale(0); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  from { transform: scale(0.5); }
+  to { transform: scale(1); }
 }
 
 .earned-points-label {
   font-size: 18px;
-  margin-left: 10px;
-  opacity: 0.9;
+  color: #333;
+  font-weight: 600;
+  margin-top: 5px;
+  display: block;
 }
 
-/* Integration Animation */
 .points-integration-animation {
   margin-top: 30px;
-  animation: slideUp 0.5s ease-out;
+  animation: slideUp 0.8s ease-out;
 }
 
 @keyframes slideUp {
@@ -294,8 +314,9 @@
 
 .integration-arrow {
   font-size: 24px;
+  color: #007bff;
   margin-bottom: 10px;
-  animation: arrowBounce 1s infinite;
+  animation: arrowBounce 1s ease-in-out infinite;
 }
 
 @keyframes arrowBounce {
@@ -304,124 +325,134 @@
 }
 
 .integration-text {
+  color: #333;
   font-size: 16px;
   margin-bottom: 15px;
-  opacity: 0.8;
 }
 
 .final-points-display {
-  font-size: 20px;
-  font-weight: bold;
-  color: #4ecdc4;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  color: #28a745;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #dee2e6;
 }
 
-/* Cooldown State */
 .daily-points-cooldown {
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 .cooldown-icon {
-  font-size: 64px;
+  font-size: 48px;
   margin-bottom: 20px;
-  animation: pulse 2s infinite;
+  color: #dc3545;
 }
 
 .daily-points-cooldown h3 {
   font-size: 24px;
-  margin: 0 0 15px 0;
-  color: #ffd700;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .daily-points-cooldown p {
+  color: #6c757d;
   font-size: 16px;
-  margin: 0 0 30px 0;
-  opacity: 0.9;
+  margin-bottom: 30px;
 }
 
 .cooldown-timer {
-  margin: 30px 0;
+  background: #f8f9fa;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid #dee2e6;
 }
 
 .cooldown-timer span {
   display: block;
-  font-size: 14px;
+  color: #333;
+  font-size: 16px;
   margin-bottom: 15px;
-  opacity: 0.8;
+  font-weight: 600;
 }
 
 .timer-display {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  font-size: 24px;
-  font-weight: bold;
+  gap: 15px;
 }
 
 .timer-hours,
 .timer-minutes {
-  background: rgba(255, 255, 255, 0.2);
+  background: #e9ecef;
   padding: 10px 15px;
-  border-radius: 10px;
+  border-radius: 8px;
+  color: #495057;
+  font-weight: 700;
+  font-size: 18px;
   min-width: 60px;
   text-align: center;
+  border: 1px solid #dee2e6;
 }
 
 .daily-points-close-button {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  border: none;
+  background: #6c757d;
   color: white;
+  border: none;
   padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 16px;
-  font-weight: bold;
-  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .daily-points-close-button:hover {
+  background: #495057;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
 
-/* Footer */
 .daily-points-modal-footer {
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid #dee2e6;
 }
 
 .daily-points-probabilities h4 {
-  margin: 0 0 15px 0;
-  font-size: 16px;
-  opacity: 0.9;
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
 .probability-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   justify-content: center;
+  gap: 10px;
 }
 
 .probability-list span {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  backdrop-filter: blur(10px);
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #495057;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #dee2e6;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .daily-points-modal {
     max-width: 95vw;
-    max-height: 95vh;
+    margin: 10px;
   }
   
   .daily-points-modal-content {
@@ -446,7 +477,7 @@
   }
   
   .daily-points-spin-button {
-    padding: 12px 30px;
+    padding: 12px 24px;
     font-size: 16px;
   }
   
@@ -460,13 +491,12 @@
   }
   
   .probability-list span {
-    font-size: 11px;
-    padding: 4px 10px;
+    width: 100%;
+    text-align: center;
   }
   
-  /* Cooldown responsive */
   .cooldown-icon {
-    font-size: 48px;
+    font-size: 36px;
   }
   
   .daily-points-cooldown h3 {
@@ -478,13 +508,13 @@
   }
   
   .timer-display {
-    font-size: 20px;
-    gap: 15px;
+    flex-direction: column;
+    gap: 10px;
   }
   
   .timer-hours,
   .timer-minutes {
-    padding: 8px 12px;
+    font-size: 16px;
     min-width: 50px;
   }
 }
@@ -508,7 +538,7 @@
   }
   
   .daily-points-spin-button {
-    padding: 10px 25px;
+    padding: 10px 20px;
     font-size: 14px;
   }
   
@@ -520,9 +550,8 @@
     font-size: 14px;
   }
   
-  /* Cooldown mobile */
   .cooldown-icon {
-    font-size: 40px;
+    font-size: 32px;
   }
   
   .daily-points-cooldown h3 {
@@ -530,27 +559,26 @@
   }
   
   .daily-points-cooldown p {
-    font-size: 13px;
+    font-size: 12px;
   }
   
   .timer-display {
-    font-size: 18px;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
   }
   
   .timer-hours,
   .timer-minutes {
-    padding: 6px 10px;
-    min-width: 45px;
+    font-size: 14px;
+    min-width: 40px;
   }
   
   .daily-points-close-button {
-    padding: 10px 25px;
+    padding: 10px 20px;
     font-size: 14px;
   }
 }
 
-/* Tablet Styles */
 @media (min-width: 769px) and (max-width: 1024px) {
   .daily-points-modal {
     max-width: 80vw;
@@ -566,10 +594,9 @@
   }
 }
 
-/* Desktop Styles */
 @media (min-width: 1025px) {
   .daily-points-modal {
-    max-width: 500px;
+    max-width: 600px;
   }
   
   .daily-points-wheel {
