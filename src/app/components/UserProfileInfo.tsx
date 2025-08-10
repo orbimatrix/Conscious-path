@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import { UserResource } from '@clerk/nextjs';
 import { UserData } from '../types/user';
 
 interface UserProfileInfoProps {
-    user: UserResource;
+    user: any;
     userData: UserData | null;
     isEditing: boolean;
     currentTime: string;
