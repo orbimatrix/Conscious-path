@@ -5,12 +5,12 @@ export default function AvisoLegalPage() {
   return (
     <div className="min-h-screen">
       {/* Header Section - AVISO LEGAL */}
-      <section className="bg-[#A8926E] flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
+      <section className="bg-[#B19B6D] flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
         <div className="text-center space-y-3 sm:space-y-4">
           <h2 className="text-sm sm:text-base md:text-lg font-light uppercase tracking-wide text-gray-200">
             INFORMACIÓN
           </h2>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-wider text-gray-100 leading-tight font-light">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-wider text-gray-100 leading-tight font-light" style={{fontWeight: 300, fontFamily: 'Lato, sans-serif'}}>
             AVISO LEGAL
           </h1>
         </div>

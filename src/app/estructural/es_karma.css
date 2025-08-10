@@ -27,6 +27,7 @@
   
   .estructural-title {
     font-size: 32px;
+    font-family: 'lato', sans-serif;
     font-weight: 300;
     color: #f5f5f5;
     margin-bottom: 10px;
@@ -34,7 +35,9 @@
   }
   
   .estructural-subtitle {
-    font-size: 64px;
+    font-size: 60px;
+    font-family: 'lato', sans-serif;
+    font-weight: 300;
     color: #f5f5f5;
     /* letter-spacing: 3px; */
   }
@@ -43,6 +46,7 @@
   .estructural-benefits {
     background: white;
     padding: 30px 20px;
+
     min-height: 25vh;
     display: flex;
     align-items: center;
