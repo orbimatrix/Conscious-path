@@ -3307,10 +3307,15 @@ body {
 }
 
 .privado-banner {
-  background-color: #A3926B;
+  background-color: #B19B6D;
   padding: 60px 20px;
   text-align: center;
   color: #F5F5F5;
+  min-height: 300px;
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .privado-banner-content {
@@ -3319,7 +3324,7 @@ body {
 }
 
 .privado-banner-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin-bottom: 16px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
@@ -3329,7 +3334,7 @@ body {
 }
 
 .privado-banner-title {
-  font-size: 2.5rem;
+  font-size: 3.75rem;
   color: #F5F5F5;
   font-weight: 300;
   font-family: 'lato', sans-serif;
@@ -3563,7 +3568,7 @@ body {
 
 .privado-feature-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   font-size: 1.1rem;
   color: #333333;
@@ -3573,10 +3578,11 @@ body {
 }
 
 .privado-check-icon {
-  color: #4CAF50;
-  font-size: 18px;
-  font-weight: bold;
   flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  min-width: 22px;
 }
 
 .privado-feature-text {
@@ -3588,15 +3594,17 @@ body {
 @media (max-width: 768px) {
   .privado-banner {
     padding: 40px 16px;
+    min-height: 200px;
+    max-height: 200px;
   }
   
   .privado-banner-subtitle {
-    font-size: 1rem;
+    font-size: 16px;
     margin-bottom: 12px;
   }
   
   .privado-banner-title {
-    font-size: 2rem;
+    font-size: 28px;
   }
   
   .privado-content {
