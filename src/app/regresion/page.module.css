@@ -8,7 +8,7 @@
 
 .bannerSection {
   width: 100%;
-  min-height: 300px;
+  height: 300px;
   padding: 10px 20px;
   gap: 10px;
   opacity: 1;
@@ -233,7 +233,6 @@
 .reflectionImage {
   width: 100%;
   height: auto;
-  border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease;
   display: block;
@@ -242,6 +241,16 @@
 
 .reflectionImage:hover {
   transform: scale(1.02);
+}
+
+/* Full Width Image Section - breaks out of container padding */
+.imageSectionFullWidth {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 0;
+  background-color: white;
+  display: block;
 }
 
 /* Video Section Styles */
@@ -496,11 +505,44 @@
   
   .bannerSection {
     padding: 10px 15px;
-    min-height: 250px;
+    height: 200px;
   }
   
   .infoText {
     font-size: 1rem;
+  }
+  
+  /* Mobile devices from 768px to 360px */
+  @media (max-width: 768px) and (min-width: 360px) {
+    .bannerTitle {
+      font-size: 28px;
+    }
+    
+    .infoText {
+      font-size: 16px;
+    }
+    
+    .imageSectionFullWidth {
+      width: 100vw !important;
+      margin-left: calc(-50vw + 50%) !important;
+      margin-right: calc(-50vw + 50%) !important;
+      padding: 0 !important;
+    }
+    
+    .imageContainer {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    
+    .reflectionImage {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      display: block !important;
+      box-shadow: none !important;
+    }
   }
   
   .contentSection {
@@ -613,8 +655,8 @@
   }
   
   .bannerSection {
-    min-height: 220px;
     padding: 8px 12px;
+    height: 200px;
   }
   
   .contentSection {
@@ -732,7 +774,7 @@
   
   .bannerSection {
     padding: 20px 16px;
-    min-height: 180px;
+    height: 200px;
   }
   
   .bannerContainer {
@@ -843,9 +885,7 @@
     padding: 0 8px;
   }
   
-  .reflectionImage {
-    border-radius: 6px;
-  }
+  
   
   .serviceParagraph {
     font-size: 0.9rem;
@@ -913,8 +953,8 @@
   }
   
   .bannerSection {
-    min-height: 180px;
     padding: 5px 8px;
+    height: 200px;
   }
   
   .contentSection {
@@ -1026,8 +1066,8 @@
   }
   
   .bannerSection {
-    min-height: 160px;
     padding: 4px 6px;
+    height: 200px;
   }
   
   .contentSection {
@@ -1133,6 +1173,7 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .bannerSection {
     min-height: 150px;
+    max-height: 200px;
     padding: 5px 15px;
   }
   

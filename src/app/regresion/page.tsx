@@ -96,7 +96,7 @@ export default function RegresionPage() {
       </div>
 
       {/* Image Section */}
-      <div className={styles.imageSection}>
+      <div className={styles.imageSectionFullWidth}>
         <div className={styles.imageContainer}>
           <Image 
             src="/fotos/reflection.jpg" 
