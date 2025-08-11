@@ -1,10 +1,10 @@
 # Conscious Path - Web Application
 
-A comprehensive web application for spiritual development and conscious evolution, featuring multiple levels of knowledge and interactive content.
+A comprehensive web application for spiritual development and conscious evolution, featuring multiple levels of knowledge, user authentication, and interactive content management.
 
 ## 🌟 Overview
 
-This Next.js application provides a platform for users to explore different levels of consciousness and spiritual development. The application features multiple pages with interactive elements, responsive design, and a modern user interface.
+This Next.js application provides a platform for users to explore different levels of consciousness and spiritual development. The application features multiple pages with interactive elements, responsive design, user authentication, database integration, and a modern user interface.
 
 ## 📱 Pages & Features
 
@@ -49,14 +49,31 @@ This Next.js application provides a platform for users to explore different leve
 - **Contact Integration**: Seamless contact form integration
 - **Clean Design**: Minimalist layout with two-tone sections
 
+### 📚 Blog System
+- **Content Management**: Sanity CMS integration for blog posts
+- **Dynamic Routing**: Individual blog post pages with slug-based URLs
+- **Responsive Design**: Mobile-optimized blog layouts
+- **SEO Friendly**: Proper heading hierarchy and semantic structure
+
+### 👤 User Management
+- **Authentication**: Clerk.js integration for user authentication
+- **User Profiles**: Comprehensive user profile management
+- **Points System**: Daily points claiming and level progression
+- **Subscription Management**: Plan-based access control
+- **Database Integration**: PostgreSQL with Drizzle ORM
+
 ## 🛠️ Technical Stack
 
-- **Framework**: Next.js 14 with App Router
+- **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
 - **Styling**: CSS Modules with responsive design
 - **State Management**: React Hooks (useState)
 - **Components**: Reusable React components
 - **Responsive Design**: Mobile-first approach
+- **Authentication**: Clerk.js for user management
+- **Database**: PostgreSQL with Drizzle ORM
+- **CMS**: Sanity for content management
+- **Styling**: Tailwind CSS v4 integration
 
 ## 🎨 Design System
 
@@ -90,21 +107,44 @@ This Next.js application provides a platform for users to explore different leve
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
+- PostgreSQL database
+- Clerk.js account for authentication
+- Sanity account for CMS
+
+### Environment Setup
+Create a `.env.local` file with the following variables:
+```bash
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+
+# Database
+DATABASE_URL=your_postgres_connection_string
+
+# Sanity CMS
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=your_sanity_token
+```
 
 ### Installation
-   ```bash
+```bash
 # Clone the repository
 git clone [repository-url]
 
 # Navigate to project directory
-   cd conscious
+cd conscious
 
 # Install dependencies
-   npm install
+npm install
+
+# Set up database
+npm run db:generate
+npm run db:migrate
 
 # Start development server
-   npm run dev
-   ```
+npm run dev
+```
 
 ### Build for Production
 ```bash
@@ -123,7 +163,13 @@ src/
 │   ├── components/
 │   │   ├── Header.tsx
 │   │   ├── FooterSection.tsx
-│   │   └── ContactSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── DailyPointsModal.tsx
+│   │   ├── UserProfileInfo.tsx
+│   │   └── UserProfilePicture.tsx
+│   ├── api/
+│   │   ├── user/profile/route.ts
+│   │   └── webhooks/clerk/route.ts
 │   ├── conocimiento/
 │   │   ├── page.tsx
 │   │   └── conocimiento.css
@@ -139,9 +185,36 @@ src/
 │   ├── renacer/
 │   │   ├── page.tsx
 │   │   └── renacer.css
-│   └── sendas_renacer/
+│   ├── sendas_renacer/
+│   │   ├── page.tsx
+│   │   └── sendas_renacer.css
+│   ├── blogs/
+│   │   ├── page.tsx
+│   │   ├── blogs.css
+│   │   └── [slug]/
+│   │       ├── page.tsx
+│   │       └── blog-post.css
+│   └── usuario/
 │       ├── page.tsx
-│       └── sendas_renacer.css
+│       └── usuario.css
+├── lib/
+│   ├── auth.ts
+│   └── db/
+│       ├── index.ts
+│       ├── schema.ts
+│       └── utils.ts
+└── sanity/
+    ├── env.ts
+    ├── lib/
+    │   ├── client.ts
+    │   ├── image.ts
+    │   └── live.ts
+    └── schemaTypes/
+        ├── authorType.ts
+        ├── blockContentType.ts
+        ├── categoryType.ts
+        ├── postType.ts
+        └── index.ts
 ```
 
 ## 🔧 Key Features
@@ -152,11 +225,25 @@ src/
 - **Form Integration**: Contact forms with validation
 - **Payment Options**: Multiple payment methods including cryptocurrency
 
+### User Management
+- **Authentication**: Secure user authentication with Clerk.js
+- **Profile Management**: Comprehensive user profile system
+- **Points System**: Daily points claiming and level progression
+- **Subscription Control**: Plan-based access management
+- **Database Integration**: PostgreSQL with Drizzle ORM
+
+### Content Management
+- **Blog System**: Sanity CMS integration for content management
+- **Dynamic Routing**: SEO-friendly URLs for blog posts
+- **Image Optimization**: Responsive images with proper sizing
+- **Content Filtering**: Advanced filtering and search capabilities
+
 ### Performance Optimizations
 - **Image Optimization**: Responsive images with proper sizing
 - **CSS Efficiency**: Minimal and focused stylesheets
 - **Component Reusability**: Shared components reduce code duplication
 - **Lazy Loading**: Efficient loading of content
+- **Database Optimization**: Efficient queries with Drizzle ORM
 
 ### Accessibility
 - **Semantic HTML**: Proper heading hierarchy and structure
@@ -184,6 +271,12 @@ src/
 - **Event Handlers**: Proper event handling and propagation
 - **Modal States**: Separate state for different modals
 - **Form States**: Controlled form inputs
+
+### Database Management
+- **Migrations**: Use Drizzle Kit for database schema changes
+- **Schema Updates**: Follow migration naming conventions
+- **Data Types**: Use appropriate PostgreSQL data types
+- **Relationships**: Proper foreign key constraints
 
 ### Responsive Design
 - **Mobile-First**: Start with mobile design

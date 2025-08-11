@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-08-12
+
+### Added
+- **User Authentication System**: Complete Clerk.js integration for user management
+  - User registration and login functionality
+  - Protected routes and authentication middleware
+  - User profile management system
+  - Webhook integration for user events
+
+- **Database Integration**: PostgreSQL database with Drizzle ORM
+  - User table with comprehensive profile fields
+  - Subscription management system
+  - Points and level progression tracking
+  - Daily points claiming functionality
+
+- **User Management Features**:
+  - `src/lib/auth.ts` - Authentication utilities and middleware
+  - `src/lib/db/schema.ts` - Database schema definitions
+  - `src/lib/db/index.ts` - Database connection and utilities
+  - `src/lib/db/migrate.ts` - Database migration utilities
+
+- **API Routes**:
+  - `src/app/api/user/profile/route.ts` - User profile management
+  - `src/app/api/webhooks/clerk/route.ts` - Clerk webhook handling
+
+- **User Interface Components**:
+  - `src/app/components/DailyPointsModal.tsx` - Daily points claiming modal
+  - `src/app/components/UserProfileInfo.tsx` - User profile information display
+  - `src/app/components/UserProfilePicture.tsx` - User profile picture management
+  - `src/app/usuario/page.tsx` - User profile page with comprehensive management
+
+### Database Schema Updates
+- **User Table Enhancements**:
+  - Added `birth_date`, `city`, `telegram`, `signal` fields
+  - Added `is_active`, `points`, `level` fields for user progression
+  - Added `last_daily_claim` timestamp for daily points system
+  - Enhanced user level system (inmortal, carisma, benec, karma, renacer)
+
+- **Subscription Management**:
+  - New `user_subscriptions` table for plan management
+  - Support for carisma and karma subscription types
+  - Subscription status tracking and date management
+
+### Technical Improvements
+- **Next.js Upgrade**: Updated to Next.js 15.4.4
+- **React Upgrade**: Updated to React 19.1.0
+- **Tailwind CSS**: Integrated Tailwind CSS v4
+- **Database Migrations**: Comprehensive migration system with Drizzle Kit
+- **Type Safety**: Enhanced TypeScript types for database operations
+- **Environment Configuration**: Proper environment variable management
+
+### Security Enhancements
+- **Authentication Middleware**: Protected routes and API endpoints
+- **Webhook Security**: Secure Clerk webhook handling
+- **Database Security**: Proper connection pooling and query sanitization
+- **Environment Variables**: Secure configuration management
+
 ## [1.1.0] - 2025-07-31
 
 ### Added
