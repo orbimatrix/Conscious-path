@@ -14,31 +14,40 @@
 /* Hero Section - Light Brown Background */
 .abundancia-hero {
   background: #B19B6D;
-  padding: 80px 20px 60px;
+  padding: 0;
   text-align: center;
-  margin-bottom: 40px;
-  margin-top: 20px;
+  margin: 0;
+  height: 300px;
+  overflow: hidden;
 }
 
 .abundancia-hero-content {
   max-width: 800px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .abundancia-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #f8f8f8;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
   text-transform: uppercase;
 }
 
 .abundancia-subtitle {
-  font-size: 32px;
+  font-size: 60px;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
   color: #f8f8f8;
-  
   text-transform: uppercase;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* Benefits Section */
@@ -132,6 +141,19 @@
   }
 }
 
+/* Hero height constraints for different screen sizes */
+@media (min-width: 769px) {
+  .abundancia-hero {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 360px) {
+  .abundancia-hero {
+    height: 200px;
+  }
+}
+
 /* Content Section */
 .abundancia-content {
   padding: 60px 20px;
@@ -176,7 +198,8 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .abundancia-hero {
-    padding: 40px 15px;
+    padding: 0;
+    max-height: 200px;
   }
   
   .benefits-block-content {
@@ -231,11 +254,11 @@
   }
   
   .abundancia-title {
-    font-size: 20px;
+    font-size: 16px;
   }
   
   .abundancia-subtitle {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .abundancia-benefit-item {
@@ -479,7 +502,7 @@
 }
 
 .benefits-block-content {
-  background: #D2B48C;
+  background: #B19B6D;
   padding: 40px 30px;
   border-radius: 8px;
   text-align: left;
