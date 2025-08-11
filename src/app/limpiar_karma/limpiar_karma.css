@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 45vh;
+  max-height: 300px;
 }
 
 .limpiar-karma-hero-content {
@@ -39,10 +39,10 @@
   font-size: 60px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
-
   color: #f5f5f5;
   margin-bottom: 10px;
   letter-spacing: 2px;
+
 }
 
 .limpiar-karma-subtitle {
@@ -510,18 +510,19 @@
   .limpiar-karma-hero {
     padding: 50px 15px;
     min-height: 30vh;
+    max-height: 200px;
   }
   
   .limpiar-karma-category {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .limpiar-karma-title {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .limpiar-karma-subtitle {
-    font-size: 48px;
+    font-size: 28px;
   }
   
   .limpiar-karma-benefits {
@@ -553,11 +554,19 @@
   }
   
   .limpiar-karma-image-section {
-    padding: 20px 15px;
+    padding: 0;
+  }
+  
+  .limpiar-karma-image-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
   
   .limpiar-karma-image {
-    border-radius: 8px;
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
   }
   
   .limpiar-karma-info-section {
@@ -640,18 +649,19 @@
   .limpiar-karma-hero {
     padding: 40px 15px;
     min-height: 25vh;
+    max-height: 200px;
   }
   
   .limpiar-karma-category {
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .limpiar-karma-title {
-    font-size: 20px;
+    font-size: 28px;
   }
   
   .limpiar-karma-subtitle {
-    font-size: 36px;
+    font-size: 28px;
   }
   
   .limpiar-karma-benefits {
@@ -677,11 +687,19 @@
   }
   
   .limpiar-karma-image-section {
-    padding: 15px 15px;
+    padding: 0;
+  }
+  
+  .limpiar-karma-image-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
   
   .limpiar-karma-image {
-    border-radius: 6px;
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
   }
   
   .limpiar-karma-info-section {
@@ -764,14 +782,15 @@
   .limpiar-karma-hero {
     padding: 35px 10px;
     min-height: 20vh;
+    max-height: 200px;
   }
   
   .limpiar-karma-title {
-    font-size: 18px;
+    font-size: 28px;
   }
   
   .limpiar-karma-subtitle {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .limpiar-karma-benefits {
@@ -796,6 +815,22 @@
     height: 16px;
   }
   
+  .limpiar-karma-image-section {
+    padding: 0;
+  }
+  
+  .limpiar-karma-image-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .limpiar-karma-image {
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  
   .limpiar-karma-following-section {
     padding: 25px 10px;
   }
@@ -818,7 +853,7 @@
   }
   
   .limpiar-karma-title {
-    font-size: 16px;
+    font-size: 28px;
   }
   
   .limpiar-karma-subtitle {
