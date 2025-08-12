@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PaymentHistory, User } from '@/lib/db/schema';
+import type { PaymentHistory, User } from '@/lib/db/schema';
 
 export default function PaymentHistory() {
   const [payments, setPayments] = useState<PaymentHistory[]>([]);
@@ -47,15 +47,16 @@ export default function PaymentHistory() {
     return users.find(user => user.clerkId === clerkId);
   };
 
-  const formatAmount = (amount: number, currency: string) => {
+  const formatAmount = (amount: number, currency: string | null) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency || 'USD',
     }).format(amount / 100); // Convert from cents
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (date: Date | null) => {
+    if (!date) return 'Unknown date';
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',

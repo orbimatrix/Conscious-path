@@ -101,18 +101,18 @@ export default function UserLevels() {
     return userLevels.filter(ul => ul.userId === userId && ul.isActive);
   };
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return 'No expiration';
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (date: Date | null) => {
+    if (!date) return 'No expiration';
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
   };
 
-  const isExpired = (expiresAt: string | null) => {
+  const isExpired = (expiresAt: Date | null) => {
     if (!expiresAt) return false;
-    return new Date(expiresAt) < new Date();
+    return expiresAt < new Date();
   };
 
   if (loading) {

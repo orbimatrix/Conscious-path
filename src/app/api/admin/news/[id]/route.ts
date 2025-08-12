@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Verify admin access
@@ -15,7 +15,8 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const newsId = parseInt(params.id);
+    const { id } = await params;
+    const newsId = parseInt(id);
     if (isNaN(newsId)) {
       return NextResponse.json({ error: 'Invalid news ID' }, { status: 400 });
     }
