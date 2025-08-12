@@ -58,7 +58,7 @@ export default function BienestarPage() {
           <h2 className="bienestar-subtitle">SESIÓN DE BIENESTAR INTEGRAL</h2>
         </div>
       </section>
-      
+
       <main className="bienestar-main">
         {/* Main Content Section */}
         <section className="bienestar-content">
@@ -66,24 +66,24 @@ export default function BienestarPage() {
             <h2 className="bienestar-content-title">
               RESOLVER LOS PROBLEMAS DEL CUERPO-ALMA
             </h2>
-            
+
             {/* Benefits List */}
             <section className="bienestar-benefits">
               <div className="bienestar-benefits-container">
                 <div className="bienestar-benefits-wrapper">
                   <ul className="bienestar-benefits-list">
-                                         <li className="bienestar-benefit-item">
-                       <img src="/img/check.png" alt="Check" className="benefit-icon" />
-                       <span className="benefit-text">Eficaz solución a problemas repetitivos</span>
-                     </li>
-                     <li className="bienestar-benefit-item">
-                       <img src="/img/check.png" alt="Check" className="benefit-icon" />
-                       <span className="benefit-text">Experiencia y métodos probados</span>
-                     </li>
-                     <li className="bienestar-benefit-item">
-                       <img src="/img/check.png" alt="Check" className="benefit-icon" />
-                       <span className="benefit-text">Mucho más que una charla</span>
-                     </li>
+                    <li className="bienestar-benefit-item">
+                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <span className="benefit-text">Eficaz solución a problemas repetitivos</span>
+                    </li>
+                    <li className="bienestar-benefit-item">
+                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <span className="benefit-text">Experiencia y métodos probados</span>
+                    </li>
+                    <li className="bienestar-benefit-item">
+                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <span className="benefit-text">Mucho más que una charla</span>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -165,9 +165,9 @@ export default function BienestarPage() {
             </div>
           </div>
           <h3 className="video-title">
-          Presentación de la sesión de bienestar integral
+            Presentación de la sesión de bienestar integral
           </h3>
-          <button 
+          <button
             className="booking-button"
             onClick={toggleBookingForm}
           >

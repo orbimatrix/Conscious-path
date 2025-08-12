@@ -3563,7 +3563,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 }
 
 .privado-feature-item {
@@ -3670,7 +3670,7 @@ body {
   }
   
   .privado-features {
-    gap: 16px;
+    gap: 8px;
     margin-top: 30px;
   }
   
@@ -3768,7 +3768,7 @@ body {
   }
   
   .privado-features {
-    gap: 14px;
+    gap: 8px;
     margin-top: 25px;
   }
   
