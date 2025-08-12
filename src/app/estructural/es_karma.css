@@ -70,6 +70,8 @@
   .estructural-benefits-title {
     font-size: 28px;
     color: #B19B6D;
+    font-weight: 300;
+    font-family: 'lato', sans-serif;
     text-align: center;
     margin-bottom: 25px;
     line-height: 1.3;
