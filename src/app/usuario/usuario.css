@@ -275,15 +275,47 @@
 }
 
 .usuario-notifications-bar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
 .usuario-notifications-center {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.usuario-notifications-news-item {
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.usuario-notifications-refresh {
+  background: #FFD700;
+  color: #B19B6D;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.usuario-notifications-refresh:hover {
+  background: #FFED4E;
+  transform: rotate(180deg);
 }
 
 .usuario-notifications-label {
@@ -291,11 +323,37 @@
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-size: 14px;
+  text-align: center;
 }
 
 .usuario-notifications-text {
   color: #ffffff;
   font-size: 16px;
+  text-align: center;
+}
+
+.usuario-notifications-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  align-items: center;
+  max-width: 80%;
+}
+
+.usuario-notifications-title {
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.usuario-notifications-date {
+  color: #FFD700;
+  font-size: 12px;
+  opacity: 0.8;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -305,6 +363,14 @@
   
   .usuario-notifications-text {
     font-size: 20px;
+  }
+
+  .usuario-notifications-title {
+    font-size: 20px;
+  }
+
+  .usuario-notifications-date {
+    font-size: 14px;
   }
 }
 

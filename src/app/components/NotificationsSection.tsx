@@ -1,17 +1,98 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import type { News } from '@/lib/db/schema';
 
 export default function NotificationsSection() {
+    const { user } = useUser();
+    const [news, setNews] = useState<News[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (user) {
+            fetchNews();
+        }
+    }, [user]);
+
+    const fetchNews = async () => {
+        try {
+            const response = await fetch('/api/admin/news');
+            if (response.ok) {
+                const data = await response.json();
+                // Filter news: show general news + news targeted to current user
+                const relevantNews = data.news.filter((item: News) => 
+                    !item.targetUserId || // General news
+                    item.targetUserId === user?.id // News targeted to current user
+                );
+                setNews(relevantNews);
+            }
+        } catch (error) {
+            console.error('Error fetching news:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const formatDate = (date: Date | string | null) => {
+        if (!date) return '';
+        
+        // Convert string to Date if needed
+        const dateObj = typeof date === 'string' ? new Date(date) : date;
+        
+        // Check if the date is valid
+        if (isNaN(dateObj.getTime())) {
+            return 'Fecha inválida';
+        }
+        
+        return dateObj.toLocaleDateString('es-ES', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    };
+
+    if (loading) {
+        return (
+            <section className="usuario-notifications-section">
+                <div className="usuario-notifications-container">
+                    <div className="usuario-notifications-bar">
+                        <span className="usuario-notifications-label">AVISOS:</span>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (news.length === 0) {
+        return (
+            <section className="usuario-notifications-section">
+                <div className="usuario-notifications-container">
+                    <div className="usuario-notifications-bar">
+                        <span className="usuario-notifications-label">AVISOS:</span>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="usuario-notifications-section">
             <div className="usuario-notifications-container">
                 <div className="usuario-notifications-bar">
                     <span className="usuario-notifications-label">AVISOS:</span>
-                    <div className="usuario-notifications-center">
-                        <span className="usuario-notifications-text">ya está disponible la APP</span>
-                    </div>
                 </div>
+                {news.map((item, index) => (
+                    <div key={item.id} className="usuario-notifications-news-item">
+                        <div className="usuario-notifications-center">
+                            <div className="usuario-notifications-content">
+                                <span className="usuario-notifications-title">{item.title}</span>
+                                <span className="usuario-notifications-text">{item.content}</span>
+                               
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     );
