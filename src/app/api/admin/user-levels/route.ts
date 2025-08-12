@@ -3,7 +3,7 @@ import { getAdminUser } from '@/lib/admin';
 import { db } from '@/lib/db';
 import { userLevels } from '@/lib/db/schema';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Verify admin access
     const adminUser = await getAdminUser();

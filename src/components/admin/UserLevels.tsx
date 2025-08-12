@@ -95,9 +95,7 @@ export default function UserLevels() {
     }
   };
 
-  const getUserById = (userId: number) => {
-    return users.find(user => user.id === userId);
-  };
+
 
   const getUserLevels = (userId: number) => {
     return userLevels.filter(ul => ul.userId === userId && ul.isActive);

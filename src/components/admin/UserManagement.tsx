@@ -57,21 +57,7 @@ export default function UserManagement() {
     }
   };
 
-  const handleUpdatePoints = async (userId: number, points: number) => {
-    try {
-      const response = await fetch(`/api/admin/users/${userId}/points`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points }),
-      });
 
-      if (response.ok) {
-        setUsers(users.map(u => u.id === userId ? { ...u, points } : u));
-      }
-    } catch (error) {
-      console.error('Error updating points:', error);
-    }
-  };
 
   const closeProfileModal = () => {
     setProfileModal({ isOpen: false, user: null });

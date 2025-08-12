@@ -41,9 +41,7 @@ export default function PaymentHistory() {
     }
   };
 
-  const getUserById = (userId: number) => {
-    return users.find(user => user.id === userId);
-  };
+
 
   const getUserByClerkId = (clerkId: string) => {
     return users.find(user => user.clerkId === clerkId);

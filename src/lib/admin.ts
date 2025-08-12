@@ -34,7 +34,7 @@ export async function getAdminUser(): Promise<AdminUser | null> {
     firstName: user.firstName || undefined,
     lastName: user.lastName || undefined,
     imageUrl: user.imageUrl,
-    publicMetadata: user.publicMetadata as any
+    publicMetadata: user.publicMetadata as { role?: string; isAdmin?: boolean }
   };
 }
 

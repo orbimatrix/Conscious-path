@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 
 export function useAuth() {
   const { user, isLoaded } = useUser();
-  const router = useRouter();
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   // Remove automatic redirect - only redirect when explicitly requested

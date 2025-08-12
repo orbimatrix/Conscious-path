@@ -81,7 +81,7 @@ export default function MessagingSystem() {
               </label>
               <select
                 value={messageType}
-                onChange={(e) => setMessageType(e.target.value as any)}
+                onChange={(e) => setMessageType(e.target.value as 'direct' | 'group' | 'announcement')}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="direct">Direct Message</option>
