@@ -18,6 +18,7 @@
     align-items: center;
     justify-content: center;
     min-height: 45vh;
+    max-height: 300px;
   }
   
   .estructural-hero-content {
@@ -26,7 +27,7 @@
   }
   
   .estructural-title {
-    font-size: 32px;
+    font-size: 20px;
     font-family: 'lato', sans-serif;
     font-weight: 300;
     color: #f5f5f5;
@@ -547,14 +548,15 @@
     .estructural-hero {
       padding: 50px 15px;
       min-height: 30vh;
+      max-height: 200px;
     }
     
     .estructural-title {
-      font-size: 24px;
+      font-size: 16px;
     }
     
     .estructural-subtitle {
-      font-size: 48px;
+      font-size: 28px;
     }
     
          .estructural-benefits {
