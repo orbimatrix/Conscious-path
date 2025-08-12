@@ -7,18 +7,17 @@ import NewsManagement from './NewsManagement';
 import PaymentHistory from './PaymentHistory';
 import UserLevels from './UserLevels';
 
-
 type AdminTab = 'users' | 'messaging' | 'news' | 'payments' | 'levels';
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState<AdminTab>('users');
 
   const tabs = [
-    { id: 'users', name: 'User Management', icon: '👥' },
-    { id: 'messaging', name: 'Messaging', icon: '💬' },
-    { id: 'news', name: 'News Management', icon: '📰' },
-    { id: 'payments', name: 'Payment History', icon: '💰' },
-    { id: 'levels', name: 'User Levels', icon: '⭐' },
+    { id: 'users', name: 'User Management', icon: '👥', shortName: 'Users' },
+    { id: 'messaging', name: 'Messaging', icon: '💬', shortName: 'Chat' },
+    { id: 'news', name: 'News Management', icon: '📰', shortName: 'News' },
+    { id: 'payments', name: 'Payment History', icon: '💰', shortName: 'Payments' },
+    { id: 'levels', name: 'User Levels', icon: '⭐', shortName: 'Levels' },
   ];
 
   const renderTabContent = () => {
@@ -40,30 +39,33 @@ export default function AdminPanel() {
 
   return (
     <div className="bg-white rounded-lg shadow">
-      {/* Tab Navigation */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8 px-6">
+      {/* Mobile Tab Navigation - Scrollable */}
+      <div className="border-b border-gray-200 overflow-x-auto">
+        <nav className="flex px-4 sm:px-6 min-w-max">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as AdminTab)}
               className={`
-                py-4 px-1 border-b-2 font-medium text-sm
+                py-3 sm:py-4 px-3 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-all duration-200
                 ${activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-blue-500 text-blue-600 bg-blue-50'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50'
                 }
               `}
             >
-              <span className="mr-2">{tab.icon}</span>
-              {tab.name}
+              <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+                <span className="text-base sm:text-lg">{tab.icon}</span>
+                <span className="hidden sm:inline">{tab.name}</span>
+                <span className="sm:hidden text-xs font-medium">{tab.shortName}</span>
+              </div>
             </button>
           ))}
         </nav>
       </div>
 
       {/* Tab Content */}
-      <div className="p-6">
+      <div className="p-3 sm:p-4 lg:p-6">
         {renderTabContent()}
       </div>
     </div>
