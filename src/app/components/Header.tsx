@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 // Custom hook to detect media query
 function useMediaQuery(query: string): boolean {
@@ -23,6 +24,10 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { user } = useUser();
+  
+  // Check if user is admin
+  const isAdmin = user?.publicMetadata?.role === 'admin' || user?.publicMetadata?.isAdmin === true;
 
   const toggleDropdown = () => {
     if (isDropdownOpen) {
@@ -113,6 +118,13 @@ export default function Header() {
                 <Link href="/blogs" className="mobile-dropdown-menu-item">Blog</Link>
               </div>
 
+              {isAdmin && (
+                <div className="mobile-dropdown-section">
+                  <div className="mobile-dropdown-section-title">ADMIN</div>
+                  <Link href="/admin" className="mobile-dropdown-menu-item">Admin Panel</Link>
+                </div>
+              )}
+
               <div className="mobile-dropdown-section">
                 <div className="mobile-dropdown-section-title">MI ESPACIO PERSONAL</div>
                 <button className="mobile-dropdown-night-mode-btn">
@@ -183,6 +195,9 @@ export default function Header() {
 
         <a href="/contenidos" className="desktop-nav-link">Todos contenidos</a>
         <Link href="/blogs" className="desktop-nav-link">Blog</Link>
+        {isAdmin && (
+          <Link href="/admin" className="desktop-nav-link">Admin Panel</Link>
+        )}
       </nav>
     </header>
   );
