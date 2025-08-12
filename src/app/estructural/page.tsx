@@ -3,12 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import AnimatedButton from "../components/AnimatedButton";
-import SignupModal from "../components/SignupModal";
-import { useAuth } from "../../lib/auth";
 import "./es_karma.css";
 
 export default function EstructuralPage() {
-  const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -39,9 +36,6 @@ export default function EstructuralPage() {
   };
 
   const toggleBookingForm = () => {
-    if (!requireAuth()) {
-      return; // Show signup modal instead
-    }
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -288,14 +282,6 @@ export default function EstructuralPage() {
       </main>
 
       <FooterSection />
-      
-      {/* Signup Modal */}
-      <SignupModal
-        isOpen={showSignupModal}
-        onClose={closeSignupModal}
-        title="Inicia sesión para reservar"
-        message="Necesitas iniciar sesión para reservar un análisis estructural."
-      />
     </div>
   );
 }
