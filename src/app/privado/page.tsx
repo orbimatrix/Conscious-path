@@ -2,11 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
-import SignupModal from "../components/SignupModal";
-import { useAuth } from "../../lib/auth";
 
 export default function PrivadoPage() {
-    const { showSignupModal, requireAuth, closeSignupModal } = useAuth();
     const [showBookingForm, setShowBookingForm] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -37,9 +34,6 @@ export default function PrivadoPage() {
     };
 
     const toggleBookingForm = () => {
-        if (!requireAuth()) {
-            return; // Show signup modal instead
-        }
         setShowBookingForm(!showBookingForm);
         if (showBookingForm) {
             setIsSubmitted(false);
@@ -258,14 +252,6 @@ export default function PrivadoPage() {
             )}
 
                   <FooterSection />
-      
-      {/* Signup Modal */}
-      <SignupModal
-        isOpen={showSignupModal}
-        onClose={closeSignupModal}
-        title="Inicia sesión para reservar"
-        message="Necesitas iniciar sesión para reservar un encuentro privado."
-      />
     </div>
   );
 }
