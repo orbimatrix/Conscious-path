@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { UserButton } from '@clerk/nextjs';
 import { UserData } from '../types/user';
 
 interface UserProfilePictureProps {
@@ -48,14 +49,22 @@ export default function UserProfilePicture({
 
     return (
         <div className="usuario-profile-picture">
-            <div className="usuario-profile-placeholder"></div>
+            {/* Replace placeholder with Clerk UserButton */}
+            <div className="usuario-profile-clerk">
+                <UserButton 
+                    showName={false}
+                />
+            </div>
+            
             <button 
                 className="usuario-edit-button"
                 onClick={onToggleEditing}
             >
                 <img src="/img/editor.png" alt="Editar" width="40" height="40" />
             </button>
+            
             <div className="usuario-points">{userData?.points || 0} Puntos</div>
+            
             <button 
                 className={`usuario-claim-button ${canClaim() ? 'can-claim' : 'cooldown'}`}
                 onClick={onOpenModal}

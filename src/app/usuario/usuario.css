@@ -177,10 +177,50 @@
   position: relative;
 }
 
+/* Clerk Profile Button Styles */
+.usuario-profile-clerk {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.usuario-profile-clerk .cl-userButton-root {
+  width: 112px !important;
+  height: 112px !important;
+}
+
+.usuario-profile-clerk .cl-userButtonAvatarBox {
+  width: 112px !important;
+  height: 112px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+
+.usuario-profile-clerk .cl-userButtonTrigger {
+  width: 112px !important;
+  height: 112px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+
 @media (min-width: 768px) {
   .usuario-profile-placeholder {
     width: 120px;
     height: 120px;
+  }
+  
+  .usuario-profile-clerk .cl-userButton-root {
+    width: 112px !important;
+    height: 112px !important;
+  }
+  
+  .usuario-profile-clerk .cl-userButtonAvatarBox {
+    width: 112px !important;
+    height: 112px !important;
+  }
+  
+  .usuario-profile-clerk .cl-userButtonTrigger {
+    width: 112px !important;
+    height: 112px !important;
   }
 }
 
