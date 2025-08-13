@@ -5,13 +5,22 @@ import SignupModal from "../components/SignupModal";
 import { useAuth } from "../../lib/auth";
 import "./conocimiento.css";
 
-export default function AudioVideoPage() {
+interface ContentItem {
+  id: number;
+  title: string;
+  level: string;
+  description: string;
+  type: string;
+  accessLevel: number;
+}
+
+export default function ConocimientoPage() {
   const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [checkedItems, setCheckedItems] = useState<boolean[]>([false, false, false, false, false, false]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("public");
-  const [filteredContent, setFilteredContent] = useState<any[]>([]);
+  const [filteredContent, setFilteredContent] = useState<ContentItem[]>([]);
 
   // Content data with access levels
   const contentData = [

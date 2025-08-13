@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { UserButton } from '@clerk/nextjs';
 import { UserData } from '../types/user';
 
@@ -60,7 +61,7 @@ export default function UserProfilePicture({
                 className="usuario-edit-button"
                 onClick={onToggleEditing}
             >
-                <img src="/img/editor.png" alt="Editar" width="40" height="40" />
+                <Image src="/img/editor.png" alt="Editar" width={40} height={40} />
             </button>
             
             <div className="usuario-points">{userData?.points || 0} Puntos</div>
