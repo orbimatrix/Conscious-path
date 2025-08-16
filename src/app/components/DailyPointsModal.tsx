@@ -22,6 +22,7 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
   const [earnedPoints, setEarnedPoints] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
+  const [wheelRotation, setWheelRotation] = useState(0);
 
   // Check if user can claim daily points
   const canClaim = () => {
@@ -63,23 +64,45 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
   };
 
   const handleSpin = () => {
+    if (isSpinning) return;
+    
     setIsSpinning(true);
     setShowResult(false);
     setAnimationStep(0);
+    setWheelRotation(0);
 
-    // Simulate spinning animation
-    setTimeout(() => {
-      const points = getRandomPoints();
-      setEarnedPoints(points);
-      setShowResult(true);
-      setIsSpinning(false);
+    // Simulate spinning animation with realistic physics
+    const spinDuration = 3000;
+    const startTime = Date.now();
+    
+    const animateSpin = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = elapsed / spinDuration;
       
-      // Trigger points integration animation
-      setTimeout(() => {
-        setAnimationStep(1);
-        onPointsEarned(points);
-      }, 2000);
-    }, 3000);
+      // Easing function for realistic deceleration
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentRotation = easeOut * 1440; // 4 full rotations
+      
+      setWheelRotation(currentRotation);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateSpin);
+      } else {
+        // Spin complete
+        const points = getRandomPoints();
+        setEarnedPoints(points);
+        setShowResult(true);
+        setIsSpinning(false);
+        
+        // Trigger points integration animation
+        setTimeout(() => {
+          setAnimationStep(1);
+          onPointsEarned(points);
+        }, 1500);
+      }
+    };
+    
+    requestAnimationFrame(animateSpin);
   };
 
   const handleClose = () => {
@@ -88,6 +111,7 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
       setShowResult(false);
       setEarnedPoints(0);
       setAnimationStep(0);
+      setWheelRotation(0);
     }
   };
 
@@ -96,6 +120,7 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
       setShowResult(false);
       setEarnedPoints(0);
       setAnimationStep(0);
+      setWheelRotation(0);
     }
   }, [isOpen]);
 
@@ -110,8 +135,7 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
           </button>
           
           <div className="daily-points-modal-header">
-            <h2>🎁 Reclamar Puntos Diarios</h2>
-            <p>¡Gira la ruleta y obtén puntos aleatorios!</p>
+            <h2>Reclamar Puntos Diarios</h2>
           </div>
 
           <div className="daily-points-modal-body">
@@ -149,16 +173,70 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
                     <div className="daily-points-wheel-pointer"></div>
                   </div>
                   <div className="daily-points-wheel-segments">
-                    <div className="wheel-segment" data-points="1">1</div>
-                    <div className="wheel-segment" data-points="2">2</div>
-                    <div className="wheel-segment" data-points="3">3</div>
-                    <div className="wheel-segment" data-points="4">4</div>
-                    <div className="wheel-segment" data-points="5">5</div>
+                    <div className="wheel-segment-1"></div>
+                    <div className="wheel-segment-2"></div>
+                    <div className="wheel-segment-3"></div>
+                    <div className="wheel-segment-4"></div>
+                    <div className="wheel-segment-5"></div>
+                    {/* Numbers positioned correctly on each segment */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '14%',
+                      left: '30%',
+                      transform: 'translateX(-50%)',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>1</div>
+                    <div style={{
+                      position: 'absolute',
+                      top: '15%',
+                      right: '28%',
+                      color: 'black',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(255, 255, 255, 0.8)',
+                      zIndex: 5
+                    }}>2</div>
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '32%',
+                      right: '8%',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>3</div>
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '8%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>4</div>
+                    <div style={{
+                      position: 'absolute',
+                      top: '54%',
+                      left: '7%',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>5</div>
                   </div>
                 </div>
                 <button 
                   className="daily-points-spin-button"
                   onClick={handleSpin}
+                  disabled={isSpinning}
                 >
                   ¡GIRAR!
                 </button>
@@ -167,16 +245,72 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
 
             {isSpinning && (
               <div className="daily-points-spinning">
-                <div className="daily-points-wheel spinning">
+                <div 
+                  className="daily-points-wheel spinning"
+                  style={{ transform: `rotate(${wheelRotation}deg)` }}
+                >
                   <div className="daily-points-wheel-center">
                     <div className="daily-points-wheel-pointer"></div>
                   </div>
                   <div className="daily-points-wheel-segments">
-                    <div className="wheel-segment" data-points="1">1</div>
-                    <div className="wheel-segment" data-points="2">2</div>
-                    <div className="wheel-segment" data-points="3">3</div>
-                    <div className="wheel-segment" data-points="4">4</div>
-                    <div className="wheel-segment" data-points="5">5</div>
+                    <div className="wheel-segment-1"></div>
+                    <div className="wheel-segment-2"></div>
+                    <div className="wheel-segment-3"></div>
+                    <div className="wheel-segment-4"></div>
+                    <div className="wheel-segment-5"></div>
+                    {/* Numbers positioned correctly on each segment */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '14%',
+                      left: '30%',
+                      transform: 'translateX(-50%)',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>1</div>
+                    <div style={{
+                      position: 'absolute',
+                      top: '15%',
+                      right: '28%',
+                      color: 'black',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(255,255,255,0.8)',
+                      zIndex: 5
+                    }}>2</div>
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '32%',
+                      right: '8%',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>3</div>
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '8%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>4</div>
+                    <div style={{
+                      position: 'absolute',
+                      top: '54%',
+                      left: '7%',
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+                      zIndex: 5
+                    }}>5</div>
                   </div>
                 </div>
                 <p>¡Girando la ruleta...</p>
@@ -192,7 +326,7 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
                         key={index} 
                         className={`points-particle particle-${index + 1}`}
                         style={{
-                          animationDelay: `${index * 0.2}s`
+                          animationDelay: `${index * 0.15}s`
                         }}
                       >
                         ⭐
@@ -218,19 +352,6 @@ const DailyPointsModal: React.FC<DailyPointsModalProps> = ({
                 )}
               </div>
             )}
-          </div>
-
-          <div className="daily-points-modal-footer">
-            <div className="daily-points-probabilities">
-              <h4>Probabilidades:</h4>
-              <div className="probability-list">
-                <span>1 punto: 75%</span>
-                <span>2 puntos: 14%</span>
-                <span>3 puntos: 6%</span>
-                <span>4 puntos: 4%</span>
-                <span>5 puntos: 1%</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

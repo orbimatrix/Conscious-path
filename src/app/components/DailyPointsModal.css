@@ -1,4 +1,4 @@
-/* Daily Points Modal Styles */
+/* Minimalist Daily Points Modal Styles */
 
 .daily-points-modal-overlay {
   position: fixed;
@@ -6,31 +6,31 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .daily-points-modal {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  max-width: 90vw;
-  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  max-width: 380px;
+  width: 100%;
   overflow: hidden;
   position: relative;
-  animation: modalSlideIn 0.3s ease-out;
-  border: 2px solid #e9ecef;
+  animation: modalFadeIn 0.3s ease-out;
+  border: 1px solid #e1e5e9;
 }
 
-@keyframes modalSlideIn {
+@keyframes modalFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.8) translateY(-20px);
+    transform: scale(0.95) translateY(10px);
   }
   to {
     opacity: 1;
@@ -39,83 +39,76 @@
 }
 
 .daily-points-modal-content {
-  padding: 30px;
-  color: #333;
+  padding: 28px 24px;
+  color: #2c3e50;
   text-align: center;
   position: relative;
 }
 
 .daily-points-modal-close {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   background: #f8f9fa;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e9ecef;
   color: #6c757d;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
+  font-size: 18px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .daily-points-modal-close:hover {
   background: #e9ecef;
   color: #495057;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .daily-points-modal-header {
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+  margin-bottom: 28px;
 }
 
 .daily-points-modal-header h2 {
-  font-size: 24px;
-  margin: 0 0 10px 0;
-  font-weight: 700;
-  color: #333;
-}
-
-.daily-points-modal-header p {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
-  color: #6c757d;
+  font-weight: 600;
+  color: #2c3e50;
+  letter-spacing: -0.01em;
 }
 
 .daily-points-modal-body {
-  min-height: 300px;
+  min-height: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-/* Wheel Styles */
+/* Simple Professional Wheel Design */
 .daily-points-wheel {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   position: relative;
-  margin: 0 auto 30px;
+  margin: 0 auto 28px;
   border-radius: 50%;
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 8px solid #dee2e6;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border: 3px solid #e9ecef;
+  transition: transform 0.3s ease;
 }
 
 .daily-points-wheel.spinning {
-  animation: spin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: wheelSpin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-@keyframes spin {
-  to { transform: rotate(1440deg); }
+@keyframes wheelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1440deg); }
 }
 
 .daily-points-wheel-center {
@@ -123,24 +116,25 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   background: #6c757d;
   border-radius: 50%;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid #495057;
 }
 
 .daily-points-wheel-pointer {
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 12px solid #495057;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid #495057;
   position: absolute;
-  top: -6px;
+  top: -4px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -154,96 +148,156 @@
   border-radius: 50%;
 }
 
+/* Single wheel with conic gradient for proper segments - 5 different colors */
 .wheel-segment {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  transform-origin: 100% 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #dc3545 0deg 72deg,      /* Red segment 1 */
+    #ffc107 72deg 144deg,    /* Yellow segment 2 */
+    #28a745 144deg 216deg,   /* Green segment 3 */
+    #17a2b8 216deg 288deg,   /* Blue segment 4 */
+    #6f42c1 288deg 360deg    /* Purple segment 5 */
+  );
 }
 
-.wheel-segment:nth-child(1) { 
-  transform: rotate(0deg); 
-  background: #007bff;
+/* Individual segment overlays for better control */
+.wheel-segment-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #dc3545 0deg 72deg,
+    transparent 72deg 360deg
+  );
 }
-.wheel-segment:nth-child(2) { 
-  transform: rotate(72deg); 
-  background: #28a745;
+
+.wheel-segment-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    transparent 0deg 72deg,
+    #ffc107 72deg 144deg,
+    transparent 144deg 360deg
+  );
 }
-.wheel-segment:nth-child(3) { 
-  transform: rotate(144deg); 
-  background: #ffc107;
+
+.wheel-segment-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    transparent 0deg 144deg,
+    #28a745 144deg 216deg,
+    transparent 216deg 360deg
+  );
 }
-.wheel-segment:nth-child(4) { 
-  transform: rotate(216deg); 
-  background: #dc3545;
+
+.wheel-segment-4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    transparent 0deg 216deg,
+    #17a2b8 216deg 288deg,
+    transparent 288deg 360deg
+  );
 }
-.wheel-segment:nth-child(5) { 
-  transform: rotate(288deg); 
-  background: #6f42c1;
+
+.wheel-segment-5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    transparent 0deg 288deg,
+    #6f42c1 288deg 360deg
+  );
 }
 
 .daily-points-spin-button {
-  background: #007bff;
+  background: #495057;
   color: white;
   border: none;
-  padding: 15px 30px;
+  padding: 14px 28px;
   border-radius: 8px;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 15px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(73, 80, 87, 0.2);
+  min-width: 100px;
+  border: 1px solid #343a40;
 }
 
 .daily-points-spin-button:hover {
-  background: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+  background: #343a40;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(73, 80, 87, 0.3);
 }
 
 .daily-points-spin-button:active {
   transform: translateY(0);
 }
 
-.daily-points-spinning p {
-  color: #333;
-  font-size: 18px;
-  font-weight: 600;
-  animation: pulse 1.5s ease-in-out infinite;
+.daily-points-spin-button:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-@keyframes pulse {
+.daily-points-spinning p {
+  color: #495057;
+  font-size: 14px;
+  font-weight: 500;
+  animation: textPulse 1.5s ease-in-out infinite;
+  margin-top: 16px;
+}
+
+@keyframes textPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
 }
 
+/* Result Display */
 .daily-points-result {
   text-align: center;
 }
 
 .daily-points-result-animation {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .points-particle-container {
   position: relative;
-  height: 100px;
-  margin-bottom: 20px;
+  height: 60px;
+  margin-bottom: 12px;
 }
 
 .points-particle {
   position: absolute;
-  font-size: 24px;
+  font-size: 16px;
   animation: particleFloat 2s ease-out forwards;
   opacity: 0;
 }
@@ -255,56 +309,62 @@
   }
   50% {
     opacity: 1;
-    transform: translateY(-50px) scale(1.2);
+    transform: translateY(-30px) scale(1.1);
   }
   100% {
     opacity: 0;
-    transform: translateY(-100px) scale(0.8);
+    transform: translateY(-60px) scale(0.8);
   }
 }
 
 .points-particle:nth-child(1) { left: 20%; animation-delay: 0s; }
-.points-particle:nth-child(2) { left: 35%; animation-delay: 0.2s; }
-.points-particle:nth-child(3) { left: 50%; animation-delay: 0.4s; }
-.points-particle:nth-child(4) { left: 65%; animation-delay: 0.6s; }
-.points-particle:nth-child(5) { left: 80%; animation-delay: 0.8s; }
+.points-particle:nth-child(2) { left: 35%; animation-delay: 0.15s; }
+.points-particle:nth-child(3) { left: 50%; animation-delay: 0.3s; }
+.points-particle:nth-child(4) { left: 65%; animation-delay: 0.45s; }
+.points-particle:nth-child(5) { left: 80%; animation-delay: 0.6s; }
 
 .earned-points-display {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 .earned-points-number {
-  font-size: 48px;
-  font-weight: 900;
-  color: #28a745;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 32px;
+  font-weight: 600;
+  color: #495057;
   animation: numberPop 0.5s ease-out;
   display: block;
+  line-height: 1;
 }
 
 @keyframes numberPop {
-  from { transform: scale(0.5); }
-  to { transform: scale(1); }
+  from { 
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .earned-points-label {
-  font-size: 18px;
-  color: #333;
-  font-weight: 600;
-  margin-top: 5px;
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+  margin-top: 4px;
   display: block;
 }
 
 .points-integration-animation {
-  margin-top: 30px;
-  animation: slideUp 0.8s ease-out;
+  margin-top: 20px;
+  animation: slideUp 0.6s ease-out;
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -313,224 +373,123 @@
 }
 
 .integration-arrow {
-  font-size: 24px;
-  color: #007bff;
-  margin-bottom: 10px;
+  font-size: 16px;
+  color: #495057;
+  margin-bottom: 6px;
   animation: arrowBounce 1s ease-in-out infinite;
 }
 
 @keyframes arrowBounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-3px); }
 }
 
 .integration-text {
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 15px;
+  color: #6c757d;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .final-points-display {
   background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  color: #28a745;
-  font-weight: 700;
-  font-size: 18px;
-  border: 1px solid #dee2e6;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #e9ecef;
 }
 
+/* Cooldown State */
 .daily-points-cooldown {
   text-align: center;
   padding: 20px;
 }
 
 .cooldown-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 32px;
+  margin-bottom: 12px;
   color: #dc3545;
 }
 
 .daily-points-cooldown h3 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: 700;
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .daily-points-cooldown p {
   color: #6c757d;
-  font-size: 16px;
-  margin-bottom: 30px;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 .cooldown-timer {
   background: #f8f9fa;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  border: 1px solid #dee2e6;
+  padding: 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #e9ecef;
 }
 
 .cooldown-timer span {
   display: block;
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 15px;
-  font-weight: 600;
+  color: #2c3e50;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .timer-display {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .timer-hours,
 .timer-minutes {
-  background: #e9ecef;
-  padding: 10px 15px;
-  border-radius: 8px;
+  background: #ffffff;
+  padding: 6px 10px;
+  border-radius: 4px;
   color: #495057;
-  font-weight: 700;
-  font-size: 18px;
-  min-width: 60px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 45px;
   text-align: center;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e9ecef;
 }
 
 .daily-points-close-button {
   background: #6c757d;
   color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transition: all 0.2s ease;
 }
 
 .daily-points-close-button:hover {
   background: #495057;
-  transform: translateY(-2px);
-}
-
-.daily-points-modal-footer {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #dee2e6;
-}
-
-.daily-points-probabilities h4 {
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: 700;
-}
-
-.probability-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.probability-list span {
-  background: #f8f9fa;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #495057;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #dee2e6;
+  transform: translateY(-1px);
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .daily-points-modal {
-    max-width: 95vw;
-    margin: 10px;
-  }
-  
-  .daily-points-modal-content {
-    padding: 20px;
-  }
-  
-  .daily-points-modal-header h2 {
-    font-size: 20px;
-  }
-  
-  .daily-points-modal-header p {
-    font-size: 14px;
-  }
-  
-  .daily-points-wheel {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .wheel-segment {
-    font-size: 14px;
-  }
-  
-  .daily-points-spin-button {
-    padding: 12px 24px;
-    font-size: 16px;
-  }
-  
-  .earned-points-number {
-    font-size: 36px;
-  }
-  
-  .probability-list {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .probability-list span {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .cooldown-icon {
-    font-size: 36px;
-  }
-  
-  .daily-points-cooldown h3 {
-    font-size: 20px;
-  }
-  
-  .daily-points-cooldown p {
-    font-size: 14px;
-  }
-  
-  .timer-display {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .timer-hours,
-  .timer-minutes {
-    font-size: 16px;
-    min-width: 50px;
-  }
-}
-
 @media (max-width: 480px) {
   .daily-points-modal-overlay {
-    padding: 10px;
+    padding: 16px;
   }
   
   .daily-points-modal-content {
-    padding: 15px;
+    padding: 24px 20px;
   }
   
   .daily-points-wheel {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
   
   .wheel-segment {
@@ -538,7 +497,7 @@
   }
   
   .daily-points-spin-button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 14px;
   }
   
@@ -547,15 +506,15 @@
   }
   
   .earned-points-label {
-    font-size: 14px;
+    font-size: 13px;
   }
   
   .cooldown-icon {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .daily-points-cooldown h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .daily-points-cooldown p {
@@ -564,47 +523,47 @@
   
   .timer-display {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
   
   .timer-hours,
   .timer-minutes {
-    font-size: 14px;
+    font-size: 13px;
     min-width: 40px;
   }
   
   .daily-points-close-button {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 8px 18px;
+    font-size: 12px;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 768px) {
   .daily-points-modal {
-    max-width: 80vw;
+    max-width: 90vw;
   }
   
   .daily-points-wheel {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
   }
   
   .wheel-segment {
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
   .daily-points-modal {
-    max-width: 600px;
+    max-width: 400px;
   }
   
   .daily-points-wheel {
-    width: 220px;
-    height: 220px;
+    width: 170px;
+    height: 170px;
   }
   
   .wheel-segment {
-    font-size: 20px;
+    font-size: 15px;
   }
 }
