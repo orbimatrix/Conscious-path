@@ -11,6 +11,7 @@ export default function UserLevels() {
   const [expirationDate, setExpirationDate] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [assigning, setAssigning] = useState(false);
+  const [levelFilter, setLevelFilter] = useState<string>('');
 
   const levels = ['inmortal', 'carisma', 'benec', 'karma'];
 
@@ -99,6 +100,21 @@ export default function UserLevels() {
 
   const getUserLevels = (userId: number) => {
     return userLevels.filter(ul => ul.userId === userId && ul.isActive);
+  };
+
+  const getFilteredUsers = () => {
+    if (!levelFilter) return users;
+    
+    return users.filter(user => {
+      // Check if user's base level matches the filter
+      if (user.level && user.level.toLowerCase() === levelFilter.toLowerCase()) {
+        return true;
+      }
+      
+      // Check if user has additional assigned levels that match the filter
+      const userCurrentLevels = getUserLevels(user.id);
+      return userCurrentLevels.some(ul => ul.level.toLowerCase() === levelFilter.toLowerCase());
+    });
   };
 
   const formatDate = (date: Date | string | null) => {
@@ -208,10 +224,29 @@ export default function UserLevels() {
 
       {/* User Levels Overview */}
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Current User Levels</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-medium text-gray-900">Current User Levels</h3>
+          
+          {/* Level Filter */}
+          <div className="flex items-center gap-3">
+            <label className="text-sm font-medium text-gray-700">Filter by level:</label>
+            <select
+              value={levelFilter}
+              onChange={(e) => setLevelFilter(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            >
+              <option value="">All levels</option>
+              {levels.map((level) => (
+                <option key={level} value={level}>
+                  {level.charAt(0).toUpperCase() + level.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         
         <div className="space-y-6">
-          {users.map((user) => {
+          {getFilteredUsers().map((user) => {
             const userCurrentLevels = getUserLevels(user.id);
             return (
               <div key={user.id} className="bg-white p-4 rounded border">
@@ -263,6 +298,12 @@ export default function UserLevels() {
             );
           })}
         </div>
+        
+        {getFilteredUsers().length === 0 && levelFilter && (
+          <div className="text-center py-8 text-gray-500">
+            No users found with the "{levelFilter}" level
+          </div>
+        )}
       </div>
     </div>
   );
