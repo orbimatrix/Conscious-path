@@ -12,6 +12,7 @@ export default function UserLevels() {
   const [loading, setLoading] = useState(true);
   const [assigning, setAssigning] = useState(false);
   const [levelFilter, setLevelFilter] = useState<string>('');
+  const [userSearch, setUserSearch] = useState<string>('');
 
   const levels = ['inmortal', 'carisma', 'benec', 'karma'];
 
@@ -103,18 +104,33 @@ export default function UserLevels() {
   };
 
   const getFilteredUsers = () => {
-    if (!levelFilter) return users;
+    let filteredUsers = users;
     
-    return users.filter(user => {
-      // Check if user's base level matches the filter
-      if (user.level && user.level.toLowerCase() === levelFilter.toLowerCase()) {
-        return true;
-      }
-      
-      // Check if user has additional assigned levels that match the filter
-      const userCurrentLevels = getUserLevels(user.id);
-      return userCurrentLevels.some(ul => ul.level.toLowerCase() === levelFilter.toLowerCase());
-    });
+    // Apply level filter first
+    if (levelFilter) {
+      filteredUsers = filteredUsers.filter(user => {
+        // Check if user's base level matches the filter
+        if (user.level && user.level.toLowerCase() === levelFilter.toLowerCase()) {
+          return true;
+        }
+        
+        // Check if user has additional assigned levels that match the filter
+        const userCurrentLevels = getUserLevels(user.id);
+        return userCurrentLevels.some(ul => ul.level.toLowerCase() === levelFilter.toLowerCase());
+      });
+    }
+    
+    // Apply user search filter
+    if (userSearch.trim()) {
+      const searchTerm = userSearch.toLowerCase();
+      filteredUsers = filteredUsers.filter(user => 
+        (user.fullName && user.fullName.toLowerCase().includes(searchTerm)) ||
+        (user.username && user.username.toLowerCase().includes(searchTerm)) ||
+        (user.email && user.email.toLowerCase().includes(searchTerm))
+      );
+    }
+    
+    return filteredUsers;
   };
 
   const formatDate = (date: Date | string | null) => {
@@ -161,6 +177,20 @@ export default function UserLevels() {
       <div className="bg-gray-50 p-6 rounded-lg mb-8">
         <h3 className="text-lg font-medium text-gray-900 mb-4">Assign New Level</h3>
         
+        {/* User Search */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Search Users
+          </label>
+          <input
+            type="text"
+            placeholder="Search by name, username, or email..."
+            value={userSearch}
+            onChange={(e) => setUserSearch(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+          />
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -172,7 +202,7 @@ export default function UserLevels() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             >
               <option value="">Choose a user...</option>
-              {users.map((user) => (
+              {getFilteredUsers().map((user) => (
                 <option key={user.clerkId} value={user.clerkId}>
                   {user.fullName || user.username || user.email} (Current: {user.level})
                 </option>
@@ -299,9 +329,12 @@ export default function UserLevels() {
           })}
         </div>
         
-        {getFilteredUsers().length === 0 && levelFilter && (
+        {getFilteredUsers().length === 0 && (
           <div className="text-center py-8 text-gray-500">
-            No users found with the "{levelFilter}" level
+            {levelFilter || userSearch.trim() ? 
+              `No users found matching the current filters.` : 
+              'No users found.'
+            }
           </div>
         )}
       </div>
