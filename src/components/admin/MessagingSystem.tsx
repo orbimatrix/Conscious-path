@@ -11,7 +11,7 @@ export default function MessagingSystem() {
   const [messageType, setMessageType] = useState<'direct' | 'group' | 'announcement'>('direct');
   const [loading, setLoading] = useState(false);
 
-  const levels = ['inmortal', 'carisma', 'benec', 'karma', 'renacer'];
+  const levels = ['inmortal', 'carisma', 'benec', 'karma'];
 
   useEffect(() => {
     fetchUsers();
@@ -82,7 +82,7 @@ export default function MessagingSystem() {
               <select
                 value={messageType}
                 onChange={(e) => setMessageType(e.target.value as 'direct' | 'group' | 'announcement')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               >
                 <option value="direct">Direct Message</option>
                 <option value="group">Group Message (by Level)</option>
@@ -98,7 +98,7 @@ export default function MessagingSystem() {
                 <select
                   value={selectedUser}
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 >
                   <option value="">Choose a user...</option>
                   {users.map((user) => (
@@ -138,7 +138,7 @@ export default function MessagingSystem() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="Type your message here..."
               />
             </div>
