@@ -9,6 +9,7 @@ export default function PaymentHistory() {
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState<string>('');
   const [selectedStatus, setSelectedStatus] = useState<string>('');
+  const [userSearch, setUserSearch] = useState<string>('');
 
   useEffect(() => {
     fetchPayments();
@@ -45,6 +46,17 @@ export default function PaymentHistory() {
 
   const getUserByClerkId = (clerkId: string) => {
     return users.find(user => user.clerkId === clerkId);
+  };
+
+  const getFilteredUsers = () => {
+    if (!userSearch.trim()) return users;
+    
+    const searchTerm = userSearch.toLowerCase();
+    return users.filter(user => 
+      (user.fullName && user.fullName.toLowerCase().includes(searchTerm)) ||
+      (user.username && user.username.toLowerCase().includes(searchTerm)) ||
+      (user.email && user.email.toLowerCase().includes(searchTerm))
+    );
   };
 
   const formatAmount = (amount: number, currency: string | null) => {
@@ -104,49 +116,66 @@ export default function PaymentHistory() {
       <h2 className="text-2xl font-semibold text-gray-900 mb-6">Payment History</h2>
       
       {/* Filters */}
-      <div className="mb-6 flex gap-4">
+      <div className="mb-6 space-y-4">
+        {/* User Search */}
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Filter by User
+            Search Users
           </label>
-          <select
-            value={selectedUser}
-            onChange={(e) => setSelectedUser(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Users</option>
-            {users.map((user) => (
-              <option key={user.clerkId} value={user.clerkId}>
-                {user.fullName || user.username || user.email}
-              </option>
-            ))}
-          </select>
+          <input
+            type="text"
+            placeholder="Search by name, username, or email..."
+            value={userSearch}
+            onChange={(e) => setUserSearch(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+          />
         </div>
         
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Filter by Status
-          </label>
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Statuses</option>
-            <option value="completed">Completed</option>
-            <option value="pending">Pending</option>
-            <option value="failed">Failed</option>
-            <option value="refunded">Refunded</option>
-          </select>
-        </div>
-        
-        <div className="flex items-end">
-          <button
-            onClick={fetchPayments}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Refresh
-          </button>
+        {/* Existing Filters */}
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Filter by User
+            </label>
+            <select
+              value={selectedUser}
+              onChange={(e) => setSelectedUser(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            >
+              <option value="">All Users</option>
+              {getFilteredUsers().map((user) => (
+                <option key={user.clerkId} value={user.clerkId}>
+                  {user.fullName || user.username || user.email}
+                </option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Filter by Status
+            </label>
+            <select
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            >
+              <option value="">All Statuses</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+              <option value="refunded">Refunded</option>
+            </select>
+          </div>
+          
+          <div className="flex items-end">
+            <button
+              onClick={fetchPayments}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Refresh
+            </button>
+          </div>
         </div>
       </div>
 
