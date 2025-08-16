@@ -6,8 +6,9 @@ import MessagingSystem from './MessagingSystem';
 import NewsManagement from './NewsManagement';
 import PaymentHistory from './PaymentHistory';
 import UserLevels from './UserLevels';
+import PhrasesManagement from './PhrasesManagement';
 
-type AdminTab = 'users' | 'messaging' | 'news' | 'payments' | 'levels';
+type AdminTab = 'users' | 'messaging' | 'news' | 'payments' | 'levels' | 'phrases';
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState<AdminTab>('users');
@@ -18,6 +19,7 @@ export default function AdminPanel() {
     { id: 'news', name: 'News Management', icon: '📰', shortName: 'News' },
     { id: 'payments', name: 'Payment History', icon: '💰', shortName: 'Payments' },
     { id: 'levels', name: 'User Levels', icon: '⭐', shortName: 'Levels' },
+    { id: 'phrases', name: 'Daily Phrases', icon: '💭', shortName: 'Phrases' },
   ];
 
   const renderTabContent = () => {
@@ -32,6 +34,8 @@ export default function AdminPanel() {
         return <PaymentHistory />;
       case 'levels':
         return <UserLevels />;
+      case 'phrases':
+        return <PhrasesManagement />;
       default:
         return <UserManagement />;
     }

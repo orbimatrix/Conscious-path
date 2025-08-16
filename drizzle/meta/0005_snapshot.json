@@ -1,0 +1,68 @@
+{
+  "id": "0005_add_phrases_table",
+  "prevId": "0004_productive_fantastic_four",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "phrases": {
+      "name": "phrases",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": false,
+          "hasDefault": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "hasDefault": false
+        },
+        "author_id": {
+          "name": "author_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "hasDefault": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "hasDefault": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "hasDefault": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "hasDefault": true
+        }
+      },
+      "indexes": {
+        "phrases_is_active_idx": {
+          "name": "phrases_is_active_idx",
+          "columns": ["is_active"]
+        },
+        "phrases_created_at_idx": {
+          "name": "phrases_created_at_idx",
+          "columns": ["created_at"]
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    }
+  }
+}

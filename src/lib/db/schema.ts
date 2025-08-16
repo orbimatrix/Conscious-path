@@ -76,6 +76,15 @@ export const userLevels = pgTable('user_levels', {
   expiresAt: timestamp('expires_at'), // Optional expiration
 });
 
+export const phrases = pgTable('phrases', {
+  id: serial('id').primaryKey(),
+  content: text('content').notNull(),
+  authorId: varchar('author_id', { length: 255 }).notNull(), // Clerk ID of admin author
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type UserSubscription = typeof userSubscriptions.$inferSelect;
@@ -87,4 +96,6 @@ export type NewNews = typeof news.$inferInsert;
 export type PaymentHistory = typeof paymentHistory.$inferSelect;
 export type NewPaymentHistory = typeof paymentHistory.$inferInsert;
 export type UserLevel = typeof userLevels.$inferSelect;
-export type NewUserLevel = typeof userLevels.$inferInsert; 
+export type NewUserLevel = typeof userLevels.$inferInsert;
+export type Phrase = typeof phrases.$inferSelect;
+export type NewPhrase = typeof phrases.$inferInsert; 

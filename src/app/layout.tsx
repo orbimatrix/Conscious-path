@@ -6,6 +6,7 @@ import {
   ClerkProvider,
  
 } from '@clerk/nextjs'
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,8 +66,8 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-
-    <html lang="en">
+      <Toaster />
+      <html lang="en">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
         <meta name="apple-mobile-web-app-title" content="Senda Consciente" />
