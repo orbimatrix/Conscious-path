@@ -604,6 +604,16 @@
   background: #e55a2b;
 }
 
+.usuario-unified-button-activo {
+  background: #000000 !important;
+  color: white !important;
+  cursor: default !important;
+}
+
+.usuario-unified-button-activo:hover {
+  background: #000000 !important;
+}
+
 .usuario-unified-count {
   font-weight: 600;
   color: #B19B6D;

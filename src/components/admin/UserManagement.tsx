@@ -126,7 +126,7 @@ export default function UserManagement() {
               placeholder="Search users by name, email, or username..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A3926B] focus:border-transparent transition-all duration-200 bg-white hover:bg-gray-50 placeholder-black"
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A3926B] focus:border-transparent transition-all duration-200 bg-white hover:bg-gray-50 placeholder-black text-black"
             />
           </div>
           

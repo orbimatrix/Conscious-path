@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
+import toast from 'react-hot-toast';
 
 export default function UnifiedInfoSection() {
     const [isRequesting, setIsRequesting] = useState(false);
@@ -20,7 +21,9 @@ export default function UnifiedInfoSection() {
             
             if (response.ok) {
                 setHasRequested(true);
+                toast.success('Alianza solicitada correctamente');
                 // You could show a success message here
+
             }
         } catch (error) {
             console.error('Error requesting alliance:', error);
@@ -38,11 +41,11 @@ export default function UnifiedInfoSection() {
                         Alianza por la <br/>Razón, ser parte <br/>activa del cambio
                     </div>
                     <button 
-                        className={`usuario-unified-button ${hasRequested ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`usuario-unified-button ${hasRequested ? 'usuario-unified-button-activo' : ''}`}
                         onClick={handleAllianceRequest}
                         disabled={isRequesting || hasRequested}
                     >
-                        {isRequesting ? 'SOLICITANDO...' : hasRequested ? 'SOLICITADO' : 'SOLICITAR'}
+                        {isRequesting ? 'SOLICITANDO...' : hasRequested ? 'ACTIVO' : 'SOLICITAR'}
                     </button>
                 </div>
                 <div className="usuario-unified-row">
