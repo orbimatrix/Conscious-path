@@ -85,6 +85,20 @@ export const phrases = pgTable('phrases', {
   updatedAt: timestamp('updated_at').defaultNow(),
 });
 
+export const corrections = pgTable('corrections', {
+  id: serial('id').primaryKey(),
+  userId: serial('user_id').references(() => users.id),
+  clerkId: varchar('clerk_id', { length: 255 }).notNull(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  severity: varchar('severity', { length: 50 }).default('medium'), // 'low' | 'medium' | 'high' | 'critical'
+  isResolved: boolean('is_resolved').default(false),
+  assignedBy: varchar('assigned_by', { length: 255 }).notNull(), // Clerk ID of admin
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+  resolvedAt: timestamp('resolved_at'),
+});
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type UserSubscription = typeof userSubscriptions.$inferSelect;
@@ -98,4 +112,6 @@ export type NewPaymentHistory = typeof paymentHistory.$inferInsert;
 export type UserLevel = typeof userLevels.$inferSelect;
 export type NewUserLevel = typeof userLevels.$inferInsert;
 export type Phrase = typeof phrases.$inferSelect;
-export type NewPhrase = typeof phrases.$inferInsert; 
+export type NewPhrase = typeof phrases.$inferInsert;
+export type Correction = typeof corrections.$inferSelect;
+export type NewCorrection = typeof corrections.$inferInsert; 
