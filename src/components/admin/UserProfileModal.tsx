@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User } from '@/lib/db/schema';
 
 interface UserProfileModalProps {
@@ -10,9 +10,84 @@ interface UserProfileModalProps {
   onUpdate: (updatedUser: User) => void;
 }
 
+interface TimezoneData {
+  timezone: string;
+  timezoneOffset: number;
+  timezoneUpdatedAt: string;
+  previousTimezone?: string;
+  timezoneHistory?: Array<{
+    timezone: string;
+    timestamp: string;
+    previousTimezone?: string;
+  }>;
+}
+
 export default function UserProfileModal({ user, isOpen, onClose, onUpdate }: UserProfileModalProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState<User | null>(null);
+  const [timezoneData, setTimezoneData] = useState<TimezoneData | null>(null);
+  const [loadingTimezone, setLoadingTimezone] = useState(false);
+
+  // Fetch timezone data when modal opens
+  useEffect(() => {
+    if (isOpen && user) {
+      // Use Clerk ID instead of database ID
+      fetchUserTimezoneData(user.clerkId || user.id.toString());
+    }
+  }, [isOpen, user]);
+
+  const fetchUserTimezoneData = async (userId: string) => {
+    setLoadingTimezone(true);
+    try {
+      // Fetch user's Clerk metadata to get timezone info
+      const response = await fetch(`/api/admin/users/${userId}/timezone`);
+      if (response.ok) {
+        const data = await response.json();
+        setTimezoneData(data.timezoneData);
+      }
+    } catch (error) {
+      console.error('Error fetching timezone data:', error);
+    } finally {
+      setLoadingTimezone(false);
+    }
+  };
+
+  // Get current time in user's timezone
+  const getUserCurrentTime = (timezone: string) => {
+    try {
+      return new Date().toLocaleTimeString('en-US', {
+        timeZone: timezone,
+        hour12: true,
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    } catch {
+      return 'Invalid timezone';
+    }
+  };
+
+  // Get timezone offset from admin time
+  const getTimezoneOffset = (timezone: string) => {
+    try {
+      const now = new Date();
+      const userTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+      const localTime = new Date(now.toLocaleString('en-US'));
+      const diffMs = userTime.getTime() - localTime.getTime();
+      const diffHours = Math.round(diffMs / (1000 * 60 * 60));
+      
+      if (diffHours > 0) {
+        return `+${diffHours}h ahead`;
+      } else if (diffHours < 0) {
+        return `${Math.abs(diffHours)}h behind`;
+      } else {
+        return 'Same time';
+      }
+    } catch {
+      return 'Unknown';
+    }
+  };
+  
 
   if (!isOpen || !user) return null;
 
@@ -96,6 +171,95 @@ export default function UserProfileModal({ user, isOpen, onClose, onUpdate }: Us
                   {currentUser.points || 0} Points
                 </span>
               </div>
+            </div>
+          </div>
+
+          {/* Timezone Section - NEW! */}
+          <div className="mb-4 sm:mb-6">
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-100 p-3 sm:p-4 lg:p-6 shadow-lg">
+              <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                Timezone Information
+              </h4>
+              
+              {loadingTimezone ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="w-8 h-8 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
+                  <span className="ml-3 text-gray-600">Loading timezone data...</span>
+                </div>
+              ) : timezoneData ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* Live Clock */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+                    <div className="text-center">
+                      <div className="text-3xl font-mono font-bold text-blue-900 mb-2">
+                        {getUserCurrentTime(timezoneData.timezone)}
+                      </div>
+                      <div className="text-sm text-blue-600 mb-1">
+                        {timezoneData.timezone}
+                      </div>
+                      <div className="text-xs text-blue-500 bg-blue-100 px-2 py-1 rounded">
+                        {getTimezoneOffset(timezoneData.timezone)}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Timezone Details */}
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                        Current Timezone
+                      </label>
+                      <p className="text-gray-900 text-sm sm:text-base px-3 py-2 bg-gray-50 rounded-lg">
+                        {timezoneData.timezone}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                        Time Difference
+                      </label>
+                      <p className="text-gray-900 text-sm sm:text-base px-3 py-2 bg-gray-50 rounded-lg">
+                        {getTimezoneOffset(timezoneData.timezone)}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                        Last Updated
+                      </label>
+                      <p className="text-gray-900 text-xs sm:text-sm px-3 py-2 bg-gray-50 rounded-lg">
+                        {timezoneData.timezoneUpdatedAt 
+                          ? new Date(timezoneData.timezoneUpdatedAt).toLocaleString() 
+                          : 'Never updated'}
+                      </p>
+                    </div>
+
+                    {timezoneData.previousTimezone && (
+                      <div>
+                        <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                          Previous Timezone
+                        </label>
+                        <p className="text-gray-900 text-xs sm:text-sm px-3 py-2 bg-gray-50 rounded-lg">
+                          {timezoneData.previousTimezone}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p>No timezone data available</p>
+                  <p className="text-sm">User hasn&apos;t visited the app yet</p>
+                </div>
+              )}
             </div>
           </div>
 

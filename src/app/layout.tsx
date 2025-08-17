@@ -7,6 +7,7 @@ import {
  
 } from '@clerk/nextjs'
 import { Toaster } from 'react-hot-toast';
+import TimezoneDetector from "@/components/TimezoneDetector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,6 +76,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+                  <TimezoneDetector />
+
         <Header />
         {children}
       </body>

@@ -4,8 +4,16 @@ import { useState, useEffect } from 'react';
 import { User } from '@/lib/db/schema';
 import UserProfileModal from './UserProfileModal';
 
+interface UserWithProfile extends User {
+  clerkProfile?: {
+    imageUrl: string | null;
+    firstName: string | null;
+    lastName: string | null;
+  } | null;
+}
+
 export default function UserManagement() {
-  const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<UserWithProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -131,9 +139,18 @@ export default function UserManagement() {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                      {user.fullName?.charAt(0) || user.username?.charAt(0) || 'U'}
-                    </div>
+                    {/* Profile Image or Initial */}
+                    {user.clerkProfile?.imageUrl ? (
+                      <img
+                        src={user.clerkProfile.imageUrl}
+                        alt={`${user.clerkProfile.firstName || user.fullName || 'User'}`}
+                        className="w-10 h-10 rounded-full object-cover border-2 border-[#A3926B]/20"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                        {user.clerkProfile?.firstName?.charAt(0) || user.fullName?.charAt(0) || user.username?.charAt(0) || 'U'}
+                      </div>
+                    )}
                     <div>
                       <h3 className="font-semibold text-gray-900">{user.fullName || 'N/A'}</h3>
                       <p className="text-sm text-gray-500">{user.email || user.username || 'N/A'}</p>
@@ -234,9 +251,18 @@ export default function UserManagement() {
                 <tr key={user.id} className="hover:bg-gray-50 transition-colors duration-200">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                        {user.fullName?.charAt(0) || user.username?.charAt(0) || 'U'}
-                      </div>
+                      {/* Profile Image or Initial */}
+                      {user.clerkProfile?.imageUrl ? (
+                        <img
+                          src={user.clerkProfile.imageUrl}
+                          alt={`${user.clerkProfile.firstName || user.fullName || 'User'}`}
+                          className="w-10 h-10 rounded-full object-cover border-2 border-[#A3926B]/20"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                          {user.clerkProfile?.firstName?.charAt(0) || user.fullName?.charAt(0) || user.username?.charAt(0) || 'U'}
+                        </div>
+                      )}
                       <div>
                         <div className="text-sm font-semibold text-gray-900">
                           {user.fullName || 'N/A'}
