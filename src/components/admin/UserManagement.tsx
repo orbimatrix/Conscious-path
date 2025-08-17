@@ -23,9 +23,19 @@ export default function UserManagement() {
     user: null
   });
 
+  // Debounced search effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchUsers();
+    }, 300); // Wait 300ms after user stops typing
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Immediate effect for alliance filter
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [allianceFilter]);
 
   const fetchUsers = async () => {
     try {
@@ -76,11 +86,8 @@ export default function UserManagement() {
     setProfileModal({ isOpen: false, user: null });
   };
 
-  const filteredUsers = users.filter(user =>
-    user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.username?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Use users directly since filtering is done server-side
+  const filteredUsers = users;
 
   if (loading) {
     return (

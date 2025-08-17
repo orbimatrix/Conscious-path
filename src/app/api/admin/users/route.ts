@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
     const allianceFilter = searchParams.get('alliance');
     const searchTerm = searchParams.get('search');
 
+
     // Build all conditions at once
     const conditions = [];
     
@@ -46,10 +47,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
+
     // Execute query with all conditions
     const allUsers = conditions.length > 0 
       ? await db.select().from(users).where(and(...conditions))
       : await db.select().from(users);
+
 
     const clerk = await clerkClient();
     const usersWithProfiles = await Promise.all(
