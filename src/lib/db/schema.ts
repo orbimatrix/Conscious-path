@@ -14,6 +14,8 @@ export const users = pgTable('users', {
   email: varchar('email', { length: 255 }),
   username: varchar('username', { length: 256 }),
   lastDailyClaim: timestamp('last_daily_claim'),
+  allianceRequested: boolean('alliance_requested').default(false), // New field for Alianza tracking
+
   createdAt: timestamp('created_at').defaultNow(),
 });
 

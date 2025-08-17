@@ -17,6 +17,7 @@ export default function UserManagement() {
   const [loading, setLoading] = useState(true);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [allianceFilter, setAllianceFilter] = useState<string>('all');
   const [profileModal, setProfileModal] = useState<{ isOpen: boolean; user: User | null }>({
     isOpen: false,
     user: null
@@ -28,7 +29,11 @@ export default function UserManagement() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/api/admin/users');
+      const params = new URLSearchParams();
+      if (searchTerm) params.append('search', searchTerm);
+      if (allianceFilter !== 'all') params.append('alliance', allianceFilter);
+      
+      const response = await fetch(`/api/admin/users?${params}`);
       if (response.ok) {
         const data = await response.json();
         setUsers(data.users);
@@ -101,7 +106,7 @@ export default function UserManagement() {
           User Management
         </h2>
         
-        {/* Search and Refresh */}
+        {/* Search and Filters */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -117,6 +122,18 @@ export default function UserManagement() {
               className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A3926B] focus:border-transparent transition-all duration-200 bg-white hover:bg-gray-50 placeholder-black"
             />
           </div>
+          
+          {/* Alliance Filter */}
+          <select
+              value={allianceFilter}
+              onChange={(e) => setAllianceFilter(e.target.value)}
+              className="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A3926B] focus:border-transparent transition-all duration-200 bg-white hover:bg-gray-50 text-black"
+          >
+              <option value="all">All Alliance Status</option>
+              <option value="requested">Requested</option>
+              <option value="not-requested">Not Requested</option>
+          </select>
+          
           <button
             onClick={fetchUsers}
             className="px-6 py-3 bg-[#A3926B] hover:bg-[#8B7355] text-white rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 transform shadow-lg"
