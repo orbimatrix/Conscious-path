@@ -5,46 +5,36 @@ import { users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
-    try {
-        const { userId } = await auth();
-        
-        if (!userId) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-
-        const searchParams = request.nextUrl.searchParams;
-        const clerkId = searchParams.get('clerkId');
-
-        if (!clerkId) {
-            return NextResponse.json({ error: 'Clerk ID required' }, { status: 400 });
-        }
-
-        let userData = await db
-            .select()
-            .from(users)
-            .where(eq(users.clerkId, clerkId))
-            .limit(1);
-
-        // If user doesn't exist, create a new record
-        if (userData.length === 0) {
-            const newUser = await db
-                .insert(users)
-                .values({
-                    clerkId: clerkId,
-                    points: 0,
-                    level: 'inmortal',
-                    isActive: true,
-                })
-                .returning();
-            
-            userData = newUser;
-        }
-
-        return NextResponse.json(userData[0]);
-    } catch (error) {
-        console.error('Error fetching user profile:', error);
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    // Get user data
+    const userData = await db
+      .select({
+        clerkId: users.clerkId,
+        fullName: users.fullName,
+        username: users.username,
+        email: users.email,
+        level: users.level,
+      })
+      .from(users)
+      .where(eq(users.clerkId, userId))
+      .limit(1);
+
+    if (userData.length === 0) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      user: userData[0]
+    });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 }
 
 export async function PUT(request: NextRequest) {

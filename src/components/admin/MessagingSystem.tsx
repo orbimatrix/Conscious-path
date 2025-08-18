@@ -2,25 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { User } from '@/lib/db/schema';
-
-interface Message {
-  id: number;
-  content: string;
-  messageType: string;
-  visibilityLevel?: string;
-  isRead: boolean;
-  createdAt: string;
-  senderId: string;
-  receiverId: string;
-  sender?: {
-    clerkId: string;
-    fullName?: string;
-    username?: string;
-    email?: string;
-  };
-}
+import { useSocket, Message } from '@/lib/socket-client';
+import { useUser } from '@clerk/nextjs';
 
 export default function MessagingSystem() {
+  const { user, isLoaded } = useUser();
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<string>('');
   const [selectedLevel, setSelectedLevel] = useState<string>('');
@@ -30,13 +16,38 @@ export default function MessagingSystem() {
   const [cleanupLoading, setCleanupLoading] = useState(false);
   const [conversation, setConversation] = useState<Message[]>([]);
   const [showConversation, setShowConversation] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const conversationEndRef = useRef<HTMLDivElement>(null);
+
+  // Check if user is admin
+  const isAdmin = user?.publicMetadata?.role === 'admin';
+
+  // Initialize Socket.IO
+  const {
+    socket,
+    isConnected,
+    sendMessage,
+    sendGroupMessage,
+    sendAnnouncement,
+    joinLevel,
+    startTyping,
+    stopTyping,
+    markAsRead,
+  } = useSocket(isAdmin ? 'admin' : user?.id); // Connect as 'admin' if user is admin
 
   const levels = ['inmortal', 'carisma', 'benec', 'karma'];
 
   useEffect(() => {
+    if (!isLoaded) return;
+    
+    if (!isAdmin) {
+      console.error('User is not admin:', user?.publicMetadata);
+      return;
+    }
+    
     fetchUsers();
-  }, []);
+  }, [isLoaded, isAdmin]);
 
   useEffect(() => {
     if (selectedUser && messageType === 'direct') {
@@ -48,6 +59,133 @@ export default function MessagingSystem() {
     // Scroll to bottom when conversation updates
     scrollToBottom();
   }, [conversation]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    // Listen for new messages
+    socket.on('new_message', (newMessage: Message) => {
+      console.log('New message received:', newMessage);
+      if (selectedUser && messageType === 'direct' && 
+          (newMessage.senderId === selectedUser || newMessage.receiverId === selectedUser)) {
+        // Add user sender info if it's from a user
+        if (newMessage.senderId !== 'admin') {
+          const user = users.find(u => u.clerkId === newMessage.senderId);
+          if (user) {
+            newMessage.sender = {
+              clerkId: user.clerkId,
+              fullName: user.fullName || user.username || user.email || 'Unknown User',
+              username: user.username || undefined,
+              email: user.email || undefined,
+            };
+          }
+        }
+        console.log('Adding message to conversation:', newMessage);
+        setConversation(prev => [...prev, newMessage]);
+      }
+    });
+
+    // Listen for group messages
+    socket.on('new_group_message', (newMessage: Message) => {
+      if (messageType === 'group' && newMessage.visibilityLevel === selectedLevel) {
+        // Add user sender info if it's from a user
+        if (newMessage.senderId !== 'admin') {
+          const user = users.find(u => u.clerkId === newMessage.senderId);
+          if (user) {
+            newMessage.sender = {
+              clerkId: user.clerkId,
+              fullName: user.fullName || user.username || user.email || 'Unknown User',
+              username: user.username || undefined,
+              email: user.email || undefined,
+            };
+          }
+        }
+        // Add to conversation if viewing group messages
+        setConversation(prev => [...prev, newMessage]);
+      }
+    });
+
+    // Listen for announcements
+    socket.on('new_announcement', (newMessage: Message) => {
+      if (messageType === 'announcement') {
+        // Add user sender info if it's from a user
+        if (newMessage.senderId !== 'admin') {
+          const user = users.find(u => u.clerkId === newMessage.senderId);
+          if (user) {
+            newMessage.sender = {
+              clerkId: user.clerkId,
+              fullName: user.fullName || user.username || user.email || 'Unknown User',
+              username: user.username || undefined,
+              email: user.email || undefined,
+            };
+          }
+        }
+        setConversation(prev => [...prev, newMessage]);
+      }
+    });
+
+    // Listen for message confirmations
+    socket.on('message_sent', (sentMessage: Message) => {
+      // Message was sent successfully
+      console.log('Message sent:', sentMessage);
+    });
+
+    socket.on('admin_message_sent', (sentMessage: Message) => {
+      // Admin message was sent successfully
+      console.log('Admin message sent:', sentMessage);
+    });
+
+    socket.on('group_message_sent', (sentMessage: Message) => {
+      console.log('Group message sent:', sentMessage);
+    });
+
+    socket.on('announcement_sent', (sentMessage: Message) => {
+      console.log('Announcement sent:', sentMessage);
+    });
+
+    // Listen for typing indicators
+    socket.on('user_typing', (data: { senderId: string }) => {
+      if (data.senderId === selectedUser) {
+        setIsTyping(true);
+      }
+    });
+
+    socket.on('user_stopped_typing', (data: { senderId: string }) => {
+      if (data.senderId === selectedUser) {
+        setIsTyping(false);
+      }
+    });
+
+    // Listen for read receipts
+    socket.on('message_read', (data: { messageId: number }) => {
+      setConversation(prev => 
+        prev.map(msg => 
+          msg.id === data.messageId ? { ...msg, isRead: true } : msg
+        )
+      );
+    });
+
+    return () => {
+      socket.off('new_message');
+      socket.off('new_group_message');
+      socket.off('new_announcement');
+      socket.off('message_sent');
+      socket.off('admin_message_sent');
+      socket.off('group_message_sent');
+      socket.off('announcement_sent');
+      socket.off('user_typing');
+      socket.off('user_stopped_typing');
+      socket.off('message_read');
+    };
+  }, [socket, selectedUser, messageType, selectedLevel, users]);
+
+  if (!isLoaded) {
+    return <div className="text-center py-8">Loading...</div>;
+  }
+
+  if (!isAdmin) {
+    return <div className="text-center py-8 text-red-600">Access denied. Admin privileges required.</div>;
+  }
 
   const scrollToBottom = () => {
     conversationEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -90,33 +228,189 @@ export default function MessagingSystem() {
 
     setLoading(true);
     try {
-      const payload = {
-        content: message,
-        messageType,
-        receiverId: messageType === 'direct' ? selectedUser : undefined,
-        visibilityLevel: messageType === 'group' ? selectedLevel : undefined,
-      };
-
-      const response = await fetch('/api/admin/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setMessage('');
-        if (messageType === 'direct') {
-          // Refresh conversation and scroll to bottom
-          await fetchConversation(selectedUser);
+      if (messageType === 'direct' && selectedUser) {
+        // Send real-time message using admin_message event
+        console.log('Sending admin message:', {
+          content: message,
+          receiverId: selectedUser,
+          messageType: 'direct',
+          socketConnected: !!socket,
+          isConnected,
+        });
+        
+        if (socket && isConnected) {
+          socket.emit('admin_message', {
+            content: message,
+            receiverId: selectedUser,
+            messageType: 'direct',
+          });
+          console.log('Admin message sent via Socket.IO');
+        } else {
+          console.error('Socket not connected, cannot send real-time message');
         }
-        alert(`Message sent successfully to ${data.recipients} recipient(s)!`);
+        
+        // Add message to conversation immediately for instant feedback
+        const newMessage: Message = {
+          id: Date.now(),
+          content: message,
+          senderId: 'admin',
+          receiverId: selectedUser,
+          messageType: 'direct',
+          createdAt: new Date().toISOString(),
+          isRead: false,
+        };
+        console.log('Adding admin message to conversation:', newMessage);
+        setConversation(prev => [...prev, newMessage]);
+        
+        // Store message in database via API
+        try {
+          const response = await fetch('/api/admin/messages', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              content: message,
+              receiverId: selectedUser,
+              messageType: 'direct',
+            }),
+          });
+          
+          if (!response.ok) {
+            console.error('Failed to store message in database:', response.status, response.statusText);
+            const errorData = await response.text();
+            console.error('Error response:', errorData);
+          } else {
+            console.log('Message stored in database successfully');
+          }
+        } catch (error) {
+          console.error('Error storing message in database:', error);
+        }
+        
+      } else if (messageType === 'group' && selectedLevel) {
+        // Send group message using admin_message event
+        socket?.emit('admin_message', {
+          content: message,
+          messageType: 'group',
+          visibilityLevel: selectedLevel,
+        });
+        
+        // Add message to conversation immediately
+        const newMessage: Message = {
+          id: Date.now(),
+          content: message,
+          senderId: 'admin',
+          messageType: 'group',
+          visibilityLevel: selectedLevel,
+          createdAt: new Date().toISOString(),
+          isRead: false,
+        };
+        setConversation(prev => [...prev, newMessage]);
+        
+        // Store group message in database via API
+        try {
+          const response = await fetch('/api/admin/messages', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              content: message,
+              messageType: 'group',
+              visibilityLevel: selectedLevel,
+            }),
+          });
+          
+          if (!response.ok) {
+            console.error('Failed to store group message in database:', response.status, response.statusText);
+            const errorData = await response.text();
+            console.error('Error response:', errorData);
+          } else {
+            console.log('Group message stored in database successfully');
+          }
+        } catch (error) {
+          console.error('Error storing group message in database:', error);
+        }
+        
+      } else if (messageType === 'announcement') {
+        // Send announcement using admin_message event
+        socket?.emit('admin_message', {
+          content: message,
+          messageType: 'announcement',
+        });
+        
+        // Add message to conversation immediately
+        const newMessage: Message = {
+          id: Date.now(),
+          content: message,
+          senderId: 'admin',
+          messageType: 'announcement',
+          createdAt: new Date().toISOString(),
+          isRead: false,
+        };
+        setConversation(prev => [...prev, newMessage]);
+        
+        // Store announcement in database via API
+        try {
+          const response = await fetch('/api/admin/messages', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              content: message,
+              messageType: 'announcement',
+            }),
+          });
+          
+          if (!response.ok) {
+            console.error('Failed to store announcement in database:', response.status, response.statusText);
+            const errorData = await response.text();
+            console.error('Error response:', errorData);
+          } else {
+            console.log('Announcement stored in database successfully');
+          }
+        } catch (error) {
+          console.error('Error storing announcement in database:', error);
+        }
       }
+
+      setMessage('');
+      
+      // Stop typing indicator
+      if (messageType === 'direct' && selectedUser) {
+        stopTyping(selectedUser);
+      }
+      
     } catch (error) {
       console.error('Error sending message:', error);
       alert('Failed to send message');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleTyping = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+    
+    // Handle typing indicators for direct messages
+    if (messageType === 'direct' && selectedUser) {
+      startTyping(selectedUser);
+      
+      // Clear existing timeout
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+      
+      // Set new timeout to stop typing indicator
+      const timeout = setTimeout(() => {
+        stopTyping(selectedUser);
+      }, 1000);
+      
+      setTypingTimeout(timeout);
     }
   };
 
@@ -186,7 +480,18 @@ export default function MessagingSystem() {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-gray-900 mb-6">Messaging System</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold text-gray-900">Messaging System</h2>
+        <div className="flex items-center space-x-2">
+          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+          <span className="text-sm text-gray-600">
+            {isConnected ? 'Connected' : 'Disconnected'}
+          </span>
+          <span className="text-xs text-gray-500">
+            ({isAdmin ? 'Admin' : 'User'} - {user?.id})
+          </span>
+        </div>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Message Composition */}
@@ -255,7 +560,7 @@ export default function MessagingSystem() {
               </label>
               <textarea
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={handleTyping}
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="Type your message here..."
@@ -264,7 +569,7 @@ export default function MessagingSystem() {
 
             <button
               onClick={handleSendMessage}
-              disabled={loading || !message.trim() || (messageType === 'direct' && !selectedUser) || (messageType === 'group' && !selectedLevel)}
+              disabled={loading || !message.trim() || !isConnected || (messageType === 'direct' && !selectedUser) || (messageType === 'group' && !selectedLevel)}
               className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {loading ? 'Sending...' : 'Send Message'}
@@ -323,6 +628,12 @@ export default function MessagingSystem() {
               Conversation with {users.find(u => u.clerkId === selectedUser)?.fullName || 'User'}
             </h3>
             
+            {isTyping && (
+              <div className="text-sm text-gray-500 mb-3 italic">
+                {users.find(u => u.clerkId === selectedUser)?.fullName || 'User'} is typing...
+              </div>
+            )}
+            
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {conversation.length === 0 ? (
                 <div className="text-sm text-gray-500 text-center">No messages yet</div>
@@ -353,8 +664,15 @@ export default function MessagingSystem() {
                         {msg.senderId === 'admin' ? 'Admin' : msg.sender?.fullName || msg.sender?.username || 'User'}
                       </div>
                       <div className="text-gray-900 mb-1">{msg.content}</div>
-                      <div className="text-xs text-gray-500 text-right">
-                        {formatTime(msg.createdAt)}
+                      <div className="flex items-center justify-between">
+                        <div className="text-xs text-gray-500">
+                          {formatTime(msg.createdAt)}
+                        </div>
+                        {msg.senderId === 'admin' && (
+                          <div className="text-xs text-gray-500 ml-2">
+                            {msg.isRead ? '✓✓' : '✓'}
+                          </div>
+                        )}
                       </div>
                     </div>
                     

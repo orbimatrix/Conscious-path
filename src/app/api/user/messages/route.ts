@@ -41,6 +41,7 @@ export async function GET(request: NextRequest) {
         isRead: messages.isRead,
         createdAt: messages.createdAt,
         senderId: messages.senderId,
+        receiverId: messages.receiverId,
         sender: {
           clerkId: users.clerkId,
           fullName: users.fullName,
@@ -72,6 +73,22 @@ export async function GET(request: NextRequest) {
       .limit(limit)
       .offset(offset);
 
+    // Transform messages to include admin sender info when needed
+    const transformedMessages = userMessages.map(msg => {
+      if (msg.senderId === 'admin') {
+        return {
+          ...msg,
+          sender: {
+            clerkId: 'admin',
+            fullName: 'Admin',
+            username: 'admin',
+            email: 'admin@conscious.com',
+          }
+        };
+      }
+      return msg;
+    });
+
     // Get unread count (only for received messages, not sent ones)
     const unreadCount = await db
       .select({ count: messages.id })
@@ -91,7 +108,7 @@ export async function GET(request: NextRequest) {
       );
 
     return NextResponse.json({
-      messages: userMessages,
+      messages: transformedMessages,
       unreadCount: unreadCount.length,
       pagination: {
         page,
