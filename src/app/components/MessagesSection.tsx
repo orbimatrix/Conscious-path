@@ -5,21 +5,6 @@ import { useUser } from '@clerk/nextjs';
 import MessageModal from './MessageModal';
 import { useSocket } from '@/lib/socket-client';
 
-interface Message {
-  id: number;
-  content: string;
-  messageType: string;
-  visibilityLevel?: string;
-  isRead: boolean;
-  createdAt: string;
-  sender: {
-    clerkId: string;
-    fullName?: string;
-    username?: string;
-    email?: string;
-  };
-}
-
 export default function MessagesSection() {
   const { user } = useUser();
   const [unreadCount, setUnreadCount] = useState(0);
@@ -27,25 +12,19 @@ export default function MessagesSection() {
   const [loading, setLoading] = useState(false);
 
   // Initialize Socket.IO for real-time messaging
-  const { isConnected } = useSocket(user?.id);
+  const { isConnected, messages } = useSocket(user?.id);
 
   useEffect(() => {
-    if (user) {
-      fetchUnreadCount();
+    if (messages && user) {
+      // Count unread messages that are not from the current user
+      const unreadMessages = messages.filter(msg => 
+        !msg.isRead && msg.senderId !== user.id
+      );
+      setUnreadCount(unreadMessages.length);
     }
-  }, [user]);
+  }, [messages, user]);
 
-  const fetchUnreadCount = async () => {
-    try {
-      const response = await fetch('/api/user/messages');
-      if (response.ok) {
-        const data = await response.json();
-        setUnreadCount(data.unreadCount);
-      }
-    } catch (error) {
-      console.error('Error fetching unread count:', error);
-    }
-  };
+ 
 
   const handleMessageClick = () => {
     setIsModalOpen(true);
@@ -54,7 +33,6 @@ export default function MessagesSection() {
   const handleModalClose = () => {
     setIsModalOpen(false);
     // Refresh unread count when modal closes
-    fetchUnreadCount();
   };
 
   return (
@@ -80,7 +58,7 @@ export default function MessagesSection() {
       <MessageModal 
         isOpen={isModalOpen} 
         onClose={handleModalClose}
-        onMessageSent={fetchUnreadCount}
+        onMessageSent={() => {}} // No need for callback since it's real-time
       />
     </>
   );

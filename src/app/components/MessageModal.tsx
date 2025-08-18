@@ -14,35 +14,20 @@ interface MessageModalProps {
 
 export default function MessageModal({ isOpen, onClose, onMessageSent }: MessageModalProps) {
   const { user } = useUser();
-  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, markAsRead, subscribeToMessages, subscribeToUserMessages, messages: socketMessages } = useSocket(user?.id);
+  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, subscribeToMessages, messages: socketMessages } = useSocket(user?.id);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [userLevel, setUserLevel] = useState<string | null>(null);
   const [adminInfo, setAdminInfo] = useState<{ fullName?: string; username?: string } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const announcementsSubscribedRef = useRef(false); // Track if we're already subscribed to announcements
-
-  // Debug effect to monitor messages state changes
-  useEffect(() => {
-    console.log('Messages state changed, count:', messages.length);
-    if (messages.length > 0) {
-      console.log('Latest message:', messages[messages.length - 1]);
-    }
-  }, [messages]);
-
-  // Debug effect to monitor socket connection
-  useEffect(() => {
-    console.log('Socket connection changed:', { socket: !!socket, isConnected });
-  }, [socket, isConnected]);
+  const announcementsSubscribedRef = useRef(false);
 
   // Join user's level room when connected
   useEffect(() => {
     if (isConnected && user) {
-      // Just join the default level room to prevent infinite API calls
       if (!userLevel) {
         console.log('Joining default level room: inmortal');
         setUserLevel('inmortal');
@@ -56,24 +41,21 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     if (isConnected && user?.id) {
       console.log('Setting up Ably message subscription for user:', user.id);
       
-      // Check if user is admin
       const isAdmin = user?.publicMetadata?.role === 'admin';
       
       if (isAdmin) {
-        // Admin subscribes to receive messages from users
         console.log('Admin user - will subscribe to user messages when selected');
       } else {
-        // Regular user subscribes to receive messages from admin
         subscribeToMessages('admin');
         
-        // Also subscribe to announcements channel (only once)
+        // Subscribe to announcements channel (only once)
         if (socket && !announcementsSubscribedRef.current) {
           const announcementsChannel = socket.channels.get('announcements');
-          announcementsSubscribedRef.current = true; // Mark as subscribed
+          announcementsSubscribedRef.current = true;
           announcementsChannel.subscribe('announcement', (message: any) => {
             console.log('Announcement received:', message);
             const newMessage: Message = {
-              id: Date.now() + Math.random(), // Ensure unique ID
+              id: Date.now() + Math.random(),
               content: message.data.content,
               messageType: 'announcement',
               isRead: false,
@@ -82,13 +64,13 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
               receiverId: 'all',
             };
             
-            // Prevent duplicates by checking if message already exists
+            // Prevent duplicates
             setMessages(prev => {
               const messageExists = prev.some(msg => 
                 msg.content === newMessage.content && 
                 msg.senderId === newMessage.senderId && 
                 msg.messageType === newMessage.messageType &&
-                Math.abs(new Date(msg.createdAt).getTime() - new Date(newMessage.createdAt).getTime()) < 1000 // Within 1 second
+                Math.abs(new Date(msg.createdAt).getTime() - new Date(newMessage.createdAt).getTime()) < 1000
               );
               
               if (messageExists) {
@@ -105,7 +87,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       }
     }
     
-    // Cleanup function to prevent memory leaks
     return () => {
       if (socket) {
         const announcementsChannel = socket.channels.get('announcements');
@@ -121,7 +102,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     if (socketMessages.length > 0) {
       console.log('Socket messages updated:', socketMessages);
       setMessages(socketMessages);
-      // Scroll to bottom when new messages arrive
       setTimeout(() => scrollToBottom(), 100);
     }
   }, [socketMessages]);
@@ -133,7 +113,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
         const response = await fetch('/api/admin/users');
         if (response.ok) {
           const data = await response.json();
-          // Find admin user
           const adminUser = data.users.find((u: any) => u.publicMetadata?.role === 'admin');
           if (adminUser) {
             setAdminInfo({
@@ -152,50 +131,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     }
   }, [isOpen]);
 
-  // No need to fetch messages from database when using Ably
-
-  const fetchMessages = async () => {
-    if (messages.length > 0) {
-      setLoading(false);
-      return;
-    }
-    
-    setLoading(true);
-    try {
-      const response = await fetch('/api/user/messages');
-      if (response.ok) {
-        const data = await response.json();
-        setMessages(data.messages);
-        
-        // Mark messages as read in background
-        const unreadMessages = data.messages.filter((msg: Message) => !msg.isRead);
-        if (unreadMessages.length > 0) {
-          Promise.all(
-            unreadMessages.map((msg: Message) => 
-              fetch('/api/user/messages', {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messageId: msg.id }),
-              }).catch(err => console.error('Error marking message as read:', err))
-            )
-          ).then(() => {
-            if (unreadMessages.length > 0) {
-              toast.success(`${unreadMessages.length} message${unreadMessages.length > 1 ? 's' : ''} marked as read`);
-            }
-          }).catch(err => console.error('Error in batch mark as read:', err));
-        }
-      } else {
-        console.error('Failed to fetch messages:', response.status);
-        toast.error('Failed to load messages. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-      toast.error('Error loading messages. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const sendMessage = async () => {
     if (!newMessage.trim() || !isConnected) return;
 
@@ -203,7 +138,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     setNewMessage('');
     setSending(true);
 
-    // Optimistically add the message to the UI immediately
+    // Optimistically add message to UI
     const tempMessage: Message = {
       id: Date.now(),
       content: messageContent,
@@ -214,14 +149,11 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       receiverId: 'admin',
     };
 
-    // Add message to UI immediately for instant feedback
     setMessages(prev => [...prev, tempMessage]);
-    
-    // Scroll to bottom to show new message
     setTimeout(() => scrollToBottom(), 100);
 
     try {
-      // Send real-time message via Ably
+      // Send via Ably
       if (isConnected) {
         await sendSocketMessage({
           content: messageContent,
@@ -233,16 +165,13 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
         console.error('Socket not connected, cannot send real-time message');
       }
       
-      // Message sent via Ably - no need to store in database for real-time chat
-      
       onMessageSent();
       toast.success('Message sent successfully!');
       
     } catch (error) {
       console.error('Error sending message:', error);
-      // Remove temporary message on error
       setMessages(prev => prev.filter(msg => msg.id !== tempMessage.id));
-      setNewMessage(messageContent); // Restore the message content
+      setNewMessage(messageContent);
       toast.error('Failed to send message. Please try again.');
     } finally {
       setSending(false);
@@ -252,16 +181,13 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
   const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(e.target.value);
     
-    // Handle typing indicators
     if (isConnected) {
       startTyping('admin');
       
-      // Clear existing timeout
       if (typingTimeout) {
         clearTimeout(typingTimeout);
       }
       
-      // Set new timeout to stop typing indicator
       const timeout = setTimeout(() => {
         stopTyping('admin');
       }, 1000);
@@ -317,7 +243,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   };
 
-  
   if (!isOpen) return null;
 
   return (
@@ -332,46 +257,9 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
               <span className="text-sm text-gray-600">
                 {isConnected ? 'Connected' : 'Disconnected'}
               </span>
-              {/* <span className="text-xs text-gray-500">
-                (User - {user?.id})
-              </span> */}
-              
-              {/* Test Event Listener Button */}
-              {/* <button
-                onClick={() => {
-                  if (isConnected) {
-                    console.log('Testing Ably connection...');
-                    // Test sending a message to yourself
-                    sendSocketMessage({
-                      content: '[SELF TEST] Testing Ably connection - ' + new Date().toISOString(),
-                      receiverId: user?.id || 'test',
-                      messageType: 'direct',
-                    });
-                    console.log('Self-test message sent via Ably');
-                  } else {
-                    toast.error('Chat client not connected');
-                  }
-                }}
-                className="ml-2 px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600"
-              >
-                Test Ably
-              </button> */}
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                fetchMessages();
-                toast.success('Messages refreshed!');
-              }}
-              disabled={loading}
-              className="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors"
-              title="Refresh messages"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
@@ -383,9 +271,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
 
         {/* Messages Container */}
         <div className="flex-1 overflow-y-auto p-4 max-h-[60vh]">
-          {loading ? (
-            <div className="text-center text-gray-500 py-8">Cargando mensajes...</div>
-          ) : messages.length === 0 ? (
+          {messages.length === 0 ? (
             <div className="text-center text-gray-500 py-8">No hay mensajes</div>
           ) : (
             <div className="space-y-6">
