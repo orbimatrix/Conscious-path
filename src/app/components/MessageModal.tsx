@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
-import { useSocket, Message } from '@/lib/socket-client';
+import { Message } from '@/lib/socket-client';
+import { useSocket } from '@/lib/socket-client';
 
 interface MessageModalProps {
   isOpen: boolean;
@@ -13,7 +14,7 @@ interface MessageModalProps {
 
 export default function MessageModal({ isOpen, onClose, onMessageSent }: MessageModalProps) {
   const { user } = useUser();
-  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, markAsRead } = useSocket(user?.id);
+  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, markAsRead, subscribeToMessages, subscribeToUserMessages, messages: socketMessages } = useSocket(user?.id);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,21 +22,9 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
   const [isTyping, setIsTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [userLevel, setUserLevel] = useState<string | null>(null);
+  const [adminInfo, setAdminInfo] = useState<{ fullName?: string; username?: string } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Memoize markAsRead to prevent useEffect from running repeatedly
-  const memoizedMarkAsRead = useCallback((messageId: number, senderId: string) => {
-    if (socket && isConnected) {
-      markAsRead(messageId, senderId);
-    }
-  }, [socket, isConnected, markAsRead]);
-
-  useEffect(() => {
-    if (isOpen) {
-      fetchMessages();
-      toast.success('Messages loaded!');
-    }
-  }, [isOpen]);
+  const announcementsSubscribedRef = useRef(false); // Track if we're already subscribed to announcements
 
   // Debug effect to monitor messages state changes
   useEffect(() => {
@@ -62,139 +51,111 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     }
   }, [isConnected, user, joinLevel, userLevel]);
 
+  // Subscribe to messages when component mounts
   useEffect(() => {
-    if (!socket) {
-      console.log('Socket not available yet');
-      return;
+    if (isConnected && user?.id) {
+      console.log('Setting up Ably message subscription for user:', user.id);
+      
+      // Check if user is admin
+      const isAdmin = user?.publicMetadata?.role === 'admin';
+      
+      if (isAdmin) {
+        // Admin subscribes to receive messages from users
+        console.log('Admin user - will subscribe to user messages when selected');
+      } else {
+        // Regular user subscribes to receive messages from admin
+        subscribeToMessages('admin');
+        
+        // Also subscribe to announcements channel (only once)
+        if (socket && !announcementsSubscribedRef.current) {
+          const announcementsChannel = socket.channels.get('announcements');
+          announcementsSubscribedRef.current = true; // Mark as subscribed
+          announcementsChannel.subscribe('announcement', (message: any) => {
+            console.log('Announcement received:', message);
+            const newMessage: Message = {
+              id: Date.now() + Math.random(), // Ensure unique ID
+              content: message.data.content,
+              messageType: 'announcement',
+              isRead: false,
+              createdAt: message.data.timestamp,
+              senderId: 'admin',
+              receiverId: 'all',
+            };
+            
+            // Prevent duplicates by checking if message already exists
+            setMessages(prev => {
+              const messageExists = prev.some(msg => 
+                msg.content === newMessage.content && 
+                msg.senderId === newMessage.senderId && 
+                msg.messageType === newMessage.messageType &&
+                Math.abs(new Date(msg.createdAt).getTime() - new Date(newMessage.createdAt).getTime()) < 1000 // Within 1 second
+              );
+              
+              if (messageExists) {
+                console.log(`Duplicate announcement detected, not adding: ${newMessage.content}`);
+                return prev;
+              }
+              
+              console.log(`Adding new announcement: ${newMessage.content}`);
+              return [...prev, newMessage];
+            });
+          });
+          console.log('Subscribed to announcements channel');
+        }
+      }
     }
-
-    console.log('Setting up Socket.IO event listeners for user:', user?.id);
-    console.log('Socket ID:', socket.id);
-    console.log('Socket connected state:', socket.connected);
-
-    // Listen for new messages
-    socket.on('new_message', (newMessage: Message) => {
-      console.log('=== NEW MESSAGE RECEIVED ===');
-      console.log('Message received:', newMessage);
-      console.log('Current user ID:', user?.id);
-      console.log('Message sender ID:', newMessage.senderId);
-      
-      // Add admin sender info if it's from admin
-      if (newMessage.senderId === 'admin') {
-        newMessage.sender = {
-          clerkId: 'admin',
-          fullName: 'Admin',
-          username: 'admin',
-          email: 'admin@conscious.com',
-        };
-      }
-      
-      console.log('Adding message to conversation, current count:', messages.length);
-      setMessages(prev => {
-        const newMessages = [...prev, newMessage];
-        console.log('New message count:', newMessages.length);
-        return newMessages;
-      });
-      toast.success('New message received!');
-      
-      // Mark as read automatically
-      if (newMessage.senderId !== user?.id) {
-        memoizedMarkAsRead(newMessage.id, newMessage.senderId);
-      }
-    });
-
-    // Listen for group messages
-    socket.on('new_group_message', (newMessage: Message) => {
-      // Add admin sender info if it's from admin
-      if (newMessage.senderId === 'admin') {
-        newMessage.sender = {
-          clerkId: 'admin',
-          fullName: 'Admin',
-          username: 'admin',
-          email: 'admin@conscious.com',
-        };
-      }
-      
-      setMessages(prev => [...prev, newMessage]);
-      toast.success('New group message received!');
-      
-      // Mark as read automatically
-      memoizedMarkAsRead(newMessage.id, newMessage.senderId);
-    });
-
-    // Listen for announcements
-    socket.on('new_announcement', (newMessage: Message) => {
-      // Add admin sender info if it's from admin
-      if (newMessage.senderId === 'admin') {
-        newMessage.sender = {
-          clerkId: 'admin',
-          fullName: 'Admin',
-          username: 'admin',
-          email: 'admin@conscious.com',
-        };
-      }
-      
-      setMessages(prev => [...prev, newMessage]);
-      toast.success('New announcement received!');
-      
-      // Mark as read automatically
-      memoizedMarkAsRead(newMessage.id, newMessage.senderId);
-    });
-
-    // Listen for message confirmations
-    socket.on('message_sent', (sentMessage: Message) => {
-      // Message was sent successfully
-    });
-
-    // Listen for typing indicators
-    socket.on('user_typing', (data: { senderId: string }) => {
-      if (data.senderId !== user?.id) {
-        setIsTyping(true);
-      }
-    });
-
-    socket.on('user_stopped_typing', (data: { senderId: string }) => {
-      if (data.senderId !== user?.id) {
-        setIsTyping(false);
-      }
-    });
-
-    // Listen for read receipts
-    socket.on('message_read', (data: { messageId: number }) => {
-      setMessages(prev => 
-        prev.map(msg => 
-          msg.id === data.messageId ? { ...msg, isRead: true } : msg
-        )
-      );
-    });
-
-    // Listen for pong response
-    socket.on('pong_user', (data: { timestamp: string }) => {
-      toast.success('Socket.IO connection confirmed!');
-    });
-
+    
+    // Cleanup function to prevent memory leaks
     return () => {
-      socket.off('new_message');
-      socket.off('new_group_message');
-      socket.off('new_announcement');
-      socket.off('message_sent');
-      socket.off('user_typing');
-      socket.off('user_stopped_typing');
-      socket.off('message_read');
-      socket.off('pong_user');
+      if (socket) {
+        const announcementsChannel = socket.channels.get('announcements');
+        if (announcementsChannel && announcementsChannel.state === 'attached') {
+          console.log('Cleaning up announcements subscription');
+        }
+      }
     };
-  }, [socket, user?.id, memoizedMarkAsRead]);
+  }, [isConnected, user?.id, subscribeToMessages, socket]);
 
+  // Update local messages when socket messages change
   useEffect(() => {
-    // Scroll to bottom when conversation updates, but only if it's a new message
-    if (messages.length > 0) {
-      scrollToBottom();
+    if (socketMessages.length > 0) {
+      console.log('Socket messages updated:', socketMessages);
+      setMessages(socketMessages);
+      // Scroll to bottom when new messages arrive
+      setTimeout(() => scrollToBottom(), 100);
     }
-  }, [messages.length]);
+  }, [socketMessages]);
+
+  // Get admin information for display
+  useEffect(() => {
+    const fetchAdminInfo = async () => {
+      try {
+        const response = await fetch('/api/admin/users');
+        if (response.ok) {
+          const data = await response.json();
+          // Find admin user
+          const adminUser = data.users.find((u: any) => u.publicMetadata?.role === 'admin');
+          if (adminUser) {
+            setAdminInfo({
+              fullName: adminUser.fullName,
+              username: adminUser.username
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching admin info:', error);
+      }
+    };
+
+    if (isOpen) {
+      fetchAdminInfo();
+    }
+  }, [isOpen]);
+
+  // No need to fetch messages from database when using Ably
 
   const fetchMessages = async () => {
     if (messages.length > 0) {
-      // Don't show loading if we already have messages
       setLoading(false);
       return;
     }
@@ -206,10 +167,9 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
         const data = await response.json();
         setMessages(data.messages);
         
-        // Mark messages as read in background (don't wait for this)
+        // Mark messages as read in background
         const unreadMessages = data.messages.filter((msg: Message) => !msg.isRead);
         if (unreadMessages.length > 0) {
-          // Mark as read in background without blocking UI
           Promise.all(
             unreadMessages.map((msg: Message) => 
               fetch('/api/user/messages', {
@@ -245,13 +205,13 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
 
     // Optimistically add the message to the UI immediately
     const tempMessage: Message = {
-      id: Date.now(), // Temporary ID
+      id: Date.now(),
       content: messageContent,
       messageType: 'direct',
       isRead: false,
       createdAt: new Date().toISOString(),
       senderId: user?.id || '',
-      receiverId: 'admin', // Send to admin
+      receiverId: 'admin',
     };
 
     // Add message to UI immediately for instant feedback
@@ -261,38 +221,19 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     setTimeout(() => scrollToBottom(), 100);
 
     try {
-      // Send real-time message
-     
-      
-      if (socket && isConnected) {
-        sendSocketMessage({
+      // Send real-time message via Ably
+      if (isConnected) {
+        await sendSocketMessage({
           content: messageContent,
           receiverId: 'admin',
           messageType: 'direct',
         });
+        console.log('User message sent via Ably');
       } else {
         console.error('Socket not connected, cannot send real-time message');
       }
-
-      // Stop typing indicator
-      stopTyping('admin');
       
-      // Store message in database via API
-      try {
-        const response = await fetch('/api/user/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: messageContent }),
-        });
-        
-        if (!response.ok) {
-          console.error('Failed to store message in database:', response.status);
-        } else {
-          console.log('Message stored in database successfully');
-        }
-      } catch (error) {
-        console.error('Error storing message in database:', error);
-      }
+      // Message sent via Ably - no need to store in database for real-time chat
       
       onMessageSent();
       toast.success('Message sent successfully!');
@@ -332,8 +273,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  
 
   const formatDateHeader = (dateString: string) => {
     const date = new Date(dateString);
@@ -381,21 +320,21 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
   const getMessageTypeLabel = (messageType: string, visibilityLevel?: string) => {
     switch (messageType) {
       case 'direct':
-        return 'Mensaje Directo';
+        return 'Mensaje directo';
       case 'group':
-        return `Mensaje Grupal (${visibilityLevel})`;
+        return `Mensaje grupal (${visibilityLevel})`;
       case 'announcement':
-        return 'Anuncio General';
+        return 'Anuncio general';
       default:
-        return 'Mensaje';
+        return messageType;
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-2xl max-h-[80vh] flex flex-col">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl h-[80vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
@@ -409,12 +348,26 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
                 (User - {user?.id})
               </span> */}
               
-              {/* Ping Button */}
-              
-
-             
-
-              
+              {/* Test Event Listener Button */}
+              {/* <button
+                onClick={() => {
+                  if (isConnected) {
+                    console.log('Testing Ably connection...');
+                    // Test sending a message to yourself
+                    sendSocketMessage({
+                      content: '[SELF TEST] Testing Ably connection - ' + new Date().toISOString(),
+                      receiverId: user?.id || 'test',
+                      messageType: 'direct',
+                    });
+                    console.log('Self-test message sent via Ably');
+                  } else {
+                    toast.error('Chat client not connected');
+                  }
+                }}
+                className="ml-2 px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600"
+              >
+                Test Ably
+              </button> */}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -466,8 +419,15 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
                       }`}
                     >
                       {message.senderId !== user?.id && (
-                        <div className="w-8 h-8 rounded-full bg-gray-300 mr-3 flex-shrink-0 flex items-center justify-center">
-                          <span className="text-gray-600 text-sm font-medium">A</span>
+                        <div className="flex flex-col items-center mr-3">
+                          <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
+                            <span className="text-gray-600 text-sm font-medium">
+                              {adminInfo?.fullName?.charAt(0) || adminInfo?.username?.charAt(0) || 'A'}
+                            </span>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1 text-center">
+                            {adminInfo?.fullName || adminInfo?.username || 'Admin'}
+                          </div>
                         </div>
                       )}
                       
@@ -488,8 +448,15 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
                       </div>
                       
                       {message.senderId === user?.id && (
-                        <div className="w-8 h-8 rounded-full bg-blue-500 ml-3 flex-shrink-0 flex items-center justify-center">
-                          <span className="text-white text-sm font-medium">T</span>
+                        <div className="flex flex-col items-center ml-3">
+                          <div className="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
+                            <span className="text-white text-sm font-medium">
+                              {user?.fullName?.charAt(0) || user?.username?.charAt(0) || 'U'}
+                            </span>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1 text-center">
+                            {user?.fullName || user?.username || 'You'}
+                          </div>
                         </div>
                       )}
                     </div>
@@ -504,41 +471,28 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
         {/* Typing indicator */}
         {isTyping && (
           <div className="px-4 py-2 text-sm text-gray-500 italic">
-            Admin is typing...
+            Admin está escribiendo...
           </div>
         )}
 
-        {/* Message Input */}
+        {/* Input Area */}
         <div className="p-4 border-t border-gray-200">
-          <div className="flex gap-3 items-end">
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                value={newMessage}
-                onChange={handleTyping}
-                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                placeholder="Escribe tu mensaje..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800"
-                disabled={sending || !isConnected}
-              />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.586-6.586a2 2 0 00-2.828-2.828z" />
-                </svg>
-              </button>
-            </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={handleTyping}
+              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              placeholder="Escribe tu mensaje..."
+              disabled={sending || !isConnected}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            />
             <button
               onClick={sendMessage}
               disabled={sending || !newMessage.trim() || !isConnected}
-              className="w-12 h-12 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              {sending ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              )}
+              {sending ? 'Enviando...' : 'Enviar'}
             </button>
           </div>
         </div>
