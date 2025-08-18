@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 
     // Create messages for all target users
     const messageData = targetUsers.map(clerkId => ({
-      senderId: adminUser.id,
+      senderId: 'admin', // Use 'admin' as string identifier
       receiverId: clerkId,
       content,
       messageType,

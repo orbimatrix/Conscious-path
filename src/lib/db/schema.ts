@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, timestamp, boolean, integer, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, timestamp, boolean, integer, jsonb, index } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -41,7 +41,14 @@ export const messages = pgTable('messages', {
   messageType: varchar('message_type', { length: 50 }).default('direct'), // 'direct' | 'group' | 'announcement'
   visibilityLevel: varchar('visibility_level', { length: 50 }), // For group messages
   createdAt: timestamp('created_at').defaultNow(),
-});
+}, (table) => ({
+  // Add indexes for better query performance
+  senderIdIdx: index('messages_sender_id_idx').on(table.senderId),
+  receiverIdIdx: index('messages_receiver_id_idx').on(table.receiverId),
+  messageTypeIdx: index('messages_message_type_idx').on(table.messageType),
+  createdAtIdx: index('messages_created_at_idx').on(table.createdAt),
+  compositeIdx: index('messages_sender_receiver_idx').on(table.senderId, table.receiverId),
+}));
 
 export const news = pgTable('news', {
   id: serial('id').primaryKey(),

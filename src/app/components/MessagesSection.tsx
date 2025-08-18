@@ -1,16 +1,76 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import MessageModal from './MessageModal';
+
+interface Message {
+  id: number;
+  content: string;
+  messageType: string;
+  visibilityLevel?: string;
+  isRead: boolean;
+  createdAt: string;
+  sender: {
+    clerkId: string;
+    fullName?: string;
+    username?: string;
+    email?: string;
+  };
+}
 
 export default function MessagesSection() {
-    return (
-        <section className="usuario-messages-section">
-            <div className="usuario-messages-display">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span>MENSAJES</span>
-                    <div className="usuario-notification-badge">2</div>
-                </div>
-            </div>
-        </section>
-    );
+  const { user } = useUser();
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      fetchUnreadCount();
+    }
+  }, [user]);
+
+  const fetchUnreadCount = async () => {
+    try {
+      const response = await fetch('/api/user/messages');
+      if (response.ok) {
+        const data = await response.json();
+        setUnreadCount(data.unreadCount);
+      }
+    } catch (error) {
+      console.error('Error fetching unread count:', error);
+    }
+  };
+
+  const handleMessageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    // Refresh unread count when modal closes
+    fetchUnreadCount();
+  };
+
+  return (
+    <>
+      <section className="usuario-messages-section">
+        <div className="usuario-messages-display" onClick={handleMessageClick}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span>MENSAJES</span>
+            {unreadCount > 0 && (
+              <div className="usuario-notification-badge">{unreadCount}</div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <MessageModal 
+        isOpen={isModalOpen} 
+        onClose={handleModalClose}
+        onMessageSent={fetchUnreadCount}
+      />
+    </>
+  );
 }
