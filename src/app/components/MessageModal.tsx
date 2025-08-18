@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
 import { Message } from '@/lib/socket-client';
@@ -317,19 +317,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   };
 
-  const getMessageTypeLabel = (messageType: string, visibilityLevel?: string) => {
-    switch (messageType) {
-      case 'direct':
-        return 'Mensaje directo';
-      case 'group':
-        return `Mensaje grupal (${visibilityLevel})`;
-      case 'announcement':
-        return 'Anuncio general';
-      default:
-        return messageType;
-    }
-  };
-
+  
   if (!isOpen) return null;
 
   return (

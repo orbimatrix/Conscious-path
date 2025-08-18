@@ -171,25 +171,7 @@ export default function MessagingSystem() {
     }
   };
 
-  const fetchConversation = async (userId: string) => {
-    try {
-      const response = await fetch(`/api/admin/conversations/${userId}`);
-      if (response.ok) {
-        const data = await response.json();
-        // Sort messages by creation date (oldest first, like WhatsApp)
-        const sortedMessages = (data.messages || []).sort((a: Message, b: Message) => 
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        );
-        setConversation(sortedMessages);
-      } else {
-        console.error('Failed to fetch conversation:', response.status);
-        setConversation([]);
-      }
-    } catch (error) {
-      console.error('Error fetching conversation:', error);
-      setConversation([]);
-    }
-  };
+ 
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
