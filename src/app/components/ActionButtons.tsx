@@ -59,8 +59,10 @@ export default function ActionButtons() {
                     onClick={handleCorrectionsClick}
                 >
                     CORRECCIONES
-                    {correctionsCount > 0 && (
+                    {correctionsCount > 0 ? (
                         <div className="usuario-notification-badge">{correctionsCount}</div>
+                    ) : (
+                        <div className="usuario-ok-badge">OK</div>
                     )}
                 </button>
             </section>

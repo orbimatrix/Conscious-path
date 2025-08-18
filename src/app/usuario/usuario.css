@@ -529,6 +529,21 @@
   margin-left: 10px;
 }
 
+.usuario-ok-badge {
+  position: static;
+  background: #22c55e;
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
 /* Unified Info Section */
 .usuario-unified-section {
   padding: 20px;
