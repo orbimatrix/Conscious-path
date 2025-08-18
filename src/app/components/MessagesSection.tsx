@@ -9,7 +9,6 @@ export default function MessagesSection() {
   const { user } = useUser();
   const [unreadCount, setUnreadCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   // Initialize Socket.IO for real-time messaging
   const { isConnected, messages } = useSocket(user?.id);

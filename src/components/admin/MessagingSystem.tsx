@@ -197,6 +197,18 @@ export default function MessagingSystem() {
             messageType: 'direct',
           });
           console.log('Admin message sent via Ably to user:', selectedUser);
+          
+          // Add message to local conversation for immediate display
+          const newMessage: Message = {
+            id: Date.now() + Math.random(),
+            content: message,
+            messageType: 'direct',
+            isRead: false,
+            createdAt: new Date().toISOString(),
+            senderId: 'admin',
+            receiverId: selectedUser,
+          };
+          setMessages(prev => [...prev, newMessage]);
         } else {
           console.error('Socket not connected, cannot send real-time message');
         }
@@ -314,7 +326,7 @@ export default function MessagingSystem() {
         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center space-x-2">
             <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium text-black">
               {isConnected ? 'Connected to Ably' : 'Disconnected from Ably'}
             </span>
           </div>
