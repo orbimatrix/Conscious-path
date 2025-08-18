@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
 import { useSocket, Message } from '@/lib/socket-client';
@@ -13,24 +13,22 @@ interface MessageModalProps {
 
 export default function MessageModal({ isOpen, onClose, onMessageSent }: MessageModalProps) {
   const { user } = useUser();
+  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, markAsRead } = useSocket(user?.id);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [userLevel, setUserLevel] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize Socket.IO for real-time messaging
-  const {
-    socket,
-    isConnected,
-    sendMessage: sendSocketMessage,
-    startTyping,
-    stopTyping,
-    markAsRead,
-    joinLevel,
-  } = useSocket(user?.id);
+  // Memoize markAsRead to prevent useEffect from running repeatedly
+  const memoizedMarkAsRead = useCallback((messageId: number, senderId: string) => {
+    if (socket && isConnected) {
+      markAsRead(messageId, senderId);
+    }
+  }, [socket, isConnected, markAsRead]);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,36 +37,48 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     }
   }, [isOpen]);
 
+  // Debug effect to monitor messages state changes
+  useEffect(() => {
+    console.log('Messages state changed, count:', messages.length);
+    if (messages.length > 0) {
+      console.log('Latest message:', messages[messages.length - 1]);
+    }
+  }, [messages]);
+
+  // Debug effect to monitor socket connection
+  useEffect(() => {
+    console.log('Socket connection changed:', { socket: !!socket, isConnected });
+  }, [socket, isConnected]);
+
   // Join user's level room when connected
   useEffect(() => {
     if (isConnected && user) {
-      // Fetch user's level and join the room
-      fetch('/api/user/profile')
-        .then(response => response.json())
-        .then(data => {
-          if (data.user?.level) {
-            joinLevel(data.user.level);
-            console.log(`User joined level room: ${data.user.level}`);
-          } else {
-            // Default to 'inmortal' if no level found
-            joinLevel('inmortal');
-            console.log('User joined default level room: inmortal');
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching user level:', error);
-          // Default to 'inmortal' if error
-          joinLevel('inmortal');
-          console.log('User joined default level room: inmortal (fallback)');
-        });
+      // Just join the default level room to prevent infinite API calls
+      if (!userLevel) {
+        console.log('Joining default level room: inmortal');
+        setUserLevel('inmortal');
+        joinLevel('inmortal');
+      }
     }
-  }, [isConnected, user, joinLevel]);
+  }, [isConnected, user, joinLevel, userLevel]);
 
   useEffect(() => {
-    if (!socket) return;
+    if (!socket) {
+      console.log('Socket not available yet');
+      return;
+    }
+
+    console.log('Setting up Socket.IO event listeners for user:', user?.id);
+    console.log('Socket ID:', socket.id);
+    console.log('Socket connected state:', socket.connected);
 
     // Listen for new messages
     socket.on('new_message', (newMessage: Message) => {
+      console.log('=== NEW MESSAGE RECEIVED ===');
+      console.log('Message received:', newMessage);
+      console.log('Current user ID:', user?.id);
+      console.log('Message sender ID:', newMessage.senderId);
+      
       // Add admin sender info if it's from admin
       if (newMessage.senderId === 'admin') {
         newMessage.sender = {
@@ -79,12 +89,17 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
         };
       }
       
-      setMessages(prev => [...prev, newMessage]);
+      console.log('Adding message to conversation, current count:', messages.length);
+      setMessages(prev => {
+        const newMessages = [...prev, newMessage];
+        console.log('New message count:', newMessages.length);
+        return newMessages;
+      });
       toast.success('New message received!');
       
       // Mark as read automatically
       if (newMessage.senderId !== user?.id) {
-        markAsRead(newMessage.id, newMessage.senderId);
+        memoizedMarkAsRead(newMessage.id, newMessage.senderId);
       }
     });
 
@@ -104,7 +119,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       toast.success('New group message received!');
       
       // Mark as read automatically
-      markAsRead(newMessage.id, newMessage.senderId);
+      memoizedMarkAsRead(newMessage.id, newMessage.senderId);
     });
 
     // Listen for announcements
@@ -123,13 +138,12 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       toast.success('New announcement received!');
       
       // Mark as read automatically
-      markAsRead(newMessage.id, newMessage.senderId);
+      memoizedMarkAsRead(newMessage.id, newMessage.senderId);
     });
 
     // Listen for message confirmations
     socket.on('message_sent', (sentMessage: Message) => {
       // Message was sent successfully
-      console.log('Message sent:', sentMessage);
     });
 
     // Listen for typing indicators
@@ -154,6 +168,11 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       );
     });
 
+    // Listen for pong response
+    socket.on('pong_user', (data: { timestamp: string }) => {
+      toast.success('Socket.IO connection confirmed!');
+    });
+
     return () => {
       socket.off('new_message');
       socket.off('new_group_message');
@@ -162,8 +181,9 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       socket.off('user_typing');
       socket.off('user_stopped_typing');
       socket.off('message_read');
+      socket.off('pong_user');
     };
-  }, [socket, user?.id, markAsRead]);
+  }, [socket, user?.id, memoizedMarkAsRead]);
 
   useEffect(() => {
     // Scroll to bottom when conversation updates, but only if it's a new message
@@ -242,13 +262,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
 
     try {
       // Send real-time message
-      console.log('Sending user message:', {
-        content: messageContent,
-        receiverId: 'admin',
-        messageType: 'direct',
-        socketConnected: !!socket,
-        isConnected,
-      });
+     
       
       if (socket && isConnected) {
         sendSocketMessage({
@@ -256,7 +270,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
           receiverId: 'admin',
           messageType: 'direct',
         });
-        console.log('User message sent via Socket.IO');
       } else {
         console.error('Socket not connected, cannot send real-time message');
       }
@@ -320,16 +333,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
+  
 
   const formatDateHeader = (dateString: string) => {
     const date = new Date(dateString);
@@ -401,9 +405,16 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
               <span className="text-sm text-gray-600">
                 {isConnected ? 'Connected' : 'Disconnected'}
               </span>
-              <span className="text-xs text-gray-500">
+              {/* <span className="text-xs text-gray-500">
                 (User - {user?.id})
-              </span>
+              </span> */}
+              
+              {/* Ping Button */}
+              
+
+             
+
+              
             </div>
           </div>
           <div className="flex items-center gap-2">

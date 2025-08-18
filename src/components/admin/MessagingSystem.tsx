@@ -65,7 +65,6 @@ export default function MessagingSystem() {
 
     // Listen for new messages
     socket.on('new_message', (newMessage: Message) => {
-      console.log('New message received:', newMessage);
       if (selectedUser && messageType === 'direct' && 
           (newMessage.senderId === selectedUser || newMessage.receiverId === selectedUser)) {
         // Add user sender info if it's from a user
@@ -80,7 +79,6 @@ export default function MessagingSystem() {
             };
           }
         }
-        console.log('Adding message to conversation:', newMessage);
         setConversation(prev => [...prev, newMessage]);
       }
     });
@@ -127,20 +125,16 @@ export default function MessagingSystem() {
     // Listen for message confirmations
     socket.on('message_sent', (sentMessage: Message) => {
       // Message was sent successfully
-      console.log('Message sent:', sentMessage);
     });
 
     socket.on('admin_message_sent', (sentMessage: Message) => {
       // Admin message was sent successfully
-      console.log('Admin message sent:', sentMessage);
     });
 
     socket.on('group_message_sent', (sentMessage: Message) => {
-      console.log('Group message sent:', sentMessage);
     });
 
     socket.on('announcement_sent', (sentMessage: Message) => {
-      console.log('Announcement sent:', sentMessage);
     });
 
     // Listen for typing indicators
@@ -230,13 +224,7 @@ export default function MessagingSystem() {
     try {
       if (messageType === 'direct' && selectedUser) {
         // Send real-time message using admin_message event
-        console.log('Sending admin message:', {
-          content: message,
-          receiverId: selectedUser,
-          messageType: 'direct',
-          socketConnected: !!socket,
-          isConnected,
-        });
+
         
         if (socket && isConnected) {
           socket.emit('admin_message', {
@@ -244,7 +232,6 @@ export default function MessagingSystem() {
             receiverId: selectedUser,
             messageType: 'direct',
           });
-          console.log('Admin message sent via Socket.IO');
         } else {
           console.error('Socket not connected, cannot send real-time message');
         }
@@ -259,7 +246,6 @@ export default function MessagingSystem() {
           createdAt: new Date().toISOString(),
           isRead: false,
         };
-        console.log('Adding admin message to conversation:', newMessage);
         setConversation(prev => [...prev, newMessage]);
         
         // Store message in database via API
@@ -487,9 +473,7 @@ export default function MessagingSystem() {
           <span className="text-sm text-gray-600">
             {isConnected ? 'Connected' : 'Disconnected'}
           </span>
-          <span className="text-xs text-gray-500">
-            ({isAdmin ? 'Admin' : 'User'} - {user?.id})
-          </span>
+         
         </div>
       </div>
       
@@ -575,6 +559,13 @@ export default function MessagingSystem() {
               {loading ? 'Sending...' : 'Send Message'}
             </button>
 
+
+            {/* Test Connection Broadcast */}
+          
+
+          
+            {/* List Connected Users */}
+          
             <button
               onClick={handleCleanupMessages}
               disabled={cleanupLoading}
@@ -588,6 +579,18 @@ export default function MessagingSystem() {
         {/* Message Preview */}
         <div className="bg-gray-50 p-6 rounded-lg">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Message Preview</h3>
+          
+          {/* Debug Information */}
+          <div className="mb-4 p-3 bg-yellow-100 rounded border">
+            <h4 className="font-semibold text-sm text-yellow-800 mb-2">Debug Info:</h4>
+            <div className="text-xs text-yellow-700 space-y-1">
+              <div>Socket Connected: {isConnected ? 'Yes' : 'No'}</div>
+              <div>Selected User: {selectedUser || 'None'}</div>
+              <div>Message Type: {messageType}</div>
+              <div>Total Users: {users.length}</div>
+              <div>Admin Role: {isAdmin ? 'Yes' : 'No'}</div>
+            </div>
+          </div>
           
           <div className="space-y-3">
             <div className="text-sm text-gray-600">

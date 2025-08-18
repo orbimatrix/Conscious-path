@@ -39,26 +39,32 @@ app.prepare().then(() => {
   let adminSocketId = null; // Track admin socket
 
   io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
 
     // Handle user authentication
     socket.on('authenticate', (userId) => {
+      console.log(`=== USER AUTHENTICATION ===`);
+      console.log(`User ${userId} authenticating with socket ${socket.id}`);
+      
       userConnections.set(userId, socket.id);
       socket.join(`user_${userId}`);
       
       // Check if this is an admin user
       if (userId === 'admin' || userId.includes('admin')) {
         adminSocketId = socket.id;
-        console.log(`Admin authenticated and joined room: ${socket.id}`);
+        console.log(`✅ Admin authenticated and joined room: ${socket.id}`);
       } else {
-        console.log(`User ${userId} authenticated and joined room`);
+        console.log(`✅ User ${userId} authenticated and joined room: ${socket.id}`);
       }
+      
+      // Log all current connections for debugging
+      console.log('Current user connections:', Array.from(userConnections.entries()));
+      console.log('Admin socket ID:', adminSocketId);
+      console.log('Total connected users:', userConnections.size);
     });
 
     // Handle direct messages
     socket.on('send_message', async (data) => {
       const { content, receiverId, senderId, messageType, visibilityLevel } = data;
-      console.log('Received send_message:', { content, receiverId, senderId, messageType });
       
       // Emit to receiver immediately for real-time delivery
       if (receiverId === 'admin') {
@@ -74,7 +80,6 @@ app.prepare().then(() => {
             createdAt: new Date().toISOString(),
             isRead: false,
           });
-          console.log('Message delivered to admin via Socket.IO');
         } else {
           console.log('Admin not connected, message will be stored in DB only');
         }
@@ -92,7 +97,6 @@ app.prepare().then(() => {
             createdAt: new Date().toISOString(),
             isRead: false,
           });
-          console.log('Message delivered to user via Socket.IO');
         } else {
           console.log('User not connected, message will be stored in DB only');
         }
@@ -111,7 +115,6 @@ app.prepare().then(() => {
       });
 
       // Note: Database storage will be handled by the API routes
-      console.log('Message sent via Socket.IO, database storage handled by API');
     });
 
     // Handle group messages
@@ -140,7 +143,6 @@ app.prepare().then(() => {
       });
 
       // Note: Database storage will be handled by the API routes
-      console.log('Group message sent via Socket.IO, database storage handled by API');
     });
 
     // Handle announcement messages
@@ -167,18 +169,23 @@ app.prepare().then(() => {
       });
 
       // Note: Database storage will be handled by the API routes
-      console.log('Announcement sent via Socket.IO, database storage handled by API');
     });
 
     // Handle admin messages (new event for admin to user messages)
     socket.on('admin_message', async (data) => {
       const { content, receiverId, messageType, visibilityLevel } = data;
-      console.log('Received admin_message:', { content, receiverId, messageType, visibilityLevel });
+      console.log('=== ADMIN MESSAGE RECEIVED ===');
+      console.log('Message data:', { content, receiverId, messageType, visibilityLevel });
+      console.log('Current user connections:', Array.from(userConnections.entries()));
+      console.log('Admin socket ID:', adminSocketId);
       
       // Emit to specific user immediately for real-time delivery
       if (receiverId && receiverId !== 'all') {
         const receiverSocketId = userConnections.get(receiverId);
+        console.log(`Looking for user ${receiverId}, found socket ID: ${receiverSocketId}`);
+        
         if (receiverSocketId) {
+          console.log(`Sending message to user ${receiverId} via socket ${receiverSocketId}`);
           io.to(receiverSocketId).emit('new_message', {
             id: Date.now(),
             content,
@@ -189,9 +196,22 @@ app.prepare().then(() => {
             createdAt: new Date().toISOString(),
             isRead: false,
           });
-          console.log(`Admin message delivered to user ${receiverId} via Socket.IO`);
+          console.log(`✅ Admin message delivered to user ${receiverId} via Socket.IO`);
+          
+          // ALSO broadcast to all users for debugging
+          io.emit('new_message', {
+            id: Date.now(),
+            content: `[DEBUG] ${content}`,
+            senderId: 'admin',
+            receiverId: 'DEBUG_BROADCAST',
+            messageType: 'direct',
+            createdAt: new Date().toISOString(),
+            isRead: false,
+          });
+          console.log('DEBUG: Also broadcasted message to all users');
         } else {
-          console.log(`User ${receiverId} not connected, admin message will be stored in DB only`);
+          console.log(`❌ User ${receiverId} not connected, admin message will be stored in DB only`);
+          console.log('Available user IDs:', Array.from(userConnections.keys()));
         }
       } else if (messageType === 'group' && visibilityLevel) {
         // Emit to all users in the level group
@@ -204,7 +224,6 @@ app.prepare().then(() => {
           createdAt: new Date().toISOString(),
           isRead: false,
         });
-        console.log(`Admin group message delivered to level ${visibilityLevel} via Socket.IO`);
       } else if (messageType === 'announcement') {
         // Emit to all connected users
         io.emit('new_announcement', {
@@ -215,7 +234,6 @@ app.prepare().then(() => {
           createdAt: new Date().toISOString(),
           isRead: false,
         });
-        console.log('Admin announcement delivered to all users via Socket.IO');
       }
 
       // Emit back to admin for confirmation
@@ -229,14 +247,66 @@ app.prepare().then(() => {
         createdAt: new Date().toISOString(),
       });
 
-      // Note: Database storage will be handled by the API routes
-      console.log('Admin message sent via Socket.IO, database storage handled by API');
+    });
+
+    // Test connection event for debugging
+    socket.on('test_connection', () => {
+      console.log('=== TEST CONNECTION ===');
+      console.log('Test connection event received from:', socket.id);
+      
+      // Broadcast test message to all users
+      io.emit('new_message', {
+        id: Date.now(),
+        content: '[TEST] Admin connection test - ' + new Date().toISOString(),
+        senderId: 'admin',
+        receiverId: 'TEST_BROADCAST',
+        messageType: 'direct',
+        createdAt: new Date().toISOString(),
+        isRead: false,
+      });
+      console.log('✅ Test message broadcasted to all users');
+    });
+
+    // List connected users for debugging
+    socket.on('list_users', () => {
+      console.log('=== LIST USERS REQUEST ===');
+      console.log('Request from socket:', socket.id);
+      console.log('All connected users:', Array.from(userConnections.entries()));
+      console.log('Total users:', userConnections.size);
+      
+      // Send user list back to requester
+      socket.emit('users_list', {
+        users: Array.from(userConnections.entries()),
+        total: userConnections.size,
+        timestamp: new Date().toISOString()
+      });
+    });
+
+    // Simple ping event to test user connectivity
+    socket.on('ping_user', () => {
+      console.log('=== PING RECEIVED ===');
+      console.log('Ping received from user:', socket.id);
+      
+      // Send pong back to confirm connection
+      socket.emit('pong_user', { timestamp: new Date().toISOString() });
+      console.log('Pong sent to user:', socket.id);
+      
+      // ALSO send a test new_message event directly to this user
+      socket.emit('new_message', {
+        id: Date.now(),
+        content: '[PING TEST] Test message from ping - ' + new Date().toISOString(),
+        senderId: 'admin',
+        receiverId: 'PING_TEST',
+        messageType: 'direct',
+        createdAt: new Date().toISOString(),
+        isRead: false,
+      });
+      console.log('Test new_message sent directly to user via ping');
     });
 
     // Handle user joining level rooms
     socket.on('join_level', (level) => {
       socket.join(`level_${level}`);
-      console.log(`User joined level room: ${level}`);
     });
 
     // Handle typing indicators
@@ -273,7 +343,6 @@ app.prepare().then(() => {
           break;
         }
       }
-      console.log('User disconnected:', socket.id);
     });
   });
 
