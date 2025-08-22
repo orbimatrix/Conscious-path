@@ -14,6 +14,12 @@ interface ContentItem {
   accessLevel: number;
 }
 
+interface UserLevel {
+  level: string;
+  isActive: boolean;
+  expiresAt?: string;
+}
+
 export default function ConocimientoPage() {
   const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [checkedItems, setCheckedItems] = useState<boolean[]>([false, false, false, false, false, false]);
@@ -21,6 +27,13 @@ export default function ConocimientoPage() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("public");
   const [filteredContent, setFilteredContent] = useState<ContentItem[]>([]);
+  const [userLevels, setUserLevels] = useState<UserLevel[]>([]);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [upgradeMessage, setUpgradeMessage] = useState("");
+  const [upgradeAction, setUpgradeAction] = useState<"login" | "upgrade" | "abundancia">("login");
+  const [lastFetchTime, setLastFetchTime] = useState<number>(0);
+  const [isLoadingLevels, setIsLoadingLevels] = useState(false);
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
   // Content data with access levels
   const contentData = [
@@ -86,7 +99,7 @@ export default function ConocimientoPage() {
       accessLevel: 3
     },
     
-    // Level 4 (ABUNDANCIA) - Free with admin auth
+    // Level 4 (ABUNDANCIA) - Special admin-activated level
     { 
       id: 8, 
       title: "Secretos de la abundancia", 
@@ -115,38 +128,127 @@ export default function ConocimientoPage() {
     }
   ];
 
-  // Check user access level
+  // Fetch user levels from database
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      fetchUserLevels();
+    }
+  }, [isAuthenticated, user]);
+
+  const fetchUserLevels = async () => {
+    // Check if we have cached data that's still valid
+    const now = Date.now();
+    if (lastFetchTime > 0 && (now - lastFetchTime) < CACHE_DURATION) {
+      console.log('Using cached user levels, cache valid for', Math.round((CACHE_DURATION - (now - lastFetchTime)) / 1000), 'seconds');
+      return;
+    }
+
+    try {
+      console.log('Fetching fresh user levels from API...');
+      setIsLoadingLevels(true);
+      const response = await fetch('/api/user/user-levels');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Fetched user levels:', data.userLevels);
+        setUserLevels(data.userLevels || []);
+        setLastFetchTime(Date.now());
+      }
+    } catch (error) {
+      console.error('Error fetching user levels:', error);
+    } finally {
+      setIsLoadingLevels(false);
+    }
+  };
+
+  // Check user access level based on client specifications
   const getUserAccessLevel = () => {
     if (!isAuthenticated) return 1; // PUBLIC only
     
-    // Check user level from database or subscription
-    // For now, we'll use a simple check - in real implementation, 
-    // you'd query the user's actual level from the database
-    if (user?.publicMetadata?.level) {
-      const level = user.publicMetadata.level as string;
-      switch (level) {
-        case 'inmortal': return 2;
-        case 'carisma': return 3;
-        case 'abundancia': return 4;
-        case 'karma': return 5;
-        default: return 2; // Default to inmortal for registered users
-      }
+    console.log('Current user levels:', userLevels);
+    
+    // Check if user has specific levels from database
+    const hasCarisma = userLevels.some(ul => ul.level === 'carisma' && ul.isActive);
+    const hasKarma = userLevels.some(ul => ul.level === 'karma' && ul.isActive);
+    const hasAbundancia = userLevels.some(ul => ul.level === 'abundancia' && ul.isActive);
+    
+    console.log('Level checks - Carisma:', hasCarisma, 'Karma:', hasKarma, 'Abundancia:', hasAbundancia);
+    
+    // Level 5 (Karma) - highest access
+    if (hasKarma) return 5;
+    
+    // Level 3 (Carisma) - medium access
+    if (hasCarisma) return 3;
+    
+    // Level 2 (Inmortal) - basic registered user (default for all registered users)
+    // All authenticated users without premium levels are considered Inmortal level
+    const userLevel = 2;
+    console.log('User access level determined:', userLevel);
+    return userLevel;
+  };
+
+  // Check if user can access specific content level
+  const canAccessLevel = (contentLevel: number) => {
+    const userLevel = getUserAccessLevel();
+    
+    // Level 1 (Public) - always accessible
+    if (contentLevel === 1) return true;
+    
+    // Level 2 (Inmortal) - accessible to registered users
+    if (contentLevel === 2) return userLevel >= 2;
+    
+    // Level 3 (Carisma) - accessible to Carisma users
+    if (contentLevel === 3) return userLevel >= 3;
+    
+    // Level 4 (Abundancia) - special case: manually activated by admin
+    if (contentLevel === 4) {
+      return userLevels.some(ul => ul.level === 'abundancia' && ul.isActive);
     }
     
-    return 2; // Default to inmortal for registered users
+    // Level 5 (Karma) - accessible to Karma users
+    if (contentLevel === 5) return userLevel >= 5;
+    
+    return false;
+  };
+
+  // Get upgrade message based on content level and user status
+  const getUpgradeMessage = (contentLevel: number) => {
+    if (!isAuthenticated) {
+      setUpgradeAction("login");
+      return "Necesitas iniciar sesión para acceder a este contenido.";
+    }
+    
+    const userLevel = getUserAccessLevel();
+    
+    if (contentLevel === 4) {
+      setUpgradeAction("abundancia");
+      return "El nivel Abundancia es contenido especial que debe ser activado manualmente por un administrador. Contacta con soporte para solicitar acceso.";
+    }
+    
+    if (contentLevel === 5 && userLevel < 5) {
+      setUpgradeAction("upgrade");
+      return "Para acceder al contenido Karma, necesitas adquirir el acceso premium. Haz clic en 'Comprar Acceso' para continuar.";
+    }
+    
+    if (contentLevel === 3 && userLevel < 3) {
+      setUpgradeAction("upgrade");
+      return "Para acceder al contenido Carisma, necesitas adquirir el acceso premium. Haz clic en 'Comprar Acceso' para continuar.";
+    }
+    
+    setUpgradeAction("upgrade");
+    return "Para acceder a este contenido, necesitas adquirir el acceso premium correspondiente.";
   };
 
   // Filter content based on active filter and user access
   useEffect(() => {
-    const userLevel = getUserAccessLevel();
-    
     let filtered = contentData.filter(item => {
       // Always show PUBLIC content
       if (item.accessLevel === 1) return true;
       
-      // Check if user has access to this level
-      if (item.accessLevel <= userLevel) return true;
+      // For authenticated users, show ALL content but restrict access when they try to use it
+      // This allows upgrade prompts to work properly
+      if (isAuthenticated) return true;
       
+      // For non-authenticated users, only show public content
       return false;
     });
 
@@ -163,7 +265,7 @@ export default function ConocimientoPage() {
     }
 
     setFilteredContent(filtered);
-  }, [activeFilter, isAuthenticated, user, isLoaded]);
+  }, [activeFilter, isAuthenticated, user, isLoaded, userLevels]);
 
   const handleFilterClick = (filter: string) => {
     setActiveFilter(filter);
@@ -181,6 +283,20 @@ export default function ConocimientoPage() {
   };
 
   const handlePlusClick = (index: number) => {
+    const contentItem = filteredContent[index];
+    console.log('Clicked on content item:', contentItem);
+    console.log('User levels:', userLevels);
+    console.log('Can access this level?', canAccessLevel(contentItem.accessLevel));
+    
+    if (!canAccessLevel(contentItem.accessLevel)) {
+      console.log('Access denied - showing upgrade modal');
+      const message = getUpgradeMessage(contentItem.accessLevel);
+      console.log('Upgrade message:', message);
+      setUpgradeMessage(message);
+      setShowUpgradeModal(true);
+      return;
+    }
+    
     if (!isAuthenticated) {
       requireAuth();
       return;
@@ -193,6 +309,24 @@ export default function ConocimientoPage() {
   const closeModal = () => {
     setShowModal(false);
     setSelectedCard(null);
+  };
+
+  const closeUpgradeModal = () => {
+    setShowUpgradeModal(false);
+    setUpgradeMessage("");
+  };
+
+  const handleUpgradeAction = () => {
+    if (upgradeAction === "login") {
+      requireAuth();
+    } else if (upgradeAction === "upgrade") {
+      // Redirect to upgrade page or payment
+      window.location.href = "/aportes";
+    } else if (upgradeAction === "abundancia") {
+      // Redirect to contact/support page
+      window.location.href = "/bienestar";
+    }
+    closeUpgradeModal();
   };
 
   const handleModalCheckboxClick = () => {
@@ -211,6 +345,25 @@ export default function ConocimientoPage() {
       case "abundancia": return "Abundancia";
       case "karma": return "Karma";
       default: return level;
+    }
+  };
+
+  const isContentAccessible = (contentLevel: number) => {
+    return canAccessLevel(contentLevel);
+  };
+
+  const getContentCardClass = (contentLevel: number) => {
+    if (contentLevel === 1) return "video-card accessible";
+    if (isContentAccessible(contentLevel)) return "video-card accessible";
+    return "video-card restricted";
+  };
+
+  const getUpgradeButtonText = () => {
+    switch (upgradeAction) {
+      case "login": return "Iniciar Sesión";
+      case "upgrade": return "Comprar Acceso";
+      case "abundancia": return "Contactar Soporte";
+      default: return "Continuar";
     }
   };
 
@@ -284,9 +437,17 @@ export default function ConocimientoPage() {
             : `Contenido ${getLevelDisplayName(activeFilter)}`
           }
         </h2>
+        
+        {isLoadingLevels && (
+          <div className="loading-indicator">
+            <div className="loading-spinner"></div>
+            <p>Cargando niveles de usuario...</p>
+          </div>
+        )}
+        
         <div className="videos-grid">
           {filteredContent.map((item, index) => (
-            <div key={item.id} className="video-card">
+            <div key={item.id} className={getContentCardClass(item.accessLevel)}>
               <div className="video-thumbnail">
                 <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
                   {getContentIcon(item.type)}
@@ -330,6 +491,25 @@ export default function ConocimientoPage() {
                 <span className="modal-checkbox-text">Marcar como completado</span>
               </div>
               <div className="modal-minus"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div className="modal-overlay" onClick={closeUpgradeModal}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeUpgradeModal}>×</button>
+            <h3 className="modal-title">Acceso Restringido</h3>
+            <p className="modal-description">{upgradeMessage}</p>
+            <div className="modal-actions">
+              <button 
+                className="upgrade-button"
+                onClick={handleUpgradeAction}
+              >
+                {getUpgradeButtonText()}
+              </button>
             </div>
           </div>
         </div>

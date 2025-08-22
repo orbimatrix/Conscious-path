@@ -17,7 +17,12 @@ export const users = pgTable('users', {
   allianceRequested: boolean('alliance_requested').default(false), // New field for Alianza tracking
 
   createdAt: timestamp('created_at').defaultNow(),
-});
+}, (table) => ({
+  // Performance indexes
+  clerkIdIdx: index('users_clerk_id_idx').on(table.clerkId),
+  levelIdx: index('users_level_idx').on(table.level),
+  isActiveIdx: index('users_is_active_idx').on(table.isActive),
+}));
 
 export const userSubscriptions = pgTable('user_subscriptions', {
   id: serial('id').primaryKey(),
@@ -83,7 +88,14 @@ export const userLevels = pgTable('user_levels', {
   assignedBy: varchar('assigned_by', { length: 255 }).notNull(), // Clerk ID of admin
   assignedAt: timestamp('assigned_at').defaultNow(),
   expiresAt: timestamp('expires_at'), // Optional expiration
-});
+}, (table) => ({
+  // Performance indexes
+  userIdIdx: index('user_levels_user_id_idx').on(table.userId),
+  levelIdx: index('user_levels_level_idx').on(table.level),
+  isActiveIdx: index('user_levels_is_active_idx').on(table.isActive),
+  // Composite index for the most common query pattern
+  userActiveIdx: index('user_levels_user_active_idx').on(table.userId, table.isActive),
+}));
 
 export const phrases = pgTable('phrases', {
   id: serial('id').primaryKey(),

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get user data
+    // Optimized single query with only needed fields
     const userData = await db
       .select({
         clerkId: users.clerkId,
@@ -19,6 +19,8 @@ export async function GET(request: NextRequest) {
         username: users.username,
         email: users.email,
         level: users.level,
+        points: users.points,
+        isActive: users.isActive,
       })
       .from(users)
       .where(eq(users.clerkId, userId))
