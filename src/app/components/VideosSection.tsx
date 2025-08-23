@@ -547,6 +547,7 @@ export default function VideosSection() {
                   <audio
                     controls
                     className="w-full"
+                    controlsList="nodownload"
                     autoPlay
                     preload="metadata"
                     onError={(e) => {
