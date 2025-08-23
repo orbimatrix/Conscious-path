@@ -18,7 +18,7 @@ export default function AudiosPage() {
       const username = "admin";
       const password = "6cG59n4C4rNw7LAdHy";
   
-      const res = await fetch("http://162.254.35.178:3003/list-audios", {
+      const res = await fetch("https://audio.sendaconsciente.com/list-audios", {
         headers: {
           "Authorization": "Basic " + btoa(`${username}:${password}`),
         },

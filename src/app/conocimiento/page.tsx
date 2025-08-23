@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import FooterSection from "../components/FooterSection";
 import SignupModal from "../components/SignupModal";
 import { useAuth } from "../../lib/auth";
+import { useRouter } from "next/navigation";
 import "./conocimiento.css";
 
 interface ContentItem {
@@ -34,6 +35,7 @@ export default function ConocimientoPage() {
   const [lastFetchTime, setLastFetchTime] = useState<number>(0);
   const [isLoadingLevels, setIsLoadingLevels] = useState(false);
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+  const router = useRouter();
 
   // Content data with access levels
   const contentData = [
@@ -139,17 +141,14 @@ export default function ConocimientoPage() {
     // Check if we have cached data that's still valid
     const now = Date.now();
     if (lastFetchTime > 0 && (now - lastFetchTime) < CACHE_DURATION) {
-      console.log('Using cached user levels, cache valid for', Math.round((CACHE_DURATION - (now - lastFetchTime)) / 1000), 'seconds');
       return;
     }
 
     try {
-      console.log('Fetching fresh user levels from API...');
       setIsLoadingLevels(true);
       const response = await fetch('/api/user/user-levels');
       if (response.ok) {
         const data = await response.json();
-        console.log('Fetched user levels:', data.userLevels);
         setUserLevels(data.userLevels || []);
         setLastFetchTime(Date.now());
       }
@@ -164,14 +163,12 @@ export default function ConocimientoPage() {
   const getUserAccessLevel = () => {
     if (!isAuthenticated) return 1; // PUBLIC only
     
-    console.log('Current user levels:', userLevels);
     
     // Check if user has specific levels from database
     const hasCarisma = userLevels.some(ul => ul.level === 'carisma' && ul.isActive);
     const hasKarma = userLevels.some(ul => ul.level === 'karma' && ul.isActive);
     const hasAbundancia = userLevels.some(ul => ul.level === 'abundancia' && ul.isActive);
     
-    console.log('Level checks - Carisma:', hasCarisma, 'Karma:', hasKarma, 'Abundancia:', hasAbundancia);
     
     // Level 5 (Karma) - highest access
     if (hasKarma) return 5;
@@ -182,7 +179,6 @@ export default function ConocimientoPage() {
     // Level 2 (Inmortal) - basic registered user (default for all registered users)
     // All authenticated users without premium levels are considered Inmortal level
     const userLevel = 2;
-    console.log('User access level determined:', userLevel);
     return userLevel;
   };
 
@@ -214,7 +210,11 @@ export default function ConocimientoPage() {
   const getUpgradeMessage = (contentLevel: number) => {
     if (!isAuthenticated) {
       setUpgradeAction("login");
-      return "Necesitas iniciar sesión para acceder a este contenido.";
+      if (contentLevel === 1) {
+        return "Necesitas iniciar sesión para acceder a este contenido.";
+      } else {
+        return "Necesitas iniciar sesión para acceder a este contenido. Regístrate para obtener acceso a niveles superiores.";
+      }
     }
     
     const userLevel = getUserAccessLevel();
@@ -241,15 +241,9 @@ export default function ConocimientoPage() {
   // Filter content based on active filter and user access
   useEffect(() => {
     let filtered = contentData.filter(item => {
-      // Always show PUBLIC content
-      if (item.accessLevel === 1) return true;
-      
-      // For authenticated users, show ALL content but restrict access when they try to use it
-      // This allows upgrade prompts to work properly
-      if (isAuthenticated) return true;
-      
-      // For non-authenticated users, only show public content
-      return false;
+      // Show ALL content to everyone - this is the key change
+      // The access control happens when they try to interact with the content
+      return true;
     });
 
     // Apply additional filter if not showing all content
@@ -284,14 +278,18 @@ export default function ConocimientoPage() {
 
   const handlePlusClick = (index: number) => {
     const contentItem = filteredContent[index];
-    console.log('Clicked on content item:', contentItem);
-    console.log('User levels:', userLevels);
-    console.log('Can access this level?', canAccessLevel(contentItem.accessLevel));
+  
+    
+    // For non-authenticated users, show login prompt for any restricted content
+    if (!isAuthenticated && contentItem.accessLevel > 1) {
+      const message = getUpgradeMessage(contentItem.accessLevel);
+      setUpgradeMessage(message);
+      setShowUpgradeModal(true);
+      return;
+    }
     
     if (!canAccessLevel(contentItem.accessLevel)) {
-      console.log('Access denied - showing upgrade modal');
       const message = getUpgradeMessage(contentItem.accessLevel);
-      console.log('Upgrade message:', message);
       setUpgradeMessage(message);
       setShowUpgradeModal(true);
       return;
@@ -321,10 +319,10 @@ export default function ConocimientoPage() {
       requireAuth();
     } else if (upgradeAction === "upgrade") {
       // Redirect to upgrade page or payment
-      window.location.href = "/aportes";
+      router.push("/aportes");
     } else if (upgradeAction === "abundancia") {
       // Redirect to contact/support page
-      window.location.href = "/bienestar";
+      router.push("/bienestar");
     }
     closeUpgradeModal();
   };
@@ -335,6 +333,38 @@ export default function ConocimientoPage() {
 
   const getContentIcon = (type: string) => {
     return type === "video" ? "▶" : "♪";
+  };
+
+  const getLockIcon = (accessLevel: number) => {
+    // Don't show lock icon for public content (level 1)
+    if (accessLevel === 1) {
+      return null;
+    }
+    
+    // For authenticated users, check their access level
+    if (isAuthenticated && user) {
+      const userLevel = getUserAccessLevel();
+      
+      // Inmortal users (level 2) can access Inmortal content (level 2) - no lock needed
+      if (accessLevel === 2 && userLevel >= 2) {
+        return null;
+      }
+      
+      // Show lock for content the user doesn't have access to
+      if (accessLevel > userLevel) {
+        return "🔒";
+      }
+      
+      // User has access to this level - no lock needed
+      return null;
+    }
+    
+    // For non-authenticated users, show lock for all restricted content
+    if (accessLevel > 1) {
+      return "🔒";
+    }
+    
+    return null;
   };
 
   const getLevelDisplayName = (level: string) => {
@@ -353,9 +383,9 @@ export default function ConocimientoPage() {
   };
 
   const getContentCardClass = (contentLevel: number) => {
-    if (contentLevel === 1) return "video-card accessible";
-    if (isContentAccessible(contentLevel)) return "video-card accessible";
-    return "video-card restricted";
+    // All content cards are visually accessible since everyone can see them
+    // Access control happens when they try to interact with the content
+    return "video-card accessible";
   };
 
   const getUpgradeButtonText = () => {
@@ -452,6 +482,11 @@ export default function ConocimientoPage() {
                 <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
                   {getContentIcon(item.type)}
                 </div>
+                {getLockIcon(item.accessLevel) && (
+                  <div className="lock-icon">
+                    {getLockIcon(item.accessLevel)}
+                  </div>
+                )}
               </div>
               <div className="video-info">
                 <div className="video-title">{item.title}</div>
@@ -501,7 +536,9 @@ export default function ConocimientoPage() {
         <div className="modal-overlay" onClick={closeUpgradeModal}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal" onClick={closeUpgradeModal}>×</button>
-            <h3 className="modal-title">Acceso Restringido</h3>
+            <h3 className="modal-title">
+              {upgradeAction === "login" ? "Iniciar Sesión" : "Acceso Restringido"}
+            </h3>
             <p className="modal-description">{upgradeMessage}</p>
             <div className="modal-actions">
               <button 

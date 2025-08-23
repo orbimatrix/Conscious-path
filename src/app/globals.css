@@ -2471,7 +2471,7 @@ body {
 }
 
 .modal-card {
-  background: #B19B6D;
+  background: #a08b6b;
   border-radius: 12px;
   padding: 25px;
   max-width: 400px;
@@ -4373,7 +4373,7 @@ body {
 }
 
 .signup-modal {
-  background: white;
+  background: #a08b6b;
   border-radius: 12px;
   padding: 30px;
   max-width: 400px;
@@ -4423,14 +4423,14 @@ body {
 .signup-modal-title {
   font-size: 24px;
   font-weight: 700;
-  color: #333;
+  color: white;
   margin-bottom: 15px;
   font-family: 'Lato', sans-serif;
 }
 
 .signup-modal-message {
   font-size: 16px;
-  color: #666;
+  color: white;
   margin-bottom: 25px;
   line-height: 1.5;
   font-family: 'Lato', sans-serif;
