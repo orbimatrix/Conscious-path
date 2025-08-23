@@ -19,6 +19,7 @@
     "@sanity/vision": "^3.99.0",
     "@sanity/webhook": "^4.0.4",
     "ably": "^2.11.0",
+    "axios": "^1.11.0",
     "drizzle-orm": "^0.44.4",
     "luxon": "^3.7.1",
     "next": "15.4.4",
