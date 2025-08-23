@@ -29,7 +29,7 @@ export default function AudiosPage() {
       if (data.success) {
         const filesWithUrl = data.files.map((f: any) => ({
           ...f,
-          url: `http://162.254.35.178:3003${f.url}` // full URL
+          url: `https://audio.sendaconsciente.com${f.url}` // full URL
         }));
         setAudioFiles(filesWithUrl);
       }
