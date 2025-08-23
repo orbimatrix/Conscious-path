@@ -12,7 +12,7 @@ export default function MessagingSystem() {
   const isAdmin = user?.publicMetadata?.role === 'admin';
 
 
-  const { socket, isConnected, sendMessage, sendGroupMessage, sendAnnouncement, joinLevel, subscribeToUserMessages, messages: socketMessages, setMessages } = useSocket(isAdmin ? 'admin' : user?.id);
+  const { socket, isConnected, sendMessage, sendGroupMessage, subscribeToUserMessages, messages: socketMessages, setMessages } = useSocket(isAdmin ? 'admin' : user?.id);
   const [conversation, setConversation] = useState<Message[]>([]);
   const [selectedUser, setSelectedUser] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('');

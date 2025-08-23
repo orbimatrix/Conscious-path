@@ -66,15 +66,15 @@ export default function LimpiarKarmaPage() {
             <h2 className="limpiar-karma-benefits-title">LIBERE LAS CARGAS DE SU ALMA</h2>
             <ul className="limpiar-karma-benefits-list">
               <li className="limpiar-karma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Corte los lazos de la culpabilidad</span>
               </li>
               <li className="limpiar-karma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Tenga una vida más consciente y plena</span>
               </li>
               <li className="limpiar-karma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Asegure una buena reencarnación</span>
               </li>
             </ul>

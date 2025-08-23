@@ -19,15 +19,15 @@ export default function RenacerPage() {
           <div className="renacer-benefits-container">
               <ul className="renacer-benefits-list">
                 <li className="renacer-benefit-item">
-                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                   <span className="benefit-text">Evitar ser ignorante otra vez</span>
                 </li>
                 <li className="renacer-benefit-item">
-                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                   <span className="benefit-text">Conservar la experiencia y frutos conseguidos en esta vida</span>
                 </li>
                 <li className="renacer-benefit-item">
-                  <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                  <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                   <span className="benefit-text">Vivir sin miedo a morir</span>
                 </li>
               </ul>

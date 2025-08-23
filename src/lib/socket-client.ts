@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Ably from 'ably';
-import { ChatClient, ChatMessageEvent } from '@ably/chat';
+import { ChatClient } from '@ably/chat';
 
 export interface Message {
   id: number;
@@ -56,10 +56,10 @@ export const useSocket = (userId?: string): UseSocketReturn => {
   const [messages, setMessages] = useState<Message[]>([]);
   const socketRef = useRef<Ably.Realtime | null>(null);
   const chatClientRef = useRef<ChatClient | null>(null);
-  const subscriptionsRef = useRef<Map<string, any>>(new Map());
+  const subscriptionsRef = useRef<Map<string, Ably.RealtimeChannel>>(new Map());
 
   // Helper function to safely unsubscribe
-  const safeUnsubscribe = (channel: any, key: string) => {
+  const safeUnsubscribe = (channel: Ably.RealtimeChannel, key: string) => {
     if (channel && typeof channel.unsubscribe === 'function') {
       try {
         channel.unsubscribe();
@@ -121,10 +121,11 @@ export const useSocket = (userId?: string): UseSocketReturn => {
     return () => {
       console.log('Cleaning up Ably connection for user:', userId);
       // Clean up all subscriptions
-      subscriptionsRef.current.forEach((subscription, key) => {
+      const currentSubscriptions = subscriptionsRef.current;
+      currentSubscriptions.forEach((subscription, key) => {
         safeUnsubscribe(subscription, key);
       });
-      subscriptionsRef.current.clear();
+      currentSubscriptions.clear();
       ably.close();
     };
   }, [userId]);
@@ -205,7 +206,7 @@ export const useSocket = (userId?: string): UseSocketReturn => {
         const channel = socket.channels.get(`group-${level}`);
         
         // Subscribe to messages in this level
-        channel.subscribe('group_message', (message: any) => {
+        channel.subscribe('group_message', (message: Ably.Message) => {
           console.log('Group message received:', message);
           const newMessage: Message = {
             id: Date.now() + Math.random(), // Ensure unique ID
@@ -265,7 +266,7 @@ export const useSocket = (userId?: string): UseSocketReturn => {
     }
   };
 
-  const subscribeToMessages = async (receiverId: string) => {
+  const subscribeToMessages = async () => {
     if (socket && userId) {
       try {
         // Unsubscribe from previous subscription if exists
@@ -286,7 +287,7 @@ export const useSocket = (userId?: string): UseSocketReturn => {
         console.log(`Subscribed to messages on channel chat-${userId}`);
         
         // Listen for messages
-        channel.subscribe('message', (message: any) => {
+        channel.subscribe('message', (message: Ably.Message) => {
           console.log('Message received on channel:', message);
           const newMessage: Message = {
             id: Date.now() + Math.random(), // Ensure unique ID
@@ -344,7 +345,7 @@ export const useSocket = (userId?: string): UseSocketReturn => {
         console.log(`Admin subscribed to receive messages on chat-admin channel`);
         
         // Listen for messages
-        channel.subscribe('message', (message: any) => {
+        channel.subscribe('message', (message: Ably.Message) => {
           console.log('Admin received message from user:', message);
           const newMessage: Message = {
             id: Date.now() + Math.random(), // Ensure unique ID
@@ -379,7 +380,7 @@ export const useSocket = (userId?: string): UseSocketReturn => {
         const announcementsChannel = socket.channels.get('announcements');
         if (announcementsChannel) {
           announcementsChannel.attach().then(() => {
-            announcementsChannel.subscribe('announcement', (message: any) => {
+            announcementsChannel.subscribe('announcement', (message: Ably.Message) => {
               console.log('Admin received announcement from announcements channel:', message);
               const newMessage: Message = {
                 id: Date.now() + Math.random(), // Ensure unique ID

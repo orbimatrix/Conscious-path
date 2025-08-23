@@ -18,7 +18,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [userLevel, setUserLevel] = useState<string | null>(null);
   const [adminInfo, setAdminInfo] = useState<{ fullName?: string; username?: string } | null>(null);
@@ -44,7 +43,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
       const isAdmin = user?.publicMetadata?.role === 'admin';
       
       if (isAdmin) {
-        console.log('Admin user - will subscribe to user messages when selected');
       } else {
         subscribeToMessages('admin');
         
@@ -53,7 +51,6 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
           const announcementsChannel = socket.channels.get('announcements');
           announcementsSubscribedRef.current = true;
           announcementsChannel.subscribe('announcement', (message: any) => {
-            console.log('Announcement received:', message);
             const newMessage: Message = {
               id: Date.now() + Math.random(),
               content: message.data.content,
@@ -342,12 +339,7 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
           )}
         </div>
 
-        {/* Typing indicator */}
-        {isTyping && (
-          <div className="px-4 py-2 text-sm text-gray-500 italic">
-            Admin está escribiendo...
-          </div>
-        )}
+
 
         {/* Input Area */}
         <div className="p-4 border-t border-gray-200">

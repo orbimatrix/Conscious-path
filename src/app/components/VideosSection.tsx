@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../lib/auth";
 import { VimeoVideo } from "../types/vimeo";
+import Image from "next/image";
 
 interface AudioFile {
   name: string;
@@ -31,7 +32,7 @@ interface UserLevel {
 
 export default function VideosSection() {
   const router = useRouter();
-  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+  const { user,  isAuthenticated,  requireAuth } = useAuth();
   const [userLevels, setUserLevels] = useState<UserLevel[]>([]);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showContentModal, setShowContentModal] = useState(false);
@@ -431,10 +432,12 @@ export default function VideosSection() {
             >
               {item.thumbnail ? (
                 <div className="videos-thumbnail relative">
-                  <img 
+                  <Image 
                     src={item.thumbnail} 
                     alt={item.title}
                     className="w-full h-32 object-cover rounded-t-lg"
+                    width={400}
+                    height={128}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = '/placeholder-video.jpg';

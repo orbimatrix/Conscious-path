@@ -69,17 +69,17 @@ export default function PrivadoPage() {
                     <div className="privado-features-container">
                         <div className="privado-features">
                             <div className="privado-feature-item">
-                                <img src="/img/check.png" alt="Check" className="privado-check-icon" />
+                                <Image src="/img/check.png" alt="Check" className="privado-check-icon" width={20} height={20} />
                                 <span className="privado-feature-text">Atención exclusiva</span>
                             </div>
 
                             <div className="privado-feature-item">
-                                <img src="/img/check.png" alt="Check" className="privado-check-icon" />
+                                <Image src="/img/check.png" alt="Check" className="privado-check-icon" width={20} height={20} />
                                 <span className="privado-feature-text">Máxima privacidad</span>
                             </div>
 
                             <div className="privado-feature-item">
-                                <img src="/img/check.png" alt="Check" className="privado-check-icon" />
+                                <Image src="/img/check.png" alt="Check" className="privado-check-icon" width={20} height={20} />
                                 <span className="privado-feature-text">Identificar problemas y soluciones</span>
                             </div>
                         </div>

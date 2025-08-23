@@ -31,7 +31,6 @@ export default function EstructuralPage() {
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       setIsSubmitted(true);
       // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
     }
   };
 
@@ -66,17 +65,17 @@ export default function EstructuralPage() {
             <h2 className="estructural-benefits-title">DESCUBRA SUS CAPACIDADES REALES</h2>
             <ul className="estructural-benefits-list">
               <li className="estructural-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Aproveche bien su energía y tiempo
                 </span>
               </li>
               <li className="estructural-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Evite frustaciones vitales y profesionales
                 </span>
               </li>
               <li className="estructural-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Tenga amistades adecuadas</span>
               </li>
             </ul>

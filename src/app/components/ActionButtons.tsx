@@ -38,7 +38,7 @@ export default function ActionButtons() {
             toast.error('Error fetching corrections');
             console.log('Error fetching corrections count:', error);
         }
-    }, [user?.id]);
+    }, []);
 
     useEffect(() => {
         if (user) {

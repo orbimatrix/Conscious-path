@@ -2,6 +2,7 @@
 import AudioPlayer from '@/components/AudioPlayer';
 import { useState, useEffect, useCallback } from 'react';
 import { VimeoVideo } from '../types/vimeo';
+import Image from 'next/image';
 
 interface AudioFile {
   name: string;
@@ -31,14 +32,14 @@ export default function AudiosPage() {
       const data = await res.json();
   
       if (data.success) {
-        const filesWithUrl = data.files.map((f: any) => ({
+        const filesWithUrl = data.files.map((f: { name: string; url: string; size: number }) => ({
           ...f,
           url: `https://audio.sendaconsciente.com${f.url}` // full URL
         }));
         setAudioFiles(filesWithUrl);
       }
-    } catch (err) {
-      console.error("Error fetching audios:", err);
+    } catch {
+      console.error("Error fetching audios: Network error occurred");
     } finally {
       setLoading(false);
     }
@@ -140,10 +141,12 @@ export default function AudiosPage() {
           >
             {/* Video Thumbnail */}
             <div className="relative">
-              <img
+              <Image
                 src={video.pictures?.sizes?.[3]?.link || video.pictures?.sizes?.[0]?.link || '/placeholder-video.jpg'}
                 alt={video.name}
                 className="w-full h-48 object-cover"
+                width={400}
+                height={192}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = '/placeholder-video.jpg';
@@ -235,12 +238,7 @@ export default function AudiosPage() {
                       <span className="ml-2 text-gray-600">{selectedVideo.stats.plays}</span>
                     </div>
                   )}
-                  {(selectedVideo.stats as any)?.likes && (
-                    <div>
-                      <span className="font-medium text-gray-700">Likes:</span>
-                      <span className="ml-2 text-gray-600">{(selectedVideo.stats as any).likes}</span>
-                    </div>
-                  )}
+
                 </div>
 
                 <div className="pt-4 border-t">

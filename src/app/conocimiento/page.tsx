@@ -5,6 +5,7 @@ import SignupModal from "../components/SignupModal";
 import { useAuth } from "../../lib/auth";
 import { useRouter } from "next/navigation";
 import { VimeoVideo } from "../types/vimeo";
+import Image from "next/image";
 import "./conocimiento.css";
 
 interface AudioFile {
@@ -49,21 +50,9 @@ export default function ConocimientoPage() {
   const [videos, setVideos] = useState<VimeoVideo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
   const router = useRouter();
-
-  // Fetch user levels from database
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      fetchUserLevels();
-    }
-  }, [isAuthenticated, user]);
-
-  // Fetch audios and videos
-  useEffect(() => {
-    fetchAudios();
-    fetchVideos();
-  }, []);
+  
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
   const fetchUserLevels = useCallback(async () => {
     // Check if we have cached data that's still valid
@@ -102,7 +91,7 @@ export default function ConocimientoPage() {
       const data = await res.json();
   
       if (data.success) {
-        const filesWithUrl = data.files.map((f: any) => ({
+        const filesWithUrl = data.files.map((f: { name: string; url: string; size: number }) => ({
           ...f,
           url: `https://audio.sendaconsciente.com${f.url}` // full URL
         }));
@@ -128,19 +117,32 @@ export default function ConocimientoPage() {
       } else {
         setError(data.error || 'Failed to fetch videos');
       }
-    } catch (err) {
+    } catch {
       setError('Network error occurred');
     } finally {
       setLoading(false);
     }
   }, []);
 
+  // Fetch user levels from database
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      fetchUserLevels();
+    }
+  }, [isAuthenticated, user, fetchUserLevels]);
+
+  // Fetch audios and videos
+  useEffect(() => {
+    fetchAudios();
+    fetchVideos();
+  }, [fetchAudios, fetchVideos]);
+
   // Transform API data to ContentItem format
-  const getContentData = (): ContentItem[] => {
+  const getContentData = useCallback((): ContentItem[] => {
     const contentItems: ContentItem[] = [];
     
     // Add videos
-    videos.forEach((video, index) => {
+    videos.forEach((video) => {
       // Extract meaningful title from video name
       let title = video.name;
       let accessLevel = 1; // Default public level
@@ -183,7 +185,7 @@ export default function ConocimientoPage() {
     audioFiles.forEach((audio, index) => {
       // Extract meaningful title from audio filename
       let title = audio.name;
-      let accessLevel = 1; // Default public level for audios
+      const accessLevel = 1; // Default public level for audios
       
       // For audios, we'll keep them as public level 1 so they're always accessible
       
@@ -211,10 +213,10 @@ export default function ConocimientoPage() {
     });
 
     return contentItems;
-  };
+  }, [videos, audioFiles]);
 
   // Helper function to get level name
-  const getLevelName = (level: number): string => {
+  const getLevelName = useCallback((level: number): string => {
     switch (level) {
       case 1: return "public";
       case 2: return "inmortal";
@@ -223,16 +225,15 @@ export default function ConocimientoPage() {
       case 5: return "karma";
       default: return "public";
     }
-  };
+  }, []);
 
   // Check user access level based on client specifications
-  const getUserAccessLevel = () => {
+  const getUserAccessLevel = useCallback(() => {
     if (!isAuthenticated) return 1; // PUBLIC only
     
     // Check if user has specific levels from database
     const hasCarisma = userLevels.some(ul => ul.level === 'carisma' && ul.isActive);
     const hasKarma = userLevels.some(ul => ul.level === 'karma' && ul.isActive);
-    const hasAbundancia = userLevels.some(ul => ul.level === 'abundancia' && ul.isActive);
     
     // Level 5 (Karma) - highest access
     if (hasKarma) return 5;
@@ -244,10 +245,10 @@ export default function ConocimientoPage() {
     // All authenticated users without premium levels are considered Inmortal level
     const userLevel = 2;
     return userLevel;
-  };
+  }, [isAuthenticated, userLevels]);
 
   // Check if user can access specific content level
-  const canAccessLevel = (contentLevel: number) => {
+  const canAccessLevel = useCallback((contentLevel: number) => {
     const userLevel = getUserAccessLevel();
     
     // Level 1 (Public) - always accessible to everyone
@@ -268,10 +269,10 @@ export default function ConocimientoPage() {
     if (contentLevel === 5) return userLevel >= 5;
     
     return false;
-  };
+  }, [getUserAccessLevel, userLevels]);
 
   // Get upgrade message based on content level and user status
-  const getUpgradeMessage = (contentLevel: number) => {
+  const getUpgradeMessage = useCallback((contentLevel: number) => {
     if (!isAuthenticated) {
       setUpgradeAction("login");
       if (contentLevel === 1) {
@@ -300,12 +301,12 @@ export default function ConocimientoPage() {
     
     setUpgradeAction("upgrade");
     return "Para acceder a este contenido, necesitas adquirir el acceso premium correspondiente.";
-  };
+  }, [isAuthenticated, upgradeAction, setUpgradeAction]);
 
   // Filter content based on active filter and user access
   useEffect(() => {
     const contentData = getContentData();
-    let filtered = contentData.filter(item => {
+    let filtered = contentData.filter(() => {
       // Show ALL content to everyone - this is the key change
       // The access control happens when they try to interact with the content
       return true;
@@ -324,7 +325,7 @@ export default function ConocimientoPage() {
     }
 
     setFilteredContent(filtered);
-  }, [activeFilter, isAuthenticated, user, isLoaded, userLevels, videos, audioFiles]);
+  }, [activeFilter, isAuthenticated, user, isLoaded, userLevels, videos, audioFiles, getContentData]);
 
   const handleFilterClick = (filter: string) => {
     setActiveFilter(filter);
@@ -392,15 +393,13 @@ export default function ConocimientoPage() {
     closeUpgradeModal();
   };
 
-  const handleModalCheckboxClick = () => {
-    // Handle modal checkbox logic here
-  };
 
-  const getContentIcon = (type: string) => {
+
+  const getContentIcon = useCallback((type: string) => {
     return type === "video" ? "▶" : "♪";
-  };
+  }, []);
 
-  const getLockIcon = (accessLevel: number) => {
+  const getLockIcon = useCallback((accessLevel: number) => {
     // Don't show lock icon for public content (level 1)
     if (accessLevel === 1) {
       return null;
@@ -430,9 +429,9 @@ export default function ConocimientoPage() {
     }
     
     return null;
-  };
+  }, [isAuthenticated, user, getUserAccessLevel]);
 
-  const getLevelDisplayName = (level: string) => {
+  const getLevelDisplayName = useCallback((level: string) => {
     switch (level) {
       case "public": return "Público";
       case "inmortal": return "Inmortal";
@@ -441,43 +440,35 @@ export default function ConocimientoPage() {
       case "karma": return "Karma";
       default: return level;
     }
-  };
+  }, []);
 
-  const isContentAccessible = (contentLevel: number) => {
-    return canAccessLevel(contentLevel);
-  };
 
-  const getContentCardClass = (contentLevel: number) => {
+
+  const getContentCardClass = useCallback((): string => {
     // All content cards are visually accessible since everyone can see them
     // Access control happens when they try to interact with the content
     return "video-card accessible";
-  };
+  }, []);
 
-  const getUpgradeButtonText = () => {
+  const getUpgradeButtonText = useCallback(() => {
     switch (upgradeAction) {
       case "login": return "Iniciar Sesión";
       case "upgrade": return "Comprar Acceso";
       case "abundancia": return "Contactar Soporte";
       default: return "Continuar";
     }
-  };
+  }, [upgradeAction]);
 
-  const formatDuration = (seconds: number): string => {
+  const formatDuration = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
+  }, []);
 
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
+
 
   // Get level badge color
-  const getLevelBadgeColor = (level: string) => {
+  const getLevelBadgeColor = useCallback((level: string) => {
     switch (level) {
       case 'public': return 'bg-green-100 text-green-800';
       case 'inmortal': return 'bg-blue-100 text-blue-800';
@@ -486,7 +477,7 @@ export default function ConocimientoPage() {
       case 'karma': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
-  };
+  }, []);
 
   if (loading) return <div className="loading-indicator">Loading content...</div>;
 
@@ -524,10 +515,12 @@ export default function ConocimientoPage() {
           {/* For screens 360px to 479px */}
           <source media="(min-width: 360px)" srcSet="/fotos/g_360.png" />
           {/* Fallback for screens below 360px */}
-          <img 
+          <Image 
             src="/fotos/girl.png" 
             alt="Hero Image" 
             className="hero-image"
+            width={800}
+            height={600}
           />
         </picture>
       </section>
@@ -590,13 +583,15 @@ export default function ConocimientoPage() {
         
         <div className="videos-grid">
           {filteredContent.map((item, index) => (
-            <div key={item.id} className={getContentCardClass(item.accessLevel)}>
+                            <div key={item.id} className={getContentCardClass()}>
               {item.thumbnail ? (
                 <div className="video-thumbnail relative">
-                  <img 
+                  <Image 
                     src={item.thumbnail} 
                     alt={item.title}
                     className="w-full h-32 object-cover rounded-t-lg"
+                    width={400}
+                    height={128}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = '/placeholder-video.jpg';
@@ -642,7 +637,7 @@ export default function ConocimientoPage() {
                     onClick={() => handleCheckboxClick(index)}
                   ></div>
                   <div className="status-plus-circle" onClick={() => handlePlusClick(index)}>
-                    <img src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" />
+                    <Image src="/fotos/circle.svg" alt="Plus circle" className="circle-icon" width={24} height={24} />
                     <span className="plus-icon">+</span>
                   </div>
                 </div>

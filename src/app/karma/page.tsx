@@ -19,15 +19,15 @@ export default function KarmaPage() {
           <div className="carisma-benefits-container">
             <ul className="carisma-benefits-list">
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">El conocimiento más censurado</span>
               </li>
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Evite ser esclavo del mal</span>
               </li>
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Libere su siguiente vida</span>
               </li>
             </ul>

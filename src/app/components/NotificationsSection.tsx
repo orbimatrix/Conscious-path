@@ -9,12 +9,6 @@ export default function NotificationsSection() {
     const [news, setNews] = useState<News[]>([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if (user) {
-            fetchNews();
-        }
-    }, [user]);
-
     const fetchNews = async () => {
         try {
             const response = await fetch('/api/admin/news');
@@ -34,23 +28,11 @@ export default function NotificationsSection() {
         }
     };
 
-    const formatDate = (date: Date | string | null) => {
-        if (!date) return '';
-        
-        // Convert string to Date if needed
-        const dateObj = typeof date === 'string' ? new Date(date) : date;
-        
-        // Check if the date is valid
-        if (isNaN(dateObj.getTime())) {
-            return 'Fecha inválida';
+    useEffect(() => {
+        if (user) {
+            fetchNews();
         }
-        
-        return dateObj.toLocaleDateString('es-ES', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    };
+    }, [user, fetchNews]);
 
     if (loading) {
         return (

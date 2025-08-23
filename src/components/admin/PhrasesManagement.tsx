@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 
 export default function PhrasesManagement() {
   const [phrases, setPhrases] = useState<Phrase[]>([]);
-  const [newPhrase, setNewPhrase] = useState('');
   const [loading, setLoading] = useState(false);
   const [editingPhrase, setEditingPhrase] = useState<Phrase | null>(null);
   const [editContent, setEditContent] = useState('');
@@ -23,7 +22,7 @@ export default function PhrasesManagement() {
         const data = await response.json();
         setPhrases(data.phrases);
       }
-    } catch (error) {
+    } catch  {
       toast.error('Error fetching phrases');
     }
   };

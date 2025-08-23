@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { User } from '@/lib/db/schema';
 import UserProfileModal from './UserProfileModal';
+import Image from 'next/image';
 
 interface UserWithProfile extends User {
   clerkProfile?: {
@@ -165,10 +166,12 @@ export default function UserManagement() {
                   <div className="flex items-center gap-3 mb-2">
                     {/* Profile Image or Initial */}
                     {user.clerkProfile?.imageUrl ? (
-                      <img
+                      <Image
                         src={user.clerkProfile.imageUrl}
                         alt={`${user.clerkProfile.firstName || user.fullName || 'User'}`}
                         className="w-10 h-10 rounded-full object-cover border-2 border-[#A3926B]/20"
+                        width={40}
+                        height={40}
                       />
                     ) : (
                       <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
@@ -277,10 +280,12 @@ export default function UserManagement() {
                     <div className="flex items-center gap-3">
                       {/* Profile Image or Initial */}
                       {user.clerkProfile?.imageUrl ? (
-                        <img
+                        <Image
                           src={user.clerkProfile.imageUrl}
                           alt={`${user.clerkProfile.firstName || user.fullName || 'User'}`}
                           className="w-10 h-10 rounded-full object-cover border-2 border-[#A3926B]/20"
+                          width={40}
+                          height={40}
                         />
                       ) : (
                         <div className="w-10 h-10 bg-gradient-to-br from-[#A3926B] to-[#8B7355] rounded-full flex items-center justify-center text-white font-semibold text-sm">
