@@ -164,7 +164,6 @@ export default function VideosSection() {
     audioFiles.slice(0, 2).forEach((audio, index) => {
       // Extract meaningful title from audio filename
       let title = audio.name;
-      let accessLevel = 1; // Default public level for audios
       
       // For audios, we'll keep them as public level 1 so they're always accessible
       // You can modify this logic if you want different access levels for specific audio files

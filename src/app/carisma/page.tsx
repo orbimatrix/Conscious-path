@@ -19,15 +19,15 @@ export default function CarismaPage() {
           <div className="carisma-benefits-container">
             <ul className="carisma-benefits-list">
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Siempre bien informado</span>
               </li>
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Viva de forma abundante</span>
               </li>
               <li className="carisma-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Bienestar y energía vital</span>
               </li>
             </ul>

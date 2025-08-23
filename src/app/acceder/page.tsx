@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from "react";
+import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import ContactSection from "../components/ContactSection";
 import SignupModal from "../components/SignupModal";
@@ -119,7 +120,7 @@ export default function AccederPage() {
                         {plan.id === 'carisma' && index >= 6 ? (
                           <span className="feature-cross">X</span>
                         ) : (
-                          <img src="/img/check.png" alt="Check" className="feature-icon" />
+                          <Image src="/img/check.png" alt="Check" className="feature-icon" width={20} height={20} />
                         )}
                         {feature}
                       </li>

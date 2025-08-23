@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { phrases } from '@/lib/db/schema';
 import { and, eq, sql } from 'drizzle-orm';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const { userId } = await auth();
     
@@ -12,9 +12,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get today's date in YYYY-MM-DD format for consistent daily phrase selection
+    // Get today's date for consistent daily phrase selection
     const today = new Date();
-    const todayString = today.toISOString().split('T')[0];
     
     // Get the number of active phrases
     const activePhrasesResult = await db

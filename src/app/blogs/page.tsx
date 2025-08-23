@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import './blogs.css'
 
 interface BlogPost {
@@ -50,10 +51,13 @@ export default async function BlogsPage() {
           <Link href={`/blogs/${post.slug.current}`} key={post._id} className="blog-card">
             <div className="blog-card-image">
               {post.mainImage && (
-                <img
+                <Image
                   src={urlFor(post.mainImage).width(400).height(250).url()}
                   alt={post.mainImage.alt || post.title}
                   className="blog-image"
+                  width={400}
+                  height={250}
+                  unoptimized
                 />
               )}
             </div>

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdminUser } from '@/lib/admin';
 import { db } from '@/lib/db';
 import { users } from '@/lib/db/schema';
 import { clerkClient } from '@clerk/nextjs/server';

@@ -73,15 +73,15 @@ export default function BienestarPage() {
                 <div className="bienestar-benefits-wrapper">
                   <ul className="bienestar-benefits-list">
                     <li className="bienestar-benefit-item">
-                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                       <span className="benefit-text">Eficaz solución a problemas repetitivos</span>
                     </li>
                     <li className="bienestar-benefit-item">
-                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                       <span className="benefit-text">Experiencia y métodos probados</span>
                     </li>
                     <li className="bienestar-benefit-item">
-                      <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                      <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                       <span className="benefit-text">Mucho más que una charla</span>
                     </li>
                   </ul>

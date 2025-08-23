@@ -3,6 +3,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import './blog-post.css'
 
 async function getPost(slug: string) {
@@ -88,10 +89,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       
       {post.mainImage && (
         <div className="blog-post-image-container">
-                     <img
+                     <Image
              src={urlFor(post.mainImage).width(800).height(400).url()}
              alt={post.mainImage.alt || post.title}
              className="blog-post-image"
+             width={800}
+             height={400}
+             unoptimized
            />
         </div>
       )}

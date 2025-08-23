@@ -1,18 +1,29 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import FooterSection from "../components/FooterSection";
 import SignupModal from "../components/SignupModal";
 import { useAuth } from "../../lib/auth";
 import { useRouter } from "next/navigation";
+import { VimeoVideo } from "../types/vimeo";
 import "./conocimiento.css";
 
+interface AudioFile {
+  name: string;
+  url: string;
+  size: number;
+}
+
 interface ContentItem {
-  id: number;
+  id: string;
   title: string;
   level: string;
   description: string;
   type: string;
   accessLevel: number;
+  thumbnail?: string;
+  duration?: number;
+  createdTime?: string;
+  url?: string;
 }
 
 interface UserLevel {
@@ -34,101 +45,12 @@ export default function ConocimientoPage() {
   const [upgradeAction, setUpgradeAction] = useState<"login" | "upgrade" | "abundancia">("login");
   const [lastFetchTime, setLastFetchTime] = useState<number>(0);
   const [isLoadingLevels, setIsLoadingLevels] = useState(false);
+  const [audioFiles, setAudioFiles] = useState<AudioFile[]>([]);
+  const [videos, setVideos] = useState<VimeoVideo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
   const router = useRouter();
-
-  // Content data with access levels
-  const contentData = [
-    // Level 1 (PUBLIC) - No login required
-    { 
-      id: 1, 
-      title: "Abundancia y enfermedades", 
-      level: "public", 
-      description: "Este video explora la relación entre la abundancia y las enfermedades, proporcionando insights valiosos sobre cómo mantener la salud física y mental.",
-      type: "video",
-      accessLevel: 1
-    },
-    { 
-      id: 2, 
-      title: "Bienestar y prosperidad", 
-      level: "public", 
-      description: "Descubre cómo el bienestar mental está conectado con la prosperidad financiera y personal.",
-      type: "video",
-      accessLevel: 1
-    },
-    { 
-      id: 3, 
-      title: "Meditación para principiantes", 
-      level: "public", 
-      description: "Una guía completa para comenzar tu práctica de meditación diaria.",
-      type: "audio",
-      accessLevel: 1
-    },
-    
-    // Level 2 (INMORTAL) - Requires registration
-    { 
-      id: 4, 
-      title: "Técnicas avanzadas de respiración", 
-      level: "inmortal", 
-      description: "Aprende técnicas avanzadas de respiración para mejorar tu concentración y energía.",
-      type: "video",
-      accessLevel: 2
-    },
-    { 
-      id: 5, 
-      title: "Manejo del estrés", 
-      level: "inmortal", 
-      description: "Estrategias efectivas para manejar el estrés en la vida diaria.",
-      type: "video",
-      accessLevel: 2
-    },
-    
-    // Level 3 (CARISMA) - First paid level
-    { 
-      id: 6, 
-      title: "Leyes del universo", 
-      level: "carisma", 
-      description: "Descubre las leyes universales que rigen la abundancia y el éxito.",
-      type: "video",
-      accessLevel: 3
-    },
-    { 
-      id: 7, 
-      title: "Manifestación consciente", 
-      level: "carisma", 
-      description: "Aprende a manifestar tus deseos de manera consciente y efectiva.",
-      type: "audio",
-      accessLevel: 3
-    },
-    
-    // Level 4 (ABUNDANCIA) - Special admin-activated level
-    { 
-      id: 8, 
-      title: "Secretos de la abundancia", 
-      level: "abundancia", 
-      description: "Contenido exclusivo sobre los secretos de la abundancia financiera.",
-      type: "video",
-      accessLevel: 4
-    },
-    
-    // Level 5 (KARMA) - Second paid level
-    { 
-      id: 9, 
-      title: "Karma y reencarnación", 
-      level: "karma", 
-      description: "Explora la naturaleza del karma y su relación con la reencarnación.",
-      type: "video",
-      accessLevel: 5
-    },
-    { 
-      id: 10, 
-      title: "Limpieza kármica", 
-      level: "karma", 
-      description: "Técnicas avanzadas para limpiar karma negativo y crear karma positivo.",
-      type: "audio",
-      accessLevel: 5
-    }
-  ];
 
   // Fetch user levels from database
   useEffect(() => {
@@ -137,7 +59,13 @@ export default function ConocimientoPage() {
     }
   }, [isAuthenticated, user]);
 
-  const fetchUserLevels = async () => {
+  // Fetch audios and videos
+  useEffect(() => {
+    fetchAudios();
+    fetchVideos();
+  }, []);
+
+  const fetchUserLevels = useCallback(async () => {
     // Check if we have cached data that's still valid
     const now = Date.now();
     if (lastFetchTime > 0 && (now - lastFetchTime) < CACHE_DURATION) {
@@ -157,18 +85,154 @@ export default function ConocimientoPage() {
     } finally {
       setIsLoadingLevels(false);
     }
+  }, [lastFetchTime]);
+
+  const fetchAudios = useCallback(async () => {
+    setLoading(true);
+    try {
+      const username = "admin";
+      const password = "6cG59n4C4rNw7LAdHy";
+  
+      const res = await fetch("https://audio.sendaconsciente.com/list-audios", {
+        headers: {
+          "Authorization": "Basic " + btoa(`${username}:${password}`),
+        },
+      });
+  
+      const data = await res.json();
+  
+      if (data.success) {
+        const filesWithUrl = data.files.map((f: any) => ({
+          ...f,
+          url: `https://audio.sendaconsciente.com${f.url}` // full URL
+        }));
+        setAudioFiles(filesWithUrl);
+      }
+    } catch (err) {
+      console.error("Error fetching audios:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const fetchVideos = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/vimeo/videos');
+      const data = await response.json();
+      
+      if (data.success) {
+        setVideos(data.videos || []);
+      } else {
+        setError(data.error || 'Failed to fetch videos');
+      }
+    } catch (err) {
+      setError('Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Transform API data to ContentItem format
+  const getContentData = (): ContentItem[] => {
+    const contentItems: ContentItem[] = [];
+    
+    // Add videos
+    videos.forEach((video, index) => {
+      // Extract meaningful title from video name
+      let title = video.name;
+      let accessLevel = 1; // Default public level
+      
+      // Determine access level based on video name/content
+      if (title.toLowerCase().includes('karma')) {
+        accessLevel = 5; // Karma level
+      } else if (title.toLowerCase().includes('carisma')) {
+        accessLevel = 3; // Carisma level
+      } else if (title.toLowerCase().includes('abundancia')) {
+        accessLevel = 4; // Abundancia level
+      } else if (title.toLowerCase().includes('inmortal') || title.toLowerCase().includes('public')) {
+        accessLevel = 2; // Inmortal level
+      }
+      
+      if (title.includes('_')) {
+        // Convert snake_case to Title Case and remove file extensions
+        title = title
+          .replace(/\.(mp4|mov|avi|mkv)$/i, '') // Remove video extensions
+          .split('_')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+      }
+      
+      contentItems.push({
+        id: video.uri,
+        title: title,
+        level: getLevelName(accessLevel),
+        description: video.description || "Video content",
+        type: "video",
+        accessLevel: accessLevel,
+        thumbnail: video.pictures?.sizes?.[3]?.link || video.pictures?.sizes?.[0]?.link,
+        duration: video.duration,
+        createdTime: video.created_time,
+        url: video.link
+      });
+    });
+
+    // Add audios
+    audioFiles.forEach((audio, index) => {
+      // Extract meaningful title from audio filename
+      let title = audio.name;
+      let accessLevel = 1; // Default public level for audios
+      
+      // For audios, we'll keep them as public level 1 so they're always accessible
+      
+      if (title.includes('_')) {
+        // Convert snake_case to Title Case and remove file extensions
+        title = title
+          .replace(/\.(mp3|wav|aac|ogg|m4a)$/i, '') // Remove audio extensions
+          .split('_')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+      } else if (title.includes('.')) {
+        // Just remove file extension if no underscores
+        title = title.replace(/\.(mp3|wav|aac|ogg|m4a)$/i, '');
+      }
+      
+      contentItems.push({
+        id: `audio-${index}`,
+        title: title,
+        level: "public", // Always public for audios
+        description: "Audio content",
+        type: "audio",
+        accessLevel: 1, // Always accessible
+        url: audio.url
+      });
+    });
+
+    return contentItems;
+  };
+
+  // Helper function to get level name
+  const getLevelName = (level: number): string => {
+    switch (level) {
+      case 1: return "public";
+      case 2: return "inmortal";
+      case 3: return "carisma";
+      case 4: return "abundancia";
+      case 5: return "karma";
+      default: return "public";
+    }
   };
 
   // Check user access level based on client specifications
   const getUserAccessLevel = () => {
     if (!isAuthenticated) return 1; // PUBLIC only
     
-    
     // Check if user has specific levels from database
     const hasCarisma = userLevels.some(ul => ul.level === 'carisma' && ul.isActive);
     const hasKarma = userLevels.some(ul => ul.level === 'karma' && ul.isActive);
     const hasAbundancia = userLevels.some(ul => ul.level === 'abundancia' && ul.isActive);
-    
     
     // Level 5 (Karma) - highest access
     if (hasKarma) return 5;
@@ -186,7 +250,7 @@ export default function ConocimientoPage() {
   const canAccessLevel = (contentLevel: number) => {
     const userLevel = getUserAccessLevel();
     
-    // Level 1 (Public) - always accessible
+    // Level 1 (Public) - always accessible to everyone
     if (contentLevel === 1) return true;
     
     // Level 2 (Inmortal) - accessible to registered users
@@ -240,6 +304,7 @@ export default function ConocimientoPage() {
 
   // Filter content based on active filter and user access
   useEffect(() => {
+    const contentData = getContentData();
     let filtered = contentData.filter(item => {
       // Show ALL content to everyone - this is the key change
       // The access control happens when they try to interact with the content
@@ -259,7 +324,7 @@ export default function ConocimientoPage() {
     }
 
     setFilteredContent(filtered);
-  }, [activeFilter, isAuthenticated, user, isLoaded, userLevels]);
+  }, [activeFilter, isAuthenticated, user, isLoaded, userLevels, videos, audioFiles]);
 
   const handleFilterClick = (filter: string) => {
     setActiveFilter(filter);
@@ -279,7 +344,6 @@ export default function ConocimientoPage() {
   const handlePlusClick = (index: number) => {
     const contentItem = filteredContent[index];
   
-    
     // For non-authenticated users, show login prompt for any restricted content
     if (!isAuthenticated && contentItem.accessLevel > 1) {
       const message = getUpgradeMessage(contentItem.accessLevel);
@@ -316,7 +380,8 @@ export default function ConocimientoPage() {
 
   const handleUpgradeAction = () => {
     if (upgradeAction === "login") {
-      requireAuth();
+      // Redirect to registration page instead of just requiring auth
+      router.push("/registration");
     } else if (upgradeAction === "upgrade") {
       // Redirect to upgrade page or payment
       router.push("/aportes");
@@ -396,6 +461,54 @@ export default function ConocimientoPage() {
       default: return "Continuar";
     }
   };
+
+  const formatDuration = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  // Get level badge color
+  const getLevelBadgeColor = (level: string) => {
+    switch (level) {
+      case 'public': return 'bg-green-100 text-green-800';
+      case 'inmortal': return 'bg-blue-100 text-blue-800';
+      case 'carisma': return 'bg-purple-100 text-purple-800';
+      case 'abundancia': return 'bg-yellow-100 text-yellow-800';
+      case 'karma': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  if (loading) return <div className="loading-indicator">Loading content...</div>;
+
+  if (error) {
+    return (
+      <div className="text-center py-20">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+          <h3 className="text-lg font-semibold text-red-800 mb-2">Error Loading Content</h3>
+          <p className="text-red-600 mb-4">{error}</p>
+          <button
+            onClick={() => {
+              fetchVideos();
+              fetchAudios();
+            }}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -478,19 +591,51 @@ export default function ConocimientoPage() {
         <div className="videos-grid">
           {filteredContent.map((item, index) => (
             <div key={item.id} className={getContentCardClass(item.accessLevel)}>
-              <div className="video-thumbnail">
-                <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
-                  {getContentIcon(item.type)}
-                </div>
-                {getLockIcon(item.accessLevel) && (
-                  <div className="lock-icon">
-                    {getLockIcon(item.accessLevel)}
+              {item.thumbnail ? (
+                <div className="video-thumbnail relative">
+                  <img 
+                    src={item.thumbnail} 
+                    alt={item.title}
+                    className="w-full h-32 object-cover rounded-t-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/placeholder-video.jpg';
+                    }}
+                  />
+                  {item.duration && (
+                    <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-sm px-2 py-1 rounded">
+                      {formatDuration(item.duration)}
+                    </div>
+                  )}
+                  {/* Level Badge */}
+                  <div className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-medium ${getLevelBadgeColor(item.level)}`}>
+                    {item.level.toUpperCase()}
                   </div>
-                )}
-              </div>
+                  {getLockIcon(item.accessLevel) && (
+                    <div className="lock-icon">
+                      {getLockIcon(item.accessLevel)}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="video-thumbnail">
+                  <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
+                    {getContentIcon(item.type)}
+                  </div>
+                  {getLockIcon(item.accessLevel) && (
+                    <div className="lock-icon">
+                      {getLockIcon(item.accessLevel)}
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="video-info">
                 <div className="video-title">{item.title}</div>
-                <div className="video-level">{getLevelDisplayName(item.level)}</div>
+                <div className="video-level text-black">{getLevelDisplayName(item.level)}</div>
+                {item.description && (
+                  <div className="video-description text-black">{item.description}</div>
+                )}
+               
                 <div className="video-status">
                   <div 
                     className={`status-checkbox ${checkedItems[index] ? 'checked' : ''}`}
@@ -507,25 +652,98 @@ export default function ConocimientoPage() {
         </div>
       </section>
 
-      {/* Modal Overlay */}
+      {/* Content Modal */}
       {showModal && selectedCard !== null && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="modal-card" 
+            style={{ 
+              maxWidth: '90vw', 
+              width: '90vw', 
+              maxHeight: window.innerWidth < 768 ? '75vh' : '95vh',
+              padding: window.innerWidth < 768 ? '0.75rem' : '1.5rem'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button className="close-modal" onClick={closeModal}>×</button>
             <h3 className="modal-title">{filteredContent[selectedCard]?.title}</h3>
-            <p className="modal-level">Nivel: {getLevelDisplayName(filteredContent[selectedCard]?.level)}</p>
-            <p className="modal-description">
-              {filteredContent[selectedCard]?.description}
-            </p>
+            
+            {/* Content Player */}
+            <div className="modal-player">
+              {filteredContent[selectedCard]?.type === "video" && filteredContent[selectedCard]?.url ? (
+                <div className="video-player">
+                  {filteredContent[selectedCard]?.url.includes('vimeo.com') ? (
+                    // Vimeo video player - responsive height for mobile
+                    <iframe
+                      src={`https://player.vimeo.com/video/${filteredContent[selectedCard]?.id.split('/').pop()}?h=auto&autoplay=1`}
+                      width="100%"
+                      height={window.innerWidth < 768 ? '200' : '500'}
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-lg"
+                    ></iframe>
+                  ) : (
+                    // Direct video player
+                    <video
+                      controls
+                      className="w-full rounded-lg"
+                      autoPlay
+                    >
+                      <source src={filteredContent[selectedCard]?.url} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
+              ) : filteredContent[selectedCard]?.type === "audio" && filteredContent[selectedCard]?.url ? (
+                // Enhanced audio player
+                <div className="audio-player bg-gray-50 p-4 rounded-lg">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">♪</span>
+                    </div>
+                  </div>
+                  <audio
+                    controls
+                    className="w-full"
+                    autoPlay
+                    controlsList="nodownload"
+                    preload="metadata"
+                    onError={(e) => {
+                      console.error('Audio playback error:', e);
+                    }}
+                    onLoadStart={() => {
+                      console.log('Audio loading started');
+                    }}
+                    onCanPlay={() => {
+                      console.log('Audio can start playing');
+                    }}
+                  >
+                    <source src={filteredContent[selectedCard]?.url} type="audio/mpeg" />
+                    <source src={filteredContent[selectedCard]?.url} type="audio/mp3" />
+                    <source src={filteredContent[selectedCard]?.url} type="audio/wav" />
+                    <source src={filteredContent[selectedCard]?.url} type="audio/aac" />
+                    <source src={filteredContent[selectedCard]?.url} type="audio/ogg" />
+                    Your browser does not support the audio tag.
+                  </audio>
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  Content player not available
+                </div>
+              )}
+            </div>
+            
             <div className="modal-actions">
-              <div className="modal-checkbox-container">
-                <div 
-                  className="modal-checkbox"
-                  onClick={handleModalCheckboxClick}
-                ></div>
-                <span className="modal-checkbox-text">Marcar como completado</span>
-              </div>
-              <div className="modal-minus"></div>
+              <button 
+                className="content-play-button"
+                onClick={() => {
+                  // The content is already playing in the embedded player above
+                  // This button can be used for additional actions if needed
+                }}
+              >
+                {filteredContent[selectedCard]?.type === "video" ? "▶ Reproduciendo Video" : "♪ Reproduciendo Audio"}
+              </button>
             </div>
           </div>
         </div>

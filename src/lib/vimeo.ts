@@ -29,19 +29,14 @@ class VimeoService {
   // Test basic API connectivity
   async testConnection(): Promise<any> {
     try {
-      console.log('Testing Vimeo API connection...');
-      console.log('Using token:', this.accessToken);
-      console.log('Full URL:', `${VIMEO_API_BASE}/me`);
+      
       
       const headers = this.getHeaders();
-      console.log('Request headers being sent:', JSON.stringify(headers, null, 2));
       
       // Try different endpoints to isolate the issue
-      console.log('Trying /me endpoint...');
       const response = await axios.get(`${VIMEO_API_BASE}/me`, {
         headers
       });
-      console.log('Connection successful:', response.status);
       return response.data;
     } catch (error: any) {
       console.error('Connection test failed:', error);

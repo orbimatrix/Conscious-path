@@ -28,15 +28,15 @@ export default function AbundanciaPage() {
           <div className="abundancia-benefits-wrapper">
             <ul className="abundancia-benefits-list">
               <li className="abundancia-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Cambiar la suerte en positivo</span>
               </li>
               <li className="abundancia-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Llegada de dinero y regalos</span>
               </li>
               <li className="abundancia-benefit-item">
-                <img src="/img/check.png" alt="Check" className="benefit-icon" />
+                <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
                 <span className="benefit-text">Adiós a la escased</span>
               </li>
             </ul>
