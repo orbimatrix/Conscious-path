@@ -66,7 +66,9 @@ export default function RegistrationPage() {
           <SignedIn>
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-amber-200 text-center">
               <div className="mb-6">
-                <UserButton />
+                <div className="scale-195">
+                  <UserButton />
+                </div>
               </div>
               <h2 className="text-2xl font-semibold text-gray-800 mb-2">
                 ¡Bienvenido de vuelta!
