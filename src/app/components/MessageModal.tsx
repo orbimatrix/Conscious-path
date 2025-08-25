@@ -224,15 +224,15 @@ export default function MessageModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl h-[80vh] flex flex-col">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl h-[80vh] max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-semibold text-gray-900">Mensajes</h2>
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Mensajes</h2>
             <div className="flex items-center space-x-2">
               <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-              <span className="text-sm text-gray-600">
+              <span className="text-xs sm:text-sm text-gray-600">
                 {isConnected ? 'Connected' : 'Disconnected'}
               </span>
             </div>
@@ -240,7 +240,7 @@ export default function MessageModal({
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+              className="text-gray-400 hover:text-gray-600 text-xl sm:text-2xl font-bold p-1"
             >
               ×
             </button>
@@ -248,14 +248,14 @@ export default function MessageModal({
         </div>
 
         {/* View Mode Selector */}
-        <div className="px-4 py-2 border-b border-gray-200">
-          <div className="flex space-x-2">
+        <div className="px-3 sm:px-4 py-2 border-b border-gray-200">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => {
                 setViewMode('direct');
                 setLocalMessages([]); // Clear local messages when switching modes
               }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
+              className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-medium whitespace-nowrap ${
                 viewMode === 'direct'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -268,7 +268,7 @@ export default function MessageModal({
                 setViewMode('announcements');
                 setLocalMessages([]); // Clear local messages when switching modes
               }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
+              className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-medium whitespace-nowrap ${
                 viewMode === 'announcements'
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -281,7 +281,7 @@ export default function MessageModal({
                 setViewMode('group');
                 setLocalMessages([]); // Clear local messages when switching modes
               }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
+              className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-medium whitespace-nowrap ${
                 viewMode === 'group'
                   ? 'bg-green-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -293,7 +293,7 @@ export default function MessageModal({
         </div>
 
         {/* Messages Container */}
-        <div className="flex-1 overflow-y-auto p-4 max-h-[60vh]">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 max-h-[60vh]">
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 py-8">
               {viewMode === 'direct' 
@@ -304,15 +304,15 @@ export default function MessageModal({
               }
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {(() => {
                 const groupedMessages = groupMessagesByDate(messages);
                 return groupedMessages;
               })().map((dateGroup, dateIndex) => (
-                <div key={dateIndex} className="space-y-4">
+                <div key={dateIndex} className="space-y-3 sm:space-y-4">
                   {/* Date Separator */}
                   <div className="flex justify-center">
-                    <div className="bg-gray-100 px-4 py-1 rounded-full text-sm text-gray-600 font-medium">
+                    <div className="bg-gray-100 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm text-gray-600 font-medium">
                       {formatDateHeader(dateGroup.date)}
                     </div>
                   </div>
@@ -327,39 +327,39 @@ export default function MessageModal({
                         }`}
                       >
                         {message.user.name !== (user?.fullName || user?.username || 'User') && (
-                          <div className="flex flex-col items-center mr-3">
-                            <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
-                              <span className="text-gray-600 text-sm font-medium">
+                          <div className="flex flex-col items-center mr-2 sm:mr-3">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
+                              <span className="text-gray-600 text-xs sm:text-sm font-medium">
                                 {adminInfo?.fullName?.charAt(0) || adminInfo?.username?.charAt(0) || 'A'}
                               </span>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1 text-center">
+                            <div className="text-xs text-gray-500 mt-1 text-center hidden sm:block">
                               {adminInfo?.fullName || adminInfo?.username || 'Admin'}
                             </div>
                           </div>
                         )}
                         
                         <div
-                          className={`max-w-[70%] p-3 rounded-2xl ${
+                          className={`max-w-[75%] sm:max-w-[70%] p-2 sm:p-3 rounded-2xl ${
                             message.user.name === (user?.fullName || user?.username || 'User')
                               ? 'bg-orange-200 text-gray-800 rounded-br-md'
                               : 'bg-gray-100 text-gray-800 rounded-bl-md'
                           }`}
                         >
-                          <div className="text-sm leading-relaxed">{message.content}</div>
-                          <div className="text-xs text-gray-500 mt-2 text-right flex items-center gap-1">
+                          <div className="text-xs sm:text-sm leading-relaxed">{message.content}</div>
+                          <div className="text-xs text-gray-500 mt-1 sm:mt-2 text-right flex items-center gap-1">
                             {formatTime(message.createdAt)}
                           </div>
                         </div>
                         
                         {message.user.name === (user?.fullName || user?.username || 'User') && (
-                          <div className="flex flex-col items-center ml-3">
-                            <div className="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
-                              <span className="text-white text-sm font-medium">
+                          <div className="flex flex-col items-center ml-2 sm:ml-3">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
+                              <span className="text-white text-xs sm:text-sm font-medium">
                                 {user?.fullName?.charAt(0) || user?.username?.charAt(0) || 'U'}
                               </span>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1 text-center">
+                            <div className="text-xs text-gray-500 mt-1 text-center hidden sm:block">
                               {user?.fullName || user?.username || 'You'}
                             </div>
                           </div>
@@ -376,7 +376,7 @@ export default function MessageModal({
 
         {/* Input Area - Show for direct messages and group chat */}
         {(viewMode === 'direct' || viewMode === 'group') && (
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-3 sm:p-4 border-t border-gray-200">
             <div className="flex items-center gap-2">
               <input
                 type="text"
@@ -385,12 +385,12 @@ export default function MessageModal({
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder={viewMode === 'direct' ? "Escribe tu mensaje..." : "Type your group message..."}
                 disabled={sending || !isConnected}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-black"
+                className="flex-1 px-2 sm:px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-black text-sm"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={sending || !newMessage.trim() || !isConnected}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm whitespace-nowrap"
               >
                 {sending ? 'Enviando...' : 'Enviar'}
               </button>

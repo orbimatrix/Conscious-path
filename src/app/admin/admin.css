@@ -403,6 +403,78 @@
   color: #9ca3af;
 }
 
+/* Admin Messaging System Mobile Optimizations */
+.admin-messaging-select {
+  position: relative;
+  z-index: 20;
+}
+
+.admin-messaging-select select {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}
+
+/* Mobile dropdown optimizations */
+@media (max-width: 768px) {
+  .admin-messaging-select select {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  .admin-messaging-select select option {
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Ensure dropdowns don't overflow on mobile */
+  .admin-messaging-select {
+    overflow: visible;
+  }
+  
+  /* Adjust grid layout for mobile */
+  .admin-messaging-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Make room selection more compact on mobile */
+  .admin-room-selection {
+    padding: 1rem;
+  }
+  
+  .admin-room-selection h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .admin-room-selection .space-y-4 > div {
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-messaging-select select {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+  
+  .admin-messaging-select select option {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  /* Ensure proper spacing on very small screens */
+  .admin-room-selection {
+    padding: 0.75rem;
+  }
+  
+  .admin-room-selection h4 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .admin-grid-2,
