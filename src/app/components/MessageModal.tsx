@@ -3,105 +3,123 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
-import { Message } from '@/lib/socket-client';
-import { useSocket } from '@/lib/socket-client';
+import { ChatMessage, useRealtimeChat } from '@/hooks/use-realtime-chat';
 
 interface MessageModalProps {
   isOpen: boolean;
   onClose: () => void;
   onMessageSent: () => void;
+  directMessages: ChatMessage[];
+  announcementMessages: ChatMessage[];
+  groupMessages: ChatMessage[];
+  isConnected: boolean;
+  userLevel: string;
 }
 
-export default function MessageModal({ isOpen, onClose, onMessageSent }: MessageModalProps) {
+export default function MessageModal({ 
+  isOpen, 
+  onClose, 
+  onMessageSent, 
+  directMessages, 
+  announcementMessages, 
+  groupMessages, 
+  isConnected, 
+  userLevel 
+}: MessageModalProps) {
   const { user } = useUser();
-  const { socket, isConnected, sendMessage: sendSocketMessage, joinLevel, startTyping, stopTyping, subscribeToMessages, messages: socketMessages } = useSocket(user?.id);
-  const [messages, setMessages] = useState<Message[]>([]);
+  
+  // Hook for direct messages
+  const { sendMessage: sendDirectMessage } = useRealtimeChat({
+    roomName: `direct-${user?.id}-admin`,
+    username: user?.fullName || user?.username || 'User'
+  });
+
+  // Hook for group messages
+  const { sendMessage: sendGroupMessage } = useRealtimeChat({
+    roomName: `group-${userLevel}`,
+    username: user?.fullName || user?.username || 'User'
+  });
+  
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [userLevel, setUserLevel] = useState<string | null>(null);
   const [adminInfo, setAdminInfo] = useState<{ fullName?: string; username?: string } | null>(null);
+  const [viewMode, setViewMode] = useState<'direct' | 'announcements' | 'group'>('direct');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const announcementsSubscribedRef = useRef(false);
 
-  // Join user's level room when connected
+  // Set user level when component mounts
   useEffect(() => {
-    if (isConnected && user) {
-      if (!userLevel) {
-        console.log('Joining default level room: inmortal');
-        setUserLevel('inmortal');
-        joinLevel('inmortal');
-      }
+    if (user) {
+      // setUserLevel('inmortal'); // Default level
     }
-  }, [isConnected, user, joinLevel, userLevel]);
+  }, [user]);
 
-  // Subscribe to messages when component mounts
+  // Update local messages when realtime messages change
   useEffect(() => {
-    if (isConnected && user?.id) {
-      console.log('Setting up Ably message subscription for user:', user.id);
-      
-      const isAdmin = user?.publicMetadata?.role === 'admin';
-      
-      if (isAdmin) {
-      } else {
-        subscribeToMessages('admin');
-        
-        // Subscribe to announcements channel (only once)
-        if (socket && !announcementsSubscribedRef.current) {
-          const announcementsChannel = socket.channels.get('announcements');
-          announcementsSubscribedRef.current = true;
-          announcementsChannel.subscribe('announcement', (message: any) => {
-            const newMessage: Message = {
-              id: Date.now() + Math.random(),
-              content: message.data.content,
-              messageType: 'announcement',
-              isRead: false,
-              createdAt: message.data.timestamp,
-              senderId: 'admin',
-              receiverId: 'all',
-            };
-            
-            // Prevent duplicates
-            setMessages(prev => {
-              const messageExists = prev.some(msg => 
-                msg.content === newMessage.content && 
-                msg.senderId === newMessage.senderId && 
-                msg.messageType === newMessage.messageType &&
-                Math.abs(new Date(msg.createdAt).getTime() - new Date(newMessage.createdAt).getTime()) < 1000
-              );
-              
-              if (messageExists) {
-                console.log(`Duplicate announcement detected, not adding: ${newMessage.content}`);
-                return prev;
-              }
-              
-              console.log(`Adding new announcement: ${newMessage.content}`);
-              return [...prev, newMessage];
-            });
-          });
-          console.log('Subscribed to announcements channel');
-        }
-      }
+    let currentMessages: ChatMessage[] = [];
+    
+    switch (viewMode) {
+      case 'direct':
+        currentMessages = directMessages;
+        break;
+      case 'announcements':
+        currentMessages = announcementMessages;
+        break;
+      case 'group':
+        currentMessages = groupMessages;
+        break;
     }
     
-    return () => {
-      if (socket) {
-        const announcementsChannel = socket.channels.get('announcements');
-        if (announcementsChannel && announcementsChannel.state === 'attached') {
-          console.log('Cleaning up announcements subscription');
-        }
+    console.log(`🔄 MessageModal: ${viewMode} messages updated:`, {
+      viewMode,
+      messageCount: currentMessages.length,
+      messages: currentMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
+    });
+    
+    // Debug group messages specifically
+    if (viewMode === 'group') {
+      console.log(`🔍 Group Messages Debug:`, {
+        viewMode,
+        groupMessagesCount: groupMessages.length,
+        groupMessages: groupMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt })),
+        currentMessagesCount: currentMessages.length,
+        currentMessages: currentMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
+      });
+    }
+    
+    // Combine real-time messages with local messages
+    const allMessages = [...currentMessages, ...localMessages];
+    
+    // Remove duplicates based on content and user (for local messages)
+    const uniqueMessages = allMessages.filter((message, index, self) => {
+      if (localMessages.some(lm => lm.id === message.id)) {
+        // This is a local message, keep it
+        return true;
       }
-    };
-  }, [isConnected, user?.id, subscribeToMessages, socket]);
-
-  // Update local messages when socket messages change
-  useEffect(() => {
-    if (socketMessages.length > 0) {
-      console.log('Socket messages updated:', socketMessages);
-      setMessages(socketMessages);
+      // This is a real-time message, check for duplicates
+      return index === self.findIndex(m => 
+        m.id === message.id || 
+        (m.content === message.content && 
+         m.user.name === message.user.name &&
+         Math.abs(new Date(m.createdAt).getTime() - new Date(message.createdAt).getTime()) < 1000)
+      );
+    });
+    
+    console.log(`🔗 Combined messages:`, {
+      realtimeCount: currentMessages.length,
+      localCount: localMessages.length,
+      totalCount: uniqueMessages.length,
+      allMessages: uniqueMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
+    });
+    
+    // Always update messages, even if empty
+    setMessages(uniqueMessages);
+    
+    if (uniqueMessages.length > 0) {
       setTimeout(() => scrollToBottom(), 100);
     }
-  }, [socketMessages]);
+  }, [directMessages, announcementMessages, groupMessages, localMessages, viewMode]);
 
   // Get admin information for display
   useEffect(() => {
@@ -128,68 +146,55 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     }
   }, [isOpen]);
 
-  const sendMessage = async () => {
+  const handleSendMessage = async () => {
     if (!newMessage.trim() || !isConnected) return;
 
     const messageContent = newMessage.trim();
     setNewMessage('');
     setSending(true);
 
-    // Optimistically add message to UI
-    const tempMessage: Message = {
-      id: Date.now(),
+    // Create the message object
+    const userMessage: ChatMessage = {
+      id: crypto.randomUUID(),
       content: messageContent,
-      messageType: 'direct',
-      isRead: false,
+      user: {
+        name: user?.fullName || user?.username || 'User',
+      },
       createdAt: new Date().toISOString(),
-      senderId: user?.id || '',
-      receiverId: 'admin',
     };
 
-    setMessages(prev => [...prev, tempMessage]);
-    setTimeout(() => scrollToBottom(), 100);
+    // Immediately add to local messages for instant display
+    setLocalMessages(prev => [...prev, userMessage]);
 
     try {
-      // Send via Ably
+      // Send via Supabase realtime based on view mode
       if (isConnected) {
-        await sendSocketMessage({
-          content: messageContent,
-          receiverId: 'admin',
-          messageType: 'direct',
-        });
-        console.log('User message sent via Ably');
+        if (viewMode === 'direct') {
+          await sendDirectMessage(messageContent);
+          console.log('User direct message sent via Supabase');
+          onMessageSent();
+          toast.success('Direct message sent successfully!');
+        } else if (viewMode === 'group') {
+          await sendGroupMessage(messageContent);
+          console.log('User group message sent via Supabase');
+          onMessageSent();
+          toast.success('Group message sent successfully!');
+        } else {
+          toast.error('You can only send messages in direct or group chat mode');
+        }
       } else {
-        console.error('Socket not connected, cannot send real-time message');
+        console.error('Supabase not connected, cannot send real-time message');
+        toast.error('Not connected. Please try again.');
       }
-      
-      onMessageSent();
-      toast.success('Message sent successfully!');
       
     } catch (error) {
       console.error('Error sending message:', error);
-      setMessages(prev => prev.filter(msg => msg.id !== tempMessage.id));
+      // Remove the message from local state if sending failed
+      setLocalMessages(prev => prev.filter(msg => msg.id !== userMessage.id));
       setNewMessage(messageContent);
       toast.error('Failed to send message. Please try again.');
     } finally {
       setSending(false);
-    }
-  };
-
-  const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewMessage(e.target.value);
-    
-    if (isConnected) {
-      startTyping('admin');
-      
-      if (typingTimeout) {
-        clearTimeout(typingTimeout);
-      }
-      
-      const timeout = setTimeout(() => {
-        stopTyping('admin');
-      }, 1000);
-      
-      setTypingTimeout(timeout);
     }
   };
 
@@ -223,8 +228,8 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
     });
   };
 
-  const groupMessagesByDate = (messages: Message[]) => {
-    const groups: { [key: string]: Message[] } = {};
+  const groupMessagesByDate = (messages: ChatMessage[]) => {
+    const groups: { [key: string]: ChatMessage[] } = {};
     
     messages.forEach(message => {
       const date = new Date(message.createdAt).toDateString();
@@ -266,13 +271,88 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
           </div>
         </div>
 
+        {/* View Mode Selector */}
+        <div className="px-4 py-2 border-b border-gray-200">
+          <div className="flex space-x-2">
+            <button
+              onClick={() => {
+                setViewMode('direct');
+                setLocalMessages([]); // Clear local messages when switching modes
+              }}
+              className={`px-3 py-1 rounded text-sm font-medium ${
+                viewMode === 'direct'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Direct Messages
+            </button>
+            <button
+              onClick={() => {
+                setViewMode('announcements');
+                setLocalMessages([]); // Clear local messages when switching modes
+              }}
+              className={`px-3 py-1 rounded text-sm font-medium ${
+                viewMode === 'announcements'
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Announcements
+            </button>
+            <button
+              onClick={() => {
+                setViewMode('group');
+                setLocalMessages([]); // Clear local messages when switching modes
+              }}
+              className={`px-3 py-1 rounded text-sm font-medium ${
+                viewMode === 'group'
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Group Chat ({userLevel})
+            </button>
+          </div>
+        </div>
+
+        {/* Debug Information */}
+        <div className="px-4 py-2 bg-blue-100 rounded border mb-2">
+          <h4 className="font-semibold text-sm text-blue-800 mb-2">Debug: Current Messages</h4>
+          <div className="text-xs text-blue-700 space-y-1">
+            <div>View Mode: {viewMode}</div>
+            <div>Local Messages Count: {messages.length}</div>
+            <div>Direct Messages Count: {directMessages.length}</div>
+            <div>Group Messages Count: {groupMessages.length}</div>
+            <div>Announcement Messages Count: {announcementMessages.length}</div>
+            <div>Connection Status: {isConnected ? 'Connected' : 'Disconnected'}</div>
+            <div>User Level: {userLevel}</div>
+          </div>
+        </div>
+
         {/* Messages Container */}
         <div className="flex-1 overflow-y-auto p-4 max-h-[60vh]">
           {messages.length === 0 ? (
-            <div className="text-center text-gray-500 py-8">No hay mensajes</div>
+            <div className="text-center text-gray-500 py-8">
+              {viewMode === 'direct' 
+                ? 'No direct messages yet' 
+                : viewMode === 'announcements' 
+                ? 'No announcements yet'
+                : 'No group messages yet'
+              }
+            </div>
           ) : (
             <div className="space-y-6">
-              {groupMessagesByDate(messages).map((dateGroup, dateIndex) => (
+              {(() => {
+                const groupedMessages = groupMessagesByDate(messages);
+                console.log(`🎯 Rendering messages:`, {
+                  totalMessages: messages.length,
+                  groupedCount: groupedMessages.length,
+                  messages: messages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt })),
+                  grouped: groupedMessages.map(g => ({ date: g.date, count: g.messages.length }))
+                });
+                return groupedMessages;
+              })().map((dateGroup, dateIndex) => (
                 <div key={dateIndex} className="space-y-4">
                   {/* Date Separator */}
                   <div className="flex justify-center">
@@ -282,56 +362,56 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
                   </div>
                   
                   {/* Messages for this date */}
-                  {dateGroup.messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${
-                        message.senderId === user?.id ? 'justify-end' : 'justify-start'
-                      }`}
-                    >
-                      {message.senderId !== user?.id && (
-                        <div className="flex flex-col items-center mr-3">
-                          <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
-                            <span className="text-gray-600 text-sm font-medium">
-                              {adminInfo?.fullName?.charAt(0) || adminInfo?.username?.charAt(0) || 'A'}
-                            </span>
-                          </div>
-                          <div className="text-xs text-gray-500 mt-1 text-center">
-                            {adminInfo?.fullName || adminInfo?.username || 'Admin'}
-                          </div>
-                        </div>
-                      )}
-                      
+                  {dateGroup.messages.map((message) => {
+                    console.log(`🎨 Rendering message:`, { id: message.id, content: message.content, user: message.user.name });
+                    return (
                       <div
-                        className={`max-w-[70%] p-3 rounded-2xl ${
-                          message.senderId === user?.id
-                            ? 'bg-orange-200 text-gray-800 rounded-br-md'
-                            : 'bg-gray-100 text-gray-800 rounded-bl-md'
+                        key={message.id}
+                        className={`flex ${
+                          message.user.name === (user?.fullName || user?.username || 'User') ? 'justify-end' : 'justify-start'
                         }`}
                       >
-                        <div className="text-sm leading-relaxed">{message.content}</div>
-                        <div className="text-xs text-gray-500 mt-2 text-right flex items-center gap-1">
-                          {message.id > 1000000000000 && (
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Sending..."></div>
-                          )}
-                          {formatTime(message.createdAt)}
+                        {message.user.name !== (user?.fullName || user?.username || 'User') && (
+                          <div className="flex flex-col items-center mr-3">
+                            <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
+                              <span className="text-gray-600 text-sm font-medium">
+                                {adminInfo?.fullName?.charAt(0) || adminInfo?.username?.charAt(0) || 'A'}
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1 text-center">
+                              {adminInfo?.fullName || adminInfo?.username || 'Admin'}
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div
+                          className={`max-w-[70%] p-3 rounded-2xl ${
+                            message.user.name === (user?.fullName || user?.username || 'User')
+                              ? 'bg-orange-200 text-gray-800 rounded-br-md'
+                              : 'bg-gray-100 text-gray-800 rounded-bl-md'
+                          }`}
+                        >
+                          <div className="text-sm leading-relaxed">{message.content}</div>
+                          <div className="text-xs text-gray-500 mt-2 text-right flex items-center gap-1">
+                            {formatTime(message.createdAt)}
+                          </div>
                         </div>
+                        
+                        {message.user.name === (user?.fullName || user?.username || 'User') && (
+                          <div className="flex flex-col items-center ml-3">
+                            <div className="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
+                              <span className="text-white text-sm font-medium">
+                                {user?.fullName?.charAt(0) || user?.username?.charAt(0) || 'U'}
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1 text-center">
+                              {user?.fullName || user?.username || 'You'}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      
-                      {message.senderId === user?.id && (
-                        <div className="flex flex-col items-center ml-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
-                            <span className="text-white text-sm font-medium">
-                              {user?.fullName?.charAt(0) || user?.username?.charAt(0) || 'U'}
-                            </span>
-                          </div>
-                          <div className="text-xs text-gray-500 mt-1 text-center">
-                            {user?.fullName || user?.username || 'You'}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -339,29 +419,29 @@ export default function MessageModal({ isOpen, onClose, onMessageSent }: Message
           )}
         </div>
 
-
-
-        {/* Input Area */}
-        <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              value={newMessage}
-              onChange={handleTyping}
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-              placeholder="Escribe tu mensaje..."
-              disabled={sending || !isConnected}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-black"
-            />
-            <button
-              onClick={sendMessage}
-              disabled={sending || !newMessage.trim() || !isConnected}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            >
-              {sending ? 'Enviando...' : 'Enviar'}
-            </button>
+        {/* Input Area - Show for direct messages and group chat */}
+        {(viewMode === 'direct' || viewMode === 'group') && (
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                placeholder={viewMode === 'direct' ? "Escribe tu mensaje..." : "Type your group message..."}
+                disabled={sending || !isConnected}
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-black"
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={sending || !newMessage.trim() || !isConnected}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {sending ? 'Enviando...' : 'Enviar'}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
