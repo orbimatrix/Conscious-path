@@ -113,7 +113,7 @@ export default function AportesPage() {
               Antes de usar criptomonedas o realizar transferencias, es necesario confirmar los datos, para evitar errores o pérdidas.
               </p>
 
-             
+
             </div>
           </div>
         </section>
@@ -131,9 +131,11 @@ export default function AportesPage() {
       {/* Payment Buttons Section */}
       <section className="payment-buttons-section">
         <div className="payment-buttons-container">
-          <button className="payment-button card-button">
-            REALIZAR APORTE CON TARJETA
-          </button>
+          <form action="/api/checkout_sessions" method="POST">
+            <button type="submit" className="payment-button card-button">
+              REALIZAR APORTE CON TARJETA
+            </button>
+          </form>
           <button className="payment-button paypal-button">
             REALIZAR APORTE CON PAYPAL
           </button>
@@ -176,7 +178,7 @@ export default function AportesPage() {
       )}
 
       <FooterSection />
-      
+
       {/* Signup Modal */}
       <SignupModal
         isOpen={showSignupModal}

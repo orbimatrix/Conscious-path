@@ -84,9 +84,6 @@ export default function PrivadoPage() {
                             </div>
                         </div>
                     </div>
-
-                  
-
                     
                 </div>
             </section>
@@ -150,7 +147,7 @@ export default function PrivadoPage() {
                         </div>
 
                         {!isSubmitted ? (
-                            <form className="booking-form" onSubmit={handleSubmit}>
+                            <form className="booking-form" action="/api/checkout_sessions" method="POST">
                                 <div className="booking-form-section-group">
                                     <ul className="booking-form-terms-list">
                                         <li>Entiendo que mis datos serán usados y almacenados para realizar el servicio solicitado.</li>
@@ -164,6 +161,7 @@ export default function PrivadoPage() {
                                             checked={formData.acceptTerms}
                                             onChange={handleInputChange}
                                             className="booking-form-checkbox"
+                                            required
                                         />
                                         <label htmlFor="acceptTerms" className="booking-form-checkbox-label">
                                             Acepto estos términos

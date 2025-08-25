@@ -193,7 +193,7 @@ export default function RegresionPage() {
             </div>
 
             {!isSubmitted ? (
-              <form className={styles.bookingForm} onSubmit={handleSubmit}>
+              <form className={styles.bookingForm} action="/api/checkout_sessions" method="POST">
                 <div className={styles.bookingFormSectionGroup}>
                   <ul className={styles.bookingFormTermsList}>
                     <li>Entiendo que mis datos serán usados y almacenados para realizar el servicio solicitado.</li>
@@ -207,6 +207,7 @@ export default function RegresionPage() {
                       checked={formData.acceptTerms}
                       onChange={handleInputChange}
                       className={styles.bookingFormCheckbox}
+                      required
                     />
                     <label htmlFor="acceptTerms" className={styles.bookingFormCheckboxLabel}>
                       Acepto estos términos
