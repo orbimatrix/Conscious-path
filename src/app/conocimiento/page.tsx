@@ -185,9 +185,18 @@ export default function ConocimientoPage() {
     audioFiles.forEach((audio, index) => {
       // Extract meaningful title from audio filename
       let title = audio.name;
-      const accessLevel = 1; // Default public level for audios
+      let accessLevel = 1; // Default public level
       
-      // For audios, we'll keep them as public level 1 so they're always accessible
+      // Determine access level based on audio name/content
+      if (title.toLowerCase().includes('karma')) {
+        accessLevel = 5; // Karma level
+      } else if (title.toLowerCase().includes('carisma')) {
+        accessLevel = 3; // Carisma level
+      } else if (title.toLowerCase().includes('abundancia')) {
+        accessLevel = 4; // Abundancia level
+      } else if (title.toLowerCase().includes('inmortal') || title.toLowerCase().includes('public')) {
+        accessLevel = 2; // Inmortal level
+      }
       
       if (title.includes('_')) {
         // Convert snake_case to Title Case and remove file extensions
@@ -204,10 +213,10 @@ export default function ConocimientoPage() {
       contentItems.push({
         id: `audio-${index}`,
         title: title,
-        level: "public", // Always public for audios
+        level: getLevelName(accessLevel),
         description: "Audio content",
         type: "audio",
-        accessLevel: 1, // Always accessible
+        accessLevel: accessLevel,
         url: audio.url
       });
     });
@@ -299,9 +308,14 @@ export default function ConocimientoPage() {
       return "Para acceder al contenido Carisma, necesitas adquirir el acceso premium. Haz clic en 'Comprar Acceso' para continuar.";
     }
     
+    if (contentLevel === 2 && userLevel < 2) {
+      setUpgradeAction("upgrade");
+      return "Para acceder al contenido Inmortal, necesitas estar registrado. Haz clic en 'Iniciar Sesión' para continuar.";
+    }
+    
     setUpgradeAction("upgrade");
     return "Para acceder a este contenido, necesitas adquirir el acceso premium correspondiente.";
-  }, [isAuthenticated, upgradeAction, setUpgradeAction]);
+  }, [isAuthenticated, getUserAccessLevel, setUpgradeAction]);
 
   // Filter content based on active filter and user access
   useEffect(() => {
@@ -384,8 +398,14 @@ export default function ConocimientoPage() {
       // Redirect to registration page instead of just requiring auth
       router.push("/registration");
     } else if (upgradeAction === "upgrade") {
-      // Redirect to upgrade page or payment
-      router.push("/aportes");
+      // For Inmortal level, redirect to login/registration
+      // For other premium levels, redirect to upgrade page
+      const contentItem = selectedCard !== null ? filteredContent[selectedCard] : null;
+      if (contentItem && contentItem.accessLevel === 2) {
+        router.push("/registration");
+      } else {
+        router.push("/aportes");
+      }
     } else if (upgradeAction === "abundancia") {
       // Redirect to contact/support page
       router.push("/bienestar");
@@ -453,11 +473,17 @@ export default function ConocimientoPage() {
   const getUpgradeButtonText = useCallback(() => {
     switch (upgradeAction) {
       case "login": return "Iniciar Sesión";
-      case "upgrade": return "Comprar Acceso";
+      case "upgrade": 
+        // Check if it's for Inmortal level (level 2)
+        const contentItem = selectedCard !== null ? filteredContent[selectedCard] : null;
+        if (contentItem && contentItem.accessLevel === 2) {
+          return "Iniciar Sesión";
+        }
+        return "Comprar Acceso";
       case "abundancia": return "Contactar Soporte";
       default: return "Continuar";
     }
-  }, [upgradeAction]);
+  }, [upgradeAction, selectedCard, filteredContent]);
 
   const formatDuration = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
