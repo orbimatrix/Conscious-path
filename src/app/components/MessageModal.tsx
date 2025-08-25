@@ -71,23 +71,6 @@ export default function MessageModal({
         break;
     }
     
-    console.log(`🔄 MessageModal: ${viewMode} messages updated:`, {
-      viewMode,
-      messageCount: currentMessages.length,
-      messages: currentMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
-    });
-    
-    // Debug group messages specifically
-    if (viewMode === 'group') {
-      console.log(`🔍 Group Messages Debug:`, {
-        viewMode,
-        groupMessagesCount: groupMessages.length,
-        groupMessages: groupMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt })),
-        currentMessagesCount: currentMessages.length,
-        currentMessages: currentMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
-      });
-    }
-    
     // Combine real-time messages with local messages
     const allMessages = [...currentMessages, ...localMessages];
     
@@ -104,13 +87,6 @@ export default function MessageModal({
          m.user.name === message.user.name &&
          Math.abs(new Date(m.createdAt).getTime() - new Date(message.createdAt).getTime()) < 1000)
       );
-    });
-    
-    console.log(`🔗 Combined messages:`, {
-      realtimeCount: currentMessages.length,
-      localCount: localMessages.length,
-      totalCount: uniqueMessages.length,
-      allMessages: uniqueMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
     });
     
     // Always update messages, even if empty
@@ -316,20 +292,6 @@ export default function MessageModal({
           </div>
         </div>
 
-        {/* Debug Information */}
-        <div className="px-4 py-2 bg-blue-100 rounded border mb-2">
-          <h4 className="font-semibold text-sm text-blue-800 mb-2">Debug: Current Messages</h4>
-          <div className="text-xs text-blue-700 space-y-1">
-            <div>View Mode: {viewMode}</div>
-            <div>Local Messages Count: {messages.length}</div>
-            <div>Direct Messages Count: {directMessages.length}</div>
-            <div>Group Messages Count: {groupMessages.length}</div>
-            <div>Announcement Messages Count: {announcementMessages.length}</div>
-            <div>Connection Status: {isConnected ? 'Connected' : 'Disconnected'}</div>
-            <div>User Level: {userLevel}</div>
-          </div>
-        </div>
-
         {/* Messages Container */}
         <div className="flex-1 overflow-y-auto p-4 max-h-[60vh]">
           {messages.length === 0 ? (
@@ -345,12 +307,6 @@ export default function MessageModal({
             <div className="space-y-6">
               {(() => {
                 const groupedMessages = groupMessagesByDate(messages);
-                console.log(`🎯 Rendering messages:`, {
-                  totalMessages: messages.length,
-                  groupedCount: groupedMessages.length,
-                  messages: messages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt })),
-                  grouped: groupedMessages.map(g => ({ date: g.date, count: g.messages.length }))
-                });
                 return groupedMessages;
               })().map((dateGroup, dateIndex) => (
                 <div key={dateIndex} className="space-y-4">
@@ -363,7 +319,6 @@ export default function MessageModal({
                   
                   {/* Messages for this date */}
                   {dateGroup.messages.map((message) => {
-                    console.log(`🎨 Rendering message:`, { id: message.id, content: message.content, user: message.user.name });
                     return (
                       <div
                         key={message.id}

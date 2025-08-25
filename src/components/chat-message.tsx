@@ -9,7 +9,7 @@ interface ChatMessageItemProps {
 
 export const ChatMessageItem = ({ message, isOwnMessage, showHeader }: ChatMessageItemProps) => {
   return (
-    <div className={`flex mt-2 ${isOwnMessage ? 'justify-end' : 'justify-start'}`}>
+    <div className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}>
       <div
         className={cn('max-w-[75%] w-fit flex flex-col gap-1', {
           'items-end': isOwnMessage,
@@ -17,12 +17,12 @@ export const ChatMessageItem = ({ message, isOwnMessage, showHeader }: ChatMessa
       >
         {showHeader && (
           <div
-            className={cn('flex items-center gap-2 text-xs px-3', {
+            className={cn('flex items-center gap-2 text-xs px-2 mb-1', {
               'justify-end flex-row-reverse': isOwnMessage,
             })}
           >
-            <span className={'font-medium'}>{message.user.name}</span>
-            <span className="text-foreground/50 text-xs">
+            <span className={'font-medium text-gray-700'}>{message.user.name}</span>
+            <span className="text-gray-500 text-xs">
               {new Date(message.createdAt).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -33,7 +33,7 @@ export const ChatMessageItem = ({ message, isOwnMessage, showHeader }: ChatMessa
         )}
         <div
           className={cn(
-            'py-2 px-3 rounded-xl text-sm w-fit',
+            'py-2 px-3 rounded-xl text-sm w-fit shadow-sm',
             isOwnMessage ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
           )}
         >

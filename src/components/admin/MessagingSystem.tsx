@@ -57,38 +57,11 @@ export default function MessagingSystem() {
     }
     
     setCurrentRoom(newRoom);
-    
-    // Debug logging for room changes
-    console.log(`🔄 Admin: Room changed:`, {
-      type,
-      id,
-      newRoom,
-      previousRoom: currentRoom,
-      viewMode: type,
-      selectedUser: type === 'direct' ? id : selectedUser,
-      selectedLevel: type === 'group' ? id : selectedLevel
-    });
   };
 
   const handleMessage = async (messages: ChatMessage[]) => {
     // Store messages in database if needed
     // This is where you would implement message persistence
-    console.log(`📤 Admin: Messages updated in room ${currentRoom}:`, {
-      roomName: currentRoom,
-      viewMode,
-      messageCount: messages.length,
-      messages: messages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
-    });
-    
-    // Additional debugging for room connection
-    console.log(`🔍 Admin Room Debug:`, {
-      currentRoom,
-      viewMode,
-      selectedUser,
-      selectedLevel,
-      expectedRoom: viewMode === 'group' ? `group-${selectedLevel}` : viewMode === 'direct' ? `direct-${selectedUser}-admin` : 'announcements',
-      roomMatch: currentRoom === (viewMode === 'group' ? `group-${selectedLevel}` : viewMode === 'direct' ? `direct-${selectedUser}-admin` : 'announcements')
-    });
   };
 
   if (!isLoaded) {
@@ -100,12 +73,12 @@ export default function MessagingSystem() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Admin Messaging System</h1>
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Admin Messaging System</h1>
         
         {/* Admin Info */}
-        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
             <span className="text-sm font-medium text-black">
@@ -120,9 +93,9 @@ export default function MessagingSystem() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
           {/* Room Selection */}
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="xl:col-span-1 bg-gray-50 p-4 sm:p-6 rounded-lg">
             <h3 className="text-lg font-medium text-gray-900 mb-4">Select Chat Room</h3>
             
             <div className="space-y-4">
@@ -138,7 +111,7 @@ export default function MessagingSystem() {
                       handleRoomChange('direct', userId);
                     }
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black text-sm"
                 >
                   <option value="">Choose a user...</option>
                   {users.map((user) => (
@@ -161,7 +134,7 @@ export default function MessagingSystem() {
                       handleRoomChange('group', level);
                     }
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black text-sm"
                 >
                   <option value="">Choose a level...</option>
                   {levels.map((level) => (
@@ -177,7 +150,7 @@ export default function MessagingSystem() {
                 <h4 className="font-medium text-gray-700 mb-2">Announcements</h4>
                 <button
                   onClick={() => handleRoomChange('announcement')}
-                  className={`w-full px-4 py-2 rounded-md text-sm font-medium ${
+                  className={`w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                     viewMode === 'announcement'
                       ? 'bg-purple-600 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -190,64 +163,58 @@ export default function MessagingSystem() {
           </div>
 
           {/* Chat Display */}
-          <div className="lg:col-span-2">
-            <div className="bg-gray-50 rounded-lg h-96">
+          <div className="xl:col-span-3">
+            <div className="bg-gray-50 rounded-lg min-h-[500px] h-[calc(100vh-300px)] max-h-[800px] flex flex-col">
               {viewMode === 'direct' && selectedUser ? (
-                <div className="h-full">
-                  <div className="p-4 border-b bg-white rounded-t-lg">
-                    <h3 className="font-medium text-gray-900">
+                <div className="h-full flex flex-col">
+                  <div className="p-3 sm:p-4 border-b bg-white rounded-t-lg flex-shrink-0">
+                    <h3 className="font-medium text-gray-900 text-sm sm:text-base">
                       Chat with {users.find(u => u.clerkId === selectedUser)?.fullName || selectedUser}
                     </h3>
-                    <p className="text-sm text-gray-600">Room: {currentRoom}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Room: {currentRoom}</p>
                   </div>
-                  <RealtimeChat
-                    roomName={currentRoom}
-                    username="admin"
-                    onMessage={handleMessage}
-                  />
+                  <div className="flex-1 min-h-0">
+                    <RealtimeChat
+                      roomName={currentRoom}
+                      username="admin"
+                      onMessage={handleMessage}
+                    />
+                  </div>
                 </div>
               ) : viewMode === 'group' && selectedLevel ? (
-                <div className="h-full">
-                  <div className="p-4 border-b bg-white rounded-t-lg">
-                    <h3 className="font-medium text-gray-900">
+                <div className="h-full flex flex-col">
+                  <div className="p-3 sm:p-4 border-b bg-white rounded-t-lg flex-shrink-0">
+                    <h3 className="font-medium text-gray-900 text-sm sm:text-base">
                       Group Chat - {selectedLevel} Level
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {getUsersByLevel(selectedLevel).length} users | Room: {currentRoom}
                     </p>
-                    {/* Group Room Connection Debug */}
-                    <div className="mt-2 text-xs">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${currentRoom === `group-${selectedLevel}` ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                        <span className={currentRoom === `group-${selectedLevel}` ? 'text-green-600' : 'text-red-600'}>
-                          {currentRoom === `group-${selectedLevel}` ? 'Room Connected' : 'Room Mismatch'}
-                        </span>
-                      </div>
-                      <div className="text-gray-500 mt-1">
-                        Expected: group-{selectedLevel} | Actual: {currentRoom}
-                      </div>
-                    </div>
                   </div>
-                  <RealtimeChat
-                    roomName={currentRoom}
-                    username="admin"
-                    onMessage={handleMessage}
-                  />
+                  <div className="flex-1 min-h-0">
+                    <RealtimeChat
+                      roomName={currentRoom}
+                      username="admin"
+                      onMessage={handleMessage}
+                    />
+                  </div>
                 </div>
               ) : viewMode === 'announcement' ? (
-                <div className="h-full">
-                  <div className="p-4 border-b bg-white rounded-t-lg">
-                    <h3 className="font-medium text-gray-900">General Announcements</h3>
-                    <p className="text-sm text-gray-600">Room: {currentRoom}</p>
+                <div className="h-full flex flex-col">
+                  <div className="p-3 sm:p-4 border-b bg-white rounded-t-lg flex-shrink-0">
+                    <h3 className="font-medium text-gray-900 text-sm sm:text-base">General Announcements</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">Room: {currentRoom}</p>
                   </div>
-                  <RealtimeChat
-                    roomName={currentRoom}
-                    username="admin"
-                    onMessage={handleMessage}
-                  />
+                  <div className="flex-1 min-h-0">
+                    <RealtimeChat
+                      roomName={currentRoom}
+                      username="admin"
+                      onMessage={handleMessage}
+                    />
+                  </div>
                 </div>
               ) : (
-                <div className="h-full flex items-center justify-center">
+                <div className="h-full flex items-center justify-center p-6">
                   <div className="text-center text-gray-500">
                     <p className="text-lg font-medium mb-2">Select a chat room</p>
                     <p className="text-sm">Choose a user, level, or announcement channel to start chatting</p>
@@ -257,9 +224,6 @@ export default function MessagingSystem() {
             </div>
           </div>
         </div>
-
-        {/* Debug Information */}
-      
       </div>
     </div>
   );
