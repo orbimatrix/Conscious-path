@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 // Custom hook to detect media query
 function useMediaQuery(query: string): boolean {
@@ -25,7 +26,12 @@ export default function Header() {
   const [isClosing, setIsClosing] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { user } = useUser();
-  
+  const router = useRouter();
+
+  const handleLogoClick = () => {
+    router.push('/');
+  };
+
   // Check if user is admin
   const isAdmin = user?.publicMetadata?.role === 'admin' || user?.publicMetadata?.isAdmin === true;
 
@@ -67,14 +73,14 @@ export default function Header() {
             <div className="header-icon" onClick={toggleDropdown}>
               <Image src="/img/menu/menu200.svg" alt="Menu" width={32} height={32} />
             </div>
-              <div className="header-logo-container">
-                <Image src="/dollar.png" alt="Logo" width={32} height={32} />
-                <span className="header-brand-text">
-                  <span className="header-brand-senda">SENDA</span>
-                  <span className="header-brand-consciente"> CONSCIENTE</span>
-                </span>
+            <div className="header-logo-container" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+              <Image src="/dollar.png" alt="Logo" width={32} height={32} />
+              <span className="header-brand-text">
+                <span className="header-brand-senda">SENDA</span>
+                <span className="header-brand-consciente"> CONSCIENTE</span>
+              </span>
             </div>
-            <div className="header-icon">
+            <div className="header-icon" onClick={() => router.push('/registration')} style={{ cursor: 'pointer' }}>
               <Image src="/profile.svg" alt="User" width={32} height={32} />
             </div>
           </header>
@@ -143,12 +149,12 @@ export default function Header() {
   return (
     <header className="desktop-header">
       <div className="desktop-header-top">
-        <div className="desktop-header-brand">
+        <div className="desktop-header-brand" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
           <Image src="/dollar.png" alt="Logo" width={40} height={40} className="desktop-header-logo" />
           <span className="desktop-header-text desktop-header-text-senda">SENDA</span>
           <span className="desktop-header-text desktop-header-text-consciente"> CONSCIENTE</span>
         </div>
-        <button className="desktop-header-button">Entrar</button>
+        <Link href="/registration" className="desktop-header-button">Entrar</Link>
       </div>
       <div className="desktop-header-divider" />
       <nav className="desktop-nav">
