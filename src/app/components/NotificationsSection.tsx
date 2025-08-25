@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import type { News } from '@/lib/db/schema';
 
@@ -9,7 +9,7 @@ export default function NotificationsSection() {
     const [news, setNews] = useState<News[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchNews = async () => {
+    const fetchNews = useCallback(async () => {
         try {
             const response = await fetch('/api/admin/news');
             if (response.ok) {
@@ -26,13 +26,13 @@ export default function NotificationsSection() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [user?.id]);
 
     useEffect(() => {
         if (user) {
             fetchNews();
         }
-    }, [user, fetchNews]);
+    }, [user]);
 
     if (loading) {
         return (
