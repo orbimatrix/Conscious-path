@@ -56,7 +56,7 @@ export function usePersistentChat({ roomName, username, senderId }: UsePersisten
         const userIds = [...new Set(data.messages.map((msg: any) => msg.senderId || msg.sender_id))];
         
         // Fetch user names if we have user IDs
-        let userNames: { [key: string]: string } = {};
+        const userNames: { [key: string]: string } = {};
         if (userIds.length > 0 && userIds.some(id => id && id !== '')) {
           try {
             const validUserIds = userIds.filter(id => id && id !== '');
