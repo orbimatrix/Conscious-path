@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import { ChatMessageItem } from '@/components/chat-message'
 import { useChatScroll } from '@/hooks/use-chat-scroll'
 import {
-  type ChatMessage,
-  useRealtimeChat,
-} from '@/hooks/use-realtime-chat'
+  type PersistentChatMessage,
+  usePersistentChat,
+} from '@/hooks/use-persistent-chat'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Send } from 'lucide-react'
@@ -15,14 +15,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 interface RealtimeChatProps {
   roomName: string
   username: string
-  onMessage?: (messages: ChatMessage[]) => void
-  messages?: ChatMessage[]
+  senderId: string // Clerk ID of the sender
+  onMessage?: (messages: PersistentChatMessage[]) => void
+  messages?: PersistentChatMessage[]
 }
 
 /**
- * Realtime chat component
+ * Realtime chat component with database persistence
  * @param roomName - The name of the room to join. Each room is a unique chat.
  * @param username - The username of the user
+ * @param senderId - The Clerk ID of the sender
  * @param onMessage - The callback function to handle the messages. Useful if you want to store the messages in a database.
  * @param messages - The messages to display in the chat. Useful if you want to display messages from a database.
  * @returns The chat component
@@ -30,6 +32,7 @@ interface RealtimeChatProps {
 export const RealtimeChat = ({
   roomName,
   username,
+  senderId,
   onMessage,
   messages: initialMessages = [],
 }: RealtimeChatProps) => {
@@ -39,10 +42,13 @@ export const RealtimeChat = ({
     messages: realtimeMessages,
     sendMessage,
     isConnected,
-  } = useRealtimeChat({
+    isLoading,
+  } = usePersistentChat({
     roomName,
     username,
+    senderId,
   })
+
   const [newMessage, setNewMessage] = useState('')
 
   // Merge realtime messages with initial messages
@@ -52,8 +58,12 @@ export const RealtimeChat = ({
     const uniqueMessages = mergedMessages.filter(
       (message, index, self) => index === self.findIndex((m) => m.id === message.id)
     )
-    // Sort by creation date
-    const sortedMessages = uniqueMessages.sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+    // Sort by creation date, with fallback for invalid dates
+    const sortedMessages = uniqueMessages.sort((a, b) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return dateA - dateB;
+    })
 
     return sortedMessages
   }, [initialMessages, realtimeMessages])
@@ -80,6 +90,17 @@ export const RealtimeChat = ({
     [newMessage, isConnected, sendMessage]
   )
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center text-sm text-muted-foreground">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+          Loading messages...
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col h-full w-full bg-background text-foreground antialiased">
       {/* Messages */}
@@ -101,7 +122,7 @@ export const RealtimeChat = ({
               >
                 <ChatMessageItem
                   message={message}
-                  isOwnMessage={message.user.name === username}
+                  isOwnMessage={message.user.id === senderId}
                   showHeader={showHeader}
                 />
               </div>

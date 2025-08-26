@@ -3,15 +3,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
-import { ChatMessage, useRealtimeChat } from '@/hooks/use-realtime-chat';
+import { PersistentChatMessage, usePersistentChat } from '@/hooks/use-persistent-chat';
 
 interface MessageModalProps {
   isOpen: boolean;
   onClose: () => void;
   onMessageSent: () => void;
-  directMessages: ChatMessage[];
-  announcementMessages: ChatMessage[];
-  groupMessages: ChatMessage[];
+  directMessages: PersistentChatMessage[];
+  announcementMessages: PersistentChatMessage[];
+  groupMessages: PersistentChatMessage[];
   isConnected: boolean;
   userLevel: string;
 }
@@ -28,25 +28,31 @@ export default function MessageModal({
 }: MessageModalProps) {
   const { user } = useUser();
   
-  // Hook for direct messages
-  const { sendMessage: sendDirectMessage } = useRealtimeChat({
+  // Hook for direct messages with database persistence
+  const { sendMessage: sendDirectMessage, isLoading: isDirectLoading } = usePersistentChat({
     roomName: `direct-${user?.id}-admin`,
-    username: user?.fullName || user?.username || 'User'
+    username: user?.fullName || user?.username || 'User',
+    senderId: user?.id || ''
   });
 
-  // Hook for group messages
-  const { sendMessage: sendGroupMessage } = useRealtimeChat({
+  // Hook for group messages with database persistence
+  const { sendMessage: sendGroupMessage, isLoading: isGroupLoading } = usePersistentChat({
     roomName: `group-${userLevel}`,
-    username: user?.fullName || user?.username || 'User'
+    username: user?.fullName || user?.username || 'User',
+    senderId: user?.id || ''
   });
   
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<PersistentChatMessage[]>([]);
+  const [localMessages, setLocalMessages] = useState<PersistentChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [adminInfo, setAdminInfo] = useState<{ fullName?: string; username?: string } | null>(null);
   const [viewMode, setViewMode] = useState<'direct' | 'announcements' | 'group'>('direct');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Determine if we're currently loading messages
+  const isLoading = (viewMode === 'direct' && isDirectLoading) || 
+                   (viewMode === 'group' && isGroupLoading);
 
   // Set user level when component mounts
   useEffect(() => {
@@ -57,7 +63,7 @@ export default function MessageModal({
 
   // Update local messages when realtime messages change
   useEffect(() => {
-    let currentMessages: ChatMessage[] = [];
+    let currentMessages: PersistentChatMessage[] = [];
     
     switch (viewMode) {
       case 'direct':
@@ -130,36 +136,37 @@ export default function MessageModal({
     setSending(true);
 
     // Create the message object
-    const userMessage: ChatMessage = {
+    const userMessage: PersistentChatMessage = {
       id: crypto.randomUUID(),
       content: messageContent,
       user: {
         name: user?.fullName || user?.username || 'User',
+        id: user?.id || ''
       },
       createdAt: new Date().toISOString(),
+      messageType: viewMode === 'direct' ? 'direct' : 'group',
+      visibilityLevel: viewMode === 'group' ? userLevel : undefined
     };
 
     // Immediately add to local messages for instant display
     setLocalMessages(prev => [...prev, userMessage]);
 
     try {
-      // Send via Supabase realtime based on view mode
+      // Send via persistent chat hook (which handles both database and real-time)
       if (isConnected) {
         if (viewMode === 'direct') {
           await sendDirectMessage(messageContent);
-          console.log('User direct message sent via Supabase');
           onMessageSent();
           toast.success('Direct message sent successfully!');
         } else if (viewMode === 'group') {
           await sendGroupMessage(messageContent);
-          console.log('User group message sent via Supabase');
           onMessageSent();
           toast.success('Group message sent successfully!');
         } else {
           toast.error('You can only send messages in direct or group chat mode');
         }
       } else {
-        console.error('Supabase not connected, cannot send real-time message');
+        console.error('Chat not connected, cannot send message');
         toast.error('Not connected. Please try again.');
       }
       
@@ -204,8 +211,8 @@ export default function MessageModal({
     });
   };
 
-  const groupMessagesByDate = (messages: ChatMessage[]) => {
-    const groups: { [key: string]: ChatMessage[] } = {};
+  const groupMessagesByDate = (messages: PersistentChatMessage[]) => {
+    const groups: { [key: string]: PersistentChatMessage[] } = {};
     
     messages.forEach(message => {
       const date = new Date(message.createdAt).toDateString();
@@ -235,6 +242,12 @@ export default function MessageModal({
               <span className="text-xs sm:text-sm text-gray-600">
                 {isConnected ? 'Connected' : 'Disconnected'}
               </span>
+              {isLoading && (
+                <div className="flex items-center gap-2 ml-2">
+                  <div className="inline-block animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600"></div>
+                  <span className="text-xs text-blue-600">Loading...</span>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -294,7 +307,14 @@ export default function MessageModal({
 
         {/* Messages Container */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-4 max-h-[60vh]">
-          {messages.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
+                <p className="text-gray-500 text-sm">Loading messages...</p>
+              </div>
+            </div>
+          ) : messages.length === 0 ? (
             <div className="text-center text-gray-500 py-8">
               {viewMode === 'direct' 
                 ? 'No direct messages yet' 
@@ -323,10 +343,10 @@ export default function MessageModal({
                       <div
                         key={message.id}
                         className={`flex ${
-                          message.user.name === (user?.fullName || user?.username || 'User') ? 'justify-end' : 'justify-start'
+                          message.user.id === user?.id ? 'justify-end' : 'justify-start'
                         }`}
                       >
-                        {message.user.name !== (user?.fullName || user?.username || 'User') && (
+                        {message.user.id !== user?.id && (
                           <div className="flex flex-col items-center mr-2 sm:mr-3">
                             <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
                               <span className="text-gray-600 text-xs sm:text-sm font-medium">
@@ -341,7 +361,7 @@ export default function MessageModal({
                         
                         <div
                           className={`max-w-[75%] sm:max-w-[70%] p-2 sm:p-3 rounded-2xl ${
-                            message.user.name === (user?.fullName || user?.username || 'User')
+                            message.user.id === user?.id
                               ? 'bg-orange-200 text-gray-800 rounded-br-md'
                               : 'bg-gray-100 text-gray-800 rounded-bl-md'
                           }`}
@@ -352,7 +372,7 @@ export default function MessageModal({
                           </div>
                         </div>
                         
-                        {message.user.name === (user?.fullName || user?.username || 'User') && (
+                        {message.user.id === user?.id && (
                           <div className="flex flex-col items-center ml-2 sm:ml-3">
                             <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center">
                               <span className="text-white text-xs sm:text-sm font-medium">
@@ -384,12 +404,12 @@ export default function MessageModal({
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder={viewMode === 'direct' ? "Escribe tu mensaje..." : "Type your group message..."}
-                disabled={sending || !isConnected}
+                disabled={sending || !isConnected || isLoading}
                 className="flex-1 px-2 sm:px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-black text-sm"
               />
               <button
                 onClick={handleSendMessage}
-                disabled={sending || !newMessage.trim() || !isConnected}
+                disabled={sending || !newMessage.trim() || !isConnected || isLoading}
                 className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm whitespace-nowrap"
               >
                 {sending ? 'Enviando...' : 'Enviar'}

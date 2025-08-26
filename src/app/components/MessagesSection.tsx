@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import MessageModal from './MessageModal';
-import { useRealtimeChat } from '@/hooks/use-realtime-chat';
+import { usePersistentChat } from '@/hooks/use-persistent-chat';
 
 export default function MessagesSection() {
   const { user } = useUser();
@@ -35,22 +35,25 @@ export default function MessagesSection() {
     fetchUserLevel();
   }, [user?.id]);
 
-  // Initialize Supabase real-time chat for user messages
-  const { isConnected: directConnected, messages: directMessages } = useRealtimeChat({
+  // Initialize Supabase real-time chat for user messages with database persistence
+  const { isConnected: directConnected, messages: directMessages } = usePersistentChat({
     roomName: `direct-${user?.id}-admin`,
-    username: user?.fullName || user?.username || 'User'
+    username: user?.fullName || user?.username || 'User',
+    senderId: user?.id || ''
   });
 
-  // Subscribe to announcements channel
-  const { isConnected: announcementConnected, messages: announcementMessages } = useRealtimeChat({
+  // Subscribe to announcements channel with database persistence
+  const { isConnected: announcementConnected, messages: announcementMessages } = usePersistentChat({
     roomName: 'announcements',
-    username: user?.fullName || user?.username || 'User'
+    username: user?.fullName || user?.username || 'User',
+    senderId: user?.id || ''
   });
 
-  // Subscribe to user's level group chat (dynamic based on user's actual level)
-  const { isConnected: groupConnected, messages: groupMessages } = useRealtimeChat({
+  // Subscribe to user's level group chat with database persistence (dynamic based on user's actual level)
+  const { isConnected: groupConnected, messages: groupMessages } = usePersistentChat({
     roomName: `group-${userLevel}`,
-    username: user?.fullName || user?.username || 'User'
+    username: user?.fullName || user?.username || 'User',
+    senderId: user?.id || ''
   });
 
   // Debug group connection and messages

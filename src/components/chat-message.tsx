@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
-import type { ChatMessage } from '@/hooks/use-realtime-chat'
+import type { PersistentChatMessage } from '@/hooks/use-persistent-chat'
 
 interface ChatMessageItemProps {
-  message: ChatMessage
+  message: PersistentChatMessage
   isOwnMessage: boolean
   showHeader: boolean
 }
@@ -23,11 +23,11 @@ export const ChatMessageItem = ({ message, isOwnMessage, showHeader }: ChatMessa
           >
             <span className={'font-medium text-gray-700'}>{message.user.name}</span>
             <span className="text-gray-500 text-xs">
-              {new Date(message.createdAt).toLocaleTimeString('en-US', {
+              {message.createdAt ? new Date(message.createdAt).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
                 hour12: true,
-              })}
+              }) : 'Invalid Date'}
             </span>
           </div>
         )}

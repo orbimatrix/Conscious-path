@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { RealtimeChat } from '@/components/realtime-chat';
-import { ChatMessage } from '@/hooks/use-realtime-chat';
+import { PersistentChatMessage } from '@/hooks/use-persistent-chat';
 
 export default function MessagingSystem() {
   const { user, isLoaded } = useUser();
@@ -12,7 +12,7 @@ export default function MessagingSystem() {
   const [selectedLevel, setSelectedLevel] = useState('');
   const [messageType, setMessageType] = useState<'direct' | 'group' | 'announcement'>('direct');
   const [viewMode, setViewMode] = useState<'direct' | 'group' | 'announcement'>('direct');
-  const [currentRoom, setCurrentRoom] = useState('admin-inbox');
+  const [currentRoom, setCurrentRoom] = useState(`admin-direct-${user?.id || ''}`);
   const [levels] = useState(['inmortal', 'renacer', 'karma', 'carisma', 'conocimiento', 'bienestar', 'abundancia']);
 
   const isAdmin = user?.publicMetadata?.role === 'admin';
@@ -48,6 +48,7 @@ export default function MessagingSystem() {
     let newRoom = '';
     if (type === 'direct' && id) {
       setSelectedUser(id);
+      // For admin-user chat, use format: direct-{userId}-admin
       newRoom = `direct-${id}-admin`;
     } else if (type === 'group' && id) {
       setSelectedLevel(id);
@@ -59,7 +60,7 @@ export default function MessagingSystem() {
     setCurrentRoom(newRoom);
   };
 
-  const handleMessage = async (messages: ChatMessage[]) => {
+  const handleMessage = async (messages: PersistentChatMessage[]) => {
     // Store messages in database if needed
     // This is where you would implement message persistence
   };
@@ -90,6 +91,9 @@ export default function MessagingSystem() {
           </p>
           <p className="text-xs text-gray-600 mt-1">
             Current Room: <span className="font-mono bg-gray-200 px-1 rounded">{currentRoom}</span>
+          </p>
+          <p className="text-xs text-gray-600 mt-1">
+            View Mode: {viewMode} | Selected User: {selectedUser} | Selected Level: {selectedLevel}
           </p>
         </div>
 
@@ -177,6 +181,7 @@ export default function MessagingSystem() {
                     <RealtimeChat
                       roomName={currentRoom}
                       username="admin"
+                      senderId={user?.id || ''}
                       onMessage={handleMessage}
                     />
                   </div>
@@ -195,6 +200,7 @@ export default function MessagingSystem() {
                     <RealtimeChat
                       roomName={currentRoom}
                       username="admin"
+                      senderId={user?.id || ''}
                       onMessage={handleMessage}
                     />
                   </div>
@@ -209,6 +215,7 @@ export default function MessagingSystem() {
                     <RealtimeChat
                       roomName={currentRoom}
                       username="admin"
+                      senderId={user?.id || ''}
                       onMessage={handleMessage}
                     />
                   </div>
