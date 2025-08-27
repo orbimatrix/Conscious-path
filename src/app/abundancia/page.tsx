@@ -1,15 +1,105 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./abundancia.css";
 
+interface Video {
+  uri: string;
+  name: string;
+  description?: string;
+  duration: number;
+  created_time: string;
+  modified_time: string;
+  release_time: string;
+  pictures: {
+    sizes: Array<{
+      width: number;
+      height: number;
+      link: string;
+    }>;
+  };
+  player_embed_url: string;
+  link: string;
+  embed: {
+    html: string;
+  };
+  stats: {
+    plays: number;
+    likes: number;
+    comments: number;
+  };
+  accessLevel?: number;
+}
+
 export default function AbundanciaPage() {
   // Simulate user login status - in real app this would come from auth context
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  // Video modal state
+  const [publicVideo, setPublicVideo] = useState<Video | null>(null);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchPublicVideo();
+  }, []);
+
+  const fetchPublicVideo = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      // Fetch videos from Vimeo API
+      const response = await fetch('/api/vimeo/videos');
+      const result = await response.json();
+      
+      if (result.success && result.videos && result.videos.length > 0) {
+        // Find a public video or abundancia-related video
+        const publicVid = result.videos.find((video: Video) => 
+          video.name.toLowerCase().includes('public') || 
+          video.name.toLowerCase().includes('abundancia') ||
+          video.name.toLowerCase().includes('benec') ||
+          video.name.toLowerCase().includes('nivel') ||
+          video.description?.toLowerCase().includes('public') ||
+          video.description?.toLowerCase().includes('abundancia') ||
+          video.description?.toLowerCase().includes('benec')
+        );
+        
+        setPublicVideo(publicVid || result.videos[0]); // Fallback to first video if no public one found
+      } else {
+        setError('No se encontraron videos disponibles');
+      }
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+      setError('Error al cargar los videos');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleLoginStatus = () => {
     setIsLoggedIn(!isLoggedIn);
+  };
+
+  const openVideoModal = () => {
+    if (publicVideo) {
+      setShowVideoModal(true);
+    }
+  };
+
+  const closeVideoModal = () => {
+    setShowVideoModal(false);
+  };
+
+  const getVideoThumbnail = () => {
+    if (publicVideo?.pictures?.sizes) {
+      // Get the best quality thumbnail available
+      const bestThumbnail = publicVideo.pictures.sizes.find(size => size.width >= 640) || 
+                           publicVideo.pictures.sizes[publicVideo.pictures.sizes.length - 1];
+      return bestThumbnail?.link;
+    }
+    return null;
   };
 
   return (
@@ -95,12 +185,48 @@ export default function AbundanciaPage() {
       {/* Video Presentation Section */}
       <section className="abundancia-video-section">
         <div className="video-section-container">
-          <div className="video-player">
-            <div className="play-button">
-              <div className="play-icon"></div>
+          {loading ? (
+            <div className="video-player">
+              <div className="video-loading">Cargando video...</div>
             </div>
-          </div>
-          <h3 className="video-title">Presentación del Grupo de Proyección</h3>
+          ) : error ? (
+            <div className="video-player">
+              <div className="video-error">
+                <div className="error-text">{error}</div>
+              </div>
+            </div>
+          ) : publicVideo ? (
+            <div className="video-player" onClick={openVideoModal}>
+              {getVideoThumbnail() ? (
+                <div className="video-thumbnail">
+                  <Image
+                    src={getVideoThumbnail()!}
+                    alt={publicVideo.name}
+                    fill
+                    className="thumbnail-image"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              ) : (
+                <div className="video-placeholder">
+                  <div className="placeholder-text">Video no disponible</div>
+                </div>
+              )}
+              <div className="play-button">
+                <div className="play-icon"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="video-player no-video">
+              <div className="video-placeholder">
+                <div className="placeholder-text">No hay videos disponibles</div>
+              </div>
+            </div>
+          )}
+          
+          <h3 className="video-title">
+            {publicVideo ? publicVideo.name : 'Presentación del Grupo de Proyección'}
+          </h3>
           
           {/* Conditional content based on login status */}
           {isLoggedIn ? (
@@ -143,6 +269,37 @@ export default function AbundanciaPage() {
           </button>
         </div>
       </section>
+
+      {/* Video Modal */}
+      {showVideoModal && publicVideo && (
+        <div className="video-modal-overlay" onClick={closeVideoModal}>
+          <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="video-modal-close" onClick={closeVideoModal}>×</button>
+            <div className="video-modal-player">
+              {publicVideo.link.includes('vimeo.com') ? (
+                <iframe
+                  src={`https://player.vimeo.com/video/${publicVideo.uri.split('/').pop()}?h=auto&autoplay=1`}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe"
+                ></iframe>
+              ) : (
+                <video
+                  controls
+                  className="video-element"
+                  autoPlay
+                  src={publicVideo.link}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <FooterSection />
     </div>
