@@ -131,11 +131,14 @@ export default function AportesPage() {
       {/* Payment Buttons Section */}
       <section className="payment-buttons-section">
         <div className="payment-buttons-container">
-          <form action="/api/checkout_sessions" method="POST">
-            <button type="submit" className="payment-button card-button">
-              REALIZAR APORTE CON TARJETA
-            </button>
-          </form>
+          <a 
+            href="https://buy.stripe.com/test_9B66oGaC7fBLeEJ6W0gA804" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="payment-button card-button"
+          >
+            REALIZAR APORTE CON TARJETA
+          </a>
           <button className="payment-button paypal-button">
             REALIZAR APORTE CON PAYPAL
           </button>
