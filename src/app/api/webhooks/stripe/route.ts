@@ -5,6 +5,7 @@ import { db } from '@/lib/db';
 import { users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { updateUserLevel, addUserPoints, calculatePointsFromAmount } from '@/lib/subscription-utils';
+import { sendOwnerPaymentNotification, FormSubmissionData } from '@/lib/email';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -27,8 +28,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
 
-    console.log('Webhook event received:', event.type);
-    console.log('Event data:', JSON.stringify(event.data.object, null, 2));
+
 
     // Handle different event types
     switch (event.type) {
@@ -41,8 +41,12 @@ export async function POST(request: Request) {
         await handlePaymentSuccess(event.data.object);
         break;
       
+      case 'checkout.session.completed':
+        await handleCheckoutSessionCompleted(event.data.object);
+        break;
+      
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        // Unhandled event type
     }
 
     return NextResponse.json({ received: true });
@@ -78,8 +82,7 @@ async function handleSubscriptionChange(subscription: any) {
 
     if (!clerkId) {
       console.error('Customer has no Clerk ID in metadata');
-      console.log('Subscription metadata:', subscription.metadata);
-      console.log('Customer ID:', customerId);
+     
       return;
     }
 
@@ -108,7 +111,7 @@ async function handleSubscriptionChange(subscription: any) {
       await updateUserLevel(user.id, tier);
     }
 
-    console.log(`Updated user ${user.id} level for subscription: ${product.name}`);
+    // User level updated for subscription
   } catch (error) {
     console.error('Error handling subscription change:', error);
   }
@@ -167,7 +170,7 @@ async function handlePaymentSuccess(invoice: any) {
     // Add points to user account
     await addUserPoints(user.id, pointsToAdd);
 
-    console.log(`Added ${pointsToAdd} points to user ${user.id}`);
+    // Points added to user account
   } catch (error) {
     console.error('Error handling payment success:', error);
   }
@@ -196,4 +199,34 @@ function calculateSubscriptionTier(subscription: any, product: any) {
   }
   
   return tier;
+}
+
+async function handleCheckoutSessionCompleted(session: any) {
+  try {
+    // Extract form data from session metadata
+    const { customerEmail, caseInfo, availability, paymentMethod, paymentAmount } = session.metadata;
+    
+    if (customerEmail && caseInfo && availability && paymentMethod && paymentAmount) {
+      // Create form data object for email
+      const formData: FormSubmissionData = {
+        email: customerEmail,
+        caseInfo,
+        availability,
+        paymentMethod,
+        acceptTerms: true,
+        paymentAmount,
+        timestamp: new Date().toISOString()
+      };
+
+      // Send payment notification to owner with form details
+      await sendOwnerPaymentNotification({
+        customerEmail: customerEmail,
+        amount: `$${(session.amount_total / 100).toFixed(2)}`,
+        sessionId: session.id,
+        formData
+      });
+    }
+  } catch (error) {
+    console.error('Error handling checkout session completion:', error);
+  }
 }

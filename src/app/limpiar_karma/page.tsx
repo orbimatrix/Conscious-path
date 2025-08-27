@@ -11,7 +11,8 @@ export default function LimpiarKarmaPage() {
     caseInfo: "",
     availability: "",
     paymentMethod: "",
-    acceptTerms: false
+    acceptTerms: false,
+    paymentAmount: "$75" // Default price for karma cleaning session
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
