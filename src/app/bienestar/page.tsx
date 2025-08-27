@@ -11,7 +11,8 @@ export default function BienestarPage() {
     caseInfo: "",
     availability: "",
     paymentMethod: "",
-    acceptTerms: false
+    acceptTerms: false,
+    paymentAmount: "$250" // Default price for bienestar integral session
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -25,11 +26,45 @@ export default function BienestarPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
-      setIsSubmitted(true);
-      console.log('Form submitted:', formData);
+      try {
+        // First, submit the form data to our booking API
+        const formResponse = await fetch('/api/booking-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!formResponse.ok) {
+          throw new Error('Failed to submit form');
+        }
+
+        // Then, redirect to Stripe checkout with form data
+        const checkoutResponse = await fetch('/api/checkout_sessions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!checkoutResponse.ok) {
+          throw new Error('Failed to create checkout session');
+        }
+
+        // Redirect to Stripe checkout
+        const checkoutData = await checkoutResponse.json();
+        if (checkoutData.url) {
+          window.location.href = checkoutData.url;
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
+      }
     }
   };
 
@@ -42,7 +77,8 @@ export default function BienestarPage() {
         caseInfo: "",
         availability: "",
         paymentMethod: "",
-        acceptTerms: false
+        acceptTerms: false,
+        paymentAmount: "$250"
       });
     }
   };
@@ -188,7 +224,7 @@ export default function BienestarPage() {
               </p>
             </div>
             {!isSubmitted ? (
-              <form className="booking-form" action="/api/checkout_sessions" method="POST">
+              <form className="booking-form" onSubmit={handleSubmit}>
                 <div className="booking-form-section-group">
                   <ul className="booking-form-terms-list">
                     <li>Entiendo que mis datos serán usados y almacenados para realizar el servicio solicitado.</li>

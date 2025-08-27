@@ -203,10 +203,20 @@ function calculateSubscriptionTier(subscription: any, product: any) {
 
 async function handleCheckoutSessionCompleted(session: any) {
   try {
+    console.log('🔔 Starting checkout session completion handler...');
+    
     // Extract form data from session metadata
     const { customerEmail, caseInfo, availability, paymentMethod, paymentAmount } = session.metadata;
     
+    console.log('📧 Customer email:', customerEmail);
+    console.log('📋 Case info:', caseInfo);
+    console.log('📅 Availability:', availability);
+    console.log('💳 Payment method:', paymentMethod);
+    console.log('💰 Payment amount:', paymentAmount);
+    
     if (customerEmail && caseInfo && availability && paymentMethod && paymentAmount) {
+      console.log('✅ All form data found, creating form data object...');
+      
       // Create form data object for email
       const formData: FormSubmissionData = {
         email: customerEmail,
@@ -218,6 +228,9 @@ async function handleCheckoutSessionCompleted(session: any) {
         timestamp: new Date().toISOString()
       };
 
+      console.log('📤 Sending owner payment notification...');
+      console.log('👤 Owner email from env:', process.env.OWNER_EMAIL);
+      
       // Send payment notification to owner with form details
       await sendOwnerPaymentNotification({
         customerEmail: customerEmail,
@@ -225,8 +238,12 @@ async function handleCheckoutSessionCompleted(session: any) {
         sessionId: session.id,
         formData
       });
+      
+      console.log('✅ Owner payment notification sent successfully!');
+    } else {
+      console.log('❌ Missing form data:', { customerEmail, caseInfo, availability, paymentMethod, paymentAmount });
     }
   } catch (error) {
-    console.error('Error handling checkout session completion:', error);
+    console.error('❌ Error handling checkout session completion:', error);
   }
 }

@@ -11,7 +11,8 @@ export default function RegresionPage() {
     caseInfo: "",
     availability: "",
     paymentMethod: "",
-    acceptTerms: false
+    acceptTerms: false,
+    paymentAmount: "$100" // Default price for regression session
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -25,12 +26,45 @@ export default function RegresionPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
-      setIsSubmitted(true);
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
+      try {
+        // First, submit the form data to our booking API
+        const formResponse = await fetch('/api/booking-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!formResponse.ok) {
+          throw new Error('Failed to submit form');
+        }
+
+        // Then, redirect to Stripe checkout with form data
+        const checkoutResponse = await fetch('/api/checkout_sessions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!checkoutResponse.ok) {
+          throw new Error('Failed to create checkout session');
+        }
+
+        // Redirect to Stripe checkout
+        const checkoutData = await checkoutResponse.json();
+        if (checkoutData.url) {
+          window.location.href = checkoutData.url;
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
+      }
     }
   };
 
@@ -43,7 +77,8 @@ export default function RegresionPage() {
         caseInfo: "",
         availability: "",
         paymentMethod: "",
-        acceptTerms: false
+        acceptTerms: false,
+        paymentAmount: "$100"
       });
     }
   };
@@ -193,7 +228,7 @@ export default function RegresionPage() {
             </div>
 
             {!isSubmitted ? (
-              <form className={styles.bookingForm} action="/api/checkout_sessions" method="POST">
+              <form className={styles.bookingForm} onSubmit={handleSubmit}>
                 <div className={styles.bookingFormSectionGroup}>
                   <ul className={styles.bookingFormTermsList}>
                     <li>Entiendo que mis datos serán usados y almacenados para realizar el servicio solicitado.</li>

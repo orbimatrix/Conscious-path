@@ -131,8 +131,6 @@ export async function sendOwnerPaymentNotification(paymentData: PaymentNotificat
           <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #555;">Información del Pago:</h3>
             <p><strong>Email del cliente:</strong> ${paymentData.customerEmail}</p>
-            <p><strong>Monto:</strong> ${paymentData.amount}</p>
-            <p><strong>ID de sesión:</strong> ${paymentData.sessionId}</p>
             
             <h3 style="color: #555;">Detalles de la solicitud original:</h3>
             <p><strong>Email:</strong> ${paymentData.formData.email}</p>
