@@ -187,13 +187,21 @@ export default function AccederPage() {
                       </span>
                       <span className="price-period">/mes</span>
                     </div>
-                    <button 
-                      className={`payment-option ${selectedPayment === 'monthly-single' ? 'selected' : ''}`}
-                      onClick={() => handlePaymentSelect('monthly-single')}
+                    
+                    <form 
+                      className="booking-form" 
+                      action={selectedPlan === "carisma" ? "/api/subscription/carisma-monthly" : "/api/subscription/karma-monthly"} 
+                      method="POST"
                     >
-                      <div>Pago único</div>
-                      <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
-                    </button>
+                      <button 
+                        type="submit"
+                        className={`payment-option ${selectedPayment === 'monthly-single' ? 'selected' : ''}`}
+                        onClick={() => handlePaymentSelect('monthly-single')}
+                      >
+                        <div>Pago único</div>
+                        <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
+                      </button>
+                    </form>
                   </div>
                 </div>
 
@@ -211,13 +219,20 @@ export default function AccederPage() {
                     <div className="discount-badge">20% de descuento</div>
                     
                     <div className="annual-payment-options">
-                      <button 
-                        className={`payment-option ${selectedPayment === 'annual-single' ? 'selected' : ''}`}
-                        onClick={() => handlePaymentSelect('annual-single')}
+                      <form 
+                        className="booking-form" 
+                        action={selectedPlan === "carisma" ? "/api/subscription/carisma-yearly" : "/api/subscription/karma-yearly"} 
+                        method="POST"
                       >
-                        <div>Pago único</div>
-                        <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
-                      </button>
+                        <button 
+                          type="submit"
+                          className={`payment-option ${selectedPayment === 'annual-single' ? 'selected' : ''}`}
+                          onClick={() => handlePaymentSelect('annual-single')}
+                        >
+                          <div>Pago único</div>
+                          <div className="payment-subtitle">con Tarjeta, Paypal, etc</div>
+                        </button>
+                      </form>
                       
                       <button 
                         className={`payment-option ${selectedPayment === 'annual-3months' ? 'selected' : ''}`}
@@ -246,11 +261,7 @@ export default function AccederPage() {
                 </div>
               </div>
 
-              {selectedPayment && (
-                <button className="proceed-payment-btn">
-                  Continuar con el Pago
-                </button>
-              )}
+
             </div>
           </div>
         )}
