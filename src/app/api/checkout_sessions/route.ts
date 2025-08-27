@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
-
+import { auth } from '@clerk/nextjs/server'
 import { stripe } from '../../../lib/stripe'
 
 export async function POST() {
   try {
+    // Get authenticated user
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const headersList = await headers()
     const origin = headersList.get('origin')
 
@@ -18,6 +24,9 @@ export async function POST() {
         },
       ],
       mode: 'payment',
+      metadata: {
+        clerkId: userId // Store Clerk ID in session metadata
+      },
       success_url: `${origin}/paysuccess?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/payfail`,
     });
