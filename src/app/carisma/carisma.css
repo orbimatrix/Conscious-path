@@ -844,7 +844,7 @@
   }
   
   .carisma-title {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .carisma-subtitle {
@@ -1044,5 +1044,12 @@
     height: 200px;
     min-height: 200px;
     padding: 0 20px;
+  }
+}
+
+/* Font size for carisma subtitle - 28px for screens 320px to 959px */
+@media (max-width: 959px) and (min-width: 320px) {
+  .carisma-subtitle {
+    font-size: 28px;
   }
 }
