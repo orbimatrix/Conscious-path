@@ -18,7 +18,7 @@ export async function POST() {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1S0gLcCVRRyLCIRPt60GKeWG', // Karma 150$/month
+          price: 'price_1S178bDq7sTN0VRGM0vtcYpx', // Karma 150$/month
           quantity: 1,
         },
       ],

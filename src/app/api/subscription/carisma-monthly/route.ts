@@ -18,7 +18,7 @@ export async function POST() {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1S0fy8CVRRyLCIRPtKQEDpij', // Carisma 15$/month
+          price: 'price_1S1772Dq7sTN0VRGi6nBrWSh', // Carisma 15$/month
           quantity: 1,
         },
       ],

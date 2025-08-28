@@ -132,7 +132,7 @@ export default function AportesPage() {
       <section className="payment-buttons-section">
         <div className="payment-buttons-container">
           <a 
-            href="https://buy.stripe.com/test_9B66oGaC7fBLeEJ6W0gA804" 
+            href="https://buy.stripe.com/test_dRmcN58A3aLMdvm7wI9R600" 
             target="_blank" 
             rel="noopener noreferrer"
             className="payment-button card-button"
