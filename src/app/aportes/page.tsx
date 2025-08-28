@@ -11,13 +11,39 @@ export default function AportesPage() {
   const [messageSent, setMessageSent] = useState(false);
   const [messageText, setMessageText] = useState("");
 
-  const handleSendMessage = () => {
-    // if (!requireAuth()) {
-    //   return; // Show signup modal instead
-    // }
-    if (messageText.trim()) {
-      setMessageSent(true);
-      setMessageText("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSendMessage = async () => {
+    if (!messageText.trim()) {
+      setSubmitError("Por favor ingrese un mensaje");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch('/api/aportes-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: messageText }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessageSent(true);
+        setMessageText("");
+      } else {
+        setSubmitError(result.error || 'Error al enviar el mensaje');
+      }
+    } catch (error) {
+      setSubmitError('Error de conexión');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -160,11 +186,17 @@ export default function AportesPage() {
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
             ></textarea>
+            {submitError && (
+              <div className="error-message">
+                <p className="error-text">{submitError}</p>
+              </div>
+            )}
             <button
               className="send-message-button"
               onClick={handleSendMessage}
+              disabled={isSubmitting}
             >
-              ENVIAR MENSAJE
+              {isSubmitting ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
             </button>
 
 

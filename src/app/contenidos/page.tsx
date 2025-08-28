@@ -1,10 +1,53 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./contenidos.css";
+import { useRouter } from "next/navigation";
 
 export default function ContenidosPage() {
+  const router = useRouter();
+  const [subscriptionEmail, setSubscriptionEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleEmailSubscription = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subscriptionEmail.trim()) {
+      setSubmitStatus({ type: 'error', message: 'Por favor ingrese un email' });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/email-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: subscriptionEmail }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: result.message });
+        setSubscriptionEmail("");
+      } else {
+        setSubmitStatus({ type: 'error', message: result.error || 'Error al procesar la suscripción' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Error de conexión' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="contenidos-page">
       {/* Brown Banner Section */}
@@ -46,10 +89,13 @@ export default function ContenidosPage() {
       {/* Bottom Button Section */}
       <section className="contenidos-button-section">
         <div className="contenidos-button-container">
-          <button className="contenidos-register-button">
-            <span className="button-line-1">Regístrese ahora</span>
-            <span className="button-line-2">y descubra los secretos</span>
-          </button>
+            <button 
+              className="contenidos-register-button"
+              onClick={() => router.push('/registration')}
+            >
+              <span className="button-line-1">Regístrese ahora</span>
+              <span className="button-line-2">y descubra los secretos</span>
+            </button>
         </div>
       </section>
 
@@ -209,15 +255,26 @@ export default function ContenidosPage() {
               Reciba en su email todas las novedades.
             </p>
             
-            <form className="contenidos-email-form">
+            <form className="contenidos-email-form" onSubmit={handleEmailSubscription}>
               <input 
                 type="email" 
                 placeholder="Su Email" 
                 className="contenidos-email-input"
+                value={subscriptionEmail}
+                onChange={(e) => setSubscriptionEmail(e.target.value)}
                 required
               />
-              <button type="submit" className="contenidos-submit-button">
-                Enviar
+              {submitStatus.type && (
+                <div className={`subscription-status ${submitStatus.type}`}>
+                  {submitStatus.message}
+                </div>
+              )}
+              <button 
+                type="submit" 
+                className="contenidos-submit-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Enviando...' : 'Enviar'}
               </button>
             </form>
           </div>

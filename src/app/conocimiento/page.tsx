@@ -505,7 +505,7 @@ export default function ConocimientoPage() {
     }
   }, []);
 
-  if (loading) return <div className="loading-indicator">Loading content...</div>;
+  // if (loading) return <div className="loading-indicator">Loading content...</div>;
 
   if (error) {
     return (
