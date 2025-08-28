@@ -3687,6 +3687,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 40px 0;
+  
 }
 
 .privado-image {
@@ -3775,6 +3776,8 @@ body {
   color: #333333;
   text-align: left;
   max-width: 400px;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
   width: 100%;
 }
 
@@ -3907,7 +3910,7 @@ body {
   }
 
   .privado-content {
-    padding: 30px 12px;
+    padding: 8px 9px;
   }
 
   .privado-content-title {
@@ -5220,5 +5223,18 @@ body {
   .video-loading,
   .video-error {
     gap: 10px;
+  }
+}
+
+/* Privado Content Section Height - 222px for screens 320px to 768px */
+@media (max-width: 768px) and (min-width: 320px) {
+  .privado-content {
+    height: 222px;
+    min-height: 222px;
+    box-sizing: border-box;
+  }
+  
+  .privado-image-container {
+    padding-top: 20px;
   }
 }
