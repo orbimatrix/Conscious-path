@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "@/lib/auth";
 
 export default function PrivadoPage() {
+    const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
     const [showBookingForm, setShowBookingForm] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -27,6 +30,12 @@ export default function PrivadoPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Check authentication before submitting
+        if (!requireAuth()) {
+            return;
+        }
+        
         if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
             try {
                 // First, submit the form data to our booking API
@@ -67,6 +76,14 @@ export default function PrivadoPage() {
     };
 
     const toggleBookingForm = () => {
+        // If not authenticated, show signup modal instead
+        if (!isAuthenticated) {
+            // This will automatically show the signup modal via requireAuth()
+            requireAuth();
+            return;
+        }
+        
+        // If authenticated, toggle the booking form
         setShowBookingForm(!showBookingForm);
         if (showBookingForm) {
             setIsSubmitted(false);
@@ -159,11 +176,19 @@ export default function PrivadoPage() {
                         </div>
                     </div>
                     <h3 className="privado-video-title">Presentación del Encuentro privado</h3>
+                    
+                    {/* Authentication Status */}
+                    {!isAuthenticated && (
+                        <div className="auth-notice">
+                            <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
+                        </div>
+                    )}
+                    
                     <button
                         className="privado-cta-button"
                         onClick={toggleBookingForm}
                     >
-                        Reservar el Encuentro
+                        {isAuthenticated ? 'Reservar el Encuentro' : 'Inicia sesión para reservar'}
                     </button>
                 </div>
             </section>
@@ -284,6 +309,14 @@ export default function PrivadoPage() {
             )}
 
                   <FooterSection />
+
+                  {/* Signup Modal */}
+                  <SignupModal
+                    isOpen={showSignupModal}
+                    onClose={closeSignupModal}
+                    title="Inicia sesión para continuar"
+                    message="Necesitas iniciar sesión para acceder a la función de reserva de encuentro privado."
+                  />
     </div>
   );
 }

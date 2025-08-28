@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "@/lib/auth";
 import "./bienestar.css";
 
 export default function BienestarPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -28,6 +31,12 @@ export default function BienestarPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check authentication before submitting
+    if (!requireAuth()) {
+      return;
+    }
+    
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       try {
         // First, submit the form data to our booking API
@@ -44,7 +53,7 @@ export default function BienestarPage() {
         }
 
         // Then, redirect to Stripe checkout with form data
-        const checkoutResponse = await fetch('/api/checkout_sessions', {
+        const checkoutResponse = await fetch('/api/checkout_sessions/bienestar', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -69,6 +78,14 @@ export default function BienestarPage() {
   };
 
   const toggleBookingForm = () => {
+    // If not authenticated, show signup modal instead
+    if (!isAuthenticated) {
+      // This will automatically show the signup modal via requireAuth()
+      requireAuth();
+      return;
+    }
+    
+    // If authenticated, toggle the booking form
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -203,11 +220,19 @@ export default function BienestarPage() {
           <h3 className="video-title">
             Presentación de la sesión de bienestar integral
           </h3>
+          
+          {/* Authentication Status */}
+          {!isAuthenticated && (
+            <div className="auth-notice">
+              <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
+            </div>
+          )}
+          
           <button
             className="booking-button"
             onClick={toggleBookingForm}
           >
-            Reservar sesión de Bienestar Integral
+            {isAuthenticated ? 'Reservar sesión de Bienestar Integral' : 'Inicia sesión para reservar'}
           </button>
         </div>
       </section>
@@ -323,6 +348,14 @@ export default function BienestarPage() {
       )}
 
       <FooterSection />
+
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para continuar"
+        message="Necesitas iniciar sesión para acceder a la función de reserva de sesiones de bienestar."
+      />
     </div>
   );
 }

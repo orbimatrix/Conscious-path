@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import FooterSection from '../components/FooterSection';
+import SignupModal from '../components/SignupModal';
+import { useAuth } from '@/lib/auth';
 
 export default function RegresionPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -28,6 +31,12 @@ export default function RegresionPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check authentication before submitting
+    if (!requireAuth()) {
+      return;
+    }
+    
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       try {
         // First, submit the form data to our booking API
@@ -44,7 +53,7 @@ export default function RegresionPage() {
         }
 
         // Then, redirect to Stripe checkout with form data
-        const checkoutResponse = await fetch('/api/checkout_sessions', {
+        const checkoutResponse = await fetch('/api/checkout_sessions/regresion', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -69,6 +78,14 @@ export default function RegresionPage() {
   };
 
   const toggleBookingForm = () => {
+    // If not authenticated, show signup modal instead
+    if (!isAuthenticated) {
+      // This will automatically show the signup modal via requireAuth()
+      requireAuth();
+      return;
+    }
+    
+    // If authenticated, toggle the booking form
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -205,12 +222,19 @@ export default function RegresionPage() {
             Presentación de Regresión Origen
           </h2>
           
+          {/* Authentication Status */}
+          {!isAuthenticated && (
+            <div className={styles.authNotice}>
+              <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
+            </div>
+          )}
+          
           {/* Booking Button */}
           <button 
             className={styles.bookingButton}
             onClick={toggleBookingForm}
           >
-            Reservar Regresión Origen
+            {isAuthenticated ? 'Reservar Regresión Origen' : 'Inicia sesión para reservar'}
           </button>
         </div>
       </div>
@@ -332,6 +356,14 @@ export default function RegresionPage() {
 
       {/* Footer Section */}
       <FooterSection />
+
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para continuar"
+        message="Necesitas iniciar sesión para acceder a la función de reserva de regresión origen."
+      />
     </div>
   );
 }

@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import AnimatedButton from "../components/AnimatedButton";
+import SignupModal from "../components/SignupModal";
+import { useAuth } from "@/lib/auth";
 import "./es_karma.css";
 
 export default function EstructuralPage() {
+  const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -29,6 +32,12 @@ export default function EstructuralPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check authentication before submitting
+    if (!requireAuth()) {
+      return;
+    }
+    
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       try {
         // First, submit the form data to our booking API
@@ -45,7 +54,7 @@ export default function EstructuralPage() {
         }
 
         // Then, redirect to Stripe checkout with form data
-        const checkoutResponse = await fetch('/api/checkout_sessions', {
+        const checkoutResponse = await fetch('/api/checkout_sessions/estructural', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,6 +79,14 @@ export default function EstructuralPage() {
   };
 
   const toggleBookingForm = () => {
+    // If not authenticated, show signup modal instead
+    if (!isAuthenticated) {
+      // This will automatically show the signup modal via requireAuth()
+      requireAuth();
+      return;
+    }
+    
+    // If authenticated, toggle the booking form
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -188,13 +205,21 @@ export default function EstructuralPage() {
               </div>
             </div>
             <h3 className="video-title">Presentación del Análisis Estructural</h3>
+            
+            {/* Authentication Status */}
+            {!isAuthenticated && (
+              <div className="auth-notice">
+                <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
+              </div>
+            )}
+            
             <section className="estructural-button-section">
               <div className="estructural-button-container">
                 <AnimatedButton
                   className="estructural-action-button"
                   onClick={toggleBookingForm}
                 >
-                  RESERVAR
+                  {isAuthenticated ? 'RESERVAR' : 'Inicia sesión para reservar'}
                 </AnimatedButton>
               </div>
             </section>
@@ -321,6 +346,14 @@ export default function EstructuralPage() {
       </main>
 
       <FooterSection />
+
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={showSignupModal}
+        onClose={closeSignupModal}
+        title="Inicia sesión para continuar"
+        message="Necesitas iniciar sesión para acceder a la función de reserva de análisis estructural."
+      />
     </div>
   );
 }
