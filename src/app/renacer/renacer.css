@@ -663,7 +663,7 @@
   }
   
   .renacer-subtitle {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .renacer-benefits {
@@ -766,7 +766,7 @@
   }
   
   .renacer-subtitle {
-    font-size: 22px;
+    font-size: 28px;
   }
   
   .renacer-benefits {
@@ -896,5 +896,19 @@
     max-width: 1800px;
     width: 100%;
     height: auto;
+  }
+}
+
+/* Font size for renacer title - 16px for screens 360px to 768px */
+@media (max-width: 768px) and (min-width: 360px) {
+  .renacer-title {
+    font-size: 16px;
+  }
+}
+
+/* Font size for renacer title - 20px for screens 960px and greater */
+@media (min-width: 960px) {
+  .renacer-title {
+    font-size: 20px;
   }
 }
