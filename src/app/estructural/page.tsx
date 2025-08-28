@@ -521,11 +521,7 @@ export default function EstructuralPage() {
                   style={{ display: videoLoading || error ? 'none' : 'block' }}
                 ></iframe>
               </div>
-              {selectedVideo.description && (
-                <div className="video-modal-description">
-                  <p>{selectedVideo.description}</p>
-                </div>
-              )}
+              
             </div>
           </div>
         </div>

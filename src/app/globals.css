@@ -5050,6 +5050,58 @@ body {
 }
 
 /* Responsive Video Modal */
+/* Large screens - ensure video controls are visible and proper spacing */
+@media (min-width: 1025px) {
+  .video-modal-player {
+    padding-bottom: 42%;
+    max-width: 80%;
+    margin: 0 auto 40px auto;
+  }
+  
+  .video-modal {
+    max-width: 85vw;
+    max-height: 80vh;
+    margin: 40px 0;
+  }
+  
+  .video-modal-content {
+    padding: 30px;
+  }
+  
+  .video-modal-title {
+    margin-bottom: 30px;
+  }
+  
+  .video-modal-description {
+    margin-top: 30px;
+    padding: 20px;
+  }
+}
+
+/* Extra large screens - further reduce video size */
+@media (min-width: 1440px) {
+  .video-modal-player {
+    padding-bottom: 37%;
+    max-width: 70%;
+  }
+  
+  .video-modal {
+    max-width: 80vw;
+  }
+}
+
+/* Ultra large screens - minimal video size */
+@media (min-width: 1920px) {
+  .video-modal-player {
+    padding-bottom: 32%;
+    max-width: 60%;
+  }
+  
+  .video-modal {
+    max-width: 75vw;
+  }
+}
+
 @media (max-width: 1024px) {
   .video-modal {
     max-width: 95vw;
