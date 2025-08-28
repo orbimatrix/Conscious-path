@@ -1143,6 +1143,15 @@
   }
 }
 
+/* Hero section height for screens 920px to 320px */
+@media (max-width: 920px) and (min-width: 320px) {
+  .carisma-hero {
+    height: 200px;
+    min-height: 200px;
+    padding: 0 20px;
+  }
+}
+
 /* Increase image size for screens wider than 960px */
 @media (min-width: 960px) {
   .carisma-image-container {
