@@ -203,20 +203,54 @@ function calculateSubscriptionTier(subscription: any, product: any) {
 
 async function handleCheckoutSessionCompleted(session: any) {
   try {
-    console.log('🔔 Starting checkout session completion handler...');
+    // Extract Clerk ID and form data from session metadata
+    const { clerkId, customerEmail, caseInfo, availability, paymentMethod, paymentAmount } = session.metadata;
     
-    // Extract form data from session metadata
-    const { customerEmail, caseInfo, availability, paymentMethod, paymentAmount } = session.metadata;
+    // Calculate points based on payment amount ($1 = 1 point)
+    let paymentAmountInDollars = 0;
     
-    console.log('📧 Customer email:', customerEmail);
-    console.log('📋 Case info:', caseInfo);
-    console.log('📅 Availability:', availability);
-    console.log('💳 Payment method:', paymentMethod);
-    console.log('💰 Payment amount:', paymentAmount);
+    if (paymentAmount) {
+      // Handle different payment amount formats
+      if (typeof paymentAmount === 'string') {
+        // Remove $ and any non-numeric characters, then parse
+        paymentAmountInDollars = parseFloat(paymentAmount.replace(/[^0-9.]/g, ''));
+      } else if (typeof paymentAmount === 'number') {
+        paymentAmountInDollars = paymentAmount;
+      }
+    }
+    
+    // Fallback: if we can't parse the payment amount, use the session amount
+    if (!paymentAmountInDollars || isNaN(paymentAmountInDollars)) {
+      paymentAmountInDollars = (session.amount_total / 100);
+    }
+    
+    const pointsToAdd = Math.floor(paymentAmountInDollars);
+    
+    if (clerkId && pointsToAdd > 0) {
+      try {
+        // Find user by Clerk ID
+        const userData = await db.select().from(users).where(eq(users.clerkId, clerkId));
+        
+        if (userData.length > 0) {
+          const user = userData[0];
+          const currentPoints = user.points || 0;
+          const newPoints = currentPoints + pointsToAdd;
+          
+          // Update user points and last points update timestamp
+          await db.update(users)
+            .set({ 
+              points: newPoints,
+              lastPointsUpdate: new Date(),
+              lastUpdated: new Date()
+            })
+            .where(eq(users.clerkId, clerkId));
+        }
+      } catch (dbError) {
+        console.error('Database error updating user points:', dbError);
+      }
+    }
     
     if (customerEmail && caseInfo && availability && paymentMethod && paymentAmount) {
-      console.log('✅ All form data found, creating form data object...');
-      
       // Create form data object for email
       const formData: FormSubmissionData = {
         email: customerEmail,
@@ -228,9 +262,6 @@ async function handleCheckoutSessionCompleted(session: any) {
         timestamp: new Date().toISOString()
       };
 
-      console.log('📤 Sending owner payment notification...');
-      console.log('👤 Owner email from env:', process.env.OWNER_EMAIL);
-      
       // Send payment notification to owner with form details
       await sendOwnerPaymentNotification({
         customerEmail: customerEmail,
@@ -238,12 +269,9 @@ async function handleCheckoutSessionCompleted(session: any) {
         sessionId: session.id,
         formData
       });
-      
-      console.log('✅ Owner payment notification sent successfully!');
-    } else {
-      console.log('❌ Missing form data:', { customerEmail, caseInfo, availability, paymentMethod, paymentAmount });
     }
+    
   } catch (error) {
-    console.error('❌ Error handling checkout session completion:', error);
+    console.error('Error handling checkout session completion:', error);
   }
 }
