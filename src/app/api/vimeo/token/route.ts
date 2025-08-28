@@ -16,10 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Vimeo app credentials not configured' }, { status: 500 });
     }
 
-    console.log('🔍 Debug Info:');
-    console.log('Client ID:', VIMEO_CLIENT_ID);
-    console.log('Redirect URI:', VIMEO_REDIRECT_URI);
-    console.log('Code received:', code.substring(0, 10) + '...');
+   
 
     // Exchange authorization code for access token
     const tokenResponse = await fetch('https://api.vimeo.com/oauth/access_token', {

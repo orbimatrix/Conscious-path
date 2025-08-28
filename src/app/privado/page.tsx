@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import SignupModal from "../components/SignupModal";
 import { useAuth } from "@/lib/auth";
+import { VimeoVideo } from "../types/vimeo";
 
 export default function PrivadoPage() {
     const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
@@ -17,6 +18,79 @@ export default function PrivadoPage() {
         paymentAmount: "$75" // Default price for private session
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
+    
+    // Video state
+    const [videos, setVideos] = useState<VimeoVideo[]>([]);
+    const [selectedVideo, setSelectedVideo] = useState<VimeoVideo | null>(null);
+    const [showVideoModal, setShowVideoModal] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [videoLoading, setVideoLoading] = useState(false);
+
+    // Fetch videos with "privado public" tag
+    const fetchVideos = useCallback(async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            const response = await fetch('/api/vimeo/videos?search=privado public');
+            const data = await response.json();
+            
+            if (data.success) {
+                setVideos(data.videos || []);
+                if (data.videos && data.videos.length === 0) {
+                    setError('No se encontraron videos de Encuentro Privado. Intenta con otros términos de búsqueda.');
+                }
+            } else {
+                setError(data.error || 'Error al buscar videos');
+            }
+        } catch {
+            setError('Error de red al buscar videos');
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    // Fetch videos on component mount
+    useEffect(() => {
+        fetchVideos();
+    }, [fetchVideos]);
+
+    const handleVideoClick = (video: VimeoVideo) => {
+        setSelectedVideo(video);
+        setShowVideoModal(true);
+        setVideoLoading(true);
+    };
+
+    const closeVideoModal = () => {
+        setShowVideoModal(false);
+        setSelectedVideo(null);
+    };
+
+    // Handle escape key to close modal
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && showVideoModal) {
+                closeVideoModal();
+            }
+        };
+
+        if (showVideoModal) {
+            document.addEventListener('keydown', handleEscape);
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            // Focus the close button for accessibility
+            setTimeout(() => {
+                const closeButton = document.querySelector('.video-modal-close') as HTMLButtonElement;
+                if (closeButton) closeButton.focus();
+            }, 100);
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+            document.body.style.overflow = 'unset';
+        };
+    }, [showVideoModal]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
@@ -170,11 +244,59 @@ export default function PrivadoPage() {
             {/* Video and CTA Section */}
             <section className="privado-video-section">
                 <div className="privado-video-container">
-                    <div className="privado-video-player">
-                        <div className="privado-play-button">
-                            <div className="privado-play-icon">▶</div>
+                    {loading ? (
+                        <div className="privado-video-player loading">
+                            <div className="loading-spinner"></div>
+                            <p>Buscando videos de Encuentro Privado...</p>
                         </div>
-                    </div>
+                    ) : error ? (
+                        <div className="privado-video-player error">
+                            <p>Error al cargar videos: {error}</p>
+                            <button onClick={fetchVideos} className="retry-button">Reintentar</button>
+                        </div>
+                    ) : videos.length > 0 ? (
+                        <div 
+                            className="privado-video-player" 
+                            onClick={() => handleVideoClick(videos[0])}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleVideoClick(videos[0]);
+                                }
+                            }}
+                            aria-label={`Reproducir video: ${videos[0].name}`}
+                        >
+                            <div className="video-thumbnail">
+                                <Image 
+                                    src={videos[0].pictures?.sizes?.[3]?.link || videos[0].pictures?.sizes?.[0]?.link || '/img/check.png'} 
+                                    alt={videos[0].name}
+                                    fill
+                                    className="thumbnail-image"
+                                    sizes="(max-width: 768px) 100vw, 600px"
+                                    onError={(e) => {
+                                        // Fallback to a default image if Vimeo thumbnail fails
+                                        const target = e.target as HTMLImageElement;
+                                        target.src = '/img/check.png';
+                                    }}
+                                />
+                                <div className="play-overlay">
+                                    <div className="privado-play-button">
+                                        <div className="privado-play-icon">▶</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="privado-video-player placeholder">
+                            <div className="privado-play-button">
+                                <div className="privado-play-icon">▶</div>
+                            </div>
+                            <p>No hay videos disponibles</p>
+                            <button onClick={fetchVideos} className="retry-button">Buscar videos</button>
+                        </div>
+                    )}
                     <h3 className="privado-video-title">Presentación del Encuentro privado</h3>
                     
                     {/* Authentication Status */}
@@ -308,7 +430,71 @@ export default function PrivadoPage() {
                 </section>
             )}
 
-                  <FooterSection />
+            {/* Video Modal */}
+            {showVideoModal && selectedVideo && (
+                <div 
+                    className="video-modal-overlay" 
+                    onClick={closeVideoModal}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="video-modal-title"
+                >
+                    <div className="video-modal" onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            className="video-modal-close" 
+                            onClick={closeVideoModal}
+                            aria-label="Cerrar video"
+                        >
+                            ×
+                        </button>
+                        <div className="video-modal-content">
+                            <h3 id="video-modal-title" className="video-modal-title">{selectedVideo.name}</h3>
+                            <div className="video-modal-player">
+                                {videoLoading && (
+                                    <div className="video-loading">
+                                        <div className="loading-spinner"></div>
+                                        <p>Cargando video...</p>
+                                    </div>
+                                )}
+                                {error && !videoLoading && (
+                                    <div className="video-error">
+                                        <p>Error al cargar el video</p>
+                                        <button onClick={() => {
+                                            setError(null);
+                                            setVideoLoading(true);
+                                        }} className="retry-button">
+                                            Reintentar
+                                        </button>
+                                    </div>
+                                )}
+                                <iframe
+                                    src={`https://player.vimeo.com/video/${selectedVideo.uri.split('/').pop() || '0'}?h=auto&autoplay=1`}
+                                    width="100%"
+                                    height="100%"
+                                    frameBorder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture"
+                                    allowFullScreen
+                                    className="video-iframe"
+                                    title={`Video: ${selectedVideo.name}`}
+                                    onLoad={() => setVideoLoading(false)}
+                                    onError={() => {
+                                        setVideoLoading(false);
+                                        setError('Error al cargar el video');
+                                    }}
+                                    style={{ display: videoLoading || error ? 'none' : 'block' }}
+                                ></iframe>
+                            </div>
+                            {selectedVideo.description && (
+                                <div className="video-modal-description">
+                                    <p>{selectedVideo.description}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <FooterSection />
 
                   {/* Signup Modal */}
                   <SignupModal
