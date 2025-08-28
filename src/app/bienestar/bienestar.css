@@ -29,7 +29,7 @@
 
 .bienestar-title {
   font-size: 20px;
-  color: #f8f8f8;
+  color: #ffffff;
   margin-bottom: 10px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
@@ -199,6 +199,7 @@
   font-weight: bold;
 }
 
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .bienestar-hero {
@@ -206,11 +207,11 @@
   }
   
   .bienestar-title {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .bienestar-subtitle {
-    font-size: 22px;
+    font-size: 28px;
   }
   
   .bienestar-content-title {
@@ -283,7 +284,7 @@
   }
   
   .bienestar-subtitle {
-    font-size: 18px;
+    font-size: 28px;
   }
   
   .bienestar-content-title {
@@ -347,11 +348,11 @@
 
 @media (max-width: 360px) {
   .bienestar-title {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .bienestar-subtitle {
-    font-size: 16px;
+    font-size: 28px;
   }
   
   .bienestar-content-title {
