@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import SignupModal from "../components/SignupModal";
 import { useAuth } from "@/lib/auth";
+import { VimeoVideo } from "../types/vimeo";
 import "./bienestar.css";
 
 export default function BienestarPage() {
@@ -18,6 +19,79 @@ export default function BienestarPage() {
     paymentAmount: "$250" // Default price for bienestar integral session
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  // Video state
+  const [videos, setVideos] = useState<VimeoVideo[]>([]);
+  const [selectedVideo, setSelectedVideo] = useState<VimeoVideo | null>(null);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [videoLoading, setVideoLoading] = useState(false);
+
+  // Fetch videos with "bienestar public" tag
+  const fetchVideos = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/vimeo/videos?search=bienestar public');
+      const data = await response.json();
+      
+      if (data.success) {
+        setVideos(data.videos || []);
+        if (data.videos && data.videos.length === 0) {
+          setError('No se encontraron videos de Bienestar Integral. Intenta con otros términos de búsqueda.');
+        }
+      } else {
+        setError(data.error || 'Error al buscar videos');
+      }
+    } catch {
+      setError('Error de red al buscar videos');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Fetch videos on component mount
+  useEffect(() => {
+    fetchVideos();
+  }, [fetchVideos]);
+
+  const handleVideoClick = (video: VimeoVideo) => {
+    setSelectedVideo(video);
+    setShowVideoModal(true);
+    setVideoLoading(true);
+  };
+
+  const closeVideoModal = () => {
+    setShowVideoModal(false);
+    setSelectedVideo(null);
+  };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showVideoModal) {
+        closeVideoModal();
+      }
+    };
+
+    if (showVideoModal) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+      // Focus the close button for accessibility
+      setTimeout(() => {
+        const closeButton = document.querySelector('.video-modal-close') as HTMLButtonElement;
+        if (closeButton) closeButton.focus();
+      }, 100);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [showVideoModal]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -212,11 +286,59 @@ export default function BienestarPage() {
       {/* Video Presentation Section - Outside main for full width */}
       <section className="bienestar-video-section">
         <div className="bienestar-video-container">
-          <div className="video-player">
-            <div className="play-button">
-              <div className="play-icon"></div>
+          {loading ? (
+            <div className="video-player loading">
+              <div className="loading-spinner"></div>
+              <p>Buscando videos de Bienestar Integral...</p>
             </div>
-          </div>
+          ) : error ? (
+            <div className="video-player error">
+              <p>Error al cargar videos: {error}</p>
+              <button onClick={fetchVideos} className="retry-button">Reintentar</button>
+            </div>
+          ) : videos.length > 0 ? (
+            <div 
+              className="video-player" 
+              onClick={() => handleVideoClick(videos[0])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleVideoClick(videos[0]);
+                }
+              }}
+              aria-label={`Reproducir video: ${videos[0].name}`}
+            >
+              <div className="video-thumbnail">
+                <Image 
+                  src={videos[0].pictures?.sizes?.[3]?.link || videos[0].pictures?.sizes?.[0]?.link || '/img/check.png'} 
+                  alt={videos[0].name}
+                  fill
+                  className="thumbnail-image"
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  onError={(e) => {
+                    // Fallback to a default image if Vimeo thumbnail fails
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/img/check.png';
+                  }}
+                />
+                <div className="play-overlay">
+                  <div className="play-button">
+                    <div className="play-icon"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="video-player placeholder">
+              <div className="play-button">
+                <div className="play-icon"></div>
+              </div>
+              <p>No hay videos disponibles</p>
+              <button onClick={fetchVideos} className="retry-button">Buscar videos</button>
+            </div>
+          )}
           <h3 className="video-title">
             Presentación de la sesión de bienestar integral
           </h3>
@@ -345,6 +467,70 @@ export default function BienestarPage() {
             )}
           </div>
         </section>
+      )}
+
+      {/* Video Modal */}
+      {showVideoModal && selectedVideo && (
+        <div 
+          className="video-modal-overlay" 
+          onClick={closeVideoModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="video-modal-title"
+        >
+          <div className="video-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="video-modal-close" 
+              onClick={closeVideoModal}
+              aria-label="Cerrar video"
+            >
+              ×
+            </button>
+            <div className="video-modal-content">
+              <h3 id="video-modal-title" className="video-modal-title">{selectedVideo.name}</h3>
+              <div className="video-modal-player">
+                {videoLoading && (
+                  <div className="video-loading">
+                    <div className="loading-spinner"></div>
+                    <p>Cargando video...</p>
+                  </div>
+                )}
+                {error && !videoLoading && (
+                  <div className="video-error">
+                    <p>Error al cargar el video</p>
+                    <button onClick={() => {
+                      setError(null);
+                      setVideoLoading(true);
+                    }} className="retry-button">
+                      Reintentar
+                    </button>
+                  </div>
+                )}
+                <iframe
+                  src={`https://player.vimeo.com/video/${selectedVideo.uri.split('/').pop() || '0'}?h=auto&autoplay=1`}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe"
+                  title={`Video: ${selectedVideo.name}`}
+                  onLoad={() => setVideoLoading(false)}
+                  onError={() => {
+                    setVideoLoading(false);
+                    setError('Error al cargar el video');
+                  }}
+                  style={{ display: videoLoading || error ? 'none' : 'block' }}
+                ></iframe>
+              </div>
+              {selectedVideo.description && (
+                <div className="video-modal-description">
+                  <p>{selectedVideo.description}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
 
       <FooterSection />
