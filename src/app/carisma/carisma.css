@@ -1037,3 +1037,12 @@
     height: auto !important;
   }
 }
+
+/* Hero section height for screens 920px to 320px */
+@media (max-width: 920px) and (min-width: 320px) {
+  .carisma-hero {
+    height: 200px;
+    min-height: 200px;
+    padding: 0 20px;
+  }
+}
