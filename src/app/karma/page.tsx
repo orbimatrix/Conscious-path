@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./karma.css";
+import { useRouter } from "next/navigation";
 
 interface Video {
   uri: string;
@@ -22,6 +23,7 @@ interface Video {
 }
 
 export default function KarmaPage() {
+  const router = useRouter();
   const [publicVideo, setPublicVideo] = useState<Video | null>(null);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -215,7 +217,7 @@ export default function KarmaPage() {
             </h3>
             <section className="carisma-button-section">
           <div className="carisma-button-container">
-            <button className="carisma-action-button">
+            <button className="carisma-action-button" onClick={() => router.push('/acceder')}>
               Acceder
             </button>
           </div>

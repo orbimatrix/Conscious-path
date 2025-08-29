@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import FooterSection from "../components/FooterSection";
 import "./carisma.css";
 
@@ -78,6 +79,8 @@ export default function CarismaPage() {
     }
     return null;
   };
+
+  const router = useRouter();
 
   return (
     <div className="carisma-page">
@@ -176,7 +179,7 @@ export default function CarismaPage() {
 
         <section className="carisma-button-section">
           <div className="carisma-button-container">
-            <button className="carisma-action-button">
+            <button className="carisma-action-button" onClick={() => router.push('/acceder')}>
               Acceder
             </button>
           </div>
