@@ -214,10 +214,11 @@
   background: #6284AB;
   color: white;
   border: none;
-  padding: 18px 40px;
-  font-size: 18px;
+  height: 80px;
+  padding: 11px 40px;
+  font-size: 20px;
   font-weight: 500;
-  border-radius: 6px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 100%;

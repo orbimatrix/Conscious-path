@@ -3,8 +3,10 @@ import React from "react";
 import Image from "next/image";
 import FooterSection from "../components/FooterSection";
 import "./renacer.css";
+import { useRouter } from "next/navigation";
 
 export default function RenacerPage() {
+  const router = useRouter();
   return (
     <div className="renacer-page">
       <main className="renacer-main">
@@ -111,12 +113,12 @@ export default function RenacerPage() {
               </div>
             </div>
             <h3 className="video-title">Presentación del Nivel Renacer Consciente</h3>
-            <button className="video-cta-button">
+            <button className="video-cta-button" onClick={() => router.push('/acceder')}>
               ACCEDER
             </button>
             <div className="secondary-buttons">
-              <button className="secondary-button">Nivel Carisma</button>
-              <button className="secondary-button">Nivel Karma</button>
+              <button className="secondary-button" onClick={() => router.push('/carisma')}>Nivel Carisma</button>
+              <button className="secondary-button" onClick={() => router.push('/karma')}>Nivel Karma</button>
             </div>
           </div>
         </section>

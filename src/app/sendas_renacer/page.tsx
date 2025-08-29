@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import FooterSection from "../components/FooterSection";
 import ContactSection from "../components/ContactSection";
 import "./sendas_renacer.css";
+import { useRouter } from "next/navigation";
 
 export default function SendasRenacerPage() {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showDirectModal, setShowDirectModal] = useState(false);
 
@@ -62,9 +64,9 @@ export default function SendasRenacerPage() {
                   <li>Precio de referencia</li>
                 </ul>
               </div>
-              <button className="cta-button karma-button" onClick={openModal}>
-                Acceder por NIVEL KARMA
-              </button>
+                <button className="cta-button karma-button" onClick={openModal} style={{ width: '180px', margin: '0 auto', display: 'block' }}>
+                  Acceder por <br /> NIVEL <br /> KARMA
+                </button>
             </div>
 
             {/* Right Column - Direct Access */}
@@ -82,8 +84,8 @@ export default function SendasRenacerPage() {
                   <li>Precio personalizado</li>
                 </ul>
               </div>
-              <button className="cta-button direct-button" onClick={openDirectModal}>
-                Acceder de forma DIRECTA
+              <button className="cta-button direct-button" onClick={openDirectModal} style={{ width: '180px', margin: '0 auto', display: 'block' }}>
+                Acceder <br /> de forma <br /> DIRECTA
               </button>
             </div>
           </div>
@@ -112,8 +114,8 @@ export default function SendasRenacerPage() {
         {/* Bottom CTA Button */}
         <section className="sendas-bottom-cta">
           <div className="bottom-cta-container">
-            <button className="bottom-cta-button">
-              Entrar en el NIVEL KARMA
+            <button className="bottom-cta-button" onClick={() => router.push('/karma')}>
+              Entrar en el <br /> NIVEL  KARMA
             </button>
           </div>
         </section>
