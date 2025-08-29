@@ -70,10 +70,10 @@
   font-size: 2.5rem;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.0;
   margin-bottom: 3rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.1px;
 }
 
 .checkmarkList {
@@ -89,6 +89,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   gap: 0.75rem;
   width: 100%;
   max-width: 500px;
@@ -856,6 +858,14 @@
   }
 }
 
+@media (max-width: 768px) and (min-width: 320px) {
+  .checkmarkTitle {
+    font-size: 1.6rem;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 480px) {
   .container {
     padding: 0 16px;
@@ -955,9 +965,9 @@
   }
   
   .checkmarkTitle {
-    font-size: 1.2rem;
-    line-height: 1.3;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
   }
   
   .checkmarkList {
@@ -975,7 +985,7 @@
   }
   
   .checkmarkText {
-    font-size: 0.9rem;
+    font-size: 0.938rem;
     line-height: 1.4;
   }
   
@@ -1061,7 +1071,7 @@
   }
   
   .contentSection {
-    padding: 0.75rem 0.25rem;
+    padding: 0.5rem 0.25rem;
   }
   
   .serviceSection {
@@ -1089,11 +1099,11 @@
   }
   
   .checkmarkSection {
-    padding: 1.5rem 0.25rem;
+    padding: 0.5rem 0.25rem;
   }
   
   .checkmarkTitle {
-    font-size: 1.125rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
   }
   
@@ -1111,7 +1121,7 @@
   }
   
   .checkmarkText {
-    font-size: 0.8rem;
+    font-size: 0.938rem;
   }
   
   .imageSection {
@@ -1206,7 +1216,7 @@
   }
   
   .checkmarkTitle {
-    font-size: 1rem;
+    font-size: 1.4rem;
     margin-bottom: 0.75rem;
   }
   
@@ -1224,7 +1234,7 @@
   }
   
   .checkmarkText {
-    font-size: 0.75rem;
+    font-size: 0.938rem;
   }
   
   .imageSection {

@@ -196,7 +196,7 @@ export default function RegresionPage() {
       <div className={styles.checkmarkSection}>
         <div className={styles.checkmarkContainer}>
           <h2 className={styles.checkmarkTitle}>
-            DESCUBRIR LOS SECRETOS DE LAS VIDAS <br/>PASADAS
+            DESCUBRIR LOS SECRETOS <br/>DE LAS VIDAS PASADAS
           </h2>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className={styles.checkmarkList}>
