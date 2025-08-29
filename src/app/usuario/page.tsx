@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import LoadingSpinner from '../components/LoadingSpinner';
 import UserProfileInfo from '../components/UserProfileInfo';
 import UserProfilePicture from '../components/UserProfilePicture';
 import NotificationsSection from '../components/NotificationsSection';
@@ -138,12 +137,22 @@ export default function UsuarioPage() {
 
     // Show loading state only while Clerk is loading
     if (!isLoaded) {
-        return <LoadingSpinner message="Cargando perfil..." />;
+        return (
+            <div className="loading-spinner-container">
+                <div className="loading-spinner"></div>
+                <p>Cargando perfil...</p>
+            </div>
+        );
     }
 
     // Show loading state while fetching user data
     if (loading) {
-        return <LoadingSpinner message="Cargando perfil..." />;
+        return (
+            <div className="loading-spinner-container">
+                <div className="loading-spinner"></div>
+                <p>Cargando perfil...</p>
+            </div>
+        );
     }
 
     if (!user) {
