@@ -80,7 +80,7 @@ export default function Header() {
                 <span className="header-brand-consciente"> CONSCIENTE</span>
               </span>
             </div>
-            <div className="header-icon" onClick={() => router.push('/registration')} style={{ cursor: 'pointer' }}>
+            <div className="header-icon" onClick={() => router.push('/usuario')} style={{ cursor: 'pointer' }}>
               <Image src="/profile.svg" alt="User" width={32} height={32} />
             </div>
           </header>
@@ -160,7 +160,7 @@ export default function Header() {
           <span className="desktop-header-text desktop-header-text-senda">SENDA</span>
           <span className="desktop-header-text desktop-header-text-consciente"> CONSCIENTE</span>
         </div>
-        <Link href="/registration" className="desktop-header-button">Entrar</Link>
+        <Link href="/usuario" className="desktop-header-button">Entrar</Link>
       </div>
       <div className="desktop-header-divider" />
       <nav className="desktop-nav">
