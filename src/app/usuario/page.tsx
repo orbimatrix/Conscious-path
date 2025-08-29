@@ -147,7 +147,11 @@ export default function UsuarioPage() {
     }
 
     if (!user) {
-        return <div>Please sign in to view your profile.</div>;
+        return (
+            <div className="signin-required-message">
+                Please sign in to view your profile.
+            </div>
+        );
     }
 
     return (

@@ -834,3 +834,13 @@
 .usuario-cancel-button:hover {
     opacity: 0.8;
 } 
+
+/* Sign-in Required Message */
+.signin-required-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 1.2rem;
+    color: #666;
+} 
