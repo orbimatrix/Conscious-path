@@ -161,13 +161,24 @@ export default function VideosSection() {
       });
     });
 
-    // Add audios (limit to 2 for homepage to complete the 6-card grid)
+    // Add audios with proper access control
     audioFiles.slice(0, 2).forEach((audio, index) => {
       // Extract meaningful title from audio filename
       let title = audio.name;
+      let accessLevel = 1; // Default public level
       
-      // For audios, we'll keep them as public level 1 so they're always accessible
-      // You can modify this logic if you want different access levels for specific audio files
+      // Determine access level based on audio filename/content
+      if (title.toLowerCase().includes('karma')) {
+        accessLevel = 5; // Karma level - requires karma subscription
+      } else if (title.toLowerCase().includes('carisma')) {
+        accessLevel = 3; // Carisma level - requires carisma subscription
+      } else if (title.toLowerCase().includes('abundancia')) {
+        accessLevel = 4; // Abundancia level - requires abundancia subscription
+      } else if (title.toLowerCase().includes('inmortal') || title.toLowerCase().includes('registrado')) {
+        accessLevel = 2; // Inmortal level - requires login
+      } else {
+        accessLevel = 1; // Public level - no login required
+      }
       
       if (title.includes('_')) {
         // Convert snake_case to Title Case and remove file extensions
@@ -184,10 +195,10 @@ export default function VideosSection() {
       contentItems.push({
         id: `audio-${index}`,
         title: title,
-        level: "public", // Always public for audios
+        level: getLevelName(accessLevel),
         description: "Audio content",
         type: "audio",
-        accessLevel: 1, // Always accessible
+        accessLevel: accessLevel,
         url: audio.url
       });
     });
@@ -255,7 +266,13 @@ export default function VideosSection() {
   const getUpgradeMessage = (contentLevel: number) => {
     if (!isAuthenticated) {
       setUpgradeAction("login");
-      return "Necesitas iniciar sesión para acceder a este contenido.";
+      if (contentLevel === 1) {
+        return "Este contenido es público y accesible para todos.";
+      } else if (contentLevel === 2) {
+        return "Necesitas iniciar sesión para acceder a este contenido.";
+      } else {
+        return "Necesitas iniciar sesión y tener el nivel correspondiente para acceder a este contenido.";
+      }
     }
     
     const userLevel = getUserAccessLevel();
@@ -273,6 +290,11 @@ export default function VideosSection() {
     if (contentLevel === 3 && userLevel < 3) {
       setUpgradeAction("upgrade");
       return "Para acceder al contenido Carisma, necesitas adquirir el acceso premium. Haz clic en 'Comprar Acceso' para continuar.";
+    }
+    
+    if (contentLevel === 2 && userLevel < 2) {
+      setUpgradeAction("login");
+      return "Necesitas iniciar sesión para acceder a este contenido.";
     }
     
     setUpgradeAction("upgrade");
@@ -479,7 +501,7 @@ export default function VideosSection() {
         <div className="modal-overlay" onClick={closeUpgradeModal}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal" onClick={closeUpgradeModal}>×</button>
-            <h3 className="modal-title">Acceso Restringido</h3>
+            <h3 className="modal-title">Contenido Premium</h3>
             <p className="modal-description">{upgradeMessage}</p>
             <div className="modal-actions">
               <button 
