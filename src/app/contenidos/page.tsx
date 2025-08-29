@@ -111,28 +111,52 @@ export default function ContenidosPage() {
           
           <div className="contenidos-services-list">
             <div className="contenidos-service-item">
-              <h3 className="contenidos-service-level">Nivel Renacer Consciente</h3>
+              <h3 
+                className="contenidos-service-level"
+                onClick={() => router.push('/renacer')}
+                style={{ cursor: 'pointer' }}
+              >
+                Nivel Renacer Consciente
+              </h3>
               <p className="contenidos-service-description">
                 El servicio más exclusivo, para retener la memoria actual en la siguiente reencarnación
               </p>
             </div>
             
             <div className="contenidos-service-item">
-              <h3 className="contenidos-service-level">Nivel Carisma</h3>
+              <h3 
+                className="contenidos-service-level"
+                onClick={() => router.push('/carisma')}
+                style={{ cursor: 'pointer' }}
+              >
+                Nivel Carisma
+              </h3>
               <p className="contenidos-service-description">
                 Audios y vídeos enfocados en conocer los secretos del mundo y la ciencia
               </p>
             </div>
             
             <div className="contenidos-service-item">
-              <h3 className="contenidos-service-level">Nivel Karma</h3>
+              <h3 
+                className="contenidos-service-level"
+                onClick={() => router.push('/karma')}
+                style={{ cursor: 'pointer' }}
+              >
+                Nivel Karma
+              </h3>
               <p className="contenidos-service-description">
                 Material avanzado, con los misterios más censurados y ocultos
               </p>
             </div>
             
             <div className="contenidos-service-item">
-              <h3 className="contenidos-service-level">Nivel Abundancia y Grupo BENEC</h3>
+              <h3 
+                className="contenidos-service-level"
+                onClick={() => router.push('/abundancia')}
+                style={{ cursor: 'pointer' }}
+              >
+                Nivel Abundancia y Grupo BENEC
+              </h3>
               <p className="contenidos-service-description">
                 Metafísica para lograr el éxito económico, con la opción de usar nuestro egrégor grupal
               </p>
@@ -148,35 +172,65 @@ export default function ContenidosPage() {
           
           <div className="contenidos-personal-list">
             <div className="contenidos-personal-item">
-              <h3 className="contenidos-personal-service">Bienestar Integral</h3>
+              <h3 
+                className="contenidos-personal-service" 
+                onClick={() => router.push('/bienestar')}
+                style={{ cursor: 'pointer' }}
+              >
+                Bienestar Integral
+              </h3>
               <p className="contenidos-personal-description">
                 Resuelva conflictos y problemas con las técnicas más avanzadas y completas
               </p>
             </div>
             
             <div className="contenidos-personal-item">
-              <h3 className="contenidos-personal-service">Encuentro Privado</h3>
+              <h3 
+                className="contenidos-personal-service" 
+                onClick={() => router.push('/privado')}
+                style={{ cursor: 'pointer' }}
+              >
+                Encuentro Privado
+              </h3>
               <p className="contenidos-personal-description">
                 Reunión discreta para conocer su caso y aconsejarle de forma directa
               </p>
             </div>
             
             <div className="contenidos-personal-item">
-              <h3 className="contenidos-personal-service">Sesiones Limpiar Karma</h3>
+              <h3 
+                className="contenidos-personal-service" 
+                onClick={() => router.push('/limpiar-karma')}
+                style={{ cursor: 'pointer' }}
+              >
+                Sesiones Limpiar Karma
+              </h3>
               <p className="contenidos-personal-description">
                 Libere las cargas que arrastra de esta y otras vidas de forma guiada
               </p>
             </div>
             
             <div className="contenidos-personal-item">
-              <h3 className="contenidos-personal-service">Análisis Estructural Esencial</h3>
+              <h3 
+                className="contenidos-personal-service" 
+                onClick={() => router.push('/estructural')}
+                style={{ cursor: 'pointer' }}
+              >
+                Análisis Estructural Esencial
+              </h3>
               <p className="contenidos-personal-description">
                 Conozca sus verdaderas capacidades y carencias, lejos de su autoimagen actual
               </p>
             </div>
             
             <div className="contenidos-personal-item">
-              <h3 className="contenidos-personal-service">Regresión Origen</h3>
+              <h3 
+                className="contenidos-personal-service" 
+                onClick={() => router.push('/regresion')}
+                style={{ cursor: 'pointer' }}
+              >
+                Regresión Origen
+              </h3>
               <p className="contenidos-personal-description">
                 Sesiones de Hipnoterapia para obtener información de sus vidas pasadas
               </p>
@@ -192,28 +246,48 @@ export default function ContenidosPage() {
           
           <div className="contenidos-contents-list">
             <div className="contenidos-content-item">
-              <h3 className="contenidos-content-heading">Audios y Vídeos</h3>
+              <h3 className="contenidos-content-heading" 
+                onClick={() => router.push('/conocimiento')}
+                style={{ cursor: 'pointer' }}
+              >
+                Audios y Vídeos
+              </h3>
               <p className="contenidos-content-description">
                 Todo el conocimiento a su alcance
               </p>
             </div>
             
             <div className="contenidos-content-item">
-              <h3 className="contenidos-content-heading">Sobre la Mente Única</h3>
+              <h3 className="contenidos-content-heading" 
+                onClick={() => router.push('/mente_unica')}
+                style={{ cursor: 'pointer' }}
+              >
+                Sobre la Mente Única
+              </h3>
               <p className="contenidos-content-description">
                 Principios esenciales sobre la realidad
               </p>
             </div>
             
             <div className="contenidos-content-item">
-              <h3 className="contenidos-content-heading">Guía de Invitación</h3>
+              <h3 className="contenidos-content-heading" 
+                onClick={() => router.push('/invitar')}
+                style={{ cursor: 'pointer' }}
+              >
+                Guía de Invitación
+              </h3>
               <p className="contenidos-content-description">
                 La forma correcta de invitar a un amigo
               </p>
             </div>
             
             <div className="contenidos-content-item">
-              <h3 className="contenidos-content-heading">Normas</h3>
+              <h3 className="contenidos-content-heading" 
+                onClick={() => router.push('/normas')}
+                style={{ cursor: 'pointer' }}
+              >
+                Normas
+              </h3>
               <p className="contenidos-content-description">
                 Guía básica de comportamiento
               </p>
@@ -229,19 +303,19 @@ export default function ContenidosPage() {
           
           <div className="contenidos-about-list">
             <div className="contenidos-about-item">
-              <a href="#" className="contenidos-about-link">Condiciones de uso</a>
+              <a href="/aviso_legal" className="contenidos-about-link" >Condiciones de uso</a>
             </div>
             
             <div className="contenidos-about-item">
-              <a href="#" className="contenidos-about-link">Privacidad</a>
+              <a href="/privacidad" className="contenidos-about-link">Privacidad</a>
             </div>
             
             <div className="contenidos-about-item">
-              <a href="#" className="contenidos-about-link">Donaciones y Aportes</a>
+              <a href="/aportes" className="contenidos-about-link">Donaciones y Aportes</a>
             </div>
             
             <div className="contenidos-about-item">
-              <a href="#" className="contenidos-about-link">Contacto</a>
+              <a href="/contacto" className="contenidos-about-link">Contacto</a>
             </div>
           </div>
         </div>

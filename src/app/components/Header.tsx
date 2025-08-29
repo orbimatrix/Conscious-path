@@ -132,8 +132,14 @@ export default function Header() {
               )}
 
               <div className="mobile-dropdown-section">
-                <div className="mobile-dropdown-section-title">MI ESPACIO PERSONAL</div>
-                <button className="mobile-dropdown-night-mode-btn">
+                <div 
+                  className="mobile-dropdown-section-title" 
+                  onClick={() => router.push('/usuario')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  MI ESPACIO PERSONAL
+                </div>
+                <button className="mobile-dropdown-night-mode-btn" disabled>
                   <span>🌙</span>
                   modo noche
                 </button>
