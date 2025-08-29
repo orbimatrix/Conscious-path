@@ -14,6 +14,7 @@ interface MessageModalProps {
   groupMessages: PersistentChatMessage[];
   isConnected: boolean;
   userLevel: string;
+  onMessagesRead?: () => void; // Added this prop
 }
 
 export default function MessageModal({ 
@@ -24,7 +25,8 @@ export default function MessageModal({
   announcementMessages, 
   groupMessages, 
   isConnected, 
-  userLevel 
+  userLevel, 
+  onMessagesRead 
 }: MessageModalProps) {
   const { user } = useUser();
   
@@ -102,6 +104,13 @@ export default function MessageModal({
       setTimeout(() => scrollToBottom(), 100);
     }
   }, [directMessages, announcementMessages, groupMessages, localMessages, viewMode]);
+
+  // Mark messages as read when modal opens
+  useEffect(() => {
+    if (isOpen && onMessagesRead) {
+      onMessagesRead();
+    }
+  }, [isOpen, onMessagesRead]);
 
   // Get admin information for display
   useEffect(() => {

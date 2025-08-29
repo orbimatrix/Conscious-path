@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import MessageModal from './MessageModal';
 import { usePersistentChat } from '@/hooks/use-persistent-chat';
@@ -10,6 +10,7 @@ export default function MessagesSection() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userLevel, setUserLevel] = useState<string>('inmortal'); // Default level
+  const [lastReadTime, setLastReadTime] = useState<number>(Date.now());
 
   // Fetch user's level when component mounts
   useEffect(() => {
@@ -56,49 +57,43 @@ export default function MessagesSection() {
     senderId: user?.id || ''
   });
 
+  // Calculate unread count based on last read time
+  useEffect(() => {
+    if (!user) return;
+
+    const allMessages = [...directMessages, ...announcementMessages, ...groupMessages];
+    
+    // Count messages from other users that are newer than last read time
+    const unreadMessages = allMessages.filter(msg => 
+      msg.user.id !== user.id && 
+      new Date(msg.createdAt).getTime() > lastReadTime
+    );
+
+    setUnreadCount(unreadMessages.length);
+  }, [directMessages, announcementMessages, groupMessages, lastReadTime, user]);
+
   // Debug group connection and messages
   useEffect(() => {
     if (userLevel) {
-      console.log(`🔍 MessagesSection Group Debug:`, {
-        userLevel,
-        groupRoom: `group-${userLevel}`,
-        groupConnected,
-        groupMessagesCount: groupMessages.length,
-        groupMessages: groupMessages.map(m => ({ id: m.id, content: m.content, user: m.user.name, time: m.createdAt }))
-      });
+      // Group connection and messages tracking (no console output)
     }
   }, [userLevel, groupConnected, groupMessages]);
 
-  // Combine all messages and calculate unread count
-  useEffect(() => {
-    if (user) {
-      const allMessages = [...directMessages, ...announcementMessages, ...groupMessages];
-      
-      console.log(`📊 MessagesSection: All messages updated:`, {
-        directCount: directMessages.length,
-        announcementCount: announcementMessages.length,
-        groupCount: groupMessages.length,
-        totalCount: allMessages.length,
-        directMessages: directMessages.map(m => ({ content: m.content, user: m.user.name, time: m.createdAt })),
-        announcementMessages: announcementMessages.map(m => ({ content: m.content, user: m.user.name, time: m.createdAt })),
-        groupMessages: groupMessages.map(m => ({ content: m.content, user: m.user.name, time: m.createdAt }))
-      });
-      
-      // Count unread messages that are not from the current user
-      const unreadMessages = allMessages.filter(msg => 
-        msg.user.name !== (user?.fullName || user?.username || 'User')
-      );
-      setUnreadCount(unreadMessages.length);
-    }
-  }, [directMessages, announcementMessages, groupMessages, user]);
-
+  // Handle modal open - mark messages as read
   const handleMessageClick = () => {
     setIsModalOpen(true);
   };
 
+  // Handle modal close
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  // Mark messages as read
+  const markMessagesAsRead = useCallback(() => {
+    const now = Date.now();
+    setLastReadTime(now);
+  }, []);
 
   // Check if any connection is active
   const isAnyConnected = directConnected || announcementConnected || groupConnected;
@@ -132,6 +127,7 @@ export default function MessagesSection() {
         groupMessages={groupMessages}
         isConnected={isAnyConnected}
         userLevel={userLevel}
+        onMessagesRead={markMessagesAsRead}
       />
     </>
   );
