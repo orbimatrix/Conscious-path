@@ -776,7 +776,7 @@ export default function ConocimientoPage() {
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal" onClick={closeUpgradeModal}>×</button>
             <h3 className="modal-title">
-              {upgradeAction === "login" ? "Iniciar Sesión" : "Acceso Restringido"}
+              {upgradeAction === "login" ? "Iniciar Sesión" : "Contenido Premium"}
             </h3>
             <p className="modal-description">{upgradeMessage}</p>
             <div className="modal-actions">
