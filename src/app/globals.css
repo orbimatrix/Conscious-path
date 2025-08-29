@@ -3758,7 +3758,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 40px;
+  /* margin-top: 20px; */
 }
 
 .privado-features {
@@ -3772,8 +3772,8 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 1.1rem;
-  color: #333333;
+  font-size: 1.25rem;
+  color: #2F435A;
   text-align: left;
   max-width: 400px;
   font-weight: 300;
@@ -3790,7 +3790,7 @@ body {
 }
 
 .privado-feature-text {
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.4;
 }
 
@@ -3915,7 +3915,7 @@ body {
 
   .privado-content-title {
     font-size: 1.4rem;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
   }
 
   .privado-description {

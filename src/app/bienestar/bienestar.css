@@ -48,7 +48,7 @@
 
 /* Main Content Section */
 .bienestar-content {
-  padding: 40px 20px;
+  padding: 8px 9px;
 }
 
 .bienestar-content-container {
@@ -64,7 +64,7 @@
   font-weight: 300;
   /* margin-bottom: 40px; */
   
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 /* Benefits Section */
@@ -95,9 +95,9 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 8px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: #333;
+  margin-bottom: 0px;
+  font-size: 20px;
+  color: #2F435A;
   text-align: left;
   font-weight: 300;
   font-family: 'lato', sans-serif;
@@ -296,7 +296,7 @@
   }
   
   .bienestar-benefit-item {
-    font-size: 13px;
+    font-size: 15px;
     max-width: 300px;
   }
   
@@ -360,11 +360,11 @@
   }
   
   .bienestar-content-title {
-    font-size: 16px;
+    font-size: 22px;
   }
   
   .bienestar-benefit-item {
-    font-size: 12px;
+    font-size: 15px;
     max-width: 280px;
   }
   
