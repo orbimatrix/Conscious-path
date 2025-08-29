@@ -1,0 +1,331 @@
+/* Contact Page Styles */
+.contacto-page {
+  min-height: 100vh;
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Contact Banner Section */
+.contacto-banner {
+  background: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+  color:#1C31EE;
+}
+
+.contacto-banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contacto-banner-title {
+  font-size: 48px;
+  color: #1C31EE;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Contact Content Section */
+.contacto-content {
+  padding: 60px 20px;
+}
+
+.contacto-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contacto-intro-text {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Telegram Section */
+.contacto-telegram-section {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.contacto-telegram-text {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.contacto-telegram-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.telegram-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  color: #ffffff;
+  /* background: #B19B6D; */
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.telegram-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Email Section */
+.contacto-email-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.contacto-email-text {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: 'Lato', sans-serif;
+}
+
+.contacto-email-instruction {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 30px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+/* Conditional text display based on screen size */
+.desktop-text {
+  display: block;
+}
+
+.mobile-text {
+  display: none;
+  font-size: 26px;
+}
+
+@media (max-width: 767px) {
+  .desktop-text {
+    display: none;
+  }
+  
+  .mobile-text {
+    display: block;
+    font-size: 26px;
+  }
+}
+
+/* Font size for email instruction - 26px for screens 768px */
+@media (max-width: 768px) {
+  .contacto-email-instruction {
+    font-size: 26px;
+  }
+}
+
+/* Font size for email instruction - 50px for screens 960px and greater */
+@media (min-width: 960px) {
+  .contacto-email-instruction {
+    font-size: 50px;
+  }
+}
+
+/* Contact Form Styles */
+.contact-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+}
+
+.form-input,
+.form-textarea {
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  background: white;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #B19B6D;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  background: #B19B6D;
+  color: white;
+  border: none;
+  padding: 18px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+  background: #9a8a5a;
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-status {
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Lato', sans-serif;
+}
+
+.submit-status.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.submit-status.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contacto-banner-title {
+    font-size: 28px;
+  }
+  
+  .contacto-content {
+    padding: 40px 15px;
+  }
+  
+  .contacto-intro-text {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .contacto-telegram-section,
+  .contacto-email-section {
+    margin-bottom: 40px;
+    padding: 20px;
+  }
+  
+  .contacto-telegram-text,
+  .contacto-email-text {
+    font-size: 16px;
+  }
+  
+  .contacto-email-instruction {
+    font-size: 14px;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .submit-button {
+    padding: 16px 28px;
+    font-size: 16px;
+  }
+}
+
+/* Font size for contacto-banner-title - 28px for screens 360px to 768px */
+@media (max-width: 768px) and (min-width: 360px) {
+  .contacto-banner-title {
+    font-size: 28px;
+  }
+}
+
+/* Font size for contacto-banner-title - 60px for screens greater than 768px */
+@media (min-width: 769px) {
+  .contacto-banner-title {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacto-banner {
+    padding: 40px 15px;
+  }
+  
+  .contacto-banner-title {
+    font-size: 28px;
+  }
+  
+  .contacto-content {
+    padding: 30px 10px;
+  }
+  
+  .contacto-intro-text {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .contacto-telegram-section,
+  .contacto-email-section {
+    margin-bottom: 30px;
+    padding: 15px;
+  }
+  
+  .telegram-icon {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .submit-button {
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+}
