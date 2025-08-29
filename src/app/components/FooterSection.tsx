@@ -76,16 +76,22 @@ export default function FooterSection() {
             </div>
 
             <div className="footer-nav-section">
-              <h3 className="footer-section-title">MI ESPACIO PERSONAL</h3>
-              <div className="footer-divider"></div>
+              <Link href="/usuario" className="footer-section-title-link">
+                <h3 className="footer-section-title">MI ESPACIO PERSONAL</h3>
+                <div className="footer-divider"></div>
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Bottom Right - Legal Information */}
         <div className="footer-legal">
-          <p>Privacidad</p>
-          <p>Aviso legal</p>
+          <Link href="/privacidad" className="footer-legal-link">
+            <p>Privacidad</p>
+          </Link>
+          <Link href="/aviso_legal" className="footer-legal-link">
+            <p>Aviso legal</p>
+          </Link>
           <p>Agradecimiento especial Icons8 y Pixabay</p>
           <p>© DIGITALMAPS OÜ</p>
         </div>
