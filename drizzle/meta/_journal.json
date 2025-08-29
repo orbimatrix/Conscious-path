@@ -15,6 +15,13 @@
       "when": 1756313719233,
       "tag": "0001_dashing_tusk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756493165124,
+      "tag": "0002_cuddly_vermin",
+      "breakpoints": true
     }
   ]
 }

@@ -7,4 +7,5 @@ export interface UserData {
     points?: number;
     level?: string;
     lastDailyClaim?: string;
+    biography?: string;
 }

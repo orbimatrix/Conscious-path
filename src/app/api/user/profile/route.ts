@@ -21,6 +21,7 @@ export async function GET() {
         level: users.level,
         points: users.points,
         isActive: users.isActive,
+        biography: users.biography,
       })
       .from(users)
       .where(eq(users.clerkId, userId))
@@ -54,7 +55,8 @@ export async function PUT(request: NextRequest) {
             signal, 
             username, 
             points, 
-            lastDailyClaim 
+            lastDailyClaim, 
+            biography 
         } = body;
 
         if (!clerkId) {
@@ -70,6 +72,7 @@ export async function PUT(request: NextRequest) {
             username: string;
             points: number;
             lastDailyClaim: Date;
+            biography: string;
         }> = {};
         
         if (birthDate !== undefined) updateData.birthDate = birthDate;
@@ -82,6 +85,7 @@ export async function PUT(request: NextRequest) {
             // Ensure lastDailyClaim is properly formatted for the database
             updateData.lastDailyClaim = new Date(lastDailyClaim);
         }
+        if (biography !== undefined) updateData.biography = biography;
 
         // Check if we have any data to update
         if (Object.keys(updateData).length === 0) {
