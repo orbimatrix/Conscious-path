@@ -38,7 +38,7 @@ export default function ConocimientoPage() {
   const [checkedItems, setCheckedItems] = useState<boolean[]>([false, false, false, false, false, false]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
-  const [activeFilter, setActiveFilter] = useState<string>("public");
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [filteredContent, setFilteredContent] = useState<ContentItem[]>([]);
   const [userLevels, setUserLevels] = useState<UserLevel[]>([]);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
