@@ -38,6 +38,8 @@ export default function ConocimientoPage() {
   const [checkedItems, setCheckedItems] = useState<boolean[]>([false, false, false, false, false, false]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [selectedInfoCard, setSelectedInfoCard] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [filteredContent, setFilteredContent] = useState<ContentItem[]>([]);
   const [userLevels, setUserLevels] = useState<UserLevel[]>([]);
@@ -346,6 +348,17 @@ export default function ConocimientoPage() {
   };
 
   const handleCheckboxClick = (index: number) => {
+    const contentItem = filteredContent[index];
+    
+    // Public content (level 1) can be marked as completed by anyone
+    if (contentItem.accessLevel === 1) {
+      const newCheckedItems = [...checkedItems];
+      newCheckedItems[index] = !newCheckedItems[index];
+      setCheckedItems(newCheckedItems);
+      return;
+    }
+    
+    // For restricted content, require authentication
     if (!isAuthenticated) {
       requireAuth();
       return;
@@ -356,8 +369,15 @@ export default function ConocimientoPage() {
     setCheckedItems(newCheckedItems);
   };
 
-  const handlePlusClick = (index: number) => {
+  const handleImageClick = (index: number) => {
     const contentItem = filteredContent[index];
+  
+    // Public content (level 1) is always accessible to everyone
+    if (contentItem.accessLevel === 1) {
+      setSelectedCard(index);
+      setShowModal(true);
+      return;
+    }
   
     // For non-authenticated users, show login prompt for any restricted content
     if (!isAuthenticated && contentItem.accessLevel > 1) {
@@ -383,9 +403,20 @@ export default function ConocimientoPage() {
     setShowModal(true);
   };
 
+  const handlePlusClick = (index: number) => {
+    // Show info modal with expanded content details
+    setSelectedInfoCard(index);
+    setShowInfoModal(true);
+  };
+
   const closeModal = () => {
     setShowModal(false);
     setSelectedCard(null);
+  };
+
+  const closeInfoModal = () => {
+    setShowInfoModal(false);
+    setSelectedInfoCard(null);
   };
 
   const closeUpgradeModal = () => {
@@ -609,9 +640,12 @@ export default function ConocimientoPage() {
         
         <div className="videos-grid">
           {filteredContent.map((item, index) => (
-                            <div key={item.id} className={getContentCardClass()}>
+            <div key={item.id} className={getContentCardClass()}>
               {item.thumbnail ? (
-                <div className="video-thumbnail relative">
+                <div 
+                  className="video-thumbnail relative cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => handleImageClick(index)}
+                >
                   <Image 
                     src={item.thumbnail} 
                     alt={item.title}
@@ -639,7 +673,10 @@ export default function ConocimientoPage() {
                   )}
                 </div>
               ) : (
-                <div className="video-thumbnail">
+                <div 
+                  className="video-thumbnail cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => handleImageClick(index)}
+                >
                   <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
                     {getContentIcon(item.type)}
                   </div>
@@ -764,6 +801,68 @@ export default function ConocimientoPage() {
                 }}
               >
                 {filteredContent[selectedCard]?.type === "video" ? "▶ Reproduciendo Video" : "♪ Reproduciendo Audio"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Info Modal */}
+      {showInfoModal && selectedInfoCard !== null && (
+        <div className="modal-overlay" onClick={closeInfoModal}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeInfoModal}>×</button>
+            <h3 className="modal-title">{filteredContent[selectedInfoCard]?.title}</h3>
+            
+            <div className="modal-content">
+              <div className="mb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`px-2 py-1 rounded text-sm font-medium ${getLevelBadgeColor(filteredContent[selectedInfoCard]?.level || '')}`}>
+                    {filteredContent[selectedInfoCard]?.level?.toUpperCase()}
+                  </span>
+                  <span className="text-gray-100 text-sm">
+                    {filteredContent[selectedInfoCard]?.type === "video" ? "Video" : "Audio"}
+                  </span>
+                </div>
+                
+                {filteredContent[selectedInfoCard]?.description && (
+                  <div className="mb-3">
+                    <h4 className="font-semibold text-gray-800 mb-1">Descripción:</h4>
+                    <p className="text-gray-100">{filteredContent[selectedInfoCard]?.description}</p>
+                  </div>
+                )}
+                
+                {filteredContent[selectedInfoCard]?.duration && (
+                  <div className="mb-3">
+                    <h4 className="font-semibold text-gray-800 mb-1">Duración:</h4>
+                    <p className="text-gray-100">{formatDuration(filteredContent[selectedInfoCard]?.duration || 0)}</p>
+                  </div>
+                )}
+                
+                {filteredContent[selectedInfoCard]?.createdTime && (
+                  <div className="mb-3">
+                    <h4 className="font-semibold text-gray-800 mb-1">Fecha de Creación:</h4>
+                    <p className="text-gray-100">
+                      {new Date(filteredContent[selectedInfoCard]?.createdTime || '').toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="modal-actions">
+              <button 
+                className="content-play-button"
+                onClick={() => {
+                  closeInfoModal();
+                  handleImageClick(selectedInfoCard);
+                }}
+              >
+                {filteredContent[selectedInfoCard]?.type === "video" ? "▶ Reproducir Video" : "♪ Reproducir Audio"}
               </button>
             </div>
           </div>
