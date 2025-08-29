@@ -657,6 +657,14 @@ export default function ConocimientoPage() {
                       target.src = '/placeholder-video.jpg';
                     }}
                   />
+                  {/* Play Button Overlay for Videos */}
+                  {item.type === "video" && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-pink-500 bg-opacity-80 rounded-full w-12 h-12 flex items-center justify-center hover:bg-pink-600 hover:bg-opacity-90 transition-all shadow-lg">
+                        <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                      </div>
+                    </div>
+                  )}
                   {item.duration && (
                     <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-sm px-2 py-1 rounded">
                       {formatDuration(item.duration)}
@@ -680,6 +688,14 @@ export default function ConocimientoPage() {
                   <div className={item.type === "video" ? "video-icon" : "audio-icon"}>
                     {getContentIcon(item.type)}
                   </div>
+                  {/* Play Button Overlay for Videos without Thumbnails */}
+                  {item.type === "video" && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-pink-500 bg-opacity-80 rounded-full w-12 h-12 flex items-center justify-center hover:bg-pink-600 hover:bg-opacity-90 transition-all shadow-lg">
+                        <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                      </div>
+                    </div>
+                  )}
                   {getLockIcon(item.accessLevel) && (
                     <div className="lock-icon">
                       {getLockIcon(item.accessLevel)}
