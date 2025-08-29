@@ -72,6 +72,8 @@
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     padding: 20px 0;
     font-size: 18px;
     color: #666;
@@ -86,7 +88,7 @@
 }
 
 .benefit-text {
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5;
 }
 
@@ -752,7 +754,7 @@
   }
   
   .carisma-benefit-item {
-    font-size: 14px;
+    font-size: 15px;
     padding: 6px 0;
   }
   
@@ -857,7 +859,7 @@
   }
   
   .carisma-benefit-item {
-    font-size: 13px;
+    font-size: 15px;
     padding: 5px 0;
   }
   
@@ -887,7 +889,7 @@
   }
   
   .carisma-benefit-item {
-    font-size: 12px;
+    font-size: 15px;
     padding: 8px 0;
   }
   
