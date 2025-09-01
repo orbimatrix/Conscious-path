@@ -113,7 +113,7 @@ export default function RenacerPage() {
               </div>
             </div>
             <h3 className="video-title">Presentación del Nivel Renacer Consciente</h3>
-            <button className="video-cta-button" onClick={() => router.push('/acceder')}>
+            <button className="video-cta-button" onClick={() => router.push('/sendas_renacer')}>
               ACCEDER
             </button>
             <div className="secondary-buttons">
