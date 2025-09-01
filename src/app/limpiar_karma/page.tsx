@@ -185,7 +185,7 @@ export default function LimpiarKarmaPage() {
               </li>
               <li className="limpiar-karma-benefit-item">
                 <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
-                <span className="benefit-text">Tenga una vida más consciente y plena</span>
+                <span className="benefit-text">Tenga una vida más<span className="break-780-320"><br /></span> consciente y plena</span>
               </li>
               <li className="limpiar-karma-benefit-item">
                 <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />

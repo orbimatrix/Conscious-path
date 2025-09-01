@@ -112,7 +112,7 @@
   padding: 6px 0;
   font-weight: 300;
   font-family: 'lato', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   color: #666;
   width: 100%;
 }
@@ -630,7 +630,7 @@
   }
   
   .limpiar-karma-benefit-item {
-    font-size: 16px;
+    font-size: 20px;
     padding: 6px 0;
     flex-direction: row;
     gap: 12px;
@@ -638,8 +638,8 @@
   }
   
   .benefit-icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
   
   .benefit-text {
@@ -769,14 +769,14 @@
   }
   
   .limpiar-karma-benefit-item {
-    font-size: 14px;
+    font-size: 20px;
     padding: 5px 0;
     width: 100%;
   }
   
   .benefit-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
   
   .limpiar-karma-image-section {
@@ -898,14 +898,14 @@
   }
   
   .limpiar-karma-benefit-item {
-    font-size: 15.2px;
+    font-size: 20px;
     padding: 4px 0;
     width: 100%;
   }
   
   .benefit-icon {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
   }
   
   .limpiar-karma-image-section {
@@ -964,14 +964,14 @@
   }
   
   .limpiar-karma-benefit-item {
-    font-size: 12px;
-    padding: 4px 0;
+    font-size: 20px;
+    padding: 4px 30;
     width: 100%;
   }
   
   .benefit-icon {
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
   }
   
   .limpiar-karma-following-section {
