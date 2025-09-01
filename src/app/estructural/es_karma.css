@@ -96,8 +96,10 @@
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+    font-family: 'lato', sans-serif;
+    font-weight: 300;
     padding: 6px 0;
-    font-size: 18px;
+    font-size: 20px;
     color: #666;
     width: 100%;
   }
@@ -111,7 +113,7 @@
   }
   
   .benefit-text {
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.5;
   }
   
@@ -555,7 +557,7 @@
      }
      
      .estructural-benefits-title {
-       font-size: 24px;
+       font-size: 26px;
        margin-bottom: 20px;
      }
     
@@ -660,12 +662,12 @@
      }
      
      .estructural-benefits-title {
-       font-size: 22px;
+       font-size: 26px;
        margin-bottom: 18px;
      }
     
     .estructural-benefit-item {
-      font-size: 16px;
+      font-size: 20px;
       padding: 6px 0;
       flex-direction: row;
       gap: 12px;
@@ -673,8 +675,8 @@
     }
     
     .benefit-icon {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
     }
     
     .benefit-text {
@@ -785,19 +787,19 @@
      }
      
      .estructural-benefits-title {
-       font-size: 20px;
+       font-size: 26px;
        margin-bottom: 15px;
      }
     
     .estructural-benefit-item {
-      font-size: 14px;
+      font-size: 20px;
       padding: 5px 0;
       width: 100%;
     }
     
     .benefit-icon {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
     }
     
     .estructural-image-section {
@@ -904,19 +906,19 @@
      }
      
      .estructural-benefits-title {
-       font-size: 18px;
+       font-size: 26px;
        margin-bottom: 12px;
      }
     
     .estructural-benefit-item {
-      font-size: 13px;
+      font-size: 20px;
       padding: 4px 0;
       width: 100%;
     }
     
     .benefit-icon {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
     }
     
     .estructural-following-section {
@@ -953,19 +955,19 @@
      }
      
      .estructural-benefits-title {
-       font-size: 16px;
+       font-size: 26px;
        margin-bottom: 10px;
      }
     
     .estructural-benefit-item {
-      font-size: 12px;
+      font-size: 20px;
       padding: 4px 0;
       width: 100%;
     }
     
     .benefit-icon {
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
     }
     
     .estructural-following-section {
