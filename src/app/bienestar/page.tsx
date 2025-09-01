@@ -106,11 +106,6 @@ export default function BienestarPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Check authentication before submitting
-    if (!requireAuth()) {
-      return;
-    }
-    
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       try {
         // First, submit the form data to our booking API
@@ -152,14 +147,7 @@ export default function BienestarPage() {
   };
 
   const toggleBookingForm = () => {
-    // If not authenticated, show signup modal instead
-    if (!isAuthenticated) {
-      // This will automatically show the signup modal via requireAuth()
-      requireAuth();
-      return;
-    }
-    
-    // If authenticated, toggle the booking form
+    // Toggle the booking form regardless of authentication status
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -354,7 +342,7 @@ export default function BienestarPage() {
             className="booking-button"
             onClick={toggleBookingForm}
           >
-            {isAuthenticated ? 'Reservar sesión de Bienestar Integral' : 'Inicia sesión para reservar'}
+            Inicia sesión para reservar
           </button>
         </div>
       </section>

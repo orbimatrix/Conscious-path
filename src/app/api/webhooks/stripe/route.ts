@@ -206,47 +206,50 @@ async function handleCheckoutSessionCompleted(session: any) {
     // Extract Clerk ID and form data from session metadata
     const { clerkId, customerEmail, caseInfo, availability, paymentMethod, paymentAmount } = session.metadata;
     
-    // Calculate points based on payment amount ($1 = 1 point)
-    let paymentAmountInDollars = 0;
-    
-    if (paymentAmount) {
-      // Handle different payment amount formats
-      if (typeof paymentAmount === 'string') {
-        // Remove $ and any non-numeric characters, then parse
-        paymentAmountInDollars = parseFloat(paymentAmount.replace(/[^0-9.]/g, ''));
-      } else if (typeof paymentAmount === 'number') {
-        paymentAmountInDollars = paymentAmount;
-      }
-    }
-    
-    // Fallback: if we can't parse the payment amount, use the session amount
-    if (!paymentAmountInDollars || isNaN(paymentAmountInDollars)) {
-      paymentAmountInDollars = (session.amount_total / 100);
-    }
-    
-    const pointsToAdd = Math.floor(paymentAmountInDollars);
-    
-    if (clerkId && pointsToAdd > 0) {
-      try {
-        // Find user by Clerk ID
-        const userData = await db.select().from(users).where(eq(users.clerkId, clerkId));
-        
-        if (userData.length > 0) {
-          const user = userData[0];
-          const currentPoints = user.points || 0;
-          const newPoints = currentPoints + pointsToAdd;
-          
-          // Update user points and last points update timestamp
-          await db.update(users)
-            .set({ 
-              points: newPoints,
-              lastPointsUpdate: new Date(),
-              lastUpdated: new Date()
-            })
-            .where(eq(users.clerkId, clerkId));
+    // Only store points if clerkId is available (user is authenticated)
+    if (clerkId) {
+      // Calculate points based on payment amount ($1 = 1 point)
+      let paymentAmountInDollars = 0;
+      
+      if (paymentAmount) {
+        // Handle different payment amount formats
+        if (typeof paymentAmount === 'string') {
+          // Remove $ and any non-numeric characters, then parse
+          paymentAmountInDollars = parseFloat(paymentAmount.replace(/[^0-9.]/g, ''));
+        } else if (typeof paymentAmount === 'number') {
+          paymentAmountInDollars = paymentAmount;
         }
-      } catch (dbError) {
-        console.error('Database error updating user points:', dbError);
+      }
+      
+      // Fallback: if we can't parse the payment amount, use the session amount
+      if (!paymentAmountInDollars || isNaN(paymentAmountInDollars)) {
+        paymentAmountInDollars = (session.amount_total / 100);
+      }
+      
+      const pointsToAdd = Math.floor(paymentAmountInDollars);
+      
+      if (pointsToAdd > 0) {
+        try {
+          // Find user by Clerk ID
+          const userData = await db.select().from(users).where(eq(users.clerkId, clerkId));
+          
+          if (userData.length > 0) {
+            const user = userData[0];
+            const currentPoints = user.points || 0;
+            const newPoints = currentPoints + pointsToAdd;
+            
+            // Update user points and last points update timestamp
+            await db.update(users)
+              .set({ 
+                points: newPoints,
+                lastPointsUpdate: new Date(),
+                lastUpdated: new Date()
+              })
+              .where(eq(users.clerkId, clerkId));
+          }
+        } catch (dbError) {
+          console.error('Database error updating user points:', dbError);
+        }
       }
     }
     

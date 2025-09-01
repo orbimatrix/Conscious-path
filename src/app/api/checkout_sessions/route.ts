@@ -5,18 +5,29 @@ import { stripe } from '../../../lib/stripe'
 
 export async function POST(request: Request) {
   try {
-    // Get authenticated user
+    // Get authenticated user (optional)
     const { userId } = await auth();
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
+    
     // Get form data from request body
     const body = await request.json();
     const { email, caseInfo, availability, paymentMethod, paymentAmount } = body;
 
     const headersList = await headers()
     const origin = headersList.get('origin')
+
+    // Create metadata object with optional clerkId
+    const metadata: any = {
+      customerEmail: email,
+      caseInfo: caseInfo,
+      availability: availability,
+      paymentMethod: paymentMethod,
+      paymentAmount: paymentAmount
+    };
+
+    // Only add clerkId if user is authenticated
+    if (userId) {
+      metadata.clerkId = userId;
+    }
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
@@ -28,14 +39,7 @@ export async function POST(request: Request) {
         },
       ],
       mode: 'payment',
-      metadata: {
-        clerkId: userId, // Store Clerk ID in session metadata
-        customerEmail: email,
-        caseInfo: caseInfo,
-        availability: availability,
-        paymentMethod: paymentMethod,
-        paymentAmount: paymentAmount
-      },
+      metadata: metadata,
       success_url: `${origin}/paysuccess?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/payfail`,
     });

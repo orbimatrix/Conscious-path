@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import FooterSection from "../components/FooterSection";
 import "./abundancia.css";
 
@@ -33,6 +34,7 @@ interface Video {
 }
 
 export default function AbundanciaPage() {
+  const router = useRouter();
   // Simulate user login status - in real app this would come from auth context
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
@@ -241,14 +243,17 @@ export default function AbundanciaPage() {
               </button>
             </div>
           ) : (
-            <button className="video-cta-button">
+            <button 
+              className="video-cta-button" 
+              onClick={() => router.push('/registration')}
+            >
               ENTRAR / REGISTRARSE
             </button>
           )}
           
           <div className="secondary-buttons">
-            <button className="secondary-button">Volver a Carisma</button>
-            <button className="secondary-button">Volver a Karma</button>
+            <button className="secondary-button" onClick={() => router.push('/carisma')}>Volver a Carisma</button>
+            <button className="secondary-button" onClick={() => router.push('/karma')}>Volver a Karma</button>
           </div>
           
           {/* Debug toggle button - remove in production */}

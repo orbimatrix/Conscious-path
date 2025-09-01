@@ -102,15 +102,10 @@ export default function PrivadoPage() {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        
-        // Check authentication before submitting
-        if (!requireAuth()) {
-            return;
-        }
-        
-        if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
+      const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
             try {
                 // First, submit the form data to our booking API
                 const formResponse = await fetch('/api/booking-form', {
@@ -149,28 +144,21 @@ export default function PrivadoPage() {
         }
     };
 
-    const toggleBookingForm = () => {
-        // If not authenticated, show signup modal instead
-        if (!isAuthenticated) {
-            // This will automatically show the signup modal via requireAuth()
-            requireAuth();
-            return;
-        }
-        
-        // If authenticated, toggle the booking form
-        setShowBookingForm(!showBookingForm);
-        if (showBookingForm) {
-            setIsSubmitted(false);
-            setFormData({
-                email: "",
-                caseInfo: "",
-                availability: "",
-                paymentMethod: "",
-                acceptTerms: false,
-                paymentAmount: "$75"
-            });
-        }
-    };
+      const toggleBookingForm = () => {
+    // Toggle the booking form regardless of authentication status
+    setShowBookingForm(!showBookingForm);
+    if (showBookingForm) {
+      setIsSubmitted(false);
+      setFormData({
+        email: "",
+        caseInfo: "",
+        availability: "",
+        paymentMethod: "",
+        acceptTerms: false,
+        paymentAmount: "$75"
+      });
+    }
+  };
 
 
 
@@ -299,18 +287,11 @@ export default function PrivadoPage() {
                     )}
                     <h3 className="privado-video-title">Presentación del Encuentro privado</h3>
                     
-                    {/* Authentication Status */}
-                    {!isAuthenticated && (
-                        <div className="auth-notice">
-                            <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
-                        </div>
-                    )}
-                    
                     <button
                         className="privado-cta-button"
                         onClick={toggleBookingForm}
                     >
-                        {isAuthenticated ? 'Reservar el Encuentro' : 'Inicia sesión para reservar'}
+                        Inicia sesión para reservar
                     </button>
                 </div>
             </section>

@@ -106,11 +106,6 @@ export default function LimpiarKarmaPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Check authentication before submitting
-    if (!requireAuth()) {
-      return;
-    }
-    
     if (formData.acceptTerms && formData.email && formData.caseInfo && formData.availability && formData.paymentMethod) {
       try {
         // First, submit the form data to our booking API
@@ -152,14 +147,7 @@ export default function LimpiarKarmaPage() {
   };
 
   const toggleBookingForm = () => {
-    // If not authenticated, show signup modal instead
-    if (!isAuthenticated) {
-      // This will automatically show the signup modal via requireAuth()
-      requireAuth();
-      return;
-    }
-    
-    // If authenticated, toggle the booking form
+    // Toggle the booking form regardless of authentication status
     setShowBookingForm(!showBookingForm);
     if (showBookingForm) {
       setIsSubmitted(false);
@@ -314,20 +302,13 @@ export default function LimpiarKarmaPage() {
             )}
             <h3 className="video-title">Presentación de las sesiones Limpiar Karma</h3>
             
-            {/* Authentication Status */}
-            {!isAuthenticated && (
-              <div className="auth-notice">
-                <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
-              </div>
-            )}
-            
             <section className="limpiar-karma-button-section">
               <div className="limpiar-karma-button-container">
                 <button 
                   className="limpiar-karma-action-button"
                   onClick={toggleBookingForm}
                 >
-                  {isAuthenticated ? 'Reservar Sesion Limpiar Karma' : 'Inicia sesión para reservar'}
+                  Inicia sesión para reservar
                 </button>
               </div>
             </section>
