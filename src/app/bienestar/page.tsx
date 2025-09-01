@@ -331,12 +331,7 @@ export default function BienestarPage() {
             Presentación de la sesión de bienestar integral
           </h3>
           
-          {/* Authentication Status */}
-          {!isAuthenticated && (
-            <div className="auth-notice">
-              <p>⚠️ Haz clic en el botón para iniciar sesión o registrarte</p>
-            </div>
-          )}
+          
           
           <button
             className="booking-button"

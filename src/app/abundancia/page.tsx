@@ -290,6 +290,7 @@ export default function AbundanciaPage() {
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                   className="video-iframe"
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                 ></iframe>
               ) : (
                 <video
@@ -297,6 +298,7 @@ export default function AbundanciaPage() {
                   className="video-element"
                   autoPlay
                   src={publicVideo.link}
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                 >
                   Your browser does not support the video tag.
                 </video>
