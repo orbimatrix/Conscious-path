@@ -640,7 +640,7 @@
   }
   
   .carisma-benefit-item {
-    font-size: 16px;
+    font-size: 20px;
     padding: 8px 0;
     flex-direction: row;
     gap: 12px;
@@ -650,8 +650,8 @@
   }
   
   .benefit-icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     min-width: 20px;
   }
   
@@ -754,13 +754,13 @@
   }
   
   .carisma-benefit-item {
-    font-size: 15px;
+    font-size: 20px;
     padding: 6px 0;
   }
   
   .benefit-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     min-width: 18px;
   }
   
@@ -859,13 +859,13 @@
   }
   
   .carisma-benefit-item {
-    font-size: 15px;
+    font-size: 20px;
     padding: 5px 0;
   }
   
   .benefit-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     min-width: 18px;
   }
 }
@@ -889,13 +889,13 @@
   }
   
   .carisma-benefit-item {
-    font-size: 15px;
+    font-size: 20px;
     padding: 8px 0;
   }
   
   .benefit-icon {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     min-width: 16px;
   }
 }

@@ -8,6 +8,20 @@ import { VimeoVideo } from "../types/vimeo";
 
 export default function PrivadoPage() {
     const { user, isLoaded, isAuthenticated, showSignupModal, requireAuth, closeSignupModal } = useAuth();
+    
+    // Add CSS for responsive text breaking
+    const responsiveStyles = `
+        @media (max-width: 920px) and (min-width: 320px) {
+            .break-920-320 {
+                display: block;
+            }
+        }
+        @media (min-width: 921px) {
+            .break-920-320 {
+                display: none;
+            }
+        }
+    `;
     const [showBookingForm, setShowBookingForm] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -162,8 +176,10 @@ export default function PrivadoPage() {
 
 
 
-    return (
-        <div className="privado-page">
+      return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: responsiveStyles }} />
+      <div className="privado-page">
             {/* Top Banner Section */}
             <section className="privado-banner">
                 <div className="privado-banner-content">
@@ -193,7 +209,10 @@ export default function PrivadoPage() {
 
                             <div className="privado-feature-item">
                                 <Image src="/img/check.png" alt="Check" className="privado-check-icon" width={20} height={20} />
-                                <span className="privado-feature-text">Identificar problemas y soluciones</span>
+                                <span className="privado-feature-text">
+                                    Identificar problemas<br className="break-920-320" />
+                                    y soluciones
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -484,6 +503,7 @@ export default function PrivadoPage() {
                     title="Inicia sesión para continuar"
                     message="Necesitas iniciar sesión para acceder a la función de reserva de encuentro privado."
                   />
-    </div>
+      </div>
+    </>
   );
 }
