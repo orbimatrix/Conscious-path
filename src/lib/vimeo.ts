@@ -13,7 +13,6 @@ class VimeoService {
       console.error('Vimeo access token is missing. Please authenticate with Vimeo first');
       throw new Error('Vimeo access token is required');
     }
-    console.log('Vimeo service initialized with access token:', this.accessToken.substring(0, 10) + '...');
   }
 
   private getHeaders() {
