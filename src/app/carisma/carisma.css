@@ -75,7 +75,7 @@
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     padding: 20px 0;
-    font-size: 18px;
+    font-size: 30px;
     color: #666;
   }
 
@@ -532,7 +532,7 @@
   
   .carisma-benefits {
     padding: 50px 20px;
-    min-height: 60vh;
+    min-height: 25vh;
   }
   
   .carisma-image-section {
