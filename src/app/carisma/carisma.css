@@ -176,7 +176,7 @@
   margin: 0 auto;
   background: #B19B6D;
   border: 2px solid #B19B6D;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   padding: 50px 50px;
   display: flex;
   flex-direction: column;
@@ -789,7 +789,7 @@
   }
   
   .carisma-action-section {
-    padding: 40px 15px;
+    padding: 40px 0px;
   }
   
   .carisma-action-container {
