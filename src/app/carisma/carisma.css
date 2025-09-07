@@ -150,8 +150,10 @@
 }
 
 .carisma-info-paragraph {
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
   text-align: justify;
 }
 
@@ -217,10 +219,10 @@
 }
 
 .content-description {
-  font-size: 18px;
+  font-size: 20px;
   color: white;
   font-family: 'Lato', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   opacity: 0.95;
   margin: 0;
@@ -677,7 +679,7 @@
   }
   
   .carisma-info-paragraph {
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 18px;
   }
   
@@ -711,7 +713,7 @@
   }
   
   .content-description {
-    font-size: 15px;
+    font-size: 16px;
   }
   
   .carisma-live-info {
@@ -782,7 +784,7 @@
   }
   
   .carisma-info-paragraph {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 15px;
   }
   
@@ -816,7 +818,7 @@
   }
   
   .content-description {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .carisma-live-info {
