@@ -1332,6 +1332,17 @@
   background-color: #3C3C3C;
 }
 
+.mobile-dropdown-night-mode-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+  background-color: #1C1C1C;
+}
+
+.mobile-dropdown-night-mode-btn:disabled:hover {
+  background-color: #1C1C1C;
+  cursor: not-allowed;
+}
+
 /* Header inline styles moved to CSS */
 .header-safe-area {
   margin-top: 0;
