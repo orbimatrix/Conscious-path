@@ -297,7 +297,7 @@ export default function ConocimientoPage() {
     
     if (contentLevel === 4) {
       setUpgradeAction("abundancia");
-      return "El nivel Abundancia es contenido especial que debe ser activado manualmente por un administrador. Contacta con soporte para solicitar acceso.";
+      return "El nivel de Abundancia es un contenido especial que está disponible para usuarios Carisma y Karma.";
     }
     
     if (contentLevel === 5 && userLevel < 5) {
@@ -439,7 +439,7 @@ export default function ConocimientoPage() {
       }
     } else if (upgradeAction === "abundancia") {
       // Redirect to contact/support page
-      router.push("/bienestar");
+      router.push("/acceder");
     }
     closeUpgradeModal();
   };
@@ -511,7 +511,7 @@ export default function ConocimientoPage() {
           return "Iniciar Sesión";
         }
         return "Comprar Acceso";
-      case "abundancia": return "Contactar Soporte";
+      case "abundancia": return "ENTRAR EN CARISMA Y KARMA";
       default: return "Continuar";
     }
   }, [upgradeAction, selectedCard, filteredContent]);
