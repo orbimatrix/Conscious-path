@@ -435,7 +435,7 @@ export default function ConocimientoPage() {
       if (contentItem && contentItem.accessLevel === 2) {
         router.push("/registration");
       } else {
-        router.push("/aportes");
+        router.push("/acceder");
       }
     } else if (upgradeAction === "abundancia") {
       // Redirect to contact/support page

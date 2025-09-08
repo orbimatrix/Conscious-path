@@ -200,7 +200,7 @@ export default function ContenidosPage() {
             <div className="contenidos-personal-item">
               <h3 
                 className="contenidos-personal-service" 
-                onClick={() => router.push('/limpiar-karma')}
+                onClick={() => router.push('/limpiar_karma')}
                 style={{ cursor: 'pointer' }}
               >
                 Sesiones Limpiar Karma

@@ -94,7 +94,7 @@ export default function Header() {
               </button>
 
               <div className="mobile-dropdown-section">
-                <Link href="/conocimiento" className="mobile-dropdown-section-title mobile-dropdown-link">
+                <Link href="/conocimiento" className="mobile-dropdown-section-title mobile-dropdown-link" onClick={closeDropdown}>
                   AUDIOS y VIDEOS
                 </Link>
               </div>
@@ -134,7 +134,10 @@ export default function Header() {
               <div className="mobile-dropdown-section">
                 <div 
                   className="mobile-dropdown-section-title" 
-                  onClick={() => router.push('/usuario')}
+                  onClick={() => {
+                    router.push('/usuario');
+                    closeDropdown();
+                  }}
                   style={{ cursor: 'pointer' }}
                 >
                   MI ESPACIO PERSONAL
