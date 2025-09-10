@@ -428,12 +428,15 @@
   margin: 0 auto;
   padding: 0 20px;
   text-align: left;
+  margin-bottom: 301px; /* Default for screens > 960px */
 }
 
 .invitar-intro-text {
-  font-size: 16px;
+  font-size: 20px;
   color: #1e3a8a;
   line-height: 1.6;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   margin-bottom: 20px;
 }
 
@@ -465,15 +468,19 @@
 }
 
 .invitar-response-text {
-  font-size: 16px;
+  font-size: 20px;
   color:black;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   margin-bottom: 15px;
 }
 
 .invitar-recommendation-text {
-  font-size: 16px;
+  font-size: 20px;
   color: black;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -481,16 +488,27 @@
 .invitar-rejection-title {
   font-size: 16px;
   color: black;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   margin-top: 40px;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
 
 .invitar-rejection-text {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   color: black;
   line-height: 1.6;
   margin-bottom: 0;
+}
+
+/* Tablet Responsive for Questions Section */
+@media (max-width: 960px) {
+  .invitar-questions-container {
+    margin-bottom: 340px;
+  }
 }
 
 /* Mobile Responsive for Questions Section */
@@ -499,12 +517,16 @@
     margin-top: 50px;
   }
   
+  .invitar-questions-container {
+    margin-bottom: 340px;
+  }
+  
   .invitar-intro-text,
   .invitar-intro-text-followup,
   .invitar-response-text,
   .invitar-recommendation-text,
   .invitar-rejection-text {
-    font-size: 15px;
+    font-size: 16px;
   }
   
   .invitar-questions-box {
@@ -516,7 +538,7 @@
   }
   
   .invitar-rejection-title {
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 30px;
   }
 }
@@ -528,6 +550,7 @@
   
   .invitar-questions-container {
     padding: 0 15px;
+    margin-bottom: 317px;
   }
   
   .invitar-intro-text,
@@ -535,7 +558,7 @@
   .invitar-response-text,
   .invitar-recommendation-text,
   .invitar-rejection-text {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .invitar-questions-box {
@@ -547,7 +570,14 @@
   }
   
   .invitar-rejection-title {
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 25px;
+  }
+}
+
+/* Small Mobile Responsive (360px and below) */
+@media (max-width: 360px) {
+  .invitar-questions-container {
+    margin-bottom: 262px;
   }
 } 
