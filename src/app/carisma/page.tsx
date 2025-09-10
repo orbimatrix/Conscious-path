@@ -27,6 +27,7 @@ export default function CarismaPage() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetchPublicVideo();
@@ -80,7 +81,6 @@ export default function CarismaPage() {
     return null;
   };
 
-  const router = useRouter();
 
   return (
     <div className="carisma-page">
@@ -219,7 +219,10 @@ export default function CarismaPage() {
             <h3 className="video-title">
             Presentación del Nivel Carisma
             </h3>
-            <button className="video-cta-button">
+            <button 
+              className="video-cta-button"
+              onClick={() => router.push('/karma')}
+            >
               VER EL NIVEL SUPERIOR KARMA
             </button>
           </div>
