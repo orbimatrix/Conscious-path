@@ -154,8 +154,10 @@
 }
 
 .bienestar-intro-text {
-  font-size: 16px;
+  font-size: 20px;
   color: #333;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   text-align: left;
   margin: 0;
@@ -163,7 +165,7 @@
 
 /* Process Section */
 .bienestar-process {
-  padding: 40px 20px;
+  padding: 0px 20px;
 }
 
 .bienestar-process-container {
@@ -173,6 +175,8 @@
 
 .process-title {
   font-size: 20px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   color: #000000;
   margin-bottom: 30px;
   
@@ -186,8 +190,10 @@
 }
 
 .process-step {
-  font-size: 16px;
+  font-size: 20px;
   color: #333;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   margin-bottom: 25px;
   text-align: left;
@@ -234,19 +240,19 @@
   }
   
   .bienestar-intro-text {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .process-title {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .process-step {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .additional-benefit-item {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .video-player {
@@ -301,7 +307,7 @@
   }
   
   .bienestar-intro-text {
-    font-size: 13px;
+    font-size: 16px;
   }
   
   .process-title {
@@ -309,11 +315,11 @@
   }
   
   .process-step {
-    font-size: 13px;
+    font-size: 16px;
   }
   
   .additional-benefit-item {
-    font-size: 13px;
+    font-size: 16px;
   }
   
   .video-player {
@@ -369,19 +375,19 @@
   }
   
   .bienestar-intro-text {
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .process-title {
-    font-size: 15px;
+    font-size: 16px;
   }
   
   .process-step {
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .additional-benefit-item {
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .video-player {
@@ -422,8 +428,8 @@
 .bienestar-additional-benefits {
   background: #B19B6D;
   padding: 40px 20px;
-  margin: 40px 0;
   width: 100%;
+  margin-top: 124px;
 }
 
 .bienestar-additional-benefits-container {
@@ -439,12 +445,13 @@
 }
 
 .additional-benefit-item {
-  font-size: 16px;
+  font-size: 20px;
   color: #f8f8f8;
-  line-height: 1.6;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+  /* line-height: 1.6; */
   margin-bottom: 20px;
   text-align: left;
-  font-weight: 500;
 }
 
 .additional-benefit-item:last-child {
@@ -453,7 +460,7 @@
 
 /* Video Presentation Section */
 .bienestar-video-section {
-  padding: 60px 0;
+  margin-top: 70px;
   text-align: center;
   width: 100%;
 }
@@ -467,7 +474,7 @@
 .video-player {
   width: 100%;
   max-width: 500px;
-  height: 300px;
+  height: 150px;
   background: #f8e6e6;
   border-radius: 8px;
   margin: 0 auto 30px;
@@ -680,7 +687,7 @@
   }
   
   .bienestar-intro-text {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .process-title {
@@ -688,11 +695,11 @@
   }
   
   .process-step {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .additional-benefit-item {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .video-title {

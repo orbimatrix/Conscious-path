@@ -52,7 +52,7 @@
 
 /* Benefits Section */
 .abundancia-benefits {
-  padding: 47px 20px;
+  padding: 50px 20px;
   text-align: center;
 }
 
@@ -171,6 +171,8 @@
 .abundancia-content-title {
   font-size: 28px;
   color: #D2B48C;
+  font-weight: 300; 
+  font-family: 'Lato', sans-serif;
   margin-bottom: 40px;
   
   text-transform: uppercase;
@@ -182,17 +184,20 @@
 }
 
 .abundancia-paragraph {
-  font-size: 16px;
+  font-size: 20px;
   color: #333;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   margin-bottom: 25px;
   text-align: justify;
 }
 
 .abundancia-final-text {
-  font-size: 16px;
+  font-size: 20px;
   color: #333;
-  font-weight: 300;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
   margin-top: 30px;
   text-align: left;
 }
@@ -279,15 +284,15 @@
   }
   
   .abundancia-content-title {
-    font-size: 22px;
+    font-size: 26px;
   }
   
   .abundancia-paragraph {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .abundancia-final-text {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -363,15 +368,15 @@
   }
   
   .abundancia-content-title {
-    font-size: 18px;
+    font-size: 26px;
   }
   
   .abundancia-paragraph {
-    font-size: 13px;
+    font-size: 16px;
   }
   
   .abundancia-final-text {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 
@@ -442,15 +447,15 @@
   }
   
   .abundancia-content-title {
-    font-size: 16px;
+    font-size: 26px;
   }
   
   .abundancia-paragraph {
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .abundancia-final-text {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
@@ -506,7 +511,7 @@
 
 /* Benefits Block Section */
 .abundancia-benefits-block {
-  padding: 40px 20px;
+  padding: 0px 20px;
 }
 
 .benefits-block-container {
@@ -517,8 +522,24 @@
 .benefits-block-content {
   background: #B19B6D;
   padding: 40px 30px;
-  border-radius: 8px;
+  border-radius: 0;
   text-align: left;
+}
+
+/* Full width for mobile devices */
+@media (max-width: 960px) {
+  .abundancia-benefits-block {
+    padding: 0;
+  }
+  
+  .benefits-block-container {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .benefits-block-content {
+    padding: 40px 20px;
+  }
 }
 
 .benefit-item {
@@ -547,7 +568,7 @@
 
 .video-player {
   width: 100%;
-  height: 300px;
+  height: 150px;
   background: #FFE6E1;
   border-radius: 8px;
   display: flex;

@@ -227,7 +227,7 @@ export default function AbundanciaPage() {
           )}
           
           <h3 className="video-title">
-            {publicVideo ? publicVideo.name : 'Presentación del Grupo de Proyección'}
+          Presentación del Grupo de Proyección
           </h3>
           
           {/* Conditional content based on login status */}
