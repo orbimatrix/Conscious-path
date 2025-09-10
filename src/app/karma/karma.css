@@ -160,17 +160,17 @@
   }
   
   .carisma-info-paragraph {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 25px;
     text-align: justify;
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
 
   }
   
   .carisma-info-paragraph:last-child {
     margin-bottom: 0;
-    font-weight: 300;
+    font-weight: 400;
   }
   
   /* Action Section */
@@ -186,7 +186,6 @@
     height: 400px;
     margin: 0 auto;
     background: #B19B6D;
-    border: 2px solid #B19B6D;
     border-radius: 8px;
     padding: 50px 50px;
     display: flex;
@@ -558,7 +557,7 @@
     }
     
     .carisma-action-section {
-      padding: 60px 20px;
+      padding: 60px 0;
     }
     
     .carisma-action-container {
@@ -660,17 +659,17 @@
     }
     
     .carisma-info-title {
-      font-size: 24px;
+      font-size: 26px;
       margin-bottom: 25px;
     }
     
     .carisma-info-paragraph {
-      font-size: 15px;
+      font-size: 16px;
       margin-bottom: 18px;
     }
     
     .carisma-action-section {
-      padding: 50px 15px;
+      padding: 50px 0;
     }
     
     .carisma-action-container {
@@ -766,17 +765,17 @@
     }
     
     .carisma-info-title {
-      font-size: 20px;
+      font-size: 26px;
       margin-bottom: 20px;
     }
     
     .carisma-info-paragraph {
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 15px;
     }
     
     .carisma-action-section {
-      padding: 40px 15px;
+      padding: 40px 0;
     }
     
     .carisma-action-container {
