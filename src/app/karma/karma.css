@@ -45,8 +45,9 @@
   /* Benefits Section */
   .carisma-benefits {
     background: white;
-    padding: 30px 20px;
-    min-height: 25vh;
+    padding: 0px 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +57,6 @@
     max-width: 500px;
     margin: 0 auto;
     width: 100%;
-    padding: 20px;
     border-radius: 8px;
     background: white;
     display: flex;
@@ -132,7 +132,9 @@
   
   /* Information Section */
   .carisma-info-section {
-    padding: 60px 20px;
+    padding: 0px 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     background: white;
     border-left: 2px solid #e0e0e0;
     border-right: 2px solid #e0e0e0;
@@ -175,7 +177,7 @@
   
   /* Action Section */
   .carisma-action-section {
-    padding: 80px 20px;
+    padding: 0px 20px;
     background: white;
     text-align: center;
   }
@@ -186,7 +188,6 @@
     height: 400px;
     margin: 0 auto;
     background: #B19B6D;
-    border-radius: 8px;
     padding: 50px 50px;
     display: flex;
     flex-direction: column;
@@ -250,9 +251,41 @@
   
   /* Video Section */
   .carisma-video-section {
-    padding: 60px 20px;
+    padding: 0px 20px;
     background: white;
+    margin-top: 50px;
     text-align: center;
+  }
+
+  /* Responsive margin-bottom for carisma-video-section */
+  @media (max-width: 360px) {
+    .carisma-video-section {
+      margin-bottom: 364px;
+    }
+  }
+
+  @media (min-width: 361px) and (max-width: 480px) {
+    .carisma-video-section {
+      margin-bottom: 635px;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .carisma-video-section {
+      margin-bottom: 605px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 960px) {
+    .carisma-video-section {
+      margin-bottom: 286px;
+    }
+  }
+
+  @media (min-width: 961px) {
+    .carisma-video-section {
+      margin-bottom: 336px;
+    }
   }
   
   .carisma-video-container {
@@ -534,8 +567,7 @@
     }
     
     .carisma-benefits {
-      padding: 25px 20px;
-      min-height: 30vh;
+      padding: 0px 20px;
     }
     
     .carisma-image-section {
@@ -543,7 +575,7 @@
     }
     
     .carisma-info-section {
-      padding: 50px 20px;
+      padding: 0px 20px;
     }
     
     .carisma-info-title {
@@ -557,7 +589,7 @@
     }
     
     .carisma-action-section {
-      padding: 60px 0;
+      padding: 0px 0;
     }
     
     .carisma-action-container {
@@ -624,8 +656,7 @@
     }
     
     .carisma-benefits {
-      padding: 20px 15px;
-      min-height: 35vh;
+      padding: 0px 15px;
     }
     
     .carisma-benefit-item {
@@ -655,7 +686,7 @@
     }
     
     .carisma-info-section {
-      padding: 40px 15px;
+      padding: 0px 15px;
     }
     
     .carisma-info-title {
@@ -669,7 +700,7 @@
     }
     
     .carisma-action-section {
-      padding: 50px 0;
+      padding: 0px 0;
     }
     
     .carisma-action-container {
@@ -736,8 +767,7 @@
     }
     
     .carisma-benefits {
-      padding: 15px 15px;
-      min-height: 222px;
+      padding: 0px 15px;
     }
     
     .carisma-benefit-item {
@@ -761,7 +791,7 @@
     }
     
     .carisma-info-section {
-      padding: 30px 15px;
+      padding: 0px 15px;
     }
     
     .carisma-info-title {
@@ -775,7 +805,7 @@
     }
     
     .carisma-action-section {
-      padding: 40px 0;
+      padding: 0px 0;
     }
     
     .carisma-action-container {
@@ -859,8 +889,7 @@
     }
     
     .carisma-benefits {
-      padding: 12px 10px;
-      min-height: 30vh;
+      padding: 0px 10px;
     }
     
     .carisma-benefit-item {
@@ -891,7 +920,7 @@
     }
     
     .carisma-benefits {
-      padding: 10px 8px;
+      padding: 0px 8px;
     }
     
     .carisma-benefit-item {
@@ -915,8 +944,8 @@
     }
     
     .carisma-benefits {
-      min-height: 25vh;
-      padding: 15px 20px;
+      
+      padding: 0px 20px;
     }
     
     .carisma-title {
@@ -930,7 +959,7 @@
   
   @media (max-width: 1024px) {
     .carisma-video-section {
-      padding: 25px 20px;
+      padding: 0px 20px;
     }
     
     .carisma-video-container {
@@ -972,7 +1001,7 @@
   
   @media (max-width: 768px) {
     .carisma-video-section {
-      padding: 20px 15px;
+      padding: 0px 15px;
     }
     
     .video-player {
@@ -1010,7 +1039,7 @@
   
   @media (max-width: 480px) {
     .carisma-video-section {
-      padding: 15px 15px;
+      padding: 0px 15px;
     }
     
     .video-player {
@@ -1048,7 +1077,7 @@
   
   @media (max-width: 360px) {
     .carisma-video-section {
-      padding: 10px 15px;
+      padding: 0px 15px;
     }
     
     .video-player {
