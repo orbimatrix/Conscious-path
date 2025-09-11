@@ -101,7 +101,7 @@ export default function CarismaPage() {
               </li>
               <li className="carisma-benefit-item">
                 <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />
-                <span className="benefit-text">Viva de forma abundante</span>
+                <span className="benefit-text">Viva d forma abundante</span>
               </li>
               <li className="carisma-benefit-item">
                 <Image src="/img/check.png" alt="Check" className="benefit-icon" width={20} height={20} />

@@ -92,6 +92,8 @@
 .benefit-text {
   font-weight: 300;
   line-height: 1.5;
+  flex: 1;
+  margin-left: 0;
 }
 
 /* Image Section */
@@ -683,19 +685,21 @@
     padding: 8px 0;
     flex-direction: row;
     gap: 12px;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
     width: auto;
+    align-items: center;
   }
   
   .benefit-icon {
-    width: 22px;
-    height: 22px;
-    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    /* min-width: 20px; */
   }
   
   .benefit-text {
-    text-align: center;
+    text-align: left;
+    flex: 1;
   }
   
   .carisma-image-section {
@@ -795,12 +799,13 @@
   .carisma-benefit-item {
     font-size: 20px;
     padding: 6px 0;
+    align-items: center;
   }
   
   .benefit-icon {
-    width: 22px;
-    height: 22px;
-    min-width: 18px;
+    width: 20px;
+    height: 20px;
+    /* min-width: 18px; */
   }
   
   .carisma-image-section {
@@ -899,12 +904,13 @@
   .carisma-benefit-item {
     font-size: 20px;
     padding: 5px 0;
+    align-items: center;
   }
   
   .benefit-icon {
-    width: 22px;
-    height: 22px;
-    min-width: 18px;
+    width: 20px;
+    height: 20px;
+    /* min-width: 18px; */
   }
 }
 
@@ -929,12 +935,13 @@
   .carisma-benefit-item {
     font-size: 20px;
     padding: 8px 0;
+    align-items: center;
   }
   
   .benefit-icon {
-    width: 22px;
-    height: 22px;
-    min-width: 16px;
+    width: 20px;
+    height: 20px;
+    /* min-width: 16px; */
   }
 }
 
