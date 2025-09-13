@@ -70,7 +70,7 @@
 
 /* Payment Information Section */
 .payment-info-section {
-  padding: 60px 0;
+  padding: 0px 0;
   text-align: center;
 }
 
@@ -309,6 +309,37 @@
   width: 100%;
 }
 
+/* Responsive margin-bottom for bottom-brown-banner */
+@media (max-width: 360px) {
+  .bottom-brown-banner {
+    margin-bottom: 182px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  .bottom-brown-banner {
+    margin-bottom: 348px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .bottom-brown-banner {
+    margin-bottom: 667px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 960px) {
+  .bottom-brown-banner {
+    margin-bottom: 303px;
+  }
+}
+
+@media (min-width: 961px) {
+  .bottom-brown-banner {
+    margin-bottom: 939px;
+  }
+}
+
 .bottom-brown-banner-content {
   max-width: 800px;
   margin: 0 auto;
@@ -425,12 +456,12 @@
   }
   
   .payment-info-section {
-    padding: 40px 0;
+    padding: 0px 0;
   }
   
   .payment-info-title {
     font-size: 26px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
   
   .credit-card-image {
@@ -538,12 +569,12 @@
   }
   
   .payment-info-section {
-    padding: 30px 0;
+    padding: 0px 0;
   }
   
   .payment-info-title {
     font-size: 26px;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
   }
   
   .credit-card-image {
@@ -652,12 +683,12 @@
   }
   
   .payment-info-section {
-    padding: 25px 0;
+    padding: 0px 0;
   }
   
   .payment-info-title {
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
   
   .credit-card-image {
