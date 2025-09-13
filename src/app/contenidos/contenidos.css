@@ -49,7 +49,8 @@
 
 /* White Text Section */
 .contenidos-text-section {
-  padding: 50px 0;
+  margin-top: 50px;
+  margin-bottom: 50px;
   background: white;
   text-align: center;
 }
@@ -216,12 +217,10 @@
   }
   
   .contenidos-banner-title {
-    font-size: 22px;
+    font-size: 28px;
   }
   
-  .contenidos-text-section {
-    padding: 50px 0;
-  }
+  
   
   .contenidos-text-title,
   .contenidos-text-subtitle {
@@ -261,17 +260,15 @@
   }
   
   .contenidos-banner-subtitle {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 6px;
   }
   
   .contenidos-banner-title {
-    font-size: 18px;
+    font-size: 28px;
   }
   
-  .contenidos-text-section {
-    padding: 50px 0;
-  }
+  
   
   .contenidos-text-title,
   .contenidos-text-subtitle {
@@ -310,7 +307,7 @@
   }
   
   .contenidos-banner-subtitle {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 15px;
   }
   
@@ -915,12 +912,12 @@
   }
   
   .contenidos-banner-subtitle {
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 5px;
   }
   
   .contenidos-banner-title {
-    font-size: 16px;
+    font-size: 28px;
   }
   
   .contenidos-subscription-container {
