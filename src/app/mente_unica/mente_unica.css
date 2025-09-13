@@ -1,0 +1,210 @@
+/* Mente Unica Page Styles */
+
+.mente-unica-banner {
+  height: 200px;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.mente-unica-banner h1 {
+  font-size: 28px !important;
+}
+
+/* Second section styling */
+.mente-unica-second-section {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Text content section styling */
+.mente-unica-text-section {
+  margin-top: 70px !important;
+  margin-bottom: 70px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mente-unica-text-section p {
+  font-size: 16px !important;
+}
+
+.mente-unica-text-section h3 {
+  font-size: 16px !important;
+}
+
+/* More specific selectors for highlighted box */
+.mente-unica-text-section .bg-\[#B19B6D\] p {
+  font-size: 16px !important;
+}
+
+.mente-unica-text-section .bg-\[#B19B6D\] h3 {
+  font-size: 16px !important;
+}
+
+/* Highlighted box section styling */
+.mente-unica-highlighted-box {
+  width: calc(100% + 2rem) !important;
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* For larger mobile screens */
+@media (min-width: 640px) {
+  .mente-unica-highlighted-box {
+    width: calc(100% + 3rem) !important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* For medium screens */
+@media (min-width: 768px) {
+  .mente-unica-highlighted-box {
+    width: calc(100% + 4rem) !important;
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+.mente-unica-highlighted-box h3 {
+  font-size: 16px !important;
+}
+
+.mente-unica-highlighted-box p {
+  font-size: 16px !important;
+}
+
+/* Numbered points section styling */
+.mente-unica-points-section {
+  margin-top: 70px !important;
+}
+
+.mente-unica-points-section p {
+  font-size: 16px !important;
+}
+
+/* Responsive margin-bottom for numbered points section */
+@media (max-width: 360px) {
+  .mente-unica-points-section {
+    margin-bottom: 192px !important;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  .mente-unica-points-section {
+    margin-bottom: 67px !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .mente-unica-points-section {
+    margin-bottom: 441px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 960px) {
+  .mente-unica-points-section {
+    margin-bottom: 227px !important;
+  }
+}
+
+@media (min-width: 961px) {
+  .mente-unica-points-section {
+    margin-bottom: 143px !important;
+  }
+}
+
+/* Second section font sizes */
+section h2 {
+  font-size: 26px !important;
+  font-weight: 300 !important;
+  font-family: 'Lato', sans-serif !important;
+}
+
+section h3 {
+  font-size: 26px !important;
+  font-weight: 300 !important;
+  font-family: 'Lato', sans-serif !important;
+}
+
+/* Large screens - 769px and above */
+@media (min-width: 769px) {
+  .mente-unica-banner {
+    height: 300px;
+    max-height: 300px;
+  }
+  
+  .mente-unica-banner h1 {
+    font-size: 60px !important;
+  }
+  
+  .mente-unica-second-section {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  .mente-unica-text-section {
+    margin-top: 70px !important;
+    margin-bottom: 70px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  .mente-unica-text-section p {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-text-section h3 {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-text-section .bg-\[#B19B6D\] p {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-text-section .bg-\[#B19B6D\] h3 {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-highlighted-box {
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .mente-unica-highlighted-box h3 {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-highlighted-box p {
+    font-size: 20px !important;
+  }
+  
+  .mente-unica-points-section p {
+    font-size: 20px !important;
+  }
+  
+  section h2 {
+    font-size: 50px !important;
+    font-weight: 300 !important;
+    font-family: 'Lato', sans-serif !important;
+  }
+  
+  section h3 {
+    font-size: 50px !important;
+    font-weight: 300 !important;
+    font-family: 'Lato', sans-serif !important;
+  }
+}

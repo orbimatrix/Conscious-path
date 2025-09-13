@@ -1,12 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import FooterSection from '../components/FooterSection';
+import './mente_unica.css';
 
 export default function MenteUnicaPage() {
   return (
     <div className="min-h-screen">
       {/* Top Section - LA MENTE ÚNICA */}
-      <section className="bg-[#B19B6D] flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
+      <section className="bg-[#B19B6D] flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 mente-unica-banner">
         <div className="text-center space-y-3 sm:space-y-4">
           <h2 className="text-[20px] uppercase tracking-wide text-gray-100 font-light" style={{fontFamily: 'Lato, sans-serif'}}>
             INFORMACIÓN
@@ -18,7 +19,7 @@ export default function MenteUnicaPage() {
       </section>
 
       {/* Bottom Section - CONOCIMIENTOS IMPRESCINDIBLES */}
-      <section className="bg-white flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6">
+      <section className="bg-white flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 mente-unica-second-section">
         <div className="text-center space-y-3 sm:space-y-4">
           <h2 className="text-[#B19B6D] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase tracking-wide leading-tight">
             CONOCIMIENTOS IMPRESCINDIBLES
@@ -44,7 +45,7 @@ export default function MenteUnicaPage() {
       <section className="bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8">
         <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
           {/* Main Paragraph */}
-          <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
+          <div className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mente-unica-text-section">
             <p>
               A continuación se exponen los puntos más importantes para poder avanzar por el camino espiritual. 
               Es un punto de partida esencial, pues evitará tomar caminos equivocados que nos harán perder 
@@ -53,7 +54,7 @@ export default function MenteUnicaPage() {
           </div>
 
           {/* Highlighted Box */}
-          <div className="bg-[#B19B6D] p-4 sm:p-6 md:p-8 rounded-lg">
+          <div className="bg-[#B19B6D] p-4 sm:p-6 md:p-8 mente-unica-highlighted-box">
             <div className="text-gray-100 space-y-2 sm:space-y-3">
               <h3 className="text-base sm:text-lg md:text-xl uppercase font-bold">
                 RECUERDE:
@@ -68,7 +69,9 @@ export default function MenteUnicaPage() {
       </section>
 
       {/* Numbered Points Section */}
-      <section className="bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8">
+
+
+      <section className="bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8 mente-unica-points-section">
         <div className="max-w-4xl mx-auto">
           <div className="space-y-4 sm:space-y-6 text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
