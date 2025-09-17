@@ -47,8 +47,9 @@
   /* Benefits Section */
   .estructural-benefits {
     background: white;
-    padding: 30px 20px;
-
+    padding: 0px 20px;
+    margin-top: 50px;
+    margin-bottom: 70px;
     min-height: 25vh;
     display: flex;
     align-items: center;
@@ -59,7 +60,7 @@
     max-width: 500px;
     margin: 0 auto;
     width: 100%;
-    padding: 20px;
+    /* padding: 20px; */
     border-radius: 8px;
     background: white;
     display: flex;
@@ -174,7 +175,9 @@
   }
   
   .estructural-info-paragraph {
-    font-size: 18px;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
     margin-bottom: 25px;
     text-align: justify;
   }
@@ -210,7 +213,8 @@
   }
   
   .estructural-following-paragraph {
-  font-size: 22px;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
   margin-bottom: 25px;
   text-align: center;
   font-weight: 400;
@@ -285,7 +289,9 @@
   
   /* Video Section */
   .estructural-video-section {
-    padding: 60px 20px;
+    padding: 0px 20px;
+    margin-top: 70px;
+    margin-bottom: 393px;
     background: white;
     text-align: center;
   }
@@ -552,7 +558,7 @@
     }
     
          .estructural-benefits {
-       padding: 20px 20px;
+       padding: 0px 20px;
        min-height: 25vh;
      }
      
@@ -657,7 +663,7 @@
     }
     
          .estructural-benefits {
-       padding: 15px 15px;
+       padding: 0px 20px;
        min-height: 25vh;
      }
      
@@ -701,7 +707,7 @@
     }
     
     .estructural-info-paragraph {
-      font-size: 15px;
+      font-size: 16px;
       margin-bottom: 18px;
     }
     
@@ -715,7 +721,7 @@
     }
     
       .estructural-following-paragraph {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 18px;
   }
     
@@ -778,11 +784,11 @@
     }
     
     .estructural-subtitle {
-      font-size: 36px;
+      font-size: 28px;
     }
     
          .estructural-benefits {
-       padding: 12px 15px;
+       padding: 0px 20px;
        min-height: 30vh;
      }
      
@@ -820,7 +826,7 @@
     }
     
     .estructural-info-paragraph {
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 15px;
     }
     
@@ -897,11 +903,11 @@
     }
     
     .estructural-subtitle {
-      font-size: 32px;
+      font-size: 28px;
     }
     
          .estructural-benefits {
-       padding: 10px 10px;
+       padding: 0px 20px;
        min-height: 35vh;
      }
      
@@ -931,7 +937,7 @@
     }
     
       .estructural-following-paragraph {
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 12px;
   }
   }
@@ -951,7 +957,7 @@
     }
     
          .estructural-benefits {
-       padding: 10px 8px;
+       padding: 0px 20px;
      }
      
      .estructural-benefits-title {
@@ -979,8 +985,8 @@
       margin-bottom: 12px;
     }
     
-      .estructural-following-paragraph {
-    font-size: 14px;
+    .estructural-following-paragraph {
+    font-size: 16px;
     margin-bottom: 10px;
   }
   }
@@ -994,7 +1000,7 @@
     
     .estructural-benefits {
       min-height: 25vh;
-      padding: 15px 20px;
+      padding: 0px 20px;
     }
     
     .estructural-title {
@@ -1002,7 +1008,7 @@
     }
     
     .estructural-subtitle {
-      font-size: 36px;
+      font-size: 28px;
     }
     
     .estructural-following-section {
@@ -1013,7 +1019,8 @@
   /* Video section responsive design */
   @media (max-width: 1024px) {
     .estructural-video-section {
-      padding: 25px 20px;
+      padding: 0px 20px;
+      margin-bottom: 173px;
     }
     
     .estructural-video-container {
@@ -1050,7 +1057,8 @@
   
   @media (max-width: 768px) {
     .estructural-video-section {
-      padding: 20px 15px;
+      padding: 0px 15px;
+      margin-bottom: 131px;
     }
     
     .video-player {
@@ -1083,7 +1091,8 @@
   
   @media (max-width: 480px) {
     .estructural-video-section {
-      padding: 15px 15px;
+      padding: 0px 15px;
+      margin-bottom: 144px;
     }
     
     .video-player {
@@ -1116,7 +1125,8 @@
   
   @media (max-width: 360px) {
     .estructural-video-section {
-      padding: 10px 15px;
+      padding: 0px 15px;
+      margin-bottom: 203px;
     }
     
     .video-player {

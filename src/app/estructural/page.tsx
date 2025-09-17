@@ -322,7 +322,7 @@ export default function EstructuralPage() {
                   className="estructural-action-button"
                   onClick={toggleBookingForm}
                 >
-                  Inicia sesión para reservar
+                  Reservar
                 </AnimatedButton>
               </div>
             </section>
