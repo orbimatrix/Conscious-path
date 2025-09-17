@@ -76,6 +76,8 @@
   margin-bottom: 3rem;
   text-transform: uppercase;
   letter-spacing: 0.1px;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .checkmarkList {
@@ -89,7 +91,7 @@
 
 .checkmarkItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
@@ -105,6 +107,7 @@
   height: 22px;
   object-fit: contain;
   text-align: center;
+  margin-top: 2px;
 }
 
 .checkmarkText {
@@ -174,7 +177,7 @@
   counter-increment: item;
   margin-bottom: 1rem;
   line-height: 1.6;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   position: relative;
   padding-left: 1.5rem;
 }
@@ -567,11 +570,11 @@
   }
   
   .subsectionTitle {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
   
   .listItem {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
   
   .serviceParagraph {
@@ -667,7 +670,7 @@
   }
   
   .subsectionTitle {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
   
   .paragraph {
@@ -823,7 +826,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   
   .listItem {
@@ -863,7 +866,9 @@
   .checkmarkTitle {
     font-size: 1.625rem;
     line-height: 1.1;
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }
 
@@ -934,7 +939,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.3;
     margin-bottom: 0.75rem;
   }
@@ -1048,12 +1053,12 @@
   
   .numberedList li {
     padding-left: 1.25rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.5;
   }
   
   .numberedList li::before {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
@@ -1088,7 +1093,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   
   .paragraph {
@@ -1134,7 +1139,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
   
   .listItem {
@@ -1201,7 +1206,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
   
   .paragraph {
@@ -1247,7 +1252,7 @@
   }
   
   .subsectionTitle {
-    font-size: 0.8rem;
+    font-size:1rem;
   }
   
   .listItem {
