@@ -311,6 +311,11 @@
   text-align: center;
 }
 
+/* Remove margin-bottom when booking form is open */
+.limpiar-karma-video-section.booking-form-open {
+  margin-bottom: 0px;
+}
+
 .limpiar-karma-video-container {
   max-width: 600px;
   margin: 0 auto;
@@ -1042,6 +1047,10 @@
     margin-bottom: 200px;
   }
   
+  .limpiar-karma-video-section.booking-form-open {
+    margin-bottom: 0px;
+  }
+  
   .limpiar-karma-video-container {
     max-width: 100%;
   }
@@ -1088,6 +1097,10 @@
     margin-bottom: 410px;
   }
   
+  .limpiar-karma-video-section.booking-form-open {
+    margin-bottom: 0px;
+  }
+  
   .video-player {
     height: 200px;
     margin-bottom: 20px;
@@ -1132,6 +1145,10 @@
   .limpiar-karma-video-section {
     padding: 0px 15px;
     margin-bottom: 400px;
+  }
+  
+  .limpiar-karma-video-section.booking-form-open {
+    margin-bottom: 0px;
   }
   
   .video-player {
@@ -1184,6 +1201,10 @@
   .limpiar-karma-video-section {
     padding: 0px 15px;
     margin-bottom: 384px;
+  }
+  
+  .limpiar-karma-video-section.booking-form-open {
+    margin-bottom: 0px;
   }
   
   .video-player {

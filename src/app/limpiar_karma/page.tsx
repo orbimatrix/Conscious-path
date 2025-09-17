@@ -245,7 +245,7 @@ export default function LimpiarKarmaPage() {
         </section>
 
 
-        <section className="limpiar-karma-video-section">
+        <section className={`limpiar-karma-video-section ${showBookingForm ? 'booking-form-open' : ''}`}>
           <div className="limpiar-karma-video-container">
             {loading ? (
               <div className="video-player loading">
