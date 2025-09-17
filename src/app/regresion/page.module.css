@@ -208,6 +208,16 @@
   justify-content: center;
 }
 
+/* Full width service section for devices up to 960px */
+@media (max-width: 960px) {
+  .serviceSection {
+    padding: 4rem 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+}
+
 .serviceContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -221,7 +231,7 @@
 
 .serviceParagraph {
   color: #ffffff;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   text-align: left;
@@ -274,7 +284,8 @@
 /* Video Section Styles */
 .videoSection {
   width: 100%;
-  padding: 4rem 1rem;
+  padding: 0rem 1rem;
+  margin-top: 4.375rem;
   background-color: white;
   display: flex;
   align-items: center;
@@ -293,7 +304,6 @@
   max-width: 600px;
   height: 300px;
   background-color: #FCE8E8;
-  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,6 +311,44 @@
   position: relative;
   cursor: pointer;
   transition: transform 0.3s ease;
+}
+
+/* Video height for devices up to 960px */
+@media (max-width: 960px) {
+  .videoPlaceholder {
+    height: 200px;
+  }
+}
+
+/* Video section margin-bottom for different device widths */
+@media (max-width: 360px) {
+  .videoSection {
+    margin-bottom: 200px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  .videoSection {
+    margin-bottom: 370px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .videoSection {
+    margin-bottom: 238px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 960px) {
+  .videoSection {
+    margin-bottom: 310px;
+  }
+}
+
+@media (min-width: 961px) {
+  .videoSection {
+    margin-bottom: 170px;
+  }
 }
 
 .videoPlaceholder:hover {
@@ -326,13 +374,11 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
   overflow: hidden;
 }
 
 .thumbnailImage {
   object-fit: cover;
-  border-radius: 12px;
 }
 
 .playOverlay {
@@ -503,7 +549,7 @@
   }
   
   .videoSection {
-    padding: 2.5rem 1rem;
+    padding: 0rem 1rem;
   }
   
   .bannerTitle {
@@ -526,9 +572,6 @@
     font-size: 1.5rem;
   }
   
-  .videoPlaceholder {
-    height: 250px;
-  }
 }
 
 @media (max-width: 960px) and (min-width: 360px) {
@@ -552,7 +595,7 @@
   }
   
   .videoSection {
-    padding: 2rem 1rem;
+    padding: 0rem 1rem;
   }
   
   .prose {
@@ -578,16 +621,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 1.375rem;
   }
   
-  .videoPlaceholder {
-    height: 220px;
-  }
   
   .playButton {
     width: 70px;
@@ -662,7 +702,7 @@
   }
   
   .videoSection {
-    padding: 1.5rem 0.75rem;
+    padding: 0rem 0.75rem;
   }
   
   .sectionTitle {
@@ -725,16 +765,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 1.25rem;
   }
   
-  .videoPlaceholder {
-    height: 200px;
-  }
   
   .playButton {
     width: 60px;
@@ -776,7 +813,7 @@
   }
   
   .videoSection {
-    padding: 1.25rem 0.5rem;
+    padding: 0rem 0.5rem;
   }
   
   .sectionTitle {
@@ -834,16 +871,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 1.125rem;
   }
   
-  .videoPlaceholder {
-    height: 180px;
-  }
   
   .playButton {
     width: 55px;
@@ -924,7 +958,7 @@
   }
   
   .videoSection {
-    padding: 2rem 16px;
+    padding: 0rem 16px;
   }
   
   .videoContainer {
@@ -1007,7 +1041,7 @@
   
   
   .serviceParagraph {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
   }
@@ -1018,10 +1052,6 @@
     margin-bottom: 1rem;
   }
   
-  .videoPlaceholder {
-    height: 180px;
-    border-radius: 8px;
-  }
   
   .playButton {
     width: 60px;
@@ -1085,7 +1115,7 @@
   }
   
   .videoSection {
-    padding: 0.75rem 0.25rem;
+    padding: 0rem 0.25rem;
   }
   
   .sectionTitle {
@@ -1147,16 +1177,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 0.95rem;
   }
   
-  .videoPlaceholder {
-    height: 140px;
-  }
   
   .playButton {
     width: 45px;
@@ -1198,7 +1225,7 @@
   }
   
   .videoSection {
-    padding: 0.5rem 0.25rem;
+    padding: 0rem 0.25rem;
   }
   
   .sectionTitle {
@@ -1260,16 +1287,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 0.9rem;
   }
   
-  .videoPlaceholder {
-    height: 120px;
-  }
   
   .playButton {
     width: 40px;
@@ -1313,7 +1337,7 @@
   }
   
   .videoSection {
-    padding: 1rem 0.5rem;
+    padding: 0rem 0.5rem;
   }
   
   .checkmarkSection {
@@ -1338,16 +1362,13 @@
   }
   
   .serviceParagraph {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
   
   .videoTitle {
     font-size: 1.125rem;
   }
   
-  .videoPlaceholder {
-    height: 120px;
-  }
   
   .playButton {
     width: 50px;
