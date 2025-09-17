@@ -3557,7 +3557,9 @@ body {
 
 .privado-content {
   background-color: #ffffff;
-  padding: 60px 20px;
+  margin-top: 3.125rem;
+  margin-bottom: 4.375rem;
+  padding: 0px 20px;
   flex: 1;
 }
 
@@ -3624,7 +3626,8 @@ body {
 
 .privado-video-section {
   background-color: #ffffff;
-  padding: 60px 20px;
+  padding: 0px 20px;
+  margin-top: 70px;
   text-align: center;
 }
 
@@ -3638,13 +3641,20 @@ body {
   max-width: 600px;
   height: 300px;
   background-color: #FFE0E0;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 30px auto;
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Video height for devices up to 960px */
+@media (max-width: 960px) {
+  .privado-video-player {
+    height: 200px;
+  }
 }
 
 .privado-play-button {
@@ -3826,11 +3836,11 @@ body {
   }
 
   .privado-content {
-    padding: 40px 16px;
+    padding: 0px 16px;
   }
 
   .privado-content-title {
-    font-size: 1.75rem;
+    font-size: 1.625rem;
     margin-bottom: 30px;
   }
 
@@ -3851,11 +3861,11 @@ body {
   }
 
   .privado-video-section {
-    padding: 40px 16px;
+    padding: 0px 16px;
   }
 
   .privado-video-player {
-    height: 250px;
+    height: 200px;
     max-width: 500px;
   }
 
@@ -3924,11 +3934,11 @@ body {
   }
 
   .privado-content {
-    padding: 8px 9px;
+    padding: 0px 9px;
   }
 
   .privado-content-title {
-    font-size: 1.4rem;
+    font-size: 1.625rem;
     margin-bottom: 0px;
   }
 
@@ -3949,7 +3959,7 @@ body {
   }
 
   .privado-video-section {
-    padding: 30px 12px;
+    padding: 0px 12px;
   }
 
   .privado-video-player {
@@ -4827,7 +4837,6 @@ body {
   width: 100%;
   height: 300px;
   background: #FCE9E9;
-  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4835,6 +4844,44 @@ body {
   position: relative;
   cursor: pointer;
   overflow: hidden;
+}
+
+/* Video height for devices up to 960px - override for functionality styles */
+@media (max-width: 960px) {
+  .privado-video-player {
+    height: 200px;
+  }
+}
+
+/* Video section margin-bottom for different device widths */
+@media (max-width: 360px) {
+  .privado-video-section {
+    margin-bottom: 138px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  .privado-video-section {
+    margin-bottom: 243px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .privado-video-section {
+    margin-bottom: 289px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 960px) {
+  .privado-video-section {
+    margin-bottom: 209px;
+  }
+}
+
+@media (min-width: 961px) {
+  .privado-video-section {
+    margin-bottom: 300px;
+  }
 }
 
 .privado-video-player.loading,
@@ -4849,13 +4896,11 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
   overflow: hidden;
 }
 
 .thumbnail-image {
   object-fit: cover;
-  border-radius: 12px;
 }
 
 .play-overlay {

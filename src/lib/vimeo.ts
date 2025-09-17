@@ -21,7 +21,6 @@ class VimeoService {
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.vimeo.*+json;version=3.4'
     };
-    console.log('Request headers:', headers);
     return headers;
   }
 
@@ -46,12 +45,10 @@ class VimeoService {
         
         // Try alternative endpoint if /me fails
         if (error.response.status === 401) {
-          console.log('Trying alternative endpoint /users/me...');
           try {
             const altResponse = await axios.get(`${VIMEO_API_BASE}/users/me`, {
               headers: this.getHeaders()
             });
-            console.log('Alternative endpoint successful:', altResponse.status);
             return altResponse.data;
           } catch (altError: any) {
             console.error('Alternative endpoint also failed:', altError.response?.data);
@@ -66,13 +63,11 @@ class VimeoService {
   // Test public endpoint (no auth required)
   async testPublicEndpoint(): Promise<any> {
     try {
-      console.log('Testing public Vimeo endpoint...');
       const response = await axios.get(`${VIMEO_API_BASE}/categories`, {
         headers: {
           'Accept': 'application/vnd.vimeo.*+json;version=3.4'
         }
       });
-      console.log('Public endpoint successful:', response.status);
       return response.data;
     } catch (error: any) {
       console.error('Public endpoint test failed:', error);
@@ -83,17 +78,13 @@ class VimeoService {
   // Test what your current token can access
   async testTokenCapabilities(): Promise<any> {
     try {
-      console.log('Testing token capabilities...');
-      console.log('🔍 Diagnosing token type...');
       
       // Test public data (should work with any valid token)
       try {
         const publicResponse = await axios.get(`${VIMEO_API_BASE}/categories`, {
           headers: this.getHeaders()
         });
-        console.log('✅ Token can access public data:', publicResponse.status);
       } catch (error: any) {
-        console.log('❌ Token cannot access public data');
         if (error.response?.status === 401) {
           console.log('🚨 CRITICAL: Token is completely invalid or expired!');
         }
@@ -104,14 +95,9 @@ class VimeoService {
         const userResponse = await axios.get(`${VIMEO_API_BASE}/me`, {
           headers: this.getHeaders()
         });
-        console.log('✅ Token can access user data:', userResponse.status);
-        console.log('🎉 SUCCESS: You have a User-Generated Access Token!');
         return userResponse.data;
       } catch (error: any) {
         if (error.response?.status === 401) {
-          console.log('❌ Token cannot access user data');
-          console.log('🔍 This suggests you have a Client Credentials token');
-          console.log('📋 SOLUTION: Generate a User-Generated Access Token instead');
         }
         throw error;
       }
