@@ -626,7 +626,7 @@ export default function ConocimientoPage() {
       <section className="videos-section">
         <h2 className="videos-title">
           {activeFilter === "all" 
-            ? "Todo el Contenido Disponible" 
+            ? "Vídeos y Audios Todo" 
             : `Vídeos y Audios  ${getLevelDisplayName(activeFilter)}`
           }
         </h2>
