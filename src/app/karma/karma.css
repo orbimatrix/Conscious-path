@@ -301,7 +301,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     position: relative;
   }
   
@@ -352,7 +352,6 @@
     font-size: 24px;
     
     color: #333;
-    margin-bottom: 25px;
     line-height: 1.3;
   }
   
@@ -489,12 +488,11 @@
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
     overflow: hidden;
   }
   
   .thumbnail-image {
-    border-radius: 12px;
+    border-radius: 0px;
   }
   
   .video-placeholder {
@@ -518,7 +516,8 @@
   
   /* Button Section */
   .carisma-button-section {
-    padding: 20px 20px;
+    padding: 0px 20px;
+    margin-top: 30px;
     background: white;
     text-align: center;
   }
@@ -603,7 +602,7 @@
     }
     
     .carisma-action-title {
-      font-size: 28px;
+      font-size: 20px;
       margin-bottom: 15px;
     }
     
@@ -622,12 +621,12 @@
     }
     
     .carisma-live-info {
-      font-size: 18px;
+      font-size: 16px;
       margin-top: 10px;
     }
     
     .carisma-button-section {
-      padding: 15px 10px;
+      padding: 0px 10px;
     }
     
     .carisma-button-container {
@@ -714,7 +713,7 @@
     }
     
     .carisma-action-title {
-      font-size: 24px;
+      font-size: 16px;
       margin-bottom: 12px;
     }
     
@@ -729,7 +728,7 @@
     }
     
     .content-description {
-      font-size: 15px;
+      font-size: 16px;
     }
     
     .carisma-live-info {
@@ -738,7 +737,7 @@
     }
     
     .carisma-button-section {
-      padding: 25px 15px;
+      padding: 0px 15px;
     }
     
     .carisma-button-container {
@@ -819,7 +818,7 @@
     }
     
     .carisma-action-title {
-      font-size: 20px;
+      font-size: 16px;
       margin-bottom: 10px;
     }
     
@@ -834,16 +833,16 @@
     }
     
     .content-description {
-      font-size: 14px;
+      font-size: 16px;
     }
     
     .carisma-live-info {
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 6px;
     }
     
     .carisma-button-section {
-      padding: 20px 15px;
+      padding: 0px 15px;
     }
     
     .carisma-button-container {
@@ -968,7 +967,7 @@
     
     .video-player {
       height: 250px;
-      margin-bottom: 25px;
+      margin-bottom: 10px;
     }
     
     .play-button {
@@ -984,7 +983,6 @@
     
     .video-title {
       font-size: 22px;
-      margin-bottom: 20px;
     }
     
     .video-cta-button {
@@ -1006,7 +1004,7 @@
     
     .video-player {
       height: 200px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     
     .play-button {
@@ -1022,7 +1020,6 @@
     
     .video-title {
       font-size: 20px;
-      margin-bottom: 18px;
     }
     
     .video-cta-button {
@@ -1043,8 +1040,8 @@
     }
     
     .video-player {
-      height: 180px;
-      margin-bottom: 18px;
+      height: 200px;
+      margin-bottom: 10px;
     }
     
     .play-button {
@@ -1060,7 +1057,6 @@
     
     .video-title {
       font-size: 18px;
-      margin-bottom: 15px;
     }
     
     .video-cta-button {
@@ -1081,8 +1077,8 @@
     }
     
     .video-player {
-      height: 160px;
-      margin-bottom: 15px;
+      height: 200px;
+      margin-bottom: 10px;
     }
     
     .play-button {
@@ -1098,7 +1094,6 @@
     
     .video-title {
       font-size: 16px;
-      margin-bottom: 12px;
     }
     
     .video-cta-button {
@@ -1133,21 +1128,21 @@
 
 @media (max-width: 768px) {
   .karma-renacer-text {
-    font-size: 15px;
+    font-size: 16px;
     margin: 12px 0 0 0;
   }
 }
 
 @media (max-width: 480px) {
   .karma-renacer-text {
-    font-size: 14px;
+    font-size: 16px;
     margin: 10px 0 0 0;
   }
 }
 
 @media (max-width: 360px) {
   .karma-renacer-text {
-    font-size: 13px;
+    font-size: 16px;
     margin: 8px 0 0 0;
   }
 }
