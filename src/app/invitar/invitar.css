@@ -444,15 +444,20 @@
   font-size: 16px;
   color: #1e3a8a;
   line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 .invitar-questions-box {
   background: #B19B6D;
-  padding: 30px 20px;
-  border-radius: 8px;
-  margin-bottom: 40px;
+  padding: 10px 20px;
+  margin: 0 -20px 70px -20px;
   text-align: center;
+}
+
+@media (max-width: 960px) {
+  .invitar-questions-box {
+    margin: 0 -20px 70px -20px;
+  }
 }
 
 .invitar-question {
@@ -530,11 +535,13 @@
   }
   
   .invitar-questions-box {
-    padding: 25px 15px;
+    padding: 0px 15px;
   }
   
   .invitar-question {
     font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .invitar-rejection-title {
@@ -562,11 +569,13 @@
   }
   
   .invitar-questions-box {
-    padding: 20px 10px;
+    padding: 0px 10px;
   }
   
   .invitar-question {
     font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .invitar-rejection-title {
