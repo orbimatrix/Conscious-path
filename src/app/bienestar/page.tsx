@@ -337,7 +337,8 @@ export default function BienestarPage() {
             className="booking-button"
             onClick={toggleBookingForm}
           >
-            Inicia sesión para reservar
+            Reservar sesión de
+            Bienestar Integral
           </button>
         </div>
       </section>
