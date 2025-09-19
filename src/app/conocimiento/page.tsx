@@ -627,7 +627,7 @@ export default function ConocimientoPage() {
         <h2 className="videos-title">
           {activeFilter === "all" 
             ? "Todo el Contenido Disponible" 
-            : `Contenido ${getLevelDisplayName(activeFilter)}`
+            : `Vídeos y Audios  ${getLevelDisplayName(activeFilter)}`
           }
         </h2>
         
@@ -649,7 +649,7 @@ export default function ConocimientoPage() {
                   <Image 
                     src={item.thumbnail} 
                     alt={item.title}
-                    className="w-full h-32 object-cover rounded-t-lg"
+                    className="w-full h-32 object-cover"
                     width={400}
                     height={128}
                     onError={(e) => {

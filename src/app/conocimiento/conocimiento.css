@@ -16,11 +16,13 @@
 }
 
 .button-section {
-  padding: 40px 20px;
+  padding: 0px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
   max-width: 100%;
 }
 
@@ -60,14 +62,15 @@
 }
 
 .videos-section {
-  padding: 40px 20px;
+  padding: 0px 20px;
+  margin-bottom: 225px; /* Default for screens greater than 960px */
 }
 
 .videos-title {
   font-size: 50px;
   color: #94520C;
   text-align: left;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
 }
@@ -82,7 +85,7 @@
 
 .video-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -205,7 +208,7 @@
 }
 
 .video-title {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 300;
   color: #2F435A;
   text-align: left;
@@ -561,7 +564,7 @@
 /* Responsive Design for Button Grid */
 @media (max-width: 768px) {
   .button-section {
-    padding: 30px 15px;
+    padding: 0px 50px;
   }
   
   .button-grid {
@@ -578,7 +581,7 @@
 
 @media (max-width: 480px) {
   .button-section {
-    padding: 25px 10px;
+    padding: 0px 50px;
   }
   
   .button-grid {
@@ -595,7 +598,7 @@
 
 @media (max-width: 360px) {
   .button-section {
-    padding: 20px 8px;
+    padding: 0px 20px;
   }
   
   .button-grid {
@@ -684,5 +687,30 @@
     margin: 0;
     padding: 0;
     display: block;
+  }
+}
+
+/* Responsive bottom margins for videos-section */
+@media (max-width: 960px) {
+  .videos-section {
+    margin-bottom: 290px;
+  }
+}
+
+@media (max-width: 768px) {
+  .videos-section {
+    margin-bottom: 281px;
+  }
+}
+
+@media (max-width: 480px) {
+  .videos-section {
+    margin-bottom: 120px;
+  }
+}
+
+@media (max-width: 360px) {
+  .videos-section {
+    margin-bottom: 366px;
   }
 } 
