@@ -329,7 +329,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -346,7 +345,6 @@
 .video-player.placeholder p {
   color: #666;
   font-size: 16px;
-  margin: 0;
 }
 
 .video-player.placeholder .retry-button {
@@ -471,15 +469,16 @@
 
 .video-title {
   font-size: 24px;
+  margin-top: 10px;
   
   color: #333;
-  margin-bottom: 25px;
   line-height: 1.3;
 }
 
 /* Button Section */
 .limpiar-karma-button-section {
-  padding: 20px 20px;
+  padding: 0px 20px;
+  margin-top: 40px;
   background: white;
   text-align: center;
 }
@@ -607,7 +606,7 @@
   }
   
   .limpiar-karma-button-section {
-    padding: 15px 10px;
+    padding: 0px 10px;
   }
   
   .limpiar-karma-button-container {
@@ -747,7 +746,7 @@
   }
   
   .limpiar-karma-button-section {
-    padding: 25px 15px;
+    padding: 0px 15px;
   }
   
   .limpiar-karma-button-container {
@@ -881,7 +880,7 @@
   }
   
   .limpiar-karma-button-section {
-    padding: 20px 15px;
+    padding: 0px 15px;
   }
   
   .limpiar-karma-button-container {
@@ -1057,7 +1056,6 @@
   
   .video-player {
     height: 200px;
-    margin-bottom: 25px;
   }
   
   .play-button {
@@ -1073,7 +1071,6 @@
   
   .video-title {
     font-size: 22px;
-    margin-bottom: 20px;
   }
   
   .limpiar-karma-action-button {
@@ -1103,7 +1100,6 @@
   
   .video-player {
     height: 200px;
-    margin-bottom: 20px;
   }
   
   .play-button {
@@ -1119,7 +1115,6 @@
   
   .video-title {
     font-size: 20px;
-    margin-bottom: 18px;
   }
   
   .limpiar-karma-action-button {
@@ -1153,7 +1148,6 @@
   
   .video-player {
     height: 200px;
-    margin-bottom: 18px;
   }
   
   .play-button {
@@ -1169,7 +1163,6 @@
   
   .video-title {
     font-size: 18px;
-    margin-bottom: 15px;
   }
   
   .limpiar-karma-action-button {
@@ -1209,7 +1202,6 @@
   
   .video-player {
     height: 200px;
-    margin-bottom: 15px;
   }
   
   .play-button {
@@ -1225,7 +1217,6 @@
   
   .video-title {
     font-size: 16px;
-    margin-bottom: 12px;
   }
   
   .limpiar-karma-action-button {
