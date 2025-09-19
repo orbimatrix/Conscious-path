@@ -3645,7 +3645,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 30px auto;
+  /* margin: 0 auto 30px auto; */
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -3682,8 +3682,8 @@ body {
 
 .privado-video-title {
   font-size: 1.5rem;
+  margin-top: 10px;
   color: #333333;
-  margin-bottom: 30px;
 
 }
 
@@ -3691,7 +3691,8 @@ body {
   background: #6284AB;
   color: white;
   border: none;
-  padding: 16px 32px;
+  padding: 10px 32px;
+  margin-top: 40px;
   font-size: 1.2rem;
   font-weight: 600;
   border-radius: 50px;
@@ -3754,7 +3755,9 @@ body {
 
 .privado-additional-content {
   background-color: #ffffff;
-  padding: 60px 20px;
+  padding: 0px 20px;
+  margin-top: 70px;
+  margin-bottom: 70px;
   text-align: center;
 }
 
@@ -3880,11 +3883,10 @@ body {
 
   .privado-video-title {
     font-size: 1.3rem;
-    margin-bottom: 25px;
   }
 
   .privado-cta-button {
-    padding: 14px 28px;
+    padding: 10px 28px;
     font-size: 1.1rem;
   }
 
@@ -3912,7 +3914,7 @@ body {
   }
 
   .privado-additional-content {
-    padding: 40px 16px;
+    padding: 0px 16px;
   }
 
   .privado-additional-wrapper p {
@@ -3978,11 +3980,10 @@ body {
 
   .privado-video-title {
     font-size: 1.2rem;
-    margin-bottom: 20px;
   }
 
   .privado-cta-button {
-    padding: 12px 24px;
+    padding: 10px 24px;
     font-size: 1rem;
   }
 
@@ -4009,7 +4010,7 @@ body {
   }
 
   .privado-additional-content {
-    padding: 30px 16px;
+    padding: 0px 16px;
   }
 
   .privado-additional-wrapper p {
@@ -4840,7 +4841,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
   position: relative;
   cursor: pointer;
   overflow: hidden;

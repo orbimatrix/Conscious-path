@@ -350,7 +350,7 @@ export default function RegresionPage() {
               className={styles.bookingButton}
               onClick={toggleBookingForm}
             >
-              Inicia sesión para reservar
+              Reservar Regresión Origen
             </button>
           </div>
         </div>
