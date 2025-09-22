@@ -60,6 +60,44 @@
   justify-content: center;
 }
 
+/* Top and bottom margin for checkmarkSection - 90px for screens 960px to 1920px */
+@media (min-width: 960px) and (max-width: 1920px) {
+  .checkmarkSection {
+    margin-top: 90px;
+    margin-bottom: 90px;
+  }
+}
+
+/* Horizontal layout for checkmarkList - 960px and above */
+@media (min-width: 960px) {
+  .checkmarkList {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+  }
+  
+  .checkmarkItem {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 300px;
+    flex: 1;
+    justify-content: flex-start;
+  }
+  
+  .checkmarkText {
+    white-space: nowrap;
+    text-align: left;
+  }
+  
+  .checkmarkIcon {
+    margin-top: 0;
+    margin-right: 0.75rem;
+  }
+}
+
 .checkmarkContainer {
   max-width: 1200px;
   margin: 0 auto;
