@@ -48,7 +48,8 @@
 
 /* Main Content Section */
 .bienestar-content {
-  padding: 8px 9px;
+  padding: 0px 9px;
+
 }
 
 .bienestar-content-container {
@@ -1439,5 +1440,13 @@
   .bienestar-content {
     height: 222px;
     min-height: 222px;
+  }
+}
+
+/* Top margin for bienestar-content section - 90px for screens 960px to 1920px */
+@media (min-width: 960px) and (max-width: 1920px) {
+  .bienestar-content {
+    margin-top: 90px;
+    margin-bottom: 90px;
   }
 } 
