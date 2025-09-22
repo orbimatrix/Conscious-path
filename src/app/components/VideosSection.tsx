@@ -6,9 +6,12 @@ import { VimeoVideo } from "../types/vimeo";
 import Image from "next/image";
 
 interface AudioFile {
-  name: string;
-  url: string;
-  size: number;
+  audioFilename: string;
+  audioUrl: string;
+  thumbnailFilename: string;
+  thumbnailUrl: string;
+  originalAudioName: string;
+  uploadedAt: string;
 }
 
 interface ContentItem {
@@ -74,7 +77,13 @@ export default function VideosSection() {
     try {
       const username = "admin";
       const password = "6cG59n4C4rNw7LAdHy";
+      // const password = "changeme";
   
+      // const res = await fetch("https://audio.sendaconsciente.com/list-audios", {
+      //   headers: {
+      //     "Authorization": "Basic " + btoa(`${username}:${password}`),
+      //   },
+      // });
       const res = await fetch("https://audio.sendaconsciente.com/list-audios", {
         headers: {
           "Authorization": "Basic " + btoa(`${username}:${password}`),
@@ -83,11 +92,22 @@ export default function VideosSection() {
   
       const data = await res.json();
   
-      if (data.success) {
-        const filesWithUrl = data.files.map((f: any) => ({
-          ...f,
-          url: `https://audio.sendaconsciente.com${f.url}` // full URL
-        }));
+      if (data.audios) {
+        const filesWithUrl = data.audios.map((audio: any) => {
+          // Use the thumbnailUrl provided by the server, or construct it if not available
+          const thumbnailUrl = audio.thumbnailUrl ? 
+            `https://audio.sendaconsciente.com${audio.thumbnailUrl}` : 
+            (audio.thumbnailFilename ? `https://audio.sendaconsciente.com/audio-manager/thumbnails/${audio.thumbnailFilename}` : null);
+          console.log('Audio thumbnail URL:', thumbnailUrl);
+          return {
+            audioFilename: audio.audioFilename,
+            audioUrl: `https://audio.sendaconsciente.com${audio.audioUrl}`,
+            thumbnailFilename: audio.thumbnailFilename,
+            thumbnailUrl: thumbnailUrl,
+            originalAudioName: audio.originalAudioName,
+            uploadedAt: audio.uploadedAt
+          };
+        });
         setAudioFiles(filesWithUrl);
       }
     } catch (err) {
@@ -163,8 +183,8 @@ export default function VideosSection() {
 
     // Add audios with proper access control
     audioFiles.slice(0, 2).forEach((audio, index) => {
-      // Extract meaningful title from audio filename
-      let title = audio.name;
+      // Extract meaningful title from original audio name
+      let title = audio.originalAudioName;
       let accessLevel = 1; // Default public level
       
       // Determine access level based on audio filename/content
@@ -199,7 +219,8 @@ export default function VideosSection() {
         description: "Audio content",
         type: "audio",
         accessLevel: accessLevel,
-        url: audio.url
+        thumbnail: audio.thumbnailUrl,
+        url: audio.audioUrl
       });
     });
 
@@ -461,8 +482,12 @@ export default function VideosSection() {
                     width={400}
                     height={128}
                     onError={(e) => {
+                      console.log('Image load error for:', item.thumbnail);
                       const target = e.target as HTMLImageElement;
-                      target.src = '/placeholder-video.jpg';
+                      target.src = item.type === 'audio' ? '/placeholder-audio.jpg' : '/placeholder-video.jpg';
+                    }}
+                    onLoad={() => {
+                      console.log('Image loaded successfully:', item.thumbnail);
                     }}
                   />
                   {item.duration && (
@@ -470,6 +495,10 @@ export default function VideosSection() {
                       {formatDuration(item.duration)}
                     </div>
                   )}
+                  {/* Audio/Video Type Indicator */}
+                  <div className="absolute bottom-2 left-2 bg-black bg-opacity-75 text-white text-sm px-2 py-1 rounded">
+                    {item.type === 'audio' ? '♪' : '▶'}
+                  </div>
                   {/* Level Badge */}
                   <div className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-medium ${getLevelBadgeColor(item.level)}`}>
                     {item.level.toUpperCase()}
@@ -478,7 +507,10 @@ export default function VideosSection() {
               ) : (
                 <div className={`videos-icon ${item.type} relative`}>
                   <span className="videos-icon-text">{getContentIcon(item.type)}</span>
-                  {/* Level Badge for Audio - removed for cleaner look */}
+                  {/* Level Badge for content without thumbnails */}
+                  <div className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-medium ${getLevelBadgeColor(item.level)}`}>
+                    {item.level.toUpperCase()}
+                  </div>
                 </div>
               )}
               <div className="videos-content-info">

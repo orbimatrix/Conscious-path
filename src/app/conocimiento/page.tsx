@@ -12,6 +12,7 @@ interface AudioFile {
   name: string;
   url: string;
   size: number;
+  thumbnailUrl?: string;
 }
 
 interface ContentItem {
@@ -92,11 +93,20 @@ export default function ConocimientoPage() {
   
       const data = await res.json();
   
-      if (data.success) {
-        const filesWithUrl = data.files.map((f: { name: string; url: string; size: number }) => ({
-          ...f,
-          url: `https://audio.sendaconsciente.com${f.url}` // full URL
-        }));
+      if (data.audios) {
+        const filesWithUrl = data.audios.map((audio: any) => {
+          // Use the thumbnailUrl provided by the server, or construct it if not available
+          const thumbnailUrl = audio.thumbnailUrl ? 
+            `https://audio.sendaconsciente.com${audio.thumbnailUrl}` : 
+            (audio.thumbnailFilename ? `https://audio.sendaconsciente.com/audio-manager/thumbnails/${audio.thumbnailFilename}` : null);
+          console.log('Audio thumbnail URL:', thumbnailUrl);
+          return {
+            name: audio.originalAudioName,
+            url: `https://audio.sendaconsciente.com${audio.audioUrl}`,
+            size: audio.size || 0,
+            thumbnailUrl: thumbnailUrl
+          };
+        });
         setAudioFiles(filesWithUrl);
       }
     } catch (err) {
@@ -219,6 +229,7 @@ export default function ConocimientoPage() {
         description: "Audio content",
         type: "audio",
         accessLevel: accessLevel,
+        thumbnail: audio.thumbnailUrl,
         url: audio.url
       });
     });
