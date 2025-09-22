@@ -204,7 +204,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 0;
 }
 
@@ -232,6 +232,7 @@
   line-height: 1.5;
   opacity: 0.95;
   margin: 0;
+  padding: 0;
 }
 
 .carisma-live-info {
@@ -241,7 +242,6 @@
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   text-align: left;
-  padding-top: 20px;
 }
 
 /* Video Section */
@@ -644,7 +644,6 @@
   
   .carisma-live-info {
     font-size: 16px;
-    margin-top: 10px;
   }
   
   .carisma-button-section {
@@ -759,7 +758,6 @@
   
   .carisma-live-info {
     font-size: 16px;
-    margin-top: 8px;
   }
   
   .carisma-button-section {
@@ -865,7 +863,6 @@
   
   .carisma-live-info {
     font-size: 16px;
-    margin-top: 6px;
   }
   
   .carisma-button-section {

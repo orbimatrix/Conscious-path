@@ -169,11 +169,11 @@ export default function CarismaPage() {
                 3: BIENESTAR físico y emocional, señales de la vida, conflictos y malestares, recurrencia, problemas heredados, conocimientos antiguos y alternativos.
                 </p>
               </div>
-            </div>
 
-            <p className="carisma-live-info">
-              Directos online mensuales, 10 al año.
-            </p>
+              <p className="carisma-live-info">
+                Directos online mensuales, 10 al año.
+              </p>
+            </div>
           </div>
         </section>
 
